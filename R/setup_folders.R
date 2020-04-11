@@ -1,6 +1,6 @@
 #' Setup Folder Structure in Project
 #'
-#' @param folder_list
+#' @param folder_list list of folders to install
 #'
 #' @export
 #'

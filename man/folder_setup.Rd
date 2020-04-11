@@ -10,7 +10,7 @@ folder_setup(
 )
 }
 \arguments{
-\item{folder_list}{}
+\item{folder_list}{list of folders to install}
 }
 \description{
 Setup Folder Structure in Project
