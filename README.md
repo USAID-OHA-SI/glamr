@@ -2,6 +2,7 @@
 # glamr
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.org/USAID-OHA-SI/glamr.svg?branch=master)](https://travis-ci.org/USAID-OHA-SI/glamr)
 <!-- badges: end -->
 
 The goal of glamr is to ...
