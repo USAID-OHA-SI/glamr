@@ -6,7 +6,8 @@ Authors@R: c(
     person("Aaron", "Chafetz", ,"achafetz@usaid.gov", c("aut", "cre")),
     person("Tim", "Essam", ,"tessam@usaid.gov", c("aut"))
     )
-Description: Provides a series of base functions useful to the GH OHA SI team
+Description: Provides a series of base functions useful to the GH OHA SI team. This
+    includes project setup, pulling from DATIM, and key functions for working with the MSD.
 License: MIT + file LICENSE
 URL: https://github.com/USAID-OHA-SI/glamr
 BugReports: https://github.com/USAID-OHA-SI/glamr/issues
@@ -14,10 +15,12 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
 Imports: 
+    crayon,
     dplyr,
     glue,
     httr,
     jsonlite,
+    plyr,
     purrr,
     stringr,
     tibble,
