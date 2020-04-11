@@ -1,7 +1,7 @@
 #' Return Latest
 #'
 #' @param folderpath path to folder where file(s) are located
-#' @param filepattern pattern
+#' @param pattern pattern in file name, regex expressions
 #'
 #' @return the fill filepath for the most recent version of a file stub
 #' @export
@@ -12,9 +12,9 @@
 #' filepath <- return_latest("Data", file_stub)
 #' df <- read_rds(filepath) }
 
-return_latest <- function(folderpath, filepattern){
+return_latest <- function(folderpath, pattern){
 
-  f <- list.files(out_folder, filepattern, full.names = TRUE)
+  f <- list.files(folderpath, pattern, full.names = TRUE)
 
   if(length(f) == 0)
     stop("no files found")

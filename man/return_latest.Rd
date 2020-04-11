@@ -4,12 +4,12 @@
 \alias{return_latest}
 \title{Return Latest}
 \usage{
-return_latest(folderpath, filepattern)
+return_latest(folderpath, pattern)
 }
 \arguments{
 \item{folderpath}{path to folder where file(s) are located}
 
-\item{filepattern}{pattern}
+\item{pattern}{pattern in file name, regex expressions}
 }
 \value{
 the fill filepath for the most recent version of a file stub
