@@ -7,8 +7,8 @@
 #' @export
 #'
 #' @examples
-#' #' \dontrun{
-#' file_stub <- "MSD_.*"
+#' \dontrun{
+#' file_stub <- "MER_Structured_Datasets_OU_IM_FY18-20"
 #' filepath <- return_latest("Data", file_stub)
 #' df <- read_rds(filepath) }
 
@@ -23,9 +23,9 @@ return_latest <- function(folderpath, pattern){
   if(length(f) > 1){
     f <- f %>%
       file.info() %>%
-      rownames_to_column(var = "filepath") %>%
-      filter(ctime == max(ctime)) %>%
-      pull(filepath)
+      tibble::rownames_to_column(var = "filepath") %>%
+      dplyr::filter(ctime == max(ctime)) %>%
+      dplyr::pull(filepath)
   }
 
   return(f)

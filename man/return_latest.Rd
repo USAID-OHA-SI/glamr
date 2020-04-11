@@ -18,8 +18,8 @@ the fill filepath for the most recent version of a file stub
 Return Latest
 }
 \examples{
-#' \dontrun{
-file_stub <- "MSD_.*"
+\dontrun{
+file_stub <- "MER_Structured_Datasets_OU_IM_FY18-20"
 filepath <- return_latest("Data", file_stub)
 df <- read_rds(filepath) }
 }
