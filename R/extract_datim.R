@@ -92,7 +92,7 @@ clean_pds <- function(df){
             stringr::str_replace("\\.", "Q"),
           stringr::str_detect(Period, "^Oct [:digit:]{4}")
           ~ Period %>%
-            stringr::str_extract(("(?<=20)[:digit:]{2}"))%>%
+            stringr::str_extract(("(?<=20)[:digit:]{2}$"))%>%
             paste0("FY", .),
           TRUE ~ Period))
     )
