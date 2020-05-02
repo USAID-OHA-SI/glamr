@@ -1,6 +1,6 @@
 #' DATIM Analytics API
 #'
-#' @param url supply url forAPI call, recommend using`gen_url()`
+#' @param url supply url for API call
 #' @param username DATIM username
 #' @param password DATIM password, recommend using `mypwd()`
 #'
