@@ -50,6 +50,8 @@ get_outable <- function(username, password, baseurl = "https://final.datim.org/"
 
 identify_ouuids <- function(username, password, baseurl = "https://final.datim.org/"){
 
+  check_internet()
+
   ous <- baseurl %>%
     paste0("api/organisationUnits?filter=level:eq:3") %>%
     httr::GET(httr::authenticate(username,password)) %>%
@@ -100,6 +102,8 @@ identify_ouuids <- function(username, password, baseurl = "https://final.datim.o
 #'   identify_levels(username = myuser, password = mypwd(myuser)) }
 
 identify_levels <- function(username, password, baseurl = "https://final.datim.org/"){
+
+  check_internet()
 
   df_levels <- baseurl %>%
     paste0(.,"api/dataStore/dataSetAssignments/orgUnitLevels") %>%

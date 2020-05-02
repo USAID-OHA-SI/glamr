@@ -16,6 +16,7 @@ LazyData: true
 RoxygenNote: 7.0.2
 Imports: 
     crayon,
+    curl,
     dplyr,
     glue,
     httr,

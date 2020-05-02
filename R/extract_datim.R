@@ -18,6 +18,8 @@
 
 extract_datim <- function(url,username,password) {
 
+  check_internet()
+
   json <- url %>%
     httr::GET(httr::authenticate(username,password)) %>%
     httr::content("text") %>%
