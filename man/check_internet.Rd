@@ -7,7 +7,7 @@
 check_internet()
 }
 \value{
-
+A boolean or stops
 }
 \description{
 Check internet connection

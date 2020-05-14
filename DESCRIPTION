@@ -4,7 +4,8 @@ Title: SI Utilities Package
 Version: 0.0.0.9000
 Authors@R: c(
     person("Aaron", "Chafetz", ,"achafetz@usaid.gov", c("aut", "cre")),
-    person("Tim", "Essam", ,"tessam@usaid.gov", c("aut"))
+    person("Tim", "Essam", ,"tessam@usaid.gov", c("aut")),
+    person("Baboyma", "Kagniniwa", , "bkagniniwa@usaid.gov", c("aut"))
     )
 Description: Provides a series of base functions useful to the GH OHA SI team. This
     includes project setup, pulling from DATIM, and key functions for working with the MSD.
@@ -13,7 +14,7 @@ URL: https://github.com/USAID-OHA-SI/glamr
 BugReports: https://github.com/USAID-OHA-SI/glamr/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Imports: 
     crayon,
     curl,
@@ -27,7 +28,8 @@ Imports:
     tibble,
     tidyr,
     magrittr,
-    lubridate
+    lubridate,
+    rvest
 Suggests: 
     keyringr,
     testthat (>= 2.1.0)

@@ -7,7 +7,7 @@
 check_status(res)
 }
 \value{
-
+A boolean or stops
 }
 \description{
 Test status of query

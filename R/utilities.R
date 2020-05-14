@@ -1,9 +1,7 @@
-
 #' Check internet connection
 #'
-#' @return
+#' @return A boolean or stops
 #' @export
-
 
 check_internet <- function(){
 
@@ -14,7 +12,7 @@ check_internet <- function(){
 
 #' Test status of query
 #'
-#' @return
+#' @return A boolean or stops
 #' @export
 
 check_status <- function(res){

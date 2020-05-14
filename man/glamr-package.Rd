@@ -23,6 +23,7 @@ Useful links:
 Authors:
 \itemize{
   \item Tim Essam \email{tessam@usaid.gov}
+  \item Baboyma Kagniniwa \email{bkagniniwa@usaid.gov}
 }
 
 }
