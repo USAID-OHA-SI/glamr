@@ -12,6 +12,8 @@ check_internet <- function(){
 
 #' Test status of query
 #'
+#' @param res response
+#'
 #' @return A boolean or stops
 #' @export
 

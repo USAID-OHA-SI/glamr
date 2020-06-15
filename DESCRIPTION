@@ -29,7 +29,10 @@ Imports:
     tidyr,
     magrittr,
     lubridate,
-    rvest
+    rvest,
+    googledrive,
+    readxl,
+    xml2
 Suggests: 
     keyringr,
     testthat (>= 2.1.0)

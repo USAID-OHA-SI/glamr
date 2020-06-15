@@ -6,6 +6,9 @@
 \usage{
 check_status(res)
 }
+\arguments{
+\item{res}{response}
+}
 \value{
 A boolean or stops
 }
