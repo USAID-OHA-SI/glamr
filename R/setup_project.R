@@ -5,8 +5,8 @@
 
 si_setup <- function(){
   folder_setup()
-  setup_readme()
   setup_gitignore()
+  setup_readme()
 }
 
 
@@ -51,31 +51,29 @@ setup_gitignore <- function(){
 
   if(!file.exists(".gitignore")){
     cat("#R basics
-        .Rproj.user
-        .Rhistory
-        .RData
-        .Ruserdata",
-        file = ".gitignore")
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata",
+file = ".gitignore")
   }
 
-  cat("
-      #no data
-      *.csv
-      *.txt
-      *.rds
-      *.xlsx
-      *.xls
-      *.zip
-      *.png
-      *.twbx
-      *.pptx
+  cat("\n#no data
+*.csv
+*.txt
+*.rds
+*.xlsx
+*.xls
+*.zip
+*.png
+*.twbx
+*.pptx
 
-      #nothing from these folders
-      GIS/*
-      Images/*
-      Graphics/*",
-      file = ".gitignore",
-      append = TRUE
+#nothing from these folders
+GIS/*
+Images/*
+Graphics/*",
+file = ".gitignore", append = TRUE
 
   )
 
@@ -103,7 +101,7 @@ setup_readme <- function(add_disclaimer = TRUE){
     cat(
       "---
 
-      *Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.*",
+*Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.*",
       file = "README.md", append = TRUE)
   }
 }
