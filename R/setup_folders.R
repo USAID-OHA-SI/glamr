@@ -18,6 +18,8 @@ folder_setup <- function(folder_list = list("Data", "Images", "Scripts",
     stop("Please provide a list of directories to create for the project.")
   print("The following directories will be created:")
   print(glue::glue(crayon::green('{folder_list}')))
-  purrr::map(folder_list, ~dir.create(.))
+  suppressWarnings(
+  purrr::walk(folder_list, ~dir.create(.))
+  )
 
 }
