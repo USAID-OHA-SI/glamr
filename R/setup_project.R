@@ -99,9 +99,7 @@ setup_readme <- function(add_disclaimer = TRUE){
 
   if(add_disclaimer == TRUE){
     cat(
-      "---
-
-*Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.*",
+      "---\n\n*Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.*",
       file = "README.md", append = TRUE)
   }
 }
