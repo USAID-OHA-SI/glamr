@@ -25,7 +25,7 @@ si_setup <- function(){
 #'   fldrs <- c("Data", "Tableau", "AI")
 #'   folder_setup(fldrs)
 #' }
-folder_setup <- function(folder_list = list("Data", "Images", "Scripts",
+folder_setup <- function(folder_list = list("Data", "Images", "Scripts", "AI",
                                             "Dataout", "GIS", "Documents", "Graphics", "markdown")) {
   if(!is.list(folder_list))
     stop("Please provide a list of directories to create for the project.")
@@ -70,6 +70,7 @@ file = ".gitignore")
 *.pptx
 
 #nothing from these folders
+AI/*
 GIS/*
 Images/*
 Graphics/*",
