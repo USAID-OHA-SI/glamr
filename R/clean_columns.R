@@ -91,9 +91,7 @@ clean_agency <- function(.data) {
     # clean column data
     .data <- .data %>%
       dplyr::mutate(
-        # Convert everyting to upper case
         fundingagency = stringr::str_to_upper(fundingagency),
-        # Remove any leading char up to /
         fundingagency = stringr::str_remove(fundingagency, pattern = "^.*\\/")
       )
   }
