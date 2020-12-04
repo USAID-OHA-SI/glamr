@@ -16,6 +16,8 @@ Cleaned MSD DataFrame
 }
 \description{
 Clean column data
+
+Clean column data
 }
 \examples{
 \dontrun{
