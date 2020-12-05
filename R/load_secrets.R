@@ -18,6 +18,8 @@
 #' @return stores Google and DATIM credentials in session
 #' @export
 #'
+#' @importFrom utils installed.packages
+#'
 #' @examples
 #' \dontrun{
 #' load_secrets()

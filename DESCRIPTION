@@ -34,7 +34,8 @@ Imports:
     tidyr,
     usethis,
     xml2,
-    keyring
+    keyring,
+    utils
 Suggests: 
     keyringr,
     testthat (>= 2.1.0),
