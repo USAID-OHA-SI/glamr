@@ -17,3 +17,9 @@ Cleaned DataFrame
 \description{
 Clean OU/Country names to match PEPFAR Data
 }
+\examples{
+\dontrun{
+ spdf <- ne_countries(type = "sovereignty", scale = 110, returnclass = "sf") \%>\%
+   dplyr::select(sovereignt, admin, name, adm0_a3) \%>\%
+   glamr::clean_countries(colname = "admin") }
+}

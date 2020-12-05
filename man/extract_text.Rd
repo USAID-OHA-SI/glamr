@@ -17,3 +17,8 @@ text within limits
 \description{
 Extract text
 }
+\examples{
+\dontrun{
+ extract_text(txt = "Saint Mary Hopital (SMH)")
+ extract_text(txt = "TDB [Placeholder - New Mechnism]") }
+}
