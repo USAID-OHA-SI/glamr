@@ -5,7 +5,7 @@
 \title{Setup Folder Structure in Project}
 \usage{
 folder_setup(
-  folder_list = list("Data", "Images", "Scripts", "Dataout", "GIS", "Documents",
+  folder_list = list("Data", "Images", "Scripts", "AI", "Dataout", "GIS", "Documents",
     "Graphics", "markdown")
 )
 }
