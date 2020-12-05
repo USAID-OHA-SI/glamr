@@ -33,7 +33,10 @@ Imports:
     tibble,
     tidyr,
     usethis,
-    xml2
+    xml2,
+    keyring,
+    utils
 Suggests: 
     keyringr,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    googlesheets4

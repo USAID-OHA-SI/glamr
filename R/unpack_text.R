@@ -3,6 +3,8 @@
 #' @param limits area to extract text from, c("()", "{}", "[]")
 #' @return text within limits
 #' @export
+#'
+#' @examples
 #' \dontrun{
 #'  extract_text(txt = "Saint Mary Hopital (SMH)")
 #'  extract_text(txt = "TDB [Placeholder - New Mechnism]") }
@@ -14,7 +16,7 @@ extract_text <- function(txt, limits = "()") {
 
   if (!limits %in% options) {
     cat("\nERROR - invalid limits option: ",
-        Wavelength::paint_red({{limits}}), "\n")
+        crayon::red({{limits}}), "\n")
 
     return(NULL)
   }

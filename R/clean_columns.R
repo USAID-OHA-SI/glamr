@@ -17,7 +17,7 @@ clean_column <- function(.data, colname = "psnu") {
     # Check for valid column name
     if (length(dplyr::setdiff(name,  names(.data))) > 0) {
       cat("\nERROR - One of the column names is unknown: ",
-          Wavelength::paint_red({{colname}}), "\n")
+          crayon::red({{colname}}), "\n")
 
       return(NULL)
     }
@@ -34,7 +34,7 @@ clean_column <- function(.data, colname = "psnu") {
 
     # Remove characters at the end
     .data <- .data %>%
-      dplyr::mutate_at(.vars = tidyselect::all_of(name),
+      dplyr::mutate_at(.vars = dplyr::all_of(name),
                        stringr::str_remove,
                        pattern = rmv_tail)
 
@@ -43,7 +43,7 @@ clean_column <- function(.data, colname = "psnu") {
 
     # Remove characters
     .data <- .data %>%
-      dplyr::mutate_at(.vars = tidyselect::all_of(name),
+      dplyr::mutate_at(.vars = dplyr::all_of(name),
                        stringr::str_remove,
                        pattern = rmv_lead)
   }
@@ -150,6 +150,7 @@ lookup_country <- function(country) {
 #' @return  Cleaned DataFrame
 #' @export
 #'
+#' @examples
 #' \dontrun{
 #'  spdf <- ne_countries(type = "sovereignty", scale = 110, returnclass = "sf") %>%
 #'    dplyr::select(sovereignt, admin, name, adm0_a3) %>%
@@ -161,20 +162,20 @@ clean_countries <-
     # Check for valid column name
     if (!colname %in% names(.data)) {
       cat("\nERROR - ",
-          Wavelength::paint_red(colname),
+          crayon::red(colname),
           " is not available as a column.\n")
 
       return(NULL)
     }
 
     # Notification
-    cat("\nUpdating", Wavelength::paint_green(colname), "column ...\n")
+    cat("\nUpdating", crayon::green(colname), "column ...\n")
 
     # Params symbols
     name <- {{colname}}
 
     #clean column data
     .data %>%
-      dplyr::mutate(dplyr::across(.cols = tidyselect::all_of(name),
+      dplyr::mutate(dplyr::across(.cols = dplyr::all_of(name),
                            .fns = lookup_country))
   }
