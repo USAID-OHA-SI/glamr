@@ -28,30 +28,28 @@
 
 load_secrets <- function(){
 
-  accounts <- keyring::key_list()$service
-
-  if(is.null(accounts)){
+  if(length(is_stored()) == 0){
     usethis::ui_oops("No accounts stored under {usethis::ui_code('keyring')}. Use {usethis::ui_code('set_email()')} and {usethis::ui_code('set_datim()')} to establish accounts")
   } else {
     usethis::ui_info("The following items have been stored for use in this session:")
   }
 
-  if("email" %in% accounts){
+  if(is_stored("email")){
     options("email" = keyring::key_list("email")[1,2])
     usethis::ui_done("{usethis::ui_field('email')} set as {usethis::ui_value(getOption('email'))}")
   }
 
-  if("email" %in% accounts && "googledrive" %in% rownames(installed.packages())){
+  if(is_stored("email") && is_installed("googledrive")){
     options(googledrive::drive_auth(getOption("email")))
     usethis::ui_done("{usethis::ui_code('googledrive')} authenticated using {usethis::ui_field('email')}")
   }
 
-  if("email" %in% accounts && "googlesheets4" %in% rownames(installed.packages())){
+  if(is_stored("email") && is_installed("googlesheets4")){
     options(googlesheets4::gs4_auth(getOption("email")))
     usethis::ui_done("{usethis::ui_code('googlesheets4')} authenticated using {usethis::ui_field('email')}")
   }
 
-  if("datim" %in% accounts){
+  if(is_stored("datim")){
     options("datim" = keyring::key_list("datim")[1,2])
     options("baseurl" = "https://final.datim.org/")
     usethis::ui_done("{usethis::ui_field('datim')} username set as {usethis::ui_value(getOption('datim'))}")
@@ -123,6 +121,28 @@ set_datim <- function(datim_username){
                    username = datim_username)
 }
 
+#' Return DATIM username
+#'
+#' @return access DATIM username from keyring
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' load_secrets()
+#' ou_table <- datim_outable(datim_user(), datim_pwd()) }
+
+datim_user <- function(){
+
+  if(!is_stored("datim"))
+    stop(usethis::ui_oops("NO DATIM credentials stored. Setup using {usethis::ui_code('set_datim()')}"))
+
+  if(!is.loaded("datim"))
+    suppressMessages(load_secrets())
+
+  keyring::key_list("datim")[1,2]
+
+}
+
 #' Return DATIM password
 #'
 #' @return access DATIM password from keyring
@@ -131,20 +151,16 @@ set_datim <- function(datim_username){
 #' @examples
 #' \dontrun{
 #' load_secrets()
-#' user <- getOption("datim")
-#' ou_table <- datim_outable(user, datim_pwd()) }
+#' ou_table <- datim_outable(datim_user(), datim_pwd()) }
 
 datim_pwd <- function(){
 
-  accounts <- keyring::key_list()$service
-
-  if(!"datim" %in% accounts)
+  if(!is_stored("datim"))
     stop(usethis::ui_oops("NO DATIM credentials stored. Setup using {usethis::ui_code('set_datim()')}"))
 
-  if(is.null(getOption('datim')))
+  if(!is.loaded("datim"))
     suppressMessages(load_secrets())
 
-  if("datim" %in% accounts && !is.null(is.null(getOption('datim'))))
-    keyring::key_get("datim", getOption("datim"))
+  keyring::key_get("datim", getOption("datim"))
 
 }

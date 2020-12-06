@@ -4,6 +4,7 @@ language: r
 sudo : false
 warnings_are_errors: false
 cache: packages
+r_check_args: "--no-build-vignettes --ignore-vignettes"
 
 addons:
   apt:
