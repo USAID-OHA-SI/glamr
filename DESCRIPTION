@@ -39,4 +39,7 @@ Imports:
 Suggests: 
     keyringr,
     testthat (>= 2.1.0),
-    googlesheets4
+    googlesheets4,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
