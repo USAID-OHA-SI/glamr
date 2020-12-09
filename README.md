@@ -1,9 +1,11 @@
-
-# glamr
-
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/USAID-OHA-SI/glamr.svg?branch=master)](https://travis-ci.org/USAID-OHA-SI/glamr)
 <!-- badges: end -->
+
+<img src='man/figures/logo.png' align="right" height="120" />
+
+# glamr
+SI utilities package
 
 ## Overview
 
