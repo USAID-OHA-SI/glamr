@@ -40,17 +40,17 @@ is_stored <- function(service = c("datim", "email")){
 
 }
 
-#' Test if service is loaded in current session
+#' Test if option variable is loaded in current session
 #'
-#' @param service account, either "datim" or "email"
+#' @param opt_var option variable ("datim", "email", "path_msd", "path_datim", "path_vector", "path_raster")
 #'
 #' @return A boolean
 #' @export
 #'
 
-is_loaded <- function(service = c("datim", "email")){
+is_loaded <- function(opt_var){
 
-  !is.null(getOption({{service}}))
+  !is.null(getOption({{opt_var}}))
 
 }
 
