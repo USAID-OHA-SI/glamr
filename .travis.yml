@@ -10,3 +10,4 @@ addons:
   apt:
     packages:
       - libsodium-dev
+      - libgit2-dev
