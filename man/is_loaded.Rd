@@ -2,16 +2,16 @@
 % Please edit documentation in R/utilities.R
 \name{is_loaded}
 \alias{is_loaded}
-\title{Test if service is loaded in current session}
+\title{Test if option variable is loaded in current session}
 \usage{
-is_loaded(service = c("datim", "email"))
+is_loaded(opt_var)
 }
 \arguments{
-\item{service}{account, either "datim" or "email"}
+\item{opt_var}{option variable ("datim", "email", "path_msd", "path_datim", "path_vector", "path_raster")}
 }
 \value{
 A boolean
 }
 \description{
-Test if service is loaded in current session
+Test if option variable is loaded in current session
 }
