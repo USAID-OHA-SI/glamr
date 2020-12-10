@@ -21,8 +21,8 @@ centrally and outside of projects.
 \examples{
 \dontrun{
 #old
-list.files("C:/Users/rshah/Documents/Data", "OU_IM", full.names = TRUE)
+  list.files("C:/Users/rshah/Documents/Data", "OU_IM", full.names = TRUE)
 #new
-list.files(si_path("path_msd"), "OU_IM", full.names = TRUE)
+  list.files(si_path("path_msd"), "OU_IM", full.names = TRUE)
 }
 }
