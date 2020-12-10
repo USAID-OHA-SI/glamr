@@ -19,6 +19,12 @@
 #' @export
 #'
 #' @importFrom utils installed.packages
+#' @importFrom usethis ui_oops
+#' @importFrom usethis ui_info
+#' @importFrom usethis ui_done
+#' @importFrom usethis ui_field
+#' @importFrom usethis ui_value
+#' @importFrom usethis ui_code
 #'
 #' @examples
 #' \dontrun{
@@ -29,31 +35,31 @@
 load_secrets <- function(){
 
   if(length(is_stored()) == 0){
-    usethis::ui_oops("No accounts stored under {usethis::ui_code('keyring')}. Use {usethis::ui_code('set_email()')} and {usethis::ui_code('set_datim()')} to establish accounts")
+    ui_oops("No accounts stored under {ui_code('keyring')}. Use {ui_code('set_email()')} and {ui_code('set_datim()')} to establish accounts")
   } else {
-    usethis::ui_info("The following items have been stored for use in this session:")
+    ui_info("The following items have been stored for use in this session:")
   }
 
   if(is_stored("email")){
     options("email" = keyring::key_list("email")[1,2])
-    usethis::ui_done("{usethis::ui_field('email')} set as {usethis::ui_value(getOption('email'))}")
+    ui_done("{ui_field('email')} set as {ui_value(getOption('email'))}")
   }
 
   if(is_stored("email") && is_installed("googledrive")){
     options(googledrive::drive_auth(getOption("email")))
-    usethis::ui_done("{usethis::ui_code('googledrive')} authenticated using {usethis::ui_field('email')}")
+    ui_done("{ui_code('googledrive')} authenticated using {ui_field('email')}")
   }
 
   if(is_stored("email") && is_installed("googlesheets4")){
     options(googlesheets4::gs4_auth(getOption("email")))
-    usethis::ui_done("{usethis::ui_code('googlesheets4')} authenticated using {usethis::ui_field('email')}")
+    ui_done("{ui_code('googlesheets4')} authenticated using {ui_field('email')}")
   }
 
   if(is_stored("datim")){
     options("datim" = keyring::key_list("datim")[1,2])
     options("baseurl" = "https://final.datim.org/")
-    usethis::ui_done("{usethis::ui_field('datim')} username set as {usethis::ui_value(getOption('datim'))}")
-    usethis::ui_done("{usethis::ui_field('baseurl')} set to {usethis::ui_value(getOption('baseurl'))}")
+    ui_done("{ui_field('datim')} username set as {ui_value(getOption('datim'))}")
+    ui_done("{ui_field('baseurl')} set to {ui_value(getOption('baseurl'))}")
   }
 
 }
@@ -126,6 +132,8 @@ set_datim <- function(datim_username){
 #' @return access DATIM username from keyring
 #' @export
 #'
+#' @importFrom usethis ui_stop
+#' @importFrom usethis ui_code
 #' @examples
 #' \dontrun{
 #' load_secrets()
@@ -134,7 +142,7 @@ set_datim <- function(datim_username){
 datim_user <- function(){
 
   if(!is_stored("datim"))
-    stop(usethis::ui_oops("NO DATIM credentials stored. Setup using {usethis::ui_code('set_datim()')}"))
+    ui_stop("NO DATIM credentials stored. Setup using {ui_code('set_datim()')}")
 
   if(!is.loaded("datim"))
     suppressMessages(load_secrets())
@@ -148,6 +156,9 @@ datim_user <- function(){
 #' @return access DATIM password from keyring
 #' @export
 #'
+#' @importFrom usethis ui_stop
+#' @importFrom usethis ui_code
+#'
 #' @examples
 #' \dontrun{
 #' load_secrets()
@@ -156,7 +167,7 @@ datim_user <- function(){
 datim_pwd <- function(){
 
   if(!is_stored("datim"))
-    stop(usethis::ui_oops("NO DATIM credentials stored. Setup using {usethis::ui_code('set_datim()')}"))
+    ui_stop("NO DATIM credentials stored. Setup using {:ui_code('set_datim()')}")
 
   if(!is.loaded("datim"))
     suppressMessages(load_secrets())
