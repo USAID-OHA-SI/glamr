@@ -201,7 +201,7 @@ datim_pwd <- function(){
 #' promoted to enter your password through the RStudio API which will then store the
 #' username and password in your OS credential store using `keyring`.
 #'
-#' @param access_key S3 account
+#' @param access S3 account
 #'
 #' @return stored access key
 #' @export
@@ -225,7 +225,7 @@ set_s3access <- function(access){
 #' promoted to enter your password through the RStudio API which will then store the
 #' username and password in your OS credential store using `keyring`.
 #'
-#' @param secret_key S3 account
+#' @param secret S3 account
 #'
 #' @return stored secret key
 #' @export

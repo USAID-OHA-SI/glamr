@@ -17,8 +17,9 @@ stores Google and DATIM credentials in session
  or remove use names.
 }
 \details{
-To initiall store your Google email and DATIM credentials, you will first need to
- run `set_email()` and `set_datim()`
+To initiall store your Google email and DATIM credentials,
+ you will first need to
+ run `set_email()`, `set_datim()`, `set_s3access()` and `set_s3secret()`
 
  `load_secrets` utilizes `keyring` package to access the OS credentials store.
  Storing in a centralized, secure location allows analysts to other analysts code
