@@ -6,8 +6,9 @@
 #'  analysts to more easily share their scripts without having to manually update
 #'  or remove use names.
 #'
-#'  To initiall store your Google email and DATIM credentials, you will first need to
-#'  run `set_email()` and `set_datim()`
+#'  To initiall store your Google email and DATIM credentials,
+#'  you will first need to
+#'  run `set_email()`, `set_datim()`, `set_s3access()` and `set_s3secret()`
 #'
 #'  `load_secrets` utilizes `keyring` package to access the OS credentials store.
 #'  Storing in a centralized, secure location allows analysts to other analysts code
@@ -60,6 +61,21 @@ load_secrets <- function(){
     options("baseurl" = "https://final.datim.org/")
     ui_done("{ui_field('datim')} username set as {ui_value(getOption('datim'))}")
     ui_done("{ui_field('baseurl')} set to {ui_value(getOption('baseurl'))}")
+  }
+
+  if (is_stored("s3")) {
+    options("access_key" = get_s3key("access"))
+    options("secret_key" = get_s3key("secret"))
+
+    # Note: aws.s3 setting uses the below env settings
+    # It's up to the user to decide when to set this (in the GLOBALS Sections)
+    # Sys.setenv(
+    #   "AWS_ACCESS_KEY_ID" = get_s3key("access"),
+    #   "AWS_SECRET_ACCESS_KEY" = get_s3key("secret"),
+    #   "AWS_REGION" = "us-east-1"
+    # )
+
+    ui_done("{ui_field('S3')} keys set in {ui_value('access_key')} and {ui_value('secret_key')}")
   }
 
 }
@@ -175,3 +191,73 @@ datim_pwd <- function(){
   keyring::key_get("datim", getOption("datim"))
 
 }
+
+
+#' Store S3 Credentials - Access Key
+#'
+#' @description
+#' `set_s3access` stores your s3 credentials email using the `keyring` package.
+#' This will only need to done once. After running `set_s3access(access)`, you will be
+#' promoted to enter your password through the RStudio API which will then store the
+#' username and password in your OS credential store using `keyring`.
+#'
+#' @param access_key S3 account
+#'
+#' @return stored access key
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' set_s3access("ABDCEDFFFDFDFDFD") }
+#'
+set_s3access <- function(access){
+  keyring::key_set_with_value(service = "s3",
+                              username = "access",
+                              password = access)
+}
+
+
+#' Store S3 Credentials - Secret Access Key
+#'
+#' @description
+#' `set_s3secret` stores your s3 credentials email using the `keyring` package.
+#' This will only need to done once. After running `set_s3secret(secret)`, you will be
+#' promoted to enter your password through the RStudio API which will then store the
+#' username and password in your OS credential store using `keyring`.
+#'
+#' @param secret_key S3 account
+#'
+#' @return stored secret key
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' set_s3secret("fsfs8sf0fds9f6s5") }
+#'
+set_s3secret <- function(secret){
+  keyring::key_set_with_value(service = "s3",
+                              username = "secret",
+                              password = secret)
+}
+
+#' Get S3 Credentials - Access or Secret Access Key
+#'
+#' @description
+#' `get_s3key` retrieves your S3 keys using the `keyring` package.
+#' Set name to `access` for `Access Key`,
+#' `name` to `secret` for `Secret Access Key`
+#'
+#' @param name S3 account key
+#'
+#' @return stored key
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' get_s3key(name = "access") }
+#'
+get_s3key <- function(name = "access"){
+  keyring::key_get(service = "s3", username = name)
+}
+
+
