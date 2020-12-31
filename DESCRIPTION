@@ -35,7 +35,11 @@ Imports:
     usethis,
     xml2,
     keyring,
-    utils
+    utils,
+    aws.s3,
+    janitor,
+    Wavelength,
+    vroom
 Suggests: 
     keyringr,
     testthat (>= 2.1.0),
