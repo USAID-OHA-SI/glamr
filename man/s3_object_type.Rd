@@ -4,10 +4,10 @@
 \alias{s3_object_type}
 \title{Idenfity S3 Object type}
 \usage{
-s3_object_type(object_key)
+s3_object_type(object)
 }
 \arguments{
-\item{object_key}{S3 Object key}
+\item{object}{S3 Object key}
 }
 \value{
 file type: text, csv, excel, json, python, shell
@@ -17,6 +17,10 @@ Idenfity S3 Object type
 }
 \examples{
 \dontrun{
-s3_objects("sample-bucket") \%>\% filter(str_detect(key, "^HFR")) \%>\% s3_object_type()}
+s3_objects("sample-bucket") \%>\%
+  filter(str_detect(key, "^HFR")) \%>\%
+  pull(key) \%>\%
+  first() \%>\%
+  s3_object_type()}
 
 }

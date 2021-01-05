@@ -6,7 +6,7 @@
 \usage{
 s3_download(
   bucket,
-  object_key,
+  object,
   filepath = NULL,
   access_key = NULL,
   secret_key = NULL
@@ -15,7 +15,7 @@ s3_download(
 \arguments{
 \item{bucket}{S3 Bucket name}
 
-\item{object_key}{S3 Object key (id)}
+\item{object}{S3 Object key (id)}
 
 \item{filepath}{Full path of destination file}
 

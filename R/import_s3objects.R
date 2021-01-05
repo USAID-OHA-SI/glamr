@@ -159,33 +159,37 @@ s3_unpack_keys <-
 
 #' @title Idenfity S3 Object type
 #'
-#' @param object_key S3 Object key
+#' @param object S3 Object key
 #'
 #' @return file type: text, csv, excel, json, python, shell
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' s3_objects("sample-bucket") %>% filter(str_detect(key, "^HFR")) %>% s3_object_type()}
+#' s3_objects("sample-bucket") %>%
+#'   filter(str_detect(key, "^HFR")) %>%
+#'   pull(key) %>%
+#'   first() %>%
+#'   s3_object_type()}
 #'
-s3_object_type <- function(object_key) {
+s3_object_type <- function(object) {
 
   # idenfity Object type
   object_type = NULL
 
-  if (stringr::str_ends(object_key, ".csv"))
+  if (stringr::str_ends(object, ".csv"))
     object_type = "csv"
 
-  if (stringr::str_ends(object_key, ".xls|.xlsx"))
+  if (stringr::str_ends(object, ".xls|.xlsx"))
     object_type = "excel"
 
-  if (stringr::str_ends(object_key, ".json"))
+  if (stringr::str_ends(object, ".json"))
     object_type = "json"
 
-  if (stringr::str_ends(object_key, ".txt"))
+  if (stringr::str_ends(object, ".txt"))
     object_type = "text"
 
-  if (stringr::str_ends(object_key, ".Rdata|.Rda|.Rds"))
+  if (stringr::str_ends(object, ".Rdata|.Rda|.Rds"))
     object_type = "r"
 
   return(object_type)
@@ -195,7 +199,8 @@ s3_object_type <- function(object_key) {
 #' @title Read content of S3 Objects
 #'
 #' @param bucket     S3 Bucket name
-#' @param object_key S3 Object key (id)
+#' @param object     S3 Object key (id)
+#' @param sheet      S3 Excel object sheet name / index
 #' @param access_key S3 Access key id
 #' @param secret_key S3 Secret Access key
 #'
@@ -210,7 +215,7 @@ s3_object_type <- function(object_key) {
 #'   first() %>%
 #'   s3_read_object(bucket = "sample-bucket", object_key = .)}
 #'
-s3_read_object <- function(bucket, object_key,
+s3_read_object <- function(bucket, object,
                            sheet = NULL,
                            access_key = NULL,
                            secret_key = NULL) {
@@ -223,7 +228,7 @@ s3_read_object <- function(bucket, object_key,
     secret_key = glamr::get_s3key("secret")
 
   # Object type
-  object_type = s3_object_type(object_key)
+  object_type = s3_object_type(object)
 
   # Notification
   usethis::ui_info(base::paste0("TYPE - S3 Object type is: ", object_type))
@@ -231,7 +236,7 @@ s3_read_object <- function(bucket, object_key,
   # Get object as raw data
   object_raw <- aws.s3::get_object(
     bucket = bucket,
-    object = object_key,
+    object = object,
     key = access_key,
     secret = secret_key
   )
@@ -240,7 +245,7 @@ s3_read_object <- function(bucket, object_key,
   conn <- base::rawConnection(object_raw, open = "r")
 
   # Close conn when done
-  base::on.exit({base::close(conn)})
+  #base::on.exit({base::close(conn)})
 
   # Data
   df = NULL
@@ -314,7 +319,7 @@ s3_read_object <- function(bucket, object_key,
 #' @title Download S3 Objects
 #'
 #' @param bucket     S3 Bucket name
-#' @param object_key S3 Object key (id)
+#' @param object     S3 Object key (id)
 #' @param filepath   Full path of destination file
 #' @param access_key S3 Access key id
 #' @param secret_key S3 Secret Access key
@@ -331,7 +336,7 @@ s3_read_object <- function(bucket, object_key,
 #'   s3_download()}
 #'
 s3_download <-
-  function(bucket, object_key,
+  function(bucket, object,
            filepath = NULL,
            access_key = NULL,
            secret_key = NULL) {
@@ -346,9 +351,9 @@ s3_download <-
     # Notification
     usethis::ui_info("PROCESS - Downloading S3 Object ...")
 
-    # file name
+    # temp file name
     if (is.null(filepath)) {
-      filepath <- tools::file_ext(object_key) %>%
+      filepath <- tools::file_ext(object) %>%
         paste0(".", .) %>%
         base::tempfile(fileext = .)
     }
@@ -356,7 +361,7 @@ s3_download <-
     # Save object to temp file
     s3_obj <- aws.s3::save_object(
       bucket = bucket,
-      object = object_key,
+      object = object,
       file = filepath,
       key = access_key,
       secret = secret_key

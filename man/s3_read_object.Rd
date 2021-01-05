@@ -4,12 +4,20 @@
 \alias{s3_read_object}
 \title{Read content of S3 Objects}
 \usage{
-s3_read_object(bucket, object_key, access_key = NULL, secret_key = NULL)
+s3_read_object(
+  bucket,
+  object,
+  sheet = NULL,
+  access_key = NULL,
+  secret_key = NULL
+)
 }
 \arguments{
 \item{bucket}{S3 Bucket name}
 
-\item{object_key}{S3 Object key (id)}
+\item{object}{S3 Object key (id)}
+
+\item{sheet}{S3 Excel object sheet name / index}
 
 \item{access_key}{S3 Access key id}
 
