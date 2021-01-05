@@ -38,7 +38,6 @@ Imports:
     utils,
     aws.s3,
     janitor,
-    Wavelength,
     vroom
 Suggests: 
     keyringr,

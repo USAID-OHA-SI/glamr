@@ -211,6 +211,7 @@ s3_object_type <- function(object_key) {
 #'   s3_read_object(bucket = "sample-bucket", object_key = .)}
 #'
 s3_read_object <- function(bucket, object_key,
+                           sheet = NULL,
                            access_key = NULL,
                            secret_key = NULL) {
 
@@ -238,6 +239,9 @@ s3_read_object <- function(bucket, object_key,
   # Create connection to raw data
   conn <- base::rawConnection(object_raw, open = "r")
 
+  # Close conn when done
+  base::on.exit({base::close(conn)})
+
   # Data
   df = NULL
 
@@ -264,20 +268,43 @@ s3_read_object <- function(bucket, object_key,
     # Read file content
     usethis::ui_info("PROCESS - Reading data with {usethis::ui_code('Wavelength::hfr_import()')}")
 
-    df <- Wavelength::hfr_import(tmpfile)
+    #df <- Wavelength::hfr_import(tmpfile)
+    df <- NULL
+
+    if (!is.null(sheet)) {
+      df <- tempfile %>%
+        readxl::read_excel(filepath,
+                           sheet = sheet,
+                           col_types = "text")
+    }
+    else {
+      df <- tmpfile %>%
+        readxl::excel_sheets() %>%
+        stringr::str_subset(stringr::str_to_upper(.), "HFR") %>%
+        purrr::map_dfr(.f = ~ readxl::read_excel(filepath,
+                                                 sheet = .x,
+                                                 skip = 1,
+                                                 col_types = "text"))
+    }
+
+    # Close connection
+    base::close(conn)
 
     # Clean up
     file.remove(tmpfile)
 
+    # notify
     usethis::ui_info("PROCESS - Temp file removed")
   }
   else {
-
+    # notify
     usethis::ui_info("PROCESS - Reading data with {usethis::ui_code('vroom::vroom()')}")
 
+    # Read other file type with vroom
     df <- vroom::vroom(conn)
   }
 
+  # notify
   usethis::ui_info("PROCESS - Completed!")
 
   return(df)
@@ -343,3 +370,88 @@ s3_download <-
 
     return(s3_obj)
   }
+
+
+#' @title            Upload file to S3 Bucket
+#' @param filepath   Source file path
+#' @param bucket     S3 backet name
+#' @param prefix     S3 Prefix (folder structure)
+#' @param object     Destination S3 object name (with file extention)
+#' @param access_key S3 Access Key
+#' @param secret_key S3 Secret Key
+#'
+#' @return boolean
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' filepath %>% s3_upload(bucket = "test-bkt")}
+#'
+s3_upload <- function(filepath, bucket,
+                      prefix = "",
+                      object = NULL,
+                      access_key = NULL,
+                      secret_key = NULL) {
+
+  # Check S3 keys
+  if (is.null(access_key))
+    access_key = glamr::get_s3key("access")
+
+  if (is.null(secret_key))
+    secret_key = glamr::get_s3key("secret")
+
+  # s3 object: append prefix to file basename
+  s3_object <- ifelse(is.null(object),
+                      base::file.path(prefix, base::basename(filepath)),
+                      object)
+
+  # put object
+  aws.s3::put_object(
+    file =  filepath,
+    object = s3_object,
+    bucket = bucket,
+    key = access_key,
+    secret = secret_key
+  )
+
+}
+
+
+#' @title Remove objects from S3 bucket
+#'
+#' @param objects S3 object keys (full path)
+#' @param bucket     S3 backet name
+#' @param access_key S3 Access Key
+#' @param secret_key S3 Secret Key
+#'
+#'
+#' @return boolean
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' df_objects %>%
+#'   pull(key) %>%
+#'   first() %>%
+#'   s3_remove(objects = .,
+#'             bucket = "test-bkt")}
+#'
+s3_remove <- function(objects, bucket,
+                      access_key = NULL,
+                      secret_key = NULL) {
+
+  # Check S3 keys
+  if (is.null(access_key))
+    access_key = glamr::get_s3key("access")
+
+  if (is.null(secret_key))
+    secret_key = glamr::get_s3key("secret")
+
+  # delete objects from bucket
+  aws.s3::delete_object(
+    object = objects,
+    bucket = bucket,
+    key = get_s3key("access"),
+    secret = get_s3key("secret")
+  )
+}
