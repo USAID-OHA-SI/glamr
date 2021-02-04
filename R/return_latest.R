@@ -15,7 +15,7 @@
 
 return_latest <- function(folderpath, pattern, ...){
 
-  f <- list.files(folderpath, pattern, full.names = TRUE)
+  f <- list.files(folderpath, pattern, full.names = TRUE, ...)
 
   if(length(f) == 0)
     stop("no files found")
