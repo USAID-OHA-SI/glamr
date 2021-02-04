@@ -1,7 +1,8 @@
 #' Return Latest
 #'
 #' @param folderpath path to folder where file(s) are located
-#' @param pattern pattern in file name, regex expressions
+#' @param pattern    pattern in file name, regex expressions
+#' @param ...        Any other valid option for `base::list.files()`
 #'
 #' @return the fill filepath for the most recent version of a file stub
 #' @export
@@ -12,7 +13,7 @@
 #' filepath <- return_latest("Data", file_stub)
 #' df <- read_rds(filepath) }
 
-return_latest <- function(folderpath, pattern){
+return_latest <- function(folderpath, pattern, ...){
 
   f <- list.files(folderpath, pattern, full.names = TRUE)
 
