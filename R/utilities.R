@@ -65,3 +65,31 @@ is_loaded <- function(opt_var){
 is_installed <- function(package){
   {{package}} %in% rownames(installed.packages())
 }
+
+
+#' @title connect_text
+#'
+#' @param txt       String charactors
+#' @param connector Charactor used as connector
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' connect_text("THIS - is complex (very bad)")}
+#'
+connect_text <- function(txt,
+                         connections = "[^a-zA-Z0-9]",
+                         connector = "_") {
+
+  text <- base::sapply(txt, function(x) {
+    x %>%
+      stringr::str_split(connections) %>%
+      base::unlist() %>%
+      stringi::stri_remove_empty() %>%
+      base::paste0(collapse = connector)
+  }, USE.NAMES = FALSE)
+
+  return(text)
+}
