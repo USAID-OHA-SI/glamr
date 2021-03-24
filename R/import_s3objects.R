@@ -196,6 +196,64 @@ s3_object_type <- function(object) {
 }
 
 
+
+#' @title Read sheets from S3 Objects / Excel
+#'
+#' @param bucket     S3 Bucket
+#' @param object_key S3 Object Key
+#' @param access_key S3 Access Key
+#' @param secret_key S3 Secret Key
+#'
+#' @return Excel sheets as data frame
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' s3_objects(
+#'     bucket = "sample-bucket",
+#'     prefix = "ddc/xyz/ABC") %>%
+#'   filter(str_detect(key, "^HFR")) %>%
+#'   pull(key) %>%
+#'   first() %>%
+#'   s3_excel_sheets(bucket = "<sample-bucket>", object_key = .)}
+#'
+s3_excel_sheets <-
+  function(bucket, object_key,
+           access_key = NULL,
+           secret_key = NULL) {
+
+    # Notification
+    base::print(base::basename(object_key))
+
+    # Check keys
+    if (base::is.null(access_key))
+      access_key = glamr::get_s3key("access")
+
+    if (base::is.null(secret_key))
+      secret_key = glamr::get_s3key("secret")
+
+    # Create excel temp file
+    tmpfile <- base::tempfile(fileext = ".xlsx")
+
+    # Save S3 Object to temp file
+    s3_obj <- aws.s3::save_object(
+      bucket = bucket,
+      object = object_key,
+      file = tmpfile,
+      key = access_key,
+      secret = secret_key
+    )
+
+    # Read sheets from file
+    sheets <- readxl::excel_sheets(s3_obj)
+
+    # Clean up
+    base::file.remove(tmpfile)
+
+    return(sheets)
+  }
+
+
 #' @title Read content of S3 Objects
 #'
 #' @param bucket     S3 Bucket name
