@@ -69,8 +69,9 @@ is_installed <- function(package){
 
 #' @title connect_text
 #'
-#' @param txt       String charactors
-#' @param connector Charactor used as connector
+#' @param txt          String charactors
+#' @param connections  Characters to be replaced by connector
+#' @param connector    Charactor used as connector
 #'
 #' @return
 #' @export
