@@ -7,16 +7,15 @@
 set_s3secret(secret)
 }
 \arguments{
-\item{secret}{S3 account}
+\item{secret}{S3 account secret key}
 }
 \value{
 stored secret key
 }
 \description{
-`set_s3secret` stores your s3 credentials email using the `keyring` package.
-This will only need to done once. After running `set_s3secret(secret)`, you will be
-promoted to enter your password through the RStudio API which will then store the
-username and password in your OS credential store using `keyring`.
+`set_s3secret` stores your s3 secret key using the `keyring` package.
+This will only need to done once. After running `set_s3secret(secret)`,
+RStudio API which will then store the key in your OS credential store using `keyring`.
 }
 \examples{
 \dontrun{

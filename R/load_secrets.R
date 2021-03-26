@@ -192,16 +192,41 @@ datim_pwd <- function(){
 
 }
 
+#' @title Store S3 Credentials
+#'
+#' @description
+#' `set_s3keys` stores your s3 keys using the `keyring` package.
+#' This will only need to done once. After running `set_s3keys(access, secret)`,
+#' RStudio API which will then store the keys in your OS credential store using `keyring`.
+#'
+#' @param access S3 Account Access Key
+#' @param secret S3 Account Secret Key
+#'
+#' @return stored access key
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' set_s3access("ABDCEDFF", "MLIZD998SD") }
+#'
+set_s3keys <- function(access, secret){
+  keyring::key_set_with_value(service = "s3",
+                              username = "access",
+                              password = access)
+
+  keyring::key_set_with_value(service = "s3",
+                              username = "secret",
+                              password = secret)
+}
 
 #' Store S3 Credentials - Access Key
 #'
 #' @description
-#' `set_s3access` stores your s3 credentials email using the `keyring` package.
-#' This will only need to done once. After running `set_s3access(access)`, you will be
-#' promoted to enter your password through the RStudio API which will then store the
-#' username and password in your OS credential store using `keyring`.
+#' `set_s3access` stores your s3 access key using the `keyring` package.
+#' This will only need to done once. After running `set_s3access(access)`,
+#' RStudio API which will then store the key in your OS credential store using `keyring`.
 #'
-#' @param access S3 account
+#' @param access S3 account access key
 #'
 #' @return stored access key
 #' @export
@@ -220,12 +245,11 @@ set_s3access <- function(access){
 #' Store S3 Credentials - Secret Access Key
 #'
 #' @description
-#' `set_s3secret` stores your s3 credentials email using the `keyring` package.
-#' This will only need to done once. After running `set_s3secret(secret)`, you will be
-#' promoted to enter your password through the RStudio API which will then store the
-#' username and password in your OS credential store using `keyring`.
+#' `set_s3secret` stores your s3 secret key using the `keyring` package.
+#' This will only need to done once. After running `set_s3secret(secret)`,
+#' RStudio API which will then store the key in your OS credential store using `keyring`.
 #'
-#' @param secret S3 account
+#' @param secret S3 account secret key
 #'
 #' @return stored secret key
 #' @export

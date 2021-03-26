@@ -7,16 +7,15 @@
 set_s3access(access)
 }
 \arguments{
-\item{access}{S3 account}
+\item{access}{S3 account access key}
 }
 \value{
 stored access key
 }
 \description{
-`set_s3access` stores your s3 credentials email using the `keyring` package.
-This will only need to done once. After running `set_s3access(access)`, you will be
-promoted to enter your password through the RStudio API which will then store the
-username and password in your OS credential store using `keyring`.
+`set_s3access` stores your s3 access key using the `keyring` package.
+This will only need to done once. After running `set_s3access(access)`,
+RStudio API which will then store the key in your OS credential store using `keyring`.
 }
 \examples{
 \dontrun{

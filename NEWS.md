@@ -4,6 +4,7 @@
 * Extract metadata from googledirve files, `drive_ls(fldr) %>% gdrive_metadata()`
 * Read sheets from excel files in S3, `s3_excel_sheets(bucket = "<sample-bucket>", object_key = "<sample-key>")
 * Connect text for file name or other use, `connect_text()`
+* Combined set_s3access and set_s3secret into `set_s3keys(access, secret)`
 
 
 # glamr 0.0.0.9000
