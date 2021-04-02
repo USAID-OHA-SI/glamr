@@ -9,7 +9,8 @@ s3_download(
   object,
   filepath = NULL,
   access_key = NULL,
-  secret_key = NULL
+  secret_key = NULL,
+  ...
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ s3_download(
 \item{access_key}{S3 Access key id}
 
 \item{secret_key}{S3 Secret Access key}
+
+\item{...}{Additional aws.S3::save_object() options}
 }
 \value{
 file name

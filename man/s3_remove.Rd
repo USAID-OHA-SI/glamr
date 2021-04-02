@@ -4,7 +4,7 @@
 \alias{s3_remove}
 \title{Remove objects from S3 bucket}
 \usage{
-s3_remove(objects, bucket, access_key = NULL, secret_key = NULL)
+s3_remove(objects, bucket, access_key = NULL, secret_key = NULL, ...)
 }
 \arguments{
 \item{objects}{S3 object keys (full path)}
@@ -14,6 +14,8 @@ s3_remove(objects, bucket, access_key = NULL, secret_key = NULL)
 \item{access_key}{S3 Access Key}
 
 \item{secret_key}{S3 Secret Key}
+
+\item{...}{Additional aws.S3::delete_object() options}
 }
 \value{
 boolean
