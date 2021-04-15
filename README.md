@@ -21,9 +21,9 @@ If you do not have the devtools package installed, you will have to run the `ins
 ``` r
 ## SETUP
 
-  #install
+  #install package with vignettes
     install.packages("devtools")
-    devtools::install_github("USAID-OHA-SI/glamr")
+    devtools::install_github("USAID-OHA-SI/glamr", build_vignettes = TRUE)
     
   #load the package
     library(glamr)
