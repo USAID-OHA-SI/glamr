@@ -8,8 +8,10 @@ s3_objects(
   bucket,
   prefix = "ddc/uat",
   n = 1000,
+  unpack_keys = FALSE,
   access_key = NULL,
-  secret_key = NULL
+  secret_key = NULL,
+  ...
 )
 }
 \arguments{
@@ -19,9 +21,13 @@ s3_objects(
 
 \item{n}{Max number of record, default = 1000}
 
+\item{unpack_keys}{Separate key colunm, default is false}
+
 \item{access_key}{S3 Access Key ID}
 
 \item{secret_key}{S3 Secret Access Key}
+
+\item{...}{Additional aws.s3::get_bucket_df() options}
 }
 \value{
 S3 Objects list as tibble

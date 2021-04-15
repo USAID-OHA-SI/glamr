@@ -10,7 +10,8 @@ s3_upload(
   prefix = "",
   object = NULL,
   access_key = NULL,
-  secret_key = NULL
+  secret_key = NULL,
+  ...
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ s3_upload(
 \item{access_key}{S3 Access Key}
 
 \item{secret_key}{S3 Secret Key}
+
+\item{...}{Additional aws.S3::put_object() options}
 }
 \value{
 boolean

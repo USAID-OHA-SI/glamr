@@ -36,8 +36,10 @@ s3_buckets <- function(access_key = NULL,
 #' @param bucket      S3 Bucket name
 #' @param prefix      Limit response by key
 #' @param n           Max number of record, default = 1000
+#' @param unpack_keys Separate key colunm, default is false
 #' @param access_key  S3 Access Key ID
 #' @param secret_key  S3 Secret Access Key
+#' @param ...         Additional aws.s3::get_bucket_df() options
 #'
 #' @return S3 Objects list as tibble
 #' @export
@@ -49,8 +51,10 @@ s3_buckets <- function(access_key = NULL,
 s3_objects <- function(bucket,
                        prefix = "ddc/uat",
                        n = 1000,
+                       unpack_keys = FALSE,
                        access_key = NULL,
-                       secret_key = NULL) {
+                       secret_key = NULL,
+                       ...) {
 
   # Check keys
   if (is.null(access_key))
@@ -65,7 +69,8 @@ s3_objects <- function(bucket,
       prefix = prefix,
       max = n,
       key = access_key,
-      secret = secret_key
+      secret = secret_key,
+      ...
     ) %>%
     dplyr::as_tibble() %>%
     janitor::clean_names() %>% #glimpse()
@@ -76,6 +81,11 @@ s3_objects <- function(bucket,
       size = base::as.integer(size)
     ) %>%
     dplyr::relocate(bucket, .before = 1)
+
+  # Unpack keys
+  if (unpack_keys == TRUE) {
+    objects <- objects %>% s3_unpack_keys()
+  }
 
   return(objects)
 }
@@ -381,6 +391,7 @@ s3_read_object <- function(bucket, object,
 #' @param filepath   Full path of destination file
 #' @param access_key S3 Access key id
 #' @param secret_key S3 Secret Access key
+#' @param ...        Additional aws.S3::save_object() options
 #'
 #' @return file name
 #' @export
@@ -397,7 +408,8 @@ s3_download <-
   function(bucket, object,
            filepath = NULL,
            access_key = NULL,
-           secret_key = NULL) {
+           secret_key = NULL,
+           ...) {
 
     # Check keys
     if (is.null(access_key))
@@ -422,7 +434,8 @@ s3_download <-
       object = object,
       file = filepath,
       key = access_key,
-      secret = secret_key
+      secret = secret_key,
+      ...
     )
 
     # Destination file
@@ -442,6 +455,7 @@ s3_download <-
 #' @param object     Destination S3 object name (with file extention)
 #' @param access_key S3 Access Key
 #' @param secret_key S3 Secret Key
+#' @param ...        Additional aws.S3::put_object() options
 #'
 #' @return boolean
 #' @export
@@ -454,7 +468,8 @@ s3_upload <- function(filepath, bucket,
                       prefix = "",
                       object = NULL,
                       access_key = NULL,
-                      secret_key = NULL) {
+                      secret_key = NULL,
+                      ...) {
 
   # Check S3 keys
   if (is.null(access_key))
@@ -475,7 +490,8 @@ s3_upload <- function(filepath, bucket,
     bucket = bucket,
     multipart = TRUE,
     key = access_key,
-    secret = secret_key
+    secret = secret_key,
+    ...
   )
 
 }
@@ -487,6 +503,7 @@ s3_upload <- function(filepath, bucket,
 #' @param bucket     S3 backet name
 #' @param access_key S3 Access Key
 #' @param secret_key S3 Secret Key
+#' @param ...        Additional aws.S3::delete_object() options
 #'
 #'
 #' @return boolean
@@ -502,7 +519,8 @@ s3_upload <- function(filepath, bucket,
 #'
 s3_remove <- function(objects, bucket,
                       access_key = NULL,
-                      secret_key = NULL) {
+                      secret_key = NULL,
+                      ...) {
 
   # Check S3 keys
   if (is.null(access_key))
@@ -516,6 +534,7 @@ s3_remove <- function(objects, bucket,
     object = objects,
     bucket = bucket,
     key = get_s3key("access"),
-    secret = get_s3key("secret")
+    secret = get_s3key("secret"),
+    ...
   )
 }
