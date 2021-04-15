@@ -473,6 +473,7 @@ s3_upload <- function(filepath, bucket,
     file =  filepath,
     object = s3_object,
     bucket = bucket,
+    multipart = TRUE,
     key = access_key,
     secret = secret_key
   )
