@@ -179,3 +179,36 @@ clean_countries <-
       dplyr::mutate(dplyr::across(.cols = dplyr::all_of(name),
                            .fns = lookup_country))
   }
+
+
+#' Clean indicators
+#'
+#' @param df MSD data frame
+#'
+#' @return indicators with denominator have _D suffix
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' df <- df %>%
+#' filter(indicator == "TX_PVLS",
+#'        standardizeddisaggregate %in% c("Total Numerator", "Total Denominator")) %>%
+#' clean_indicator() }
+clean_indicator <- function(df){
+  # Check for valid column name
+  if (!all(c("indicator", "numeratordenom") %in% names(df))) {
+    cat("\nERROR - ",
+        crayon::red("indicator"),
+        " is not available as a column.\n")
+    return(NULL)
+  }
+
+  #add _D to indicators that are denominators
+  df <- df %>%
+    dplyr::mutate(indicator =
+                    dplyr::case_when(indicator %in% c("TX_TB_D_NEG", "TX_TB_D_POS") ~ glue::glue("{indicator}"),
+                                     numeratordenom == "D" ~ glue::glue("{indicator}_D"),
+                                     TRUE ~ glue::glue("{indicator}")) %>% paste(.))
+
+  return(df)
+}
