@@ -197,18 +197,16 @@ clean_countries <-
 clean_indicator <- function(df){
   # Check for valid column name
   if (!all(c("indicator", "numeratordenom") %in% names(df))) {
-    cat("\nERROR - ",
-        crayon::red("indicator"),
-        " is not available as a column.\n")
-    return(NULL)
+    usethis::ui_warn("ERROR - {usethis::ui_field('indicator')} and/or {usethis::ui_field('numeratordenom')} are not columns in the dataframe. No adjustments to indicator made.")
+  } else {
+    #add _D to indicators that are denominators
+    df <- df %>%
+      dplyr::mutate(indicator =
+                      dplyr::case_when(indicator %in% c("TX_TB_D_NEG", "TX_TB_D_POS") ~ glue::glue("{indicator}"),
+                                       numeratordenom == "D" ~ glue::glue("{indicator}_D"),
+                                       TRUE ~ glue::glue("{indicator}")) %>% paste(.))
+
   }
-
-  #add _D to indicators that are denominators
-  df <- df %>%
-    dplyr::mutate(indicator =
-                    dplyr::case_when(indicator %in% c("TX_TB_D_NEG", "TX_TB_D_POS") ~ glue::glue("{indicator}"),
-                                     numeratordenom == "D" ~ glue::glue("{indicator}_D"),
-                                     TRUE ~ glue::glue("{indicator}")) %>% paste(.))
-
   return(df)
+
 }
