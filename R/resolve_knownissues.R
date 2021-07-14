@@ -217,7 +217,7 @@ note_knownissues <- function(df_orig, df_allissues){
     dplyr::summarise(indicator = paste(indicator, collapse=", "), .groups = "drop") %>%
     dplyr::mutate(msg = ifelse(action == "exclude",
                                glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}"),
-                               glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}: {description}")))
+                               glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}; affecting {indicator}")))
 
   return(df_issues_matches)
 }
