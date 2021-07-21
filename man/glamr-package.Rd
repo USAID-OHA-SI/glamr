@@ -26,6 +26,7 @@ Authors:
 \itemize{
   \item Tim Essam \email{tessam@usaid.gov}
   \item Baboyma Kagniniwa \email{bkagniniwa@usaid.gov}
+  \item Benjamin Kasdan \email{bkasdan@usaid.gov}
 }
 
 }
