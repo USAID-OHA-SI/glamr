@@ -44,14 +44,14 @@
 #'   labs(caption = glue("Source: {source_info()}")) }
 source_info <- function(path, type, return = "source"){
 
-  if(!file.exists(path))
-    stop("File/folder do not exist or path is not correct.")
-
   if(missing(path) && is.null(getOption("path_msd")))
     stop("No path to a file or folder was provided.")
 
   if(missing(path))
     path <- si_path()
+
+  if(!file.exists(path))
+    stop("File/folder do not exist or path is not correct.")
 
   if(file.info(path)$isdir && missing(type))
     type <- "OU_IM_FY19"
