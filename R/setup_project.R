@@ -49,7 +49,7 @@ folder_setup <- function(folder_list = list("Data", "Images", "Scripts", "AI",
 
 setup_gitignore <- function(){
 
-  if(!file.exists(".gitignore")){
+  if(!file.exists(".gitignore") || missing_section(".gitignore")){
     cat("#R basics
 .Rproj.user
 .Rhistory
@@ -98,9 +98,29 @@ setup_readme <- function(add_disclaimer = TRUE){
   if(!file.exists("README.md"))
     usethis::use_readme_md()
 
-  if(add_disclaimer == TRUE){
+  if(add_disclaimer == TRUE && missing_section("README.md")){
     cat(
-      "---\n\n*Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.*",
+      "\n---\n\n*Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.*",
       file = "README.md", append = TRUE)
   }
+}
+
+
+
+#' Check if standard text section is missing from file
+#'
+#' @param file either README.md or .gitignore
+#'
+missing_section <- function(file){
+
+  suppressWarnings(text <- read.delim(file, col.names = "x"))
+
+  text <- text %>%
+    dplyr::filter(stringr::str_detect(x,
+          "Disclaimer: The findings|nothing from these folders")) %>%
+    nrow()
+
+  missing <- text == 0
+
+  return(missing)
 }
