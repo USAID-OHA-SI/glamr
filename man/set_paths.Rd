@@ -5,10 +5,11 @@
 \title{Set SI local folder paths}
 \usage{
 set_paths(
-  folderpath_msd = NULL,
-  folderpath_datim = NULL,
-  folderpath_raster = NULL,
-  folderpath_vector = NULL
+  folderpath_msd,
+  folderpath_datim,
+  folderpath_raster,
+  folderpath_vector,
+  folderpath_downloads
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ set_paths(
 \item{folderpath_raster}{folderpath where GIS raster data are stored}
 
 \item{folderpath_vector}{folderpath where GIS vector data are stored}
+
+\item{folderpath_downloads}{folderpath to local Downloads folder}
 }
 \value{
 code chunk to paste into .Rprofile
