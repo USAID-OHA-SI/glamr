@@ -229,8 +229,8 @@ clean_indicator <- function(df){
 #'
 #' @examples
 #' \dontrun{
-#' file <- 'Submission_Coted'Ivoire_data.csv"
-#' new_file <- clean_filename(file, rm_apostrophe = TRUE, add_date = "prefix") }
+#' file <- "Submission_Coted'Ivoire_data.csv"
+#' new_file <- clean_filename(file, rm_apostrophe = TRUE, add_date = 'prefix') }
 clean_filename <- function(x,
                            rm_apostrophe = TRUE,
                            rp_space = FALSE,

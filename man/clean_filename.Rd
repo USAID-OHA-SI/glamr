@@ -32,3 +32,8 @@ since this will get rejected by Google Drive, but also includes features like
 replacing spaces with an underscore, converting to all lowercase, and adding
 a date prefix or suffix.
 }
+\examples{
+\dontrun{
+file <- "Submission_Coted'Ivoire_data.csv"
+new_file <- clean_filename(file, rm_apostrophe = TRUE, add_date = 'prefix') }
+}
