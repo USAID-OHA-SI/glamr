@@ -23,6 +23,19 @@ check_status <- function(res){
     stop("The API returned an error")
 }
 
+#' Check if package exists
+#'
+#' @param pkg package name
+#'
+#' @export
+
+package_check <- function(pkg){
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    stop(paste("Package", pkg, "needed for this function to work. Please install it."),
+         call. = FALSE)
+  }
+}
+
 
 #' Test if service is stored in credential manager
 #'
