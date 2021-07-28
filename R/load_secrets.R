@@ -145,6 +145,8 @@ set_datim <- function(datim_username){
 
 #' Return DATIM username
 #'
+#' To setup/store, run `glamr::set_datim()`.
+#'
 #' @return access DATIM username from keyring
 #' @export
 #'
@@ -168,6 +170,8 @@ datim_user <- function(){
 }
 
 #' Return DATIM password
+#'
+#' To setup/store, run `glamr::set_datim()`.
 #'
 #' @return access DATIM password from keyring
 #' @export

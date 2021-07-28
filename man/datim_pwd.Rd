@@ -10,7 +10,7 @@ datim_pwd()
 access DATIM password from keyring
 }
 \description{
-Return DATIM password
+To setup/store, run `glamr::set_datim()`.
 }
 \examples{
 \dontrun{
