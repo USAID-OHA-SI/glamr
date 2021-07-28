@@ -16,7 +16,10 @@
 #'  DATIM or Google Drive.
 #'
 #'
-#' @return stores Google and DATIM credentials in session
+#' @param service account, either "email", "datim" or "s3"; by default, all are
+#' loaded if they are available
+#'
+#' @return stores Google, DATIM, and s3 credentials in session
 #' @export
 #'
 #' @importFrom utils installed.packages
@@ -33,7 +36,7 @@
 #' user <- getOption("datim")
 #' ou_table <- datim_outable(user, datim_pwd()) }
 
-load_secrets <- function(){
+load_secrets <- function(service = c("email", "datim", "s3")){
 
   if(length(is_stored()) == 0){
     ui_oops("No accounts stored under {ui_code('keyring')}. Use {ui_code('set_email()')} and {ui_code('set_datim()')} to establish accounts")
@@ -41,29 +44,29 @@ load_secrets <- function(){
     ui_info("The following items have been stored for use in this session:")
   }
 
-  if(is_stored("email")){
+  if(is_stored("email") && "email" %in% service){
     options("email" = keyring::key_list("email")[1,2])
     ui_done("{ui_field('email')} set as {ui_value(getOption('email'))}")
   }
 
-  if(is_stored("email") && is_installed("googledrive")){
+  if(is_stored("email") && is_installed("googledrive") && "email" %in% service){
     options(googledrive::drive_auth(getOption("email")))
     ui_done("{ui_code('googledrive')} authenticated using {ui_field('email')}")
   }
 
-  if(is_stored("email") && is_installed("googlesheets4")){
+  if(is_stored("email") && is_installed("googlesheets4") && "email" %in% service){
     options(googlesheets4::gs4_auth(getOption("email")))
     ui_done("{ui_code('googlesheets4')} authenticated using {ui_field('email')}")
   }
 
-  if(is_stored("datim")){
+  if(is_stored("datim") && "datim" %in% service){
     options("datim" = keyring::key_list("datim")[1,2])
     options("baseurl" = "https://final.datim.org/")
     ui_done("{ui_field('datim')} username set as {ui_value(getOption('datim'))}")
     ui_done("{ui_field('baseurl')} set to {ui_value(getOption('baseurl'))}")
   }
 
-  if (is_stored("s3")) {
+  if (is_stored("s3") && "s3" %in% service) {
     options("access_key" = get_s3key("access"))
     options("secret_key" = get_s3key("secret"))
 
@@ -97,10 +100,18 @@ load_secrets <- function(){
 #'  beginning of a script, storing their email and DATIM username under Options
 #'  for the current session.
 #'
+#'  This function also stores the email locally in your .Rprofile, allowing to be
+#'  used automatically as the default for `googledrive::drive_auth()` and
+#'  `googlesheets4::gs4_auth()`
+#'
 #' @param usaid_email full USAID email address
 #'
-#' @return stores USAID email in using keyring
+#' @return stores USAID email using keyring and .Rprofile
 #' @export
+#'
+#' @importFrom usethis ui_path
+#' @importFrom usethis ui_todo
+#' @importFrom usethis ui_code_block
 #'
 #' @examples
 #' \dontrun{
@@ -110,6 +121,15 @@ set_email <- function(usaid_email){
   keyring::key_set_with_value(service = "email",
                               username = usaid_email,
                               password = "NULL")
+  ui_code_block(
+    "
+    options(gargle_oauth_email = '{usaid_email}')
+    "
+  )
+
+  ui_todo("Copy and paste this code in {ui_path('.Rprofile')} to store your SI folder paths.")
+
+  usethis::edit_r_profile("user")
 }
 
 #' Store DATIM credentials

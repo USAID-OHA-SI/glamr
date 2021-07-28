@@ -26,13 +26,13 @@ check_status <- function(res){
 
 #' Test if service is stored in credential manager
 #'
-#' @param service account, either "datim" or "email"
+#' @param service account, either "email", "datim" or "s3"
 #'
 #' @return A boolean
 #' @export
 #'
 
-is_stored <- function(service = c("datim", "email")){
+is_stored <- function(service = c("datim", "email", "s3")){
 
   accounts <- keyring::key_list()$service
 
