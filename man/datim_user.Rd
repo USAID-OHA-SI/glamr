@@ -10,7 +10,7 @@ datim_user()
 access DATIM username from keyring
 }
 \description{
-Return DATIM username
+To setup/store, run `glamr::set_datim()`.
 }
 \examples{
 \dontrun{

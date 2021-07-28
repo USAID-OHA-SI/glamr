@@ -7,7 +7,7 @@
 si_path(type = "path_msd")
 }
 \arguments{
-\item{type}{folderpath, eg "path_msd" (default), "path_datim", "path_raster", "path_vector"}
+\item{type}{folderpath, eg "path_msd" (default), "path_datim", "path_raster", "path_vector", "path_downloads"}
 }
 \value{
 folderpath stored in global options

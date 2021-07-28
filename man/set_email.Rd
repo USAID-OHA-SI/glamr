@@ -10,7 +10,7 @@ set_email(usaid_email)
 \item{usaid_email}{full USAID email address}
 }
 \value{
-stores USAID email in using keyring
+stores USAID email using keyring and .Rprofile
 }
 \description{
 `set_email` stores your USAID email using the `keyring` package. This will
@@ -24,6 +24,10 @@ only need to run once.
  After `set_email` has been run once, an analyst can set `load_secrets` at the
  beginning of a script, storing their email and DATIM username under Options
  for the current session.
+
+ This function also stores the email locally in your .Rprofile, allowing to be
+ used automatically as the default for `googledrive::drive_auth()` and
+ `googlesheets4::gs4_auth()`
 }
 \examples{
 \dontrun{

@@ -4,10 +4,14 @@
 \alias{load_secrets}
 \title{Load credentials}
 \usage{
-load_secrets()
+load_secrets(service = c("email", "datim", "s3"))
+}
+\arguments{
+\item{service}{account, either "email", "datim" or "s3"; by default, all are
+loaded if they are available}
 }
 \value{
-stores Google and DATIM credentials in session
+stores Google, DATIM, and s3 credentials in session
 }
 \description{
 #' @description
