@@ -1,4 +1,5 @@
 # glamr 1.0.0
+* Include two new function to convert dates to periods and periods to dates using `convert_date_to_qtr()` and `convert_qtr_to_date()`
 * Update `set_paths()`, allowing for `path_downloads` and improve backend efficiency
 * Store email in .Rprofile in addition to keyring using `set_email()` for use with `googledrive::drive_auth()` and `googlesheets4::gs4_auth()` without having to provide an email
 * Add `clean_filename()` function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.
