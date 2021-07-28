@@ -210,3 +210,50 @@ clean_indicator <- function(df){
   return(df)
 
 }
+
+#' Clean Filename
+#'
+#' This function is primarily useful for removing any apostrophe from the filename
+#' since this will get rejected by Google Drive, but also includes features like
+#' replacing spaces with an underscore, converting to all lowercase, and adding
+#' a date prefix or suffix.
+#'
+#' @param x filepath or file name
+#' @param rm_apostrophe remove all apostrophes, default = TRUE
+#' @param rp_space replace spaces with underscore, default = FALSE
+#' @param mk_lower make lowercase, default = FALSE
+#' @param add_date add date "prefix" or "suffix"
+#'
+#' @return clean filename
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' file <- 'Submission_Coted'Ivoire_data.csv"
+#' new_file <- clean_filename(file, rm_apostrophe = TRUE, add_date = "prefix") }
+clean_filename <- function(x,
+                           rm_apostrophe = TRUE,
+                           rp_space = FALSE,
+                           mk_lower = FALSE,
+                           add_date = NULL){
+  if(rm_apostrophe == TRUE)
+    x <- stringr::str_remove_all(x, "'")
+
+  if(rp_space == TRUE)
+    x <- stringr::str_replace_all(x, " ", "_")
+
+  if(mk_lower == TRUE)
+    x <- tolower(x)
+
+  if(add_date == "prefix"){
+    x <- stringr::str_replace(x,
+                              basename(x),
+                              glue::glue('{format(Sys.Date(),"%Y%m%d")}_{basename(x)}'))
+  }
+
+  if(add_date == "suffix"){
+    x <- stringr::str_replace(x,
+                              glue::glue("{tools::file_ext(x)}$"),
+                              glue::glue('{format(Sys.Date(),"%Y%m%d")}_{tools::file_ext(x)}'))
+  }
+}

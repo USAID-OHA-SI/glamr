@@ -1,6 +1,7 @@
 # glamr 1.0.0
 * Update `set_paths()`, allowing for `path_downloads` and improve backend efficiency
 * Store email in .Rprofile in addition to keyring using `set_email()` for use with `googledrive::drive_auth()` and `googlesheets4::gs4_auth()` without having to provide an email
+* Add `clean_filename()` function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.
 * Adjust `load_secrets()` to allow user to specify which accounts to load in a session
 * Create `source_info` function to extract information from the file to use in the caption/source 
 * Add `pepfar_data_calendar` dataframe to be used in conjunction with source info
