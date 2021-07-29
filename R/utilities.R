@@ -1,7 +1,6 @@
 #' Check internet connection
 #'
 #' @return A boolean or stops
-#' @export
 
 check_internet <- function(){
 
@@ -15,7 +14,6 @@ check_internet <- function(){
 #' @param res response
 #'
 #' @return A boolean or stops
-#' @export
 
 check_status <- function(res){
 
@@ -42,7 +40,6 @@ package_check <- function(pkg){
 #' @param service account, either "email", "datim" or "s3"
 #'
 #' @return A boolean
-#' @export
 #'
 
 is_stored <- function(service = c("datim", "email", "s3")){
@@ -58,7 +55,6 @@ is_stored <- function(service = c("datim", "email", "s3")){
 #' @param opt_var option variable ("datim", "email", "path_msd", "path_datim", "path_vector", "path_raster")
 #'
 #' @return A boolean
-#' @export
 #'
 
 is_loaded <- function(opt_var){
@@ -73,7 +69,6 @@ is_loaded <- function(opt_var){
 #' @param package name of R package to check
 #'
 #' @return A boolean
-#' @export
 
 is_installed <- function(package){
   {{package}} %in% rownames(installed.packages())
