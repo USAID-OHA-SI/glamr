@@ -55,7 +55,7 @@ setup_gitignore <- function(){
 .Rhistory
 .RData
 .Ruserdata",
-file = ".gitignore")
+file = ".gitignore", append = TRUE)
   }
 
   cat("\n#no data
