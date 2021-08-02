@@ -82,7 +82,7 @@ reference:
 
 - title: Utilities
   contents:
-  - %ni%
+  - '`%ni%`'
   - prinf
   - package_check
 
