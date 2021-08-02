@@ -22,3 +22,15 @@ RStudio API which will then store the key in your OS credential store using `key
 set_s3secret("fsfs8sf0fds9f6s5") }
 
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{load_secrets}()},
+\code{\link{set_datim}()},
+\code{\link{set_email}()},
+\code{\link{set_s3access}()},
+\code{\link{set_s3keys}()}
+}
+\concept{authentication}

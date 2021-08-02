@@ -37,6 +37,7 @@ si_setup <- function(){
 #' @param folder_list list of folders to install
 #'
 #' @export
+#' @family project setup
 #'
 #' @examples
 #' \dontrun{

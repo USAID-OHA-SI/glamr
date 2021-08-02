@@ -32,3 +32,15 @@ username and password in your OS credential store using `keyring`.
 set_datim("rshah") }
 
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{load_secrets}()},
+\code{\link{set_email}()},
+\code{\link{set_s3access}()},
+\code{\link{set_s3keys}()},
+\code{\link{set_s3secret}()}
+}
+\concept{authentication}

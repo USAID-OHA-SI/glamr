@@ -39,3 +39,10 @@ The standard setup provides the following folders for these uses:
   folder_setup(fldrs)
 }
 }
+\seealso{
+Other project setup: 
+\code{\link{setup_gitignore}()},
+\code{\link{setup_readme}()},
+\code{\link{si_setup}()}
+}
+\concept{project setup}

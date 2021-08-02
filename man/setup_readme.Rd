@@ -24,6 +24,7 @@ stand alone function but primarily serves `si_setup()`.
 }
 \seealso{
 Other project setup: 
+\code{\link{folder_setup}()},
 \code{\link{setup_gitignore}()},
 \code{\link{si_setup}()}
 }

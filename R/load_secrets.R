@@ -21,6 +21,7 @@
 #'
 #' @return stores Google, DATIM, and s3 credentials in session
 #' @export
+#' @family authentication
 #'
 #' @importFrom utils installed.packages
 #' @importFrom usethis ui_oops
@@ -108,6 +109,7 @@ load_secrets <- function(service = c("email", "datim", "s3")){
 #'
 #' @return stores USAID email using keyring and .Rprofile
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_path
 #' @importFrom usethis ui_todo
@@ -153,6 +155,7 @@ set_email <- function(usaid_email){
 #'
 #' @return stores USAID email in using keyring
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -169,6 +172,7 @@ set_datim <- function(datim_username){
 #'
 #' @return access DATIM username from keyring
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_stop
 #' @importFrom usethis ui_code
@@ -195,6 +199,7 @@ datim_user <- function(){
 #'
 #' @return access DATIM password from keyring
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_stop
 #' @importFrom usethis ui_code
@@ -228,6 +233,7 @@ datim_pwd <- function(){
 #'
 #' @return stored access key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -254,6 +260,7 @@ set_s3keys <- function(access, secret){
 #'
 #' @return stored access key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -277,6 +284,7 @@ set_s3access <- function(access){
 #'
 #' @return stored secret key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -299,6 +307,7 @@ set_s3secret <- function(secret){
 #'
 #' @return stored key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{

@@ -34,3 +34,15 @@ only need to run once.
 set_email("rshah@usaid.gov") }
 
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{load_secrets}()},
+\code{\link{set_datim}()},
+\code{\link{set_s3access}()},
+\code{\link{set_s3keys}()},
+\code{\link{set_s3secret}()}
+}
+\concept{authentication}

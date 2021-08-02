@@ -36,3 +36,15 @@ load_secrets()
 user <- getOption("datim")
 ou_table <- datim_outable(user, datim_pwd()) }
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{set_datim}()},
+\code{\link{set_email}()},
+\code{\link{set_s3access}()},
+\code{\link{set_s3keys}()},
+\code{\link{set_s3secret}()}
+}
+\concept{authentication}

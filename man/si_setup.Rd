@@ -16,6 +16,7 @@ structure with the necessary folders, disclaimers, and ignored files.
 }
 \seealso{
 Other project setup: 
+\code{\link{folder_setup}()},
 \code{\link{setup_gitignore}()},
 \code{\link{setup_readme}()}
 }
