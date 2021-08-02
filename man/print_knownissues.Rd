@@ -17,3 +17,4 @@ console print of known issues
 \description{
 Print Known Issues to console
 }
+\keyword{internal}

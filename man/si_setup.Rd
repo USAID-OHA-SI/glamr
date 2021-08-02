@@ -10,5 +10,13 @@ si_setup()
 creates folders, readme, and gitignore
 }
 \description{
-Default SI Project Setup
+`si_setup()` combines three function - `folder_setup()`,
+`setup_gitignore()`, and `setup_readme()` to create the base OHA/SI project
+structure with the necessary folders, disclaimers, and ignored files.
 }
+\seealso{
+Other project setup: 
+\code{\link{setup_gitignore}()},
+\code{\link{setup_readme}()}
+}
+\concept{project setup}

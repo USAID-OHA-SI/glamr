@@ -12,3 +12,4 @@ missing_section(file)
 \description{
 Check if standard text section is missing from file
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ A boolean
 \description{
 Test if service is stored in credential manager
 }
+\keyword{internal}

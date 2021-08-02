@@ -15,3 +15,4 @@ A boolean
 \description{
 Test if package is installed locally
 }
+\keyword{internal}
