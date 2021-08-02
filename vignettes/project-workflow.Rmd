@@ -124,7 +124,7 @@ Running this will open your `.Rprofile` and you'll be prompted to paste the pre-
 
 With that stored, you can use `si_path()` to return the path to your MSD folder (as the default) and then use another `glamr` function, `return_latest()`, which looks in the provide folder path for the lastest version of a file that matches the pattern you provided. In this case, we can pass in that we want the last OUxIM MSD and it will return the file path which we can pass into `readr::read_rds()`
 
-```{r}
+```{r load_msd, eval = F}
 df <- si_path() %>%
   return_latest("OU_IM_FY19") %>% 
   readr::read_rds()

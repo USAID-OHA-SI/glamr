@@ -1,4 +1,5 @@
 # glamr 1.0.0
+* Used `pkgdown` to create a site
 * Include two new function to convert dates to periods and periods to dates using `convert_date_to_qtr()` and `convert_qtr_to_date()`.
 * New vigentte for project workflow added, `vignette(package = glamr)`
 * Update `set_paths()`, allowing for `path_downloads` and improve backend efficiency.
@@ -13,4 +14,4 @@
 * Added a `NEWS.md` file to track changes to the package.
 
 # glamr 0.1.0
-*Prior to verion 1.0.0, updates were not captured.
+* Prior to verion 1.0.0, updates were not captured.
