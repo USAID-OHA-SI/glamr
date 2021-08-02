@@ -102,7 +102,7 @@ clean_agency <- function(.data) {
 #'
 #' @param country country name
 #' @return cleaned country name
-#'
+#' @keywords internal
 
 lookup_country <- function(country) {
 

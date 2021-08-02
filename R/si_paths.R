@@ -83,7 +83,8 @@ set_paths <- function(folderpath_msd,
 #'
 #' @importFrom usethis ui_stop
 #' @importFrom usethis ui_path
-#'
+#' @keywords internal
+
 validate_path <- function(path, type){
   if(!missing(path) && !dir.exists(path))
     ui_stop("The folder path {ui_path(path)} is not valid")
