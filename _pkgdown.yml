@@ -32,86 +32,87 @@ navbar:
 reference:
 - title: Workflow
   contents:
-  - '`folder_setup`'
-  - '`import_drivefile`'
-  - '`return_latest`'
-  - '`set_paths`'
-  - '`setup_gitignore`'
-  - '`setup_readme`'
-  - '`si_path`'
-  - '`si_setup`'
-  - '`source_info`'
-  - '`gdrive_metadata`'
-  - '`extract_excel_data`'
-  - '`extract_tbl_data`'
+  - folder_setup
+  - import_drivefile
+  - return_latest
+  - set_paths
+  - setup_gitignore
+  - setup_readme
+  - si_path
+  - si_setup
+  - source_info
+  - gdrive_metadata
+  - extract_excel_data
+  - extract_tbl_data
 
 - title: Authentication
   contents:
-  - '`datim_pwd`'
-  - '`datim_user`'
-  - '`load_secrets`'
-  - '`mypwd`'
+  - datim_pwd
+  - datim_user
+  - load_secrets
+  - mypwd
 
 - title: Authentication Setup
   contents:
-  - '`get_s3key`'
-  - '`set_datim`'
-  - '`set_email`'
-  - '`set_s3access`'
-  - '`set_s3keys`'
-  - '`set_s3secret`'
+  - get_s3key
+  - set_datim
+  - set_email
+  - set_s3access
+  - set_s3keys
+  - set_s3secret
 
 - title: Tidying
   contents:
-  - '`clean_agency`'
-  - '`clean_column`'
-  - '`clean_countries`'
-  - '`clean_filename`'
-  - '`clean_indicator`'
-  - '`clean_knownissues`'
-  - '`clean_pds`'
-  - '`clean_psnu`'
-  - '`connect_text`'
-  - '`extract_text`'
+  - clean_agency
+  - clean_column
+  - clean_countries
+  - clean_filename
+  - clean_indicator
+  - clean_knownissues
+  - clean_pds
+  - clean_psnu
+  - connect_text
+  - extract_text
 
 - title: Dates
   contents:
-  - '`convert_date_to_qtr`'
-  - '`convert_qtr_to_date`'
-  - '`pepfar_data_calendar`'
+  - convert_date_to_qtr
+  - convert_qtr_to_date
+  - pepfar_data_calendar
 
 - title: Utilities
   contents:
-  - '`%ni%`'
-  - '`prinf`'
-  - '`package_check`'
+  - %ni%
+  - prinf
+  - package_check
 
 - title: DATIM
   contents:
-  - '`get_outable`'
-  - '`identify_levels`'
-  - '`identify_ouuids`'
-  - '`extract_datim`'
+  - get_outable
+  - identify_levels
+  - identify_ouuids
+  - extract_datim
 
 - title: Mechanism Handling
   contents:
-  - '`partner_types`'
-  - '`browse_knowissues`'
-  - '`resolve_knownissues`'
+  - partner_types
+  - browse_knowissues
+  - resolve_knownissues
 
 - title: Financial
   contents:
-  - '`remove_mo`'
-  - '`remove_sch`'
+  - remove_mo
+  - remove_sch
 
 - title: s3 Utilities
   contents:
-  - '`s3_buckets`'
-  - '`s3_download`'
-  - '`s3_excel_sheets`'
-  - '`s3_objects`'
-  - '`s3_object_type`'
-  - '`s3_read_object`'
-  - '`s3_remove`'
-  - '`s3_unpack_keys`'
-  - '`s3_upload`'
+  - s3_buckets
+  - s3_download
+  - s3_excel_sheets
+  - s3_objects
+  - s3_object_type
+  - s3_read_object
+  - s3_remove
+  - s3_unpack_keys
+  - s3_upload
+2
