@@ -66,6 +66,7 @@ resolve_knownissues <- function(df, store_excl = FALSE){
 #' Known Data Issues Tracker Google Sheet ID
 #'
 #' @return google sheet id
+#' @keywords internal
 #'
 gs_id_knownissues <- '1CMPY-GCWP3NSNWvLGLwMwBaPZsobgvjtobhjkZkDfow'
 
@@ -85,6 +86,7 @@ browse_knowissues <- function(){
 #' Get Known Issues locally
 #'
 #' @description load Google Sheet
+#' @keywords internal
 #'
 get_knownissues <- function(){
 
@@ -118,6 +120,7 @@ get_knownissues <- function(){
 #' @param df data from get_knownissues()
 #'
 #' @return adjust mech_code and tidy by expanding by indicator
+#' @keywords internal
 
 clean_knownissues <- function(df){
   #convert mech_code to string to match MSD
@@ -143,6 +146,7 @@ clean_knownissues <- function(df){
 #' @param df_issues df output from clean_knownissues()
 #'
 #' @return df of MSD with extra column of period type to know what to excluded
+#' @keywords internal
 
 flag_knownissues <- function(df, df_issues){
 
@@ -166,6 +170,7 @@ flag_knownissues <- function(df, df_issues){
 #' @param type period type, either targets (default) or results
 #'
 #' @return dataframe with known issues data removed
+#' @keywords internal
 
 squish_knownissues <- function(df, type = "targets"){
 
@@ -202,6 +207,7 @@ squish_knownissues <- function(df, type = "targets"){
 #' @param df_allissues df from clean_knownissues()
 #'
 #' @return df that has a description of what was excluded in orig df
+#' @keywords internal
 
 note_knownissues <- function(df_orig, df_allissues){
 
@@ -228,6 +234,7 @@ note_knownissues <- function(df_orig, df_allissues){
 #' @param store_excl whether to store exclusions to Global Envir
 #'
 #' @return console print of known issues
+#' @keywords internal
 
 print_knownissues <- function(df, store_excl = FALSE){
 
