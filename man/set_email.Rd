@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_secrets.R
 \name{set_email}
 \alias{set_email}
-\title{Set USAID email}
+\title{Store USAID email}
 \usage{
 set_email(usaid_email)
 }
@@ -15,8 +15,9 @@ stores USAID email using keyring and .Rprofile
 \description{
 `set_email` stores your USAID email using the `keyring` package. This will
 only need to run once.
-
- The `keyring` package utilized the OS credentials store. Storing in
+}
+\details{
+The `keyring` package utilized the OS credentials store. Storing in
  a centralized, secure location allows analysts to other analysts code
  without having to manually change user names/email address to access
  DATIM or Google Drive.

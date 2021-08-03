@@ -14,8 +14,7 @@ loaded if they are available}
 stores Google, DATIM, and s3 credentials in session
 }
 \description{
-#' @description
- `load_secrets` should be set at the beginning of a script to store your
+`load_secrets` should be set at the beginning of a script to store your
  email and DATIM user name under Options for the current session. This allows
  analysts to more easily share their scripts without having to manually update
  or remove use names.

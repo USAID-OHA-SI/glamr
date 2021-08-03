@@ -7,12 +7,23 @@
 browse_knownissues()
 }
 \value{
-
+Launches The Known Data Issues Tracker Google Sheet.
 }
 \description{
-Launch Known Data Issues Tracker
+Launches the USAID managed, Known Data Issues Tracker.
+
+The Known Data Issues Tracker is a table that summarizes different issues
+that are known in DATIM but cannot be resolved. For example, when a treatment
+partner start/ends mid-year, there will be duplicated targets that cannot be
+adjusted in DATIM.
+
+The list of known issues is maintained by USAID/SIEI division. To access the
+table requires having a USAID email account.
 }
 \examples{
  \dontrun{
  browse_knownissues() }
+}
+\seealso{
+[resolve_knownissues()] to exclude Known Issues from data set.
 }
