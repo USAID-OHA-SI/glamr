@@ -49,17 +49,15 @@ reference:
   contents:
   - datim_pwd
   - datim_user
+  - get_s3key
   - load_secrets
   - mypwd
 
 - title: Authentication Setup
   contents:
-  - get_s3key
   - set_datim
   - set_email
-  - set_s3access
   - set_s3keys
-  - set_s3secret
 
 - title: Tidying
   contents:

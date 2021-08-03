@@ -24,8 +24,6 @@ Other authentication:
 \code{\link{load_secrets}()},
 \code{\link{set_datim}()},
 \code{\link{set_email}()},
-\code{\link{set_s3access}()},
-\code{\link{set_s3keys}()},
-\code{\link{set_s3secret}()}
+\code{\link{set_s3keys}()}
 }
 \concept{authentication}

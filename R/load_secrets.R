@@ -245,50 +245,6 @@ set_s3keys <- function(access, secret){
                               password = secret)
 }
 
-#' Store S3 Credentials - Access Key
-#'
-#' `set_s3access` stores your s3 access key using the `keyring` package.
-#' This will only need to done once. After running `set_s3access(access)`,
-#' RStudio API which will then store the key in your OS credential store using `keyring`.
-#'
-#' @param access S3 account access key
-#'
-#' @return stored access key
-#' @export
-#' @family authentication
-#'
-#' @examples
-#' \dontrun{
-#' set_s3access("ABDCEDFFFDFDFDFD") }
-#'
-set_s3access <- function(access){
-  keyring::key_set_with_value(service = "s3",
-                              username = "access",
-                              password = access)
-}
-
-
-#' Store S3 Credentials - Secret Access Key
-#'
-#' `set_s3secret` stores your s3 secret key using the `keyring` package.
-#' This will only need to done once. After running `set_s3secret(secret)`,
-#' RStudio API which will then store the key in your OS credential store using `keyring`.
-#'
-#' @param secret S3 account secret key
-#'
-#' @return stored secret key
-#' @export
-#' @family authentication
-#'
-#' @examples
-#' \dontrun{
-#' set_s3secret("fsfs8sf0fds9f6s5") }
-#'
-set_s3secret <- function(secret){
-  keyring::key_set_with_value(service = "s3",
-                              username = "secret",
-                              password = secret)
-}
 
 #' Get S3 Credentials - Access or Secret Access Key
 #'

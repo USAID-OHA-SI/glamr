@@ -37,8 +37,6 @@ Other authentication:
 \code{\link{get_s3key}()},
 \code{\link{load_secrets}()},
 \code{\link{set_datim}()},
-\code{\link{set_email}()},
-\code{\link{set_s3access}()},
-\code{\link{set_s3secret}()}
+\code{\link{set_email}()}
 }
 \concept{authentication}
