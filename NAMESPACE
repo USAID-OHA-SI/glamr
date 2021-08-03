@@ -2,7 +2,7 @@
 
 export("%>%")
 export("%ni%")
-export(browse_knowissues)
+export(browse_knownissues)
 export(clean_agency)
 export(clean_column)
 export(clean_countries)

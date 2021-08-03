@@ -96,7 +96,7 @@ reference:
 - title: Mechanism Handling
   contents:
   - partner_types
-  - browse_knowissues
+  - browse_knownissues
   - resolve_knownissues
 
 - title: Financial

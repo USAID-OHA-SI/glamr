@@ -78,8 +78,8 @@ gs_id_knownissues <- '1CMPY-GCWP3NSNWvLGLwMwBaPZsobgvjtobhjkZkDfow'
 #'
 #' @examples
 #'  \dontrun{
-#'  browse_knowissues() }
-browse_knowissues <- function(){
+#'  browse_knownissues() }
+browse_knownissues <- function(){
   googlesheets4::gs4_browse(googlesheets4::as_sheets_id(gs_id_knownissues))
 }
 
