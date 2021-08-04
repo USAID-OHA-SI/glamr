@@ -67,7 +67,6 @@ reference:
   - clean_filename
   - clean_indicator
   - clean_knownissues
-  - clean_pds
   - clean_psnu
   - connect_text
   - extract_text

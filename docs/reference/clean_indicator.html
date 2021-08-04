@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clean indicators — clean_indicator • glamr</title>
+<title>Clean indicators (apply _D suffix) — clean_indicator • glamr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Clean indicators — clean_indicator" />
-<meta property="og:description" content="Clean indicators" />
+<meta property="og:title" content="Clean indicators (apply _D suffix) — clean_indicator" />
+<meta property="og:description" content="`clean_indicator` applies a '_D' suffix to any indicators that are a
+denominator. This is particularly useful when aggregating data or
+reshaping." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,13 +136,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clean indicators</h1>
+    <h1>Clean indicators (apply _D suffix)</h1>
     <small class="dont-index">Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/R/clean_columns.R'><code>R/clean_columns.R</code></a></small>
     <div class="hidden name"><code>clean_indicator.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Clean indicators</p>
+    <p>`clean_indicator` applies a '_D' suffix to any indicators that are a
+denominator. This is particularly useful when aggregating data or
+reshaping.</p>
     </div>
 
     <pre class="usage"><span class='fu'>clean_indicator</span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span></pre>
@@ -157,6 +161,13 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>indicators with denominator have _D suffix</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other column munging: 
+<code><a href='clean_agency.html'>clean_agency</a>()</code>,
+<code><a href='clean_column.html'>clean_column</a>()</code>,
+<code><a href='clean_countries.html'>clean_countries</a>()</code>,
+<code><a href='clean_psnu.html'>clean_psnu</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

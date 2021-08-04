@@ -175,7 +175,7 @@ set_datim <- function(datim_username){
 #' @examples
 #' \dontrun{
 #' load_secrets()
-#' ou_table <- datim_outable(datim_user(), datim_pwd())) }
+#' ou_table <- datim_outable(datim_user(), datim_pwd()) }
 
 datim_user <- function(){
 
