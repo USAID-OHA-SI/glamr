@@ -32,7 +32,6 @@ Imports:
     plyr,
     purrr,
     readxl,
-    rvest,
     stringr,
     tibble,
     tools,
@@ -42,11 +41,13 @@ Imports:
     vroom,
     xml2
 Suggests: 
+    fs,
     keyringr,
     testthat (>= 2.1.0),
     googlesheets4,
     knitr,
-    rmarkdown
+    rmarkdown,
+    rvest,
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)

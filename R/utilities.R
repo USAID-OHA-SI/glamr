@@ -112,3 +112,39 @@ connect_text <- function(txt,
 #' @export
 #' @description negate `%in%`
 `%ni%` <- Negate(`%in%`)
+
+
+#' Generate Temporary Folder
+#'
+#' `temp_folder` created a temporary folder in your AppData directory, which
+#' will be automatically removed after you close your RStudio session.
+#'
+#' @param launch do you want to launch the temp folder in the Windows Explorer?
+#'  default = FALSE
+#'
+#' @return creates a temp directory and stores it as `folderpath_tmp`
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' load_secrets()
+#' temp_folder(launch = TRUE)
+#' purrr::walk2(.x = df_googlefiles$id,
+#'              .y = df_googlefiles$filename,
+#'              .f = ~googledrive::drive_download(googledrive::as_id(.x),
+#'                                                file.path(folderpath_tmp, .y))) }
+temp_folder <- function(launch = FALSE){
+
+  package_check('fs')
+
+  folderpath_tmp <<- fs::dir_create(fs::file_temp())
+
+  usethis::ui_info("A temporary folder is now available here: {usethis::ui_path(folderpath_tmp)}")
+  usethis::ui_info("The folder path is stored as the object {usethis::ui_code('folderpath_tmp')}")
+
+
+  if(launch == TRUE)
+    shell.exec(folderpath_tmp)
+
+  invisible(folderpath_tmp)
+}
