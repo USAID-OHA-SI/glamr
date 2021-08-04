@@ -89,6 +89,13 @@ reference:
   - identify_levels
   - identify_ouuids
   - extract_datim
+  - get_orguids
+  - get_ouorgs
+  - get_ouuids
+  - get_ouuid
+  - get_ouorglevels
+  - get_ouorguids
+  - get_levels
 
 - title: Mechanism Handling
   contents:
