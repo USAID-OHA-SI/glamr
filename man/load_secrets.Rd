@@ -32,8 +32,7 @@ To initiall store your Google email and DATIM credentials,
 \examples{
 \dontrun{
 load_secrets()
-user <- getOption("datim")
-ou_table <- datim_outable(user, datim_pwd()) }
+ou_table <- datim_outable(datim_user(), datim_pwd()) }
 }
 \seealso{
 Other authentication: 

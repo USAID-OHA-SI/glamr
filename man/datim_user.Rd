@@ -15,7 +15,7 @@ To setup/store, run `glamr::set_datim()`.
 \examples{
 \dontrun{
 load_secrets()
-ou_table <- datim_outable(datim_user(), datim_pwd()) }
+ou_table <- datim_outable(datim_user(), datim_pwd())) }
 }
 \seealso{
 Other authentication: 
