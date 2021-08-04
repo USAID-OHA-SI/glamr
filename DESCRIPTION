@@ -19,16 +19,11 @@ RoxygenNote: 7.1.1
 Imports: 
     aws.s3,
     crayon,
-    curl,
     dplyr,
     glue,
     googledrive,
-    httr,
-    janitor,
-    jsonlite,
     lubridate,
     magrittr,
-    plyr,
     purrr,
     readxl,
     stringr,
@@ -39,14 +34,19 @@ Imports:
     utils,
     xml2
 Suggests: 
+    curl,
     fs,
+    httr,
+    googlesheets4,
+    janitor,
+    jsonlite,
     keyring,
     keyringr,
-    testthat (>= 2.1.0),
-    googlesheets4,
     knitr,
+    plyr,
     rmarkdown,
     rvest,
+    testthat (>= 2.1.0),
     vroom
 VignetteBuilder: knitr
 Depends: 
