@@ -93,7 +93,7 @@ reference:
 
 - title: Mechanism Handling
   contents:
-  - partner_types
+  - apply_partner_type
   - browse_knownissues
   - resolve_knownissues
 

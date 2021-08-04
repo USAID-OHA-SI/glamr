@@ -27,9 +27,15 @@ set_paths(
 code chunk to paste into .Rprofile
 }
 \description{
-Set SI local folder paths
+`set_paths` stores store local folder paths where larger data are stored
+centrally and outside of projects. Accessed through use of `si_path()`.
 }
 \examples{
 \dontrun{
 set_paths <- set_path(folderpath_msd = "C:/Users/rshah/Documents/Data") }
 }
+\seealso{
+Other stored paths: 
+\code{\link{si_path}()}
+}
+\concept{stored paths}

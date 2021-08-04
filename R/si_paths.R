@@ -1,7 +1,5 @@
-
 #' Access SI folderpath
 #'
-#' @description
 #' `si_path` accesses folder paths stored in global options to make it easier
 #' work across analysts/machines. Analysts will first setup the paths using
 #' `set_paths()` which then store local folder paths where larger data are stored
@@ -10,6 +8,7 @@
 #' @param type folderpath, eg "path_msd" (default), "path_datim", "path_raster", "path_vector", "path_downloads"
 #'
 #' @return folderpath stored in global options
+#' @family stored paths
 #' @export
 #'
 #' @importFrom usethis ui_oops
@@ -35,6 +34,9 @@ si_path <- function(type = "path_msd"){
 
 #' Set SI local folder paths
 #'
+#' `set_paths` stores store local folder paths where larger data are stored
+#' centrally and outside of projects. Accessed through use of `si_path()`.
+#'
 #' @param folderpath_msd folderpath where the MSDs are stored
 #' @param folderpath_datim folderpath where DATIM data are store eg (org hierarchy, mech table)
 #' @param folderpath_raster folderpath where GIS raster data are stored
@@ -42,6 +44,7 @@ si_path <- function(type = "path_msd"){
 #' @param folderpath_downloads folderpath to local Downloads folder
 #'
 #' @return code chunk to paste into .Rprofile
+#' @family stored paths
 #' @export
 #'
 #' @importFrom usethis ui_path
