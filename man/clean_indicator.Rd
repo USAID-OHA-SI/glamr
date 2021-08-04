@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_columns.R
 \name{clean_indicator}
 \alias{clean_indicator}
-\title{Clean indicators}
+\title{Clean indicators (apply _D suffix)}
 \usage{
 clean_indicator(df)
 }
@@ -13,7 +13,9 @@ clean_indicator(df)
 indicators with denominator have _D suffix
 }
 \description{
-Clean indicators
+`clean_indicator` applies a '_D' suffix to any indicators that are a
+denominator. This is particularly useful when aggregating data or
+reshaping.
 }
 \examples{
 \dontrun{
@@ -22,3 +24,11 @@ filter(indicator == "TX_PVLS",
        standardizeddisaggregate \%in\% c("Total Numerator", "Total Denominator")) \%>\%
 clean_indicator() }
 }
+\seealso{
+Other column munging: 
+\code{\link{clean_agency}()},
+\code{\link{clean_column}()},
+\code{\link{clean_countries}()},
+\code{\link{clean_psnu}()}
+}
+\concept{column munging}

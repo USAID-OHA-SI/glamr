@@ -1,9 +1,9 @@
 #' @title Clean column data
-#' @title Clean column data
 #'
 #' @param .data   MSD Datasets
 #' @param colname Name of the column(s)
 #' @return  Cleaned MSD DataFrame
+#' @family column munging
 #' @export
 #' @examples
 #' \dontrun{
@@ -53,6 +53,7 @@ clean_column <- function(.data, colname = "psnu") {
 #'
 #' @param .data   MSD Datasets
 #' @return  Cleaned MSD DataFrame
+#' @family column munging
 #' @export
 #' @examples
 #' \dontrun{
@@ -74,8 +75,12 @@ clean_psnu <- function(.data) {
 
 #' @title Clean data from fundingagency column
 #'
+#' `clean_agency` converts all funding agency names to upper case and removes
+#' the HHS prefix for those agencies.
+#'
 #' @param .data MSD Datasets
 #' @return  Cleaned MSD DataFrame
+#' @family column munging
 #' @export
 #' @examples
 #' \dontrun{
@@ -145,9 +150,13 @@ lookup_country <- function(country) {
 
 #' @title Clean OU/Country names to match PEPFAR Data
 #'
+#' `clean_countries` is used to adjust Natural Earth country names to match
+#' PEPFAR ones.
+#'
 #' @param .data MSD Datasets
 #' @param colname Column name to be updated
 #' @return  Cleaned DataFrame
+#' @family column munging
 #' @export
 #'
 #' @examples
@@ -181,11 +190,16 @@ clean_countries <-
   }
 
 
-#' Clean indicators
+#' Clean indicators (apply _D suffix)
+#'
+#' `clean_indicator` applies a '_D' suffix to any indicators that are a
+#' denominator. This is particularly useful when aggregating data or
+#' reshaping.
 #'
 #' @param df MSD data frame
 #'
 #' @return indicators with denominator have _D suffix
+#' @family column munging
 #' @export
 #'
 #' @examples
