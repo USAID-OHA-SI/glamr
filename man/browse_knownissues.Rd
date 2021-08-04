@@ -22,8 +22,11 @@ table requires having a USAID email account.
 }
 \examples{
  \dontrun{
+ load_secrets()
  browse_knownissues() }
 }
 \seealso{
-[resolve_knownissues()] to exclude Known Issues from data set.
+[resolve_knownissues()] to exclude Known Issues from data set;
+ [set_email()] to store USAID email;
+ [load_secrets()] to load credentials into session.
 }

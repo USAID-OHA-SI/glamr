@@ -19,7 +19,9 @@
 #' @param store_excl should the known exclusions be store in the Global Envir?
 #'
 #' @return df excluding known targets/results issues
-#' @seealso [browse_knownissues()] to view table in Google Sheets
+#' @seealso [browse_knownissues()] to view table in Google Sheets;
+#'  [set_email()] to store USAID email;
+#'  [load_secrets()] to load credentials into session.
 #' @export
 #'
 #' @examples
@@ -94,11 +96,14 @@ gs_id_knownissues <- '1CMPY-GCWP3NSNWvLGLwMwBaPZsobgvjtobhjkZkDfow'
 #' table requires having a USAID email account.
 #'
 #' @return Launches The Known Data Issues Tracker Google Sheet.
-#' @seealso [resolve_knownissues()] to exclude Known Issues from data set.
+#' @seealso [resolve_knownissues()] to exclude Known Issues from data set;
+#'  [set_email()] to store USAID email;
+#'  [load_secrets()] to load credentials into session.
 #' @export
 #'
 #' @examples
 #'  \dontrun{
+#'  load_secrets()
 #'  browse_knownissues() }
 browse_knownissues <- function(){
   googlesheets4::gs4_browse(googlesheets4::as_sheets_id(gs_id_knownissues))

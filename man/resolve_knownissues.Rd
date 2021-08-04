@@ -50,5 +50,7 @@ df_mwi_resolved <- df_mwi \%>\%
   resolve_knownissues() }
 }
 \seealso{
-[browse_knownissues()] to view table in Google Sheets
+[browse_knownissues()] to view table in Google Sheets;
+ [set_email()] to store USAID email;
+ [load_secrets()] to load credentials into session.
 }
