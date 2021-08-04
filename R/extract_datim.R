@@ -22,6 +22,7 @@ extract_datim <- function(url,username,password) {
   package_check('httr')
   package_check('jsonlite')
   package_check('plyr')
+  package_check('tibble')
 
   if(missing(username))
     username <- datim_user()
