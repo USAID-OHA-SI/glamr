@@ -1,6 +1,5 @@
 #' Load credentials
 #'
-#'#' @description
 #'  `load_secrets` should be set at the beginning of a script to store your
 #'  email and DATIM user name under Options for the current session. This allows
 #'  analysts to more easily share their scripts without having to manually update
@@ -21,6 +20,7 @@
 #'
 #' @return stores Google, DATIM, and s3 credentials in session
 #' @export
+#' @family authentication
 #'
 #' @importFrom utils installed.packages
 #' @importFrom usethis ui_oops
@@ -33,8 +33,7 @@
 #' @examples
 #' \dontrun{
 #' load_secrets()
-#' user <- getOption("datim")
-#' ou_table <- datim_outable(user, datim_pwd()) }
+#' ou_table <- datim_outable(datim_user(), datim_pwd()) }
 
 load_secrets <- function(service = c("email", "datim", "s3")){
 
@@ -85,9 +84,8 @@ load_secrets <- function(service = c("email", "datim", "s3")){
 
 
 
-#' Set USAID email
+#' Store USAID email
 #'
-#' @description
 #' `set_email` stores your USAID email using the `keyring` package. This will
 #' only need to run once.
 #'
@@ -108,6 +106,7 @@ load_secrets <- function(service = c("email", "datim", "s3")){
 #'
 #' @return stores USAID email using keyring and .Rprofile
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_path
 #' @importFrom usethis ui_todo
@@ -134,7 +133,6 @@ set_email <- function(usaid_email){
 
 #' Store DATIM credentials
 #'
-#' @description
 #' `set_datim` stores your DATIM credentials email using the `keyring` package.
 #' This will only need to done once. After running `set_datim(user)`, you will be
 #' promoted to enter your password through the RStudio API which will then store the
@@ -153,6 +151,7 @@ set_email <- function(usaid_email){
 #'
 #' @return stores USAID email in using keyring
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -169,13 +168,14 @@ set_datim <- function(datim_username){
 #'
 #' @return access DATIM username from keyring
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_stop
 #' @importFrom usethis ui_code
 #' @examples
 #' \dontrun{
 #' load_secrets()
-#' ou_table <- datim_outable(datim_user(), datim_pwd()) }
+#' ou_table <- datim_outable(datim_user(), datim_pwd())) }
 
 datim_user <- function(){
 
@@ -195,6 +195,7 @@ datim_user <- function(){
 #'
 #' @return access DATIM password from keyring
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_stop
 #' @importFrom usethis ui_code
@@ -218,7 +219,6 @@ datim_pwd <- function(){
 
 #' @title Store S3 Credentials
 #'
-#' @description
 #' `set_s3keys` stores your s3 keys using the `keyring` package.
 #' This will only need to done once. After running `set_s3keys(access, secret)`,
 #' RStudio API which will then store the keys in your OS credential store using `keyring`.
@@ -228,6 +228,7 @@ datim_pwd <- function(){
 #'
 #' @return stored access key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -243,54 +244,9 @@ set_s3keys <- function(access, secret){
                               password = secret)
 }
 
-#' Store S3 Credentials - Access Key
-#'
-#' @description
-#' `set_s3access` stores your s3 access key using the `keyring` package.
-#' This will only need to done once. After running `set_s3access(access)`,
-#' RStudio API which will then store the key in your OS credential store using `keyring`.
-#'
-#' @param access S3 account access key
-#'
-#' @return stored access key
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' set_s3access("ABDCEDFFFDFDFDFD") }
-#'
-set_s3access <- function(access){
-  keyring::key_set_with_value(service = "s3",
-                              username = "access",
-                              password = access)
-}
-
-
-#' Store S3 Credentials - Secret Access Key
-#'
-#' @description
-#' `set_s3secret` stores your s3 secret key using the `keyring` package.
-#' This will only need to done once. After running `set_s3secret(secret)`,
-#' RStudio API which will then store the key in your OS credential store using `keyring`.
-#'
-#' @param secret S3 account secret key
-#'
-#' @return stored secret key
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' set_s3secret("fsfs8sf0fds9f6s5") }
-#'
-set_s3secret <- function(secret){
-  keyring::key_set_with_value(service = "s3",
-                              username = "secret",
-                              password = secret)
-}
 
 #' Get S3 Credentials - Access or Secret Access Key
 #'
-#' @description
 #' `get_s3key` retrieves your S3 keys using the `keyring` package.
 #' Set name to `access` for `Access Key`,
 #' `name` to `secret` for `Secret Access Key`
@@ -299,6 +255,7 @@ set_s3secret <- function(secret){
 #'
 #' @return stored key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{

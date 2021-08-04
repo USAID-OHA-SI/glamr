@@ -1,4 +1,9 @@
-#' Import file from Google Drive
+#' Import file from a Google Drive folder
+#'
+#' `import_drivefile` is a wrapper around `googledrive::drive_download`, useful
+#' for pulling multiple files from a given Google Drive folder (with a Google
+#' ID provided) to download by default to the Data folder of a project.
+#'
 #'
 #' @param drive_folder Google id for Google Drive Folder
 #' @param filename exact name of file on Googl Drive to download
@@ -48,10 +53,13 @@ import_drivefile <- function(drive_folder, filename, folderpath = "Data", zip = 
 
 #' @title Unpack Google Drive Metadata
 #'
+#' Google API provides extra metadata stored as a list in the dribble
+#' returned, eg modified time, permissions, owner, etc.
+#'
 #' @param df           Results from Google Drive drive_ls
 #' @param show_details Show all metadata fields, default is FALSE
 #'
-#' @return
+#' @return adds extra meta data to data frame
 #' @export
 #'
 #' @examples

@@ -7,18 +7,29 @@
 identify_levels(username, password, baseurl = "https://final.datim.org/")
 }
 \arguments{
-\item{username}{DATIM username}
+\item{username}{DATIM Username, defaults to using `datim_user()` if blank}
 
-\item{password}{DATIM password, recommend using `mypwd()`}
+\item{password}{DATIM password, defaults to using `datim_pwd()` if blank}
 
-\item{baseurl}{base API url, default = https://final.datim.org/}
+\item{baseurl}{base url for the API, default = https://final.datim.org/}
 }
 \description{
-Identify Facility/Community levels in org hierarchy
+`identify_levels` pulls from DATIM to return a dataframe with all PEPFAR
+Operating Units and countries with their ISO codes and hierarhcy levels.
+This is one of two components that feeds into `get_outable`.
+}
+\details{
+To access the UIDs, the user will need to have a DATIM account. You can
+take advantage of storing you credentials locally in a secure way
+using `set_datim`.
 }
 \examples{
 \dontrun{
  #table for all OUs
-  myuser <- "UserX"
-  identify_levels(username = myuser, password = mypwd(myuser)) }
+  load_secrets()
+  identify_levels() }
+}
+\seealso{
+[set_datim()] to store DATIM authentication;
+  [load_secrets()] to load credentials into session
 }

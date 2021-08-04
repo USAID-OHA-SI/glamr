@@ -1,11 +1,11 @@
 #' DATIM Analytics API
 #'
 #' @param url supply url for API call
-#' @param username DATIM username
-#' @param password DATIM password, recommend using `mypwd()`
+#' @param username DATIM Username, defaults to using `datim_user()` if blank
+#' @param password DATIM password, defaults to using `datim_pwd()` if blank
 #'
 #' @export
-#'
+#' @return  API pull of data from DATIM
 #' @examples
 #' \dontrun{
 #'  myurl <- paste0(baseurl, "api/29/analytics.json?
@@ -13,12 +13,17 @@
 #'                  dimension=ou:LEVEL-4;HfVjCurKxh2&
 #'                  filter=pe:2018Oct&
 #'                  displayProperty=SHORTNAME&outputIdScheme=CODE")
-#'  myuser <- "UserX"
-#'  df_targets <- get_datim_targets(myurl, myuser, mypwd(myuser)) }
+#'  df_targets <- get_datim_targets(myurl, datim_user(), datim_pwd()) }
 
 extract_datim <- function(url,username,password) {
 
   check_internet()
+
+  if(missing(username))
+    username <- datim_user()
+
+  if(missing(password))
+    password <- datim_pwd()
 
   json <- url %>%
     httr::GET(httr::authenticate(username,password)) %>%
@@ -54,7 +59,7 @@ extract_datim <- function(url,username,password) {
       dplyr::mutate_all(~plyr::mapvalues(., metadata$from, metadata$name, warn_missing = FALSE)) %>%
       dplyr::mutate(Value = as.numeric(Value)) %>%
       dplyr::bind_cols(orgunituid = orguids) %>%
-      clean_pds()
+      convert_datim_pd_to_qtr()
 
     return(df)
 
@@ -63,43 +68,4 @@ extract_datim <- function(url,username,password) {
     return(NULL)
 
   }
-}
-
-
-#' Title
-#'
-#' @param df dataframe from \code{extract_datim()}
-#'
-#' @return Convert periods from long CY dates to PEPFAR standard FY
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' pds <- c("Jan to Mar 2019", "Oct 2018 to Sep 2019")
-#' clean_pds(pds) }
-
-clean_pds <- function(df){
-
-  if("Period" %in% names(df)){
-    suppressWarnings(
-      df <- df %>%
-        dplyr::mutate(Period = dplyr::case_when(
-          stringr::str_detect(Period, "^[:alpha:]{3} to")
-          ~ Period %>%
-            stringr::str_replace(" to [:alpha:]{3}", "1,") %>%
-            lubridate::mdy() %>%
-            lubridate::quarter(with_year = TRUE, fiscal_start = 10) %>%
-            as.character() %>%
-            stringr::str_replace("20", "FY") %>%
-            stringr::str_replace("\\.", "Q"),
-          stringr::str_detect(Period, "^Oct [:digit:]{4}")
-          ~ Period %>%
-            stringr::str_extract(("(?<=20)[:digit:]{2}$"))%>%
-            paste0("FY", .),
-          TRUE ~ Period))
-    )
-  }
-
-  return(df)
-
 }

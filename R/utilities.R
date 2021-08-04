@@ -1,6 +1,7 @@
 #' Check internet connection
 #'
 #' @return A boolean or stops
+#' @keywords internal
 
 check_internet <- function(){
 
@@ -14,6 +15,7 @@ check_internet <- function(){
 #' @param res response
 #'
 #' @return A boolean or stops
+#' @keywords internal
 
 check_status <- function(res){
 
@@ -26,6 +28,7 @@ check_status <- function(res){
 #' @param pkg package name
 #'
 #' @export
+#' @keywords internal
 
 package_check <- function(pkg){
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -40,7 +43,7 @@ package_check <- function(pkg){
 #' @param service account, either "email", "datim" or "s3"
 #'
 #' @return A boolean
-#'
+#' @keywords internal
 
 is_stored <- function(service = c("datim", "email", "s3")){
 
@@ -55,7 +58,7 @@ is_stored <- function(service = c("datim", "email", "s3")){
 #' @param opt_var option variable ("datim", "email", "path_msd", "path_datim", "path_vector", "path_raster")
 #'
 #' @return A boolean
-#'
+#' @keywords internal
 
 is_loaded <- function(opt_var){
 
@@ -69,6 +72,7 @@ is_loaded <- function(opt_var){
 #' @param package name of R package to check
 #'
 #' @return A boolean
+#' @keywords internal
 
 is_installed <- function(package){
   {{package}} %in% rownames(installed.packages())

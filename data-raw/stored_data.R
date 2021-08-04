@@ -19,3 +19,32 @@ pepfar_data_calendar <-
 
 
 usethis::use_data(pepfar_data_calendar, overwrite = TRUE)
+
+
+## PEPFAR country list
+
+library(tidyverse)
+library(glamr)
+
+curr_fy <- source_info(return = "fiscal_year")
+
+df_msd <- si_path() %>%
+  return_latest("OU_IM") %>%
+  read_rds()
+
+df_cntry <- df_msd %>%
+  filter(fiscal_year == curr_fy,
+         fundingagency %ni% c("Dedup", "Default"),
+         indicator != "TX_NET_NEW") %>%
+  distinct(operatingunit, countryname)
+
+ou_table <- get_outable(datim_user(), datim_pwd())  %>%
+  select(operatingunit, operatingunit_iso, countryname, countryname_iso)
+
+pepfar_country_list <- df_cntry %>%
+  left_join(ou_table, by = c("operatingunit", "countryname")) %>%
+  relocate(starts_with("op")) %>%
+  arrange(operatingunit, countryname)
+
+
+usethis::use_data(pepfar_country_list, overwrite = TRUE)

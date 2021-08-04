@@ -1,10 +1,14 @@
-#' Return Latest
+#' Return Latest File
 #'
-#' @param folderpath path to folder where file(s) are located
-#' @param pattern    pattern in file name, regex expressions
-#' @param ...        Any other valid option for `base::list.files()`
+#' `return_latest` checks for a pattern in a folder and provides the most
+#' recent file bases on the time the file was created.
 #'
-#' @return the fill filepath for the most recent version of a file stub
+#' @param folderpath path to folder where file(s) are located.
+#' @param pattern    pattern in file name, regex expressions. If not parttern is
+#'  provided, the last file in the folder will be returned.
+#' @param ...        Any other valid option for `base::list.files()`.
+#'
+#' @return a vector of the full filepath for the most recent version of a file stub
 #' @export
 #'
 #' @examples
@@ -14,6 +18,9 @@
 #' df <- read_rds(filepath) }
 
 return_latest <- function(folderpath, pattern, ...){
+
+  if(missing(pattern))
+    pattern <- ".*"
 
   f <- list.files(folderpath, pattern, full.names = TRUE, ...)
 

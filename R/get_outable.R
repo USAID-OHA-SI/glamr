@@ -1,14 +1,27 @@
-#' Pull OU UIDS
+#' Pull Table of OUs/Countries, UIDs, ISO codes and levels
 #'
+#' `get_outable` pulls from DATIM to return a dataframe with all PEPFAR
+#' Operating Units and countries along with useful information for merging,
+#' eg ISO codes, and use in DATIM APIs, eg UIDs and hierarchy levels.
+#'
+#' `get_outtable` is a wrapper around `identify_ouuids` and `identify_levels`
+#' that pulls this information directly from DATIM. The user will need to have
+#' a DATIM account to access this data. You can take advantage of storing you
+#' credentials locally in a secure way using `set_datim`.
+#'
+#' @param username DATIM Username, defaults to using `datim_user()` if blank
+#' @param password DATIM password, defaults to using `datim_pwd()` if blank
 #' @param baseurl base url for the API, default = https://final.datim.org/
-#' @param username DATIM Username
-#' @param password DATIM password, recommend using `mypwd()`
 #'
 #' @export
-#'
+#' @return data frame with all PEPFAR OUs, countries, their UIDs, ISO codes
+#'   and different levels in the DATIM hierarchy
+#' @seealso [set_datim()] to store DATIM authentication;
+#'   [load_secrets()] to load credentials into session
 #' @examples
 #' \dontrun{
-#'  ou_table <- datim_outable("userx", mypwd("userx")) }
+#'  load_secrets()
+#'  ou_table <- datim_outable() }
 
 get_outable <- function(username, password, baseurl = "https://final.datim.org/"){
 
@@ -38,19 +51,37 @@ get_outable <- function(username, password, baseurl = "https://final.datim.org/"
 
 #' Pull OU UIDS
 #'
+#' `identify_ouuids` pulls from DATIM to return a dataframe with all PEPFAR
+#' Operating Units and countries and their UIDs. This is one of two components
+#' that feeds into `get_outable`.
+#'
+#' To access the UIDs, the user will need to have a DATIM account. You can
+#' take advantage of storing you credentials locally in a secure way
+#' using `set_datim`.
+#'
+#' @param username DATIM Username, defaults to using `datim_user()` if blank
+#' @param password DATIM password, defaults to using `datim_pwd()` if blank
 #' @param baseurl base url for the API, default = https://final.datim.org/
-#' @param username DATIM Username
-#' @param password DATIM password, recommend using `mypwd()`
 #'
 #' @export
+#' @return
+#' @seealso [set_datim()] to store DATIM authentication;
+#'   [load_secrets()] to load credentials into session
 #'
 #' @examples
 #' \dontrun{
-#'  ous <- identify_ouuids("userx", mypwd("userx")) }
+#'  load_secrets()
+#'  ous <- identify_ouuids() }
 
 identify_ouuids <- function(username, password, baseurl = "https://final.datim.org/"){
 
   check_internet()
+
+  if(missing(username))
+    username <- datim_user()
+
+  if(missing(password))
+    password <- datim_pwd()
 
   ous <- baseurl %>%
     paste0("api/organisationUnits?filter=level:eq:3") %>%
@@ -89,21 +120,36 @@ identify_ouuids <- function(username, password, baseurl = "https://final.datim.o
 
 #' Identify Facility/Community levels in org hierarchy
 #'
-#' @param username DATIM username
-#' @param password DATIM password, recommend using `mypwd()`
-#' @param baseurl base API url, default = https://final.datim.org/
+#' `identify_levels` pulls from DATIM to return a dataframe with all PEPFAR
+#' Operating Units and countries with their ISO codes and hierarhcy levels.
+#' This is one of two components that feeds into `get_outable`.
+#'
+#' To access the UIDs, the user will need to have a DATIM account. You can
+#' take advantage of storing you credentials locally in a secure way
+#' using `set_datim`.
+#'
+#' @param username DATIM Username, defaults to using `datim_user()` if blank
+#' @param password DATIM password, defaults to using `datim_pwd()` if blank
+#' @param baseurl base url for the API, default = https://final.datim.org/
 #'
 #' @export
-#'
+#' @seealso [set_datim()] to store DATIM authentication;
+#'   [load_secrets()] to load credentials into session
 #' @examples
 #' \dontrun{
 #'  #table for all OUs
-#'   myuser <- "UserX"
-#'   identify_levels(username = myuser, password = mypwd(myuser)) }
+#'   load_secrets()
+#'   identify_levels() }
 
 identify_levels <- function(username, password, baseurl = "https://final.datim.org/"){
 
   check_internet()
+
+  if(missing(username))
+    username <- datim_user()
+
+  if(missing(password))
+    password <- datim_pwd()
 
   df_levels <- baseurl %>%
     paste0(.,"api/dataStore/dataSetAssignments/orgUnitLevels") %>%
@@ -123,8 +169,11 @@ identify_levels <- function(username, password, baseurl = "https://final.datim.o
     dplyr::rename(operatingunit = name3,
                   countryname = name4,
                   operatingunit_iso = iso3,
-                  countryname_iso = iso4) %>%
-    dplyr::rename_at(dplyr::vars(country:facility), ~ paste0(., "_lvl"))
+                  countryname_iso = iso4,
+                  psnu = prioritization) %>%
+    dplyr::rename_with(.cols= where(is.integer), ~ paste0(., "_lvl")) %>%
+    dplyr::select(dplyr::everything(), country_lvl, psnu_lvl,
+                  community_lvl, facility_lvl)
 
   return(df_levels)
 }

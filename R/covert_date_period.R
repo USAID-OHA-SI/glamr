@@ -73,3 +73,48 @@ convert_qtr_to_date <- function(period, type = "start"){
   return(date)
 
 }
+
+
+#' Convert DATIM CY Quarter/Period to FY Quarter
+#'
+#' Convert a period a DATIM API in the format of FY22Q1 or FY22 (for
+#' targets/cumulative). This function is built into `extract_datim`.
+#'
+#' @param df dataframe from \code{extract_datim()}
+#'
+#' @return Convert periods from long CY dates to PEPFAR standard FY
+#' @export
+#' @seealso [set_datim()] to store DATIM authentication;
+#' [load_secrets()] to store DATIM authentication;
+#' [extract_datim()] to run API (which incorporates convert_datim_pd_to_qtr)
+#'
+#' @examples
+#' \dontrun{
+#' df <- tibble::tibble(Periods = c("Jan to Mar 2019", "Oct 2018 to Sep 2019"))
+#' df <- convert_datim_pd_to_qtr(df) }
+
+convert_datim_pd_to_qtr <- function(df){
+
+  if("Period" %in% names(df)){
+    suppressWarnings(
+      df <- df %>%
+        dplyr::mutate(Period = dplyr::case_when(
+          stringr::str_detect(Period, "^[:alpha:]{3} to")
+          ~ Period %>%
+            stringr::str_replace(" to [:alpha:]{3}", "1,") %>%
+            lubridate::mdy() %>%
+            lubridate::quarter(with_year = TRUE, fiscal_start = 10) %>%
+            as.character() %>%
+            stringr::str_replace("20", "FY") %>%
+            stringr::str_replace("\\.", "Q"),
+          stringr::str_detect(Period, "^Oct [:digit:]{4}")
+          ~ Period %>%
+            stringr::str_extract(("(?<=20)[:digit:]{2}$"))%>%
+            paste0("FY", .),
+          TRUE ~ Period))
+    )
+  }
+
+  return(df)
+
+}

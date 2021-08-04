@@ -26,3 +26,8 @@ centrally and outside of projects.
   list.files(si_path("path_msd"), "OU_IM", full.names = TRUE)
 }
 }
+\seealso{
+Other stored paths: 
+\code{\link{set_paths}()}
+}
+\concept{stored paths}
