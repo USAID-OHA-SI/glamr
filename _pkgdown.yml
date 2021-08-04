@@ -70,9 +70,13 @@ reference:
   - clean_pds
   - clean_psnu
   - connect_text
-  - convert_date_to_qtr
-  - convert_qtr_to_date
   - extract_text
+
+- title: Date Conversion
+  contents:
+  - convert_date_to_qtr
+  - convert_datim_pd_to_qtr
+  - convert_qtr_to_date
 
 - title: Utilities
   contents:
