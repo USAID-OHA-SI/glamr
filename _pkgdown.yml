@@ -70,13 +70,9 @@ reference:
   - clean_pds
   - clean_psnu
   - connect_text
-  - extract_text
-
-- title: Dates
-  contents:
   - convert_date_to_qtr
   - convert_qtr_to_date
-  - pepfar_data_calendar
+  - extract_text
 
 - title: Utilities
   contents:
@@ -113,3 +109,8 @@ reference:
   - s3_remove
   - s3_unpack_keys
   - s3_upload
+
+- title: Data Sets
+  contents:
+  - pepfar_country_list
+  - pepfar_data_calendar

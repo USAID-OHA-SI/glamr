@@ -1,5 +1,7 @@
 # glamr 1.0.0
 * Used `pkgdown` to create a site
+* If no username/password are provided to `get_outable()`, `identify_ouuids()` or `identify_levels()`, defaults to using `datim_user()` and `datim_pwd()`
+* Adjust `get_outable()`/`identify_levels()` output, changing community to community_lvl and prioritization to psnu_lvl to match other indicators.
 * Include two new function to convert dates to periods and periods to dates using `convert_date_to_qtr()` and `convert_qtr_to_date()`.
 * New vigentte for project workflow added, `vignette(package = glamr)`
 * Update `set_paths()`, allowing for `path_downloads` and improve backend efficiency.
