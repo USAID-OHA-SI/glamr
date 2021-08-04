@@ -374,6 +374,7 @@ s3_read_object <- function(bucket, object,
     usethis::ui_info("PROCESS - Reading data with {usethis::ui_code('vroom::vroom()')}")
 
     # Read other file type with vroom
+    package_check('vroom')
     df <- vroom::vroom(conn, col_types = c(.default = "c"))
   }
 
