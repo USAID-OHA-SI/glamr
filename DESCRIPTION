@@ -26,7 +26,6 @@ Imports:
     httr,
     janitor,
     jsonlite,
-    keyring,
     lubridate,
     magrittr,
     plyr,
@@ -42,6 +41,7 @@ Imports:
     xml2
 Suggests: 
     fs,
+    keyring,
     keyringr,
     testthat (>= 2.1.0),
     googlesheets4,

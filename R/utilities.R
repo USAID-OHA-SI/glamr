@@ -47,6 +47,8 @@ package_check <- function(pkg){
 
 is_stored <- function(service = c("datim", "email", "s3")){
 
+  package_check('keyring')
+
   accounts <- keyring::key_list()$service
 
   {{service}} %in% accounts
