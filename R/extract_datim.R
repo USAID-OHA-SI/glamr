@@ -19,6 +19,9 @@ extract_datim <- function(url,username,password) {
 
   check_internet()
 
+  package_check('httr')
+  package_check('jsonlite')
+
   if(missing(username))
     username <- datim_user()
 

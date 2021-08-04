@@ -13,6 +13,8 @@
 s3_buckets <- function(access_key = NULL,
                        secret_key = NULL) {
 
+  package_check('janitor')
+
   # Check keys
   if (is.null(access_key))
     access_key = glamr::get_s3key("access")
@@ -55,6 +57,8 @@ s3_objects <- function(bucket,
                        access_key = NULL,
                        secret_key = NULL,
                        ...) {
+
+  package_check('janitor')
 
   # Check keys
   if (is.null(access_key))

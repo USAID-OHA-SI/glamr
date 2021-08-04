@@ -71,6 +71,9 @@ import_drivefile <- function(drive_folder, filename, folderpath = "Data", zip = 
 #' }
 gdrive_metadata <- function(df, show_details = FALSE){
 
+  package_check('jsonlite')
+  package_check('janitor')
+
   # Check for drive metadata
   if (!"drive_resource" %in% names(df)) {
     base::cat(

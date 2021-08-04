@@ -5,6 +5,8 @@
 
 check_internet <- function(){
 
+  package_check('curl')
+
   if(!curl::has_internet())
     stop("No internet connection. Cannot excecute API.")
 }
@@ -18,6 +20,8 @@ check_internet <- function(){
 #' @keywords internal
 
 check_status <- function(res){
+
+  package_check('httr')
 
   if(httr::status_code(res) == 200)
     stop("The API returned an error")
