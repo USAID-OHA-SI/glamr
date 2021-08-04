@@ -12,13 +12,23 @@ resolve_knownissues(df, store_excl = FALSE)
 \item{store_excl}{should the known exclusions be store in the Global Envir?}
 }
 \value{
-df excluding know targets/results issues
+df excluding known targets/results issues
 }
 \description{
 This function handles known issues in the MSD. For
 example, a mechanism starting mid-year and reporting on TX_CURR
 will duplicate TX_CURR targets. This function resolves that by
-removing those known cases and
+removing those known cases and stores cases relevant to your data frame.
+
+The best workflow is to filter your dataset down to a country and/or
+technical area of interest before running `resolve_knownissues()`. When you
+run the function, it will print out any known issues to the console (and can)
+even store them to your Global Environment, so it makes sense to limit the
+data first to what you are using/care about.
+
+The list of known issues is maintained by USAID/SIEI division. To access the
+table requires having a USAID email account and can be accessed via
+`browse_knownissues()`.
 }
 \examples{
 \dontrun{
@@ -38,4 +48,9 @@ df_mwi <- df_msd \%>\%
 
 df_mwi_resolved <- df_mwi \%>\%
   resolve_knownissues() }
+}
+\seealso{
+[browse_knownissues()] to view table in Google Sheets;
+ [set_email()] to store USAID email;
+ [load_secrets()] to load credentials into session.
 }

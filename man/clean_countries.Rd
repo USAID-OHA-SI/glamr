@@ -2,7 +2,10 @@
 % Please edit documentation in R/clean_columns.R
 \name{clean_countries}
 \alias{clean_countries}
-\title{Clean OU/Country names to match PEPFAR Data}
+\title{Clean OU/Country names to match PEPFAR Data
+
+`clean_countries` is used to adjust Natural Earth country names to match
+PEPFAR ones.}
 \usage{
 clean_countries(.data, colname = "admin")
 }
@@ -16,6 +19,9 @@ Cleaned DataFrame
 }
 \description{
 Clean OU/Country names to match PEPFAR Data
+
+`clean_countries` is used to adjust Natural Earth country names to match
+PEPFAR ones.
 }
 \examples{
 \dontrun{
@@ -23,3 +29,11 @@ Clean OU/Country names to match PEPFAR Data
    dplyr::select(sovereignt, admin, name, adm0_a3) \%>\%
    glamr::clean_countries(colname = "admin") }
 }
+\seealso{
+Other column munging: 
+\code{\link{clean_agency}()},
+\code{\link{clean_column}()},
+\code{\link{clean_indicator}()},
+\code{\link{clean_psnu}()}
+}
+\concept{column munging}

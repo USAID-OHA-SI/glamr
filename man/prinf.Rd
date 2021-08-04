@@ -2,18 +2,21 @@
 % Please edit documentation in R/prinf.R
 \name{prinf}
 \alias{prinf}
-\title{Print All Rpws}
+\title{Print All Rows}
 \usage{
-prinf(df)
+prinf(df, ...)
 }
 \arguments{
 \item{df}{data frame}
+
+\item{...}{Any other valid option for `print()`.}
 }
 \value{
-prints out all rows rather than default 10
+prints out all rows rather than default 10 rows.
 }
 \description{
-Print All Rpws
+`prinf` is a wrapper around `print` that returns all rows rather than
+just the first 10 by default.
 }
 \examples{
 \dontrun{

@@ -2,21 +2,38 @@
 % Please edit documentation in R/get_outable.R
 \name{get_outable}
 \alias{get_outable}
-\title{Pull OU UIDS}
+\title{Pull Table of OUs/Countries, UIDs, ISO codes and levels}
 \usage{
 get_outable(username, password, baseurl = "https://final.datim.org/")
 }
 \arguments{
-\item{username}{DATIM Username}
+\item{username}{DATIM Username, defaults to using `datim_user()` if blank}
 
-\item{password}{DATIM password, recommend using `mypwd()`}
+\item{password}{DATIM password, defaults to using `datim_pwd()` if blank}
 
 \item{baseurl}{base url for the API, default = https://final.datim.org/}
 }
+\value{
+data frame with all PEPFAR OUs, countries, their UIDs, ISO codes
+  and different levels in the DATIM hierarchy
+}
 \description{
-Pull OU UIDS
+`get_outable` pulls from DATIM to return a dataframe with all PEPFAR
+Operating Units and countries along with useful information for merging,
+eg ISO codes, and use in DATIM APIs, eg UIDs and hierarchy levels.
+}
+\details{
+`get_outtable` is a wrapper around `identify_ouuids` and `identify_levels`
+that pulls this information directly from DATIM. The user will need to have
+a DATIM account to access this data. You can take advantage of storing you
+credentials locally in a secure way using `set_datim`.
 }
 \examples{
 \dontrun{
- ou_table <- datim_outable("userx", mypwd("userx")) }
+ load_secrets()
+ ou_table <- datim_outable() }
+}
+\seealso{
+[set_datim()] to store DATIM authentication;
+  [load_secrets()] to load credentials into session
 }

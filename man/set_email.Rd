@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_secrets.R
 \name{set_email}
 \alias{set_email}
-\title{Set USAID email}
+\title{Store USAID email}
 \usage{
 set_email(usaid_email)
 }
@@ -10,13 +10,14 @@ set_email(usaid_email)
 \item{usaid_email}{full USAID email address}
 }
 \value{
-stores USAID email in using keyring
+stores USAID email using keyring and .Rprofile
 }
 \description{
 `set_email` stores your USAID email using the `keyring` package. This will
 only need to run once.
-
- The `keyring` package utilized the OS credentials store. Storing in
+}
+\details{
+The `keyring` package utilized the OS credentials store. Storing in
  a centralized, secure location allows analysts to other analysts code
  without having to manually change user names/email address to access
  DATIM or Google Drive.
@@ -24,9 +25,23 @@ only need to run once.
  After `set_email` has been run once, an analyst can set `load_secrets` at the
  beginning of a script, storing their email and DATIM username under Options
  for the current session.
+
+ This function also stores the email locally in your .Rprofile, allowing to be
+ used automatically as the default for `googledrive::drive_auth()` and
+ `googlesheets4::gs4_auth()`
 }
 \examples{
 \dontrun{
 set_email("rshah@usaid.gov") }
 
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{load_secrets}()},
+\code{\link{set_datim}()},
+\code{\link{set_s3keys}()}
+}
+\concept{authentication}

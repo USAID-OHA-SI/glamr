@@ -13,10 +13,19 @@ setup_readme(add_disclaimer = TRUE)
 adds/appends disclaimer to README
 }
 \description{
-Setup README with Disclaimer in Project
+`setup_readme()` establishes a README.md with the standard USAID disclaimer
+(or appends to one that currently exists). This function can be used as a
+stand alone function but primarily serves `si_setup()`.
 }
 \examples{
 \dontrun{
 #standard (appends dislaimer if README exists)
   setup_readme() }
 }
+\seealso{
+Other project setup: 
+\code{\link{folder_setup}()},
+\code{\link{setup_gitignore}()},
+\code{\link{si_setup}()}
+}
+\concept{project setup}

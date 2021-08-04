@@ -17,8 +17,9 @@ stores USAID email in using keyring
 This will only need to done once. After running `set_datim(user)`, you will be
 promoted to enter your password through the RStudio API which will then store the
 username and password in your OS credential store using `keyring`.
-
- The `keyring` package utilized the OS credentials store. Storing in
+}
+\details{
+The `keyring` package utilized the OS credentials store. Storing in
  a centralized, secure location allows analysts to other analysts code
  without having to manually change user names/email address to access
  DATIM or Google Drive.
@@ -32,3 +33,13 @@ username and password in your OS credential store using `keyring`.
 set_datim("rshah") }
 
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{load_secrets}()},
+\code{\link{set_email}()},
+\code{\link{set_s3keys}()}
+}
+\concept{authentication}

@@ -15,3 +15,4 @@ A boolean or stops
 \description{
 Test status of query
 }
+\keyword{internal}

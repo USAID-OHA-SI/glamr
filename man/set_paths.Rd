@@ -5,10 +5,11 @@
 \title{Set SI local folder paths}
 \usage{
 set_paths(
-  folderpath_msd = NULL,
-  folderpath_datim = NULL,
-  folderpath_raster = NULL,
-  folderpath_vector = NULL
+  folderpath_msd,
+  folderpath_datim,
+  folderpath_raster,
+  folderpath_vector,
+  folderpath_downloads
 )
 }
 \arguments{
@@ -19,14 +20,22 @@ set_paths(
 \item{folderpath_raster}{folderpath where GIS raster data are stored}
 
 \item{folderpath_vector}{folderpath where GIS vector data are stored}
+
+\item{folderpath_downloads}{folderpath to local Downloads folder}
 }
 \value{
 code chunk to paste into .Rprofile
 }
 \description{
-Set SI local folder paths
+`set_paths` stores store local folder paths where larger data are stored
+centrally and outside of projects. Accessed through use of `si_path()`.
 }
 \examples{
 \dontrun{
 set_paths <- set_path(folderpath_msd = "C:/Users/rshah/Documents/Data") }
 }
+\seealso{
+Other stored paths: 
+\code{\link{si_path}()}
+}
+\concept{stored paths}

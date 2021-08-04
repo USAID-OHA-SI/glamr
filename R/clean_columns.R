@@ -1,9 +1,9 @@
 #' @title Clean column data
-#' @title Clean column data
 #'
 #' @param .data   MSD Datasets
 #' @param colname Name of the column(s)
 #' @return  Cleaned MSD DataFrame
+#' @family column munging
 #' @export
 #' @examples
 #' \dontrun{
@@ -53,6 +53,7 @@ clean_column <- function(.data, colname = "psnu") {
 #'
 #' @param .data   MSD Datasets
 #' @return  Cleaned MSD DataFrame
+#' @family column munging
 #' @export
 #' @examples
 #' \dontrun{
@@ -74,8 +75,12 @@ clean_psnu <- function(.data) {
 
 #' @title Clean data from fundingagency column
 #'
+#' `clean_agency` converts all funding agency names to upper case and removes
+#' the HHS prefix for those agencies.
+#'
 #' @param .data MSD Datasets
 #' @return  Cleaned MSD DataFrame
+#' @family column munging
 #' @export
 #' @examples
 #' \dontrun{
@@ -102,7 +107,7 @@ clean_agency <- function(.data) {
 #'
 #' @param country country name
 #' @return cleaned country name
-#'
+#' @keywords internal
 
 lookup_country <- function(country) {
 
@@ -145,9 +150,13 @@ lookup_country <- function(country) {
 
 #' @title Clean OU/Country names to match PEPFAR Data
 #'
+#' `clean_countries` is used to adjust Natural Earth country names to match
+#' PEPFAR ones.
+#'
 #' @param .data MSD Datasets
 #' @param colname Column name to be updated
 #' @return  Cleaned DataFrame
+#' @family column munging
 #' @export
 #'
 #' @examples
@@ -181,11 +190,16 @@ clean_countries <-
   }
 
 
-#' Clean indicators
+#' Clean indicators (apply _D suffix)
+#'
+#' `clean_indicator` applies a '_D' suffix to any indicators that are a
+#' denominator. This is particularly useful when aggregating data or
+#' reshaping.
 #'
 #' @param df MSD data frame
 #'
 #' @return indicators with denominator have _D suffix
+#' @family column munging
 #' @export
 #'
 #' @examples
@@ -209,4 +223,51 @@ clean_indicator <- function(df){
   }
   return(df)
 
+}
+
+#' Clean Filename
+#'
+#' This function is primarily useful for removing any apostrophe from the filename
+#' since this will get rejected by Google Drive, but also includes features like
+#' replacing spaces with an underscore, converting to all lowercase, and adding
+#' a date prefix or suffix.
+#'
+#' @param x filepath or file name
+#' @param rm_apostrophe remove all apostrophes, default = TRUE
+#' @param rp_space replace spaces with underscore, default = FALSE
+#' @param mk_lower make lowercase, default = FALSE
+#' @param add_date add date "prefix" or "suffix"
+#'
+#' @return clean filename
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' file <- "Submission_Coted'Ivoire_data.csv"
+#' new_file <- clean_filename(file, rm_apostrophe = TRUE, add_date = 'prefix') }
+clean_filename <- function(x,
+                           rm_apostrophe = TRUE,
+                           rp_space = FALSE,
+                           mk_lower = FALSE,
+                           add_date = NULL){
+  if(rm_apostrophe == TRUE)
+    x <- stringr::str_remove_all(x, "'")
+
+  if(rp_space == TRUE)
+    x <- stringr::str_replace_all(x, " ", "_")
+
+  if(mk_lower == TRUE)
+    x <- tolower(x)
+
+  if(add_date == "prefix"){
+    x <- stringr::str_replace(x,
+                              basename(x),
+                              glue::glue('{format(Sys.Date(),"%Y%m%d")}_{basename(x)}'))
+  }
+
+  if(add_date == "suffix"){
+    x <- stringr::str_replace(x,
+                              glue::glue("{tools::file_ext(x)}$"),
+                              glue::glue('{format(Sys.Date(),"%Y%m%d")}_{tools::file_ext(x)}'))
+  }
 }

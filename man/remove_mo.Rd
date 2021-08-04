@@ -2,7 +2,7 @@
 % Please edit documentation in R/remove_mo.R
 \name{remove_mo}
 \alias{remove_mo}
-\title{A Function to Remove M&O from datasets}
+\title{Remove M&O funding}
 \usage{
 remove_mo(df)
 }
@@ -13,5 +13,6 @@ remove_mo(df)
 a dataset excluding M&O
 }
 \description{
-A Function to Remove M&O from datasets
+When working with financial data, its often useful to remove M&O
+funding from the data.
 }

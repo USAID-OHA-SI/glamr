@@ -1,6 +1,5 @@
 #' Load credentials
 #'
-#'#' @description
 #'  `load_secrets` should be set at the beginning of a script to store your
 #'  email and DATIM user name under Options for the current session. This allows
 #'  analysts to more easily share their scripts without having to manually update
@@ -16,8 +15,12 @@
 #'  DATIM or Google Drive.
 #'
 #'
-#' @return stores Google and DATIM credentials in session
+#' @param service account, either "email", "datim" or "s3"; by default, all are
+#' loaded if they are available
+#'
+#' @return stores Google, DATIM, and s3 credentials in session
 #' @export
+#' @family authentication
 #'
 #' @importFrom utils installed.packages
 #' @importFrom usethis ui_oops
@@ -30,10 +33,9 @@
 #' @examples
 #' \dontrun{
 #' load_secrets()
-#' user <- getOption("datim")
-#' ou_table <- datim_outable(user, datim_pwd()) }
+#' ou_table <- datim_outable(datim_user(), datim_pwd()) }
 
-load_secrets <- function(){
+load_secrets <- function(service = c("email", "datim", "s3")){
 
   if(length(is_stored()) == 0){
     ui_oops("No accounts stored under {ui_code('keyring')}. Use {ui_code('set_email()')} and {ui_code('set_datim()')} to establish accounts")
@@ -41,29 +43,29 @@ load_secrets <- function(){
     ui_info("The following items have been stored for use in this session:")
   }
 
-  if(is_stored("email")){
+  if(is_stored("email") && "email" %in% service){
     options("email" = keyring::key_list("email")[1,2])
     ui_done("{ui_field('email')} set as {ui_value(getOption('email'))}")
   }
 
-  if(is_stored("email") && is_installed("googledrive")){
+  if(is_stored("email") && is_installed("googledrive") && "email" %in% service){
     options(googledrive::drive_auth(getOption("email")))
     ui_done("{ui_code('googledrive')} authenticated using {ui_field('email')}")
   }
 
-  if(is_stored("email") && is_installed("googlesheets4")){
+  if(is_stored("email") && is_installed("googlesheets4") && "email" %in% service){
     options(googlesheets4::gs4_auth(getOption("email")))
     ui_done("{ui_code('googlesheets4')} authenticated using {ui_field('email')}")
   }
 
-  if(is_stored("datim")){
+  if(is_stored("datim") && "datim" %in% service){
     options("datim" = keyring::key_list("datim")[1,2])
     options("baseurl" = "https://final.datim.org/")
     ui_done("{ui_field('datim')} username set as {ui_value(getOption('datim'))}")
     ui_done("{ui_field('baseurl')} set to {ui_value(getOption('baseurl'))}")
   }
 
-  if (is_stored("s3")) {
+  if (is_stored("s3") && "s3" %in% service) {
     options("access_key" = get_s3key("access"))
     options("secret_key" = get_s3key("secret"))
 
@@ -82,9 +84,8 @@ load_secrets <- function(){
 
 
 
-#' Set USAID email
+#' Store USAID email
 #'
-#' @description
 #' `set_email` stores your USAID email using the `keyring` package. This will
 #' only need to run once.
 #'
@@ -97,10 +98,19 @@ load_secrets <- function(){
 #'  beginning of a script, storing their email and DATIM username under Options
 #'  for the current session.
 #'
+#'  This function also stores the email locally in your .Rprofile, allowing to be
+#'  used automatically as the default for `googledrive::drive_auth()` and
+#'  `googlesheets4::gs4_auth()`
+#'
 #' @param usaid_email full USAID email address
 #'
-#' @return stores USAID email in using keyring
+#' @return stores USAID email using keyring and .Rprofile
 #' @export
+#' @family authentication
+#'
+#' @importFrom usethis ui_path
+#' @importFrom usethis ui_todo
+#' @importFrom usethis ui_code_block
 #'
 #' @examples
 #' \dontrun{
@@ -110,11 +120,19 @@ set_email <- function(usaid_email){
   keyring::key_set_with_value(service = "email",
                               username = usaid_email,
                               password = "NULL")
+  ui_code_block(
+    "
+    options(gargle_oauth_email = '{usaid_email}')
+    "
+  )
+
+  ui_todo("Copy and paste this code in {ui_path('.Rprofile')} to store your SI folder paths.")
+
+  usethis::edit_r_profile("user")
 }
 
 #' Store DATIM credentials
 #'
-#' @description
 #' `set_datim` stores your DATIM credentials email using the `keyring` package.
 #' This will only need to done once. After running `set_datim(user)`, you will be
 #' promoted to enter your password through the RStudio API which will then store the
@@ -133,6 +151,7 @@ set_email <- function(usaid_email){
 #'
 #' @return stores USAID email in using keyring
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -145,8 +164,11 @@ set_datim <- function(datim_username){
 
 #' Return DATIM username
 #'
+#' To setup/store, run `glamr::set_datim()`.
+#'
 #' @return access DATIM username from keyring
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_stop
 #' @importFrom usethis ui_code
@@ -169,8 +191,11 @@ datim_user <- function(){
 
 #' Return DATIM password
 #'
+#' To setup/store, run `glamr::set_datim()`.
+#'
 #' @return access DATIM password from keyring
 #' @export
+#' @family authentication
 #'
 #' @importFrom usethis ui_stop
 #' @importFrom usethis ui_code
@@ -194,7 +219,6 @@ datim_pwd <- function(){
 
 #' @title Store S3 Credentials
 #'
-#' @description
 #' `set_s3keys` stores your s3 keys using the `keyring` package.
 #' This will only need to done once. After running `set_s3keys(access, secret)`,
 #' RStudio API which will then store the keys in your OS credential store using `keyring`.
@@ -204,6 +228,7 @@ datim_pwd <- function(){
 #'
 #' @return stored access key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{
@@ -219,54 +244,9 @@ set_s3keys <- function(access, secret){
                               password = secret)
 }
 
-#' Store S3 Credentials - Access Key
-#'
-#' @description
-#' `set_s3access` stores your s3 access key using the `keyring` package.
-#' This will only need to done once. After running `set_s3access(access)`,
-#' RStudio API which will then store the key in your OS credential store using `keyring`.
-#'
-#' @param access S3 account access key
-#'
-#' @return stored access key
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' set_s3access("ABDCEDFFFDFDFDFD") }
-#'
-set_s3access <- function(access){
-  keyring::key_set_with_value(service = "s3",
-                              username = "access",
-                              password = access)
-}
-
-
-#' Store S3 Credentials - Secret Access Key
-#'
-#' @description
-#' `set_s3secret` stores your s3 secret key using the `keyring` package.
-#' This will only need to done once. After running `set_s3secret(secret)`,
-#' RStudio API which will then store the key in your OS credential store using `keyring`.
-#'
-#' @param secret S3 account secret key
-#'
-#' @return stored secret key
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' set_s3secret("fsfs8sf0fds9f6s5") }
-#'
-set_s3secret <- function(secret){
-  keyring::key_set_with_value(service = "s3",
-                              username = "secret",
-                              password = secret)
-}
 
 #' Get S3 Credentials - Access or Secret Access Key
 #'
-#' @description
 #' `get_s3key` retrieves your S3 keys using the `keyring` package.
 #' Set name to `access` for `Access Key`,
 #' `name` to `secret` for `Secret Access Key`
@@ -275,6 +255,7 @@ set_s3secret <- function(secret){
 #'
 #' @return stored key
 #' @export
+#' @family authentication
 #'
 #' @examples
 #' \dontrun{

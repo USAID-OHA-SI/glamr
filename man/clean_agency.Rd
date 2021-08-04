@@ -2,7 +2,10 @@
 % Please edit documentation in R/clean_columns.R
 \name{clean_agency}
 \alias{clean_agency}
-\title{Clean data from fundingagency column}
+\title{Clean data from fundingagency column
+
+`clean_agency` converts all funding agency names to upper case and removes
+the HHS prefix for those agencies.}
 \usage{
 clean_agency(.data)
 }
@@ -14,8 +17,19 @@ Cleaned MSD DataFrame
 }
 \description{
 Clean data from fundingagency column
+
+`clean_agency` converts all funding agency names to upper case and removes
+the HHS prefix for those agencies.
 }
 \examples{
 \dontrun{
  df_msd \%>\% clean_agency() }
 }
+\seealso{
+Other column munging: 
+\code{\link{clean_column}()},
+\code{\link{clean_countries}()},
+\code{\link{clean_indicator}()},
+\code{\link{clean_psnu}()}
+}
+\concept{column munging}

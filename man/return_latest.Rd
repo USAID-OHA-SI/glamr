@@ -2,22 +2,24 @@
 % Please edit documentation in R/return_latest.R
 \name{return_latest}
 \alias{return_latest}
-\title{Return Latest}
+\title{Return Latest File}
 \usage{
 return_latest(folderpath, pattern, ...)
 }
 \arguments{
-\item{folderpath}{path to folder where file(s) are located}
+\item{folderpath}{path to folder where file(s) are located.}
 
-\item{pattern}{pattern in file name, regex expressions}
+\item{pattern}{pattern in file name, regex expressions. If not parttern is
+provided, the last file in the folder will be returned.}
 
-\item{...}{Any other valid option for `base::list.files()`}
+\item{...}{Any other valid option for `base::list.files()`.}
 }
 \value{
-the fill filepath for the most recent version of a file stub
+a vector of the full filepath for the most recent version of a file stub
 }
 \description{
-Return Latest
+`return_latest` checks for a pattern in a folder and provides the most
+recent file bases on the time the file was created.
 }
 \examples{
 \dontrun{

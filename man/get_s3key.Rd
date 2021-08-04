@@ -22,3 +22,13 @@ Set name to `access` for `Access Key`,
 get_s3key(name = "access") }
 
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{load_secrets}()},
+\code{\link{set_datim}()},
+\code{\link{set_email}()},
+\code{\link{set_s3keys}()}
+}
+\concept{authentication}

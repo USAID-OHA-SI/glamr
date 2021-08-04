@@ -2,7 +2,7 @@
 % Please edit documentation in R/import_drivefile.R
 \name{import_drivefile}
 \alias{import_drivefile}
-\title{Import file from Google Drive}
+\title{Import file from a Google Drive folder}
 \usage{
 import_drivefile(drive_folder, filename, folderpath = "Data", zip = TRUE)
 }
@@ -19,7 +19,9 @@ import_drivefile(drive_folder, filename, folderpath = "Data", zip = TRUE)
 stores file from Google Drive as a zipped file
 }
 \description{
-Import file from Google Drive
+`import_drivefile` is a wrapper around `googledrive::drive_download`, useful
+for pulling multiple files from a given Google Drive folder (with a Google
+ID provided) to download by default to the Data folder of a project.
 }
 \examples{
 \dontrun{

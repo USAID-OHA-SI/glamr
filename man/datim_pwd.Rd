@@ -10,10 +10,20 @@ datim_pwd()
 access DATIM password from keyring
 }
 \description{
-Return DATIM password
+To setup/store, run `glamr::set_datim()`.
 }
 \examples{
 \dontrun{
 load_secrets()
 ou_table <- datim_outable(datim_user(), datim_pwd()) }
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{load_secrets}()},
+\code{\link{set_datim}()},
+\code{\link{set_email}()},
+\code{\link{set_s3keys}()}
+}
+\concept{authentication}

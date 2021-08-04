@@ -14,16 +14,16 @@ When using PEPFAR data, the OHA SI PEPFAR by and large uses the same MER Structu
 
 ## Installation
 
-`glamr` is not on CRAN, so you will have to install it directly from Github using devtools.
+`glamr` is not on CRAN, so you will have to install it directly from GitHub using `remotes`.
 
-If you do not have the devtools package installed, you will have to run the `install.packages("devtools")` line in the code below as well.
+If you do not have `remotes` installed, you will have to run the `install.packages("remotes")` line in the code below as well.
 
 ``` r
 ## SETUP
 
   #install package with vignettes
-    install.packages("devtools")
-    devtools::install_github("USAID-OHA-SI/glamr", build_vignettes = TRUE)
+    install.packages("remotes")
+    remotes::install_github("USAID-OHA-SI/glamr", build_vignettes = TRUE)
     
   #load the package
     library(glamr)

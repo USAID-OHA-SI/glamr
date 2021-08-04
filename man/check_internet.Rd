@@ -12,3 +12,4 @@ A boolean or stops
 \description{
 Check internet connection
 }
+\keyword{internal}

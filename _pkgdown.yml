@@ -1,0 +1,119 @@
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: Changelog
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/USAID-OHA-SI/glamr/
+    articles:
+      text: Articles
+      menu:
+      - text: Credential Management
+        href: articles/credential-management.html
+      - text: Project Workflow
+        href: articles/project-workflow.html
+
+reference:
+- title: Workflow
+  contents:
+  - folder_setup
+  - import_drivefile
+  - return_latest
+  - set_paths
+  - setup_gitignore
+  - setup_readme
+  - si_path
+  - si_setup
+  - source_info
+  - gdrive_metadata
+  - extract_excel_data
+  - extract_tbl_data
+
+- title: Authentication
+  contents:
+  - datim_pwd
+  - datim_user
+  - get_s3key
+  - load_secrets
+  - mypwd
+
+- title: Authentication Setup
+  contents:
+  - set_datim
+  - set_email
+  - set_s3keys
+
+- title: Tidying
+  contents:
+  - clean_agency
+  - clean_column
+  - clean_countries
+  - clean_filename
+  - clean_indicator
+  - clean_knownissues
+  - clean_psnu
+  - connect_text
+  - extract_text
+
+- title: Date Conversion
+  contents:
+  - convert_date_to_qtr
+  - convert_datim_pd_to_qtr
+  - convert_qtr_to_date
+
+- title: Utilities
+  contents:
+  - '`%ni%`'
+  - prinf
+  - package_check
+
+- title: DATIM
+  contents:
+  - get_outable
+  - identify_levels
+  - identify_ouuids
+  - extract_datim
+
+- title: Mechanism Handling
+  contents:
+  - apply_partner_type
+  - browse_knownissues
+  - resolve_knownissues
+
+- title: Financial
+  contents:
+  - remove_mo
+  - remove_sch
+
+- title: s3 Utilities
+  contents:
+  - s3_buckets
+  - s3_download
+  - s3_excel_sheets
+  - s3_objects
+  - s3_object_type
+  - s3_read_object
+  - s3_remove
+  - s3_unpack_keys
+  - s3_upload
+
+- title: Data Sets
+  contents:
+  - pepfar_country_list
+  - pepfar_data_calendar

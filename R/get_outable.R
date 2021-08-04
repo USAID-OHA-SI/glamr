@@ -1,14 +1,27 @@
-#' Pull OU UIDS
+#' Pull Table of OUs/Countries, UIDs, ISO codes and levels
 #'
+#' `get_outable` pulls from DATIM to return a dataframe with all PEPFAR
+#' Operating Units and countries along with useful information for merging,
+#' eg ISO codes, and use in DATIM APIs, eg UIDs and hierarchy levels.
+#'
+#' `get_outtable` is a wrapper around `identify_ouuids` and `identify_levels`
+#' that pulls this information directly from DATIM. The user will need to have
+#' a DATIM account to access this data. You can take advantage of storing you
+#' credentials locally in a secure way using `set_datim`.
+#'
+#' @param username DATIM Username, defaults to using `datim_user()` if blank
+#' @param password DATIM password, defaults to using `datim_pwd()` if blank
 #' @param baseurl base url for the API, default = https://final.datim.org/
-#' @param username DATIM Username
-#' @param password DATIM password, recommend using `mypwd()`
 #'
 #' @export
-#'
+#' @return data frame with all PEPFAR OUs, countries, their UIDs, ISO codes
+#'   and different levels in the DATIM hierarchy
+#' @seealso [set_datim()] to store DATIM authentication;
+#'   [load_secrets()] to load credentials into session
 #' @examples
 #' \dontrun{
-#'  ou_table <- datim_outable("userx", mypwd("userx")) }
+#'  load_secrets()
+#'  ou_table <- datim_outable() }
 
 get_outable <- function(username, password, baseurl = "https://final.datim.org/"){
 
@@ -38,19 +51,37 @@ get_outable <- function(username, password, baseurl = "https://final.datim.org/"
 
 #' Pull OU UIDS
 #'
+#' `identify_ouuids` pulls from DATIM to return a dataframe with all PEPFAR
+#' Operating Units and countries and their UIDs. This is one of two components
+#' that feeds into `get_outable`.
+#'
+#' To access the UIDs, the user will need to have a DATIM account. You can
+#' take advantage of storing you credentials locally in a secure way
+#' using `set_datim`.
+#'
+#' @param username DATIM Username, defaults to using `datim_user()` if blank
+#' @param password DATIM password, defaults to using `datim_pwd()` if blank
 #' @param baseurl base url for the API, default = https://final.datim.org/
-#' @param username DATIM Username
-#' @param password DATIM password, recommend using `mypwd()`
 #'
 #' @export
+#' @return
+#' @seealso [set_datim()] to store DATIM authentication;
+#'   [load_secrets()] to load credentials into session
 #'
 #' @examples
 #' \dontrun{
-#'  ous <- identify_ouuids("userx", mypwd("userx")) }
+#'  load_secrets()
+#'  ous <- identify_ouuids() }
 
 identify_ouuids <- function(username, password, baseurl = "https://final.datim.org/"){
 
   check_internet()
+
+  if(missing(username))
+    username <- datim_user()
+
+  if(missing(password))
+    password <- datim_pwd()
 
   ous <- baseurl %>%
     paste0("api/organisationUnits?filter=level:eq:3") %>%
@@ -89,21 +120,36 @@ identify_ouuids <- function(username, password, baseurl = "https://final.datim.o
 
 #' Identify Facility/Community levels in org hierarchy
 #'
-#' @param username DATIM username
-#' @param password DATIM password, recommend using `mypwd()`
-#' @param baseurl base API url, default = https://final.datim.org/
+#' `identify_levels` pulls from DATIM to return a dataframe with all PEPFAR
+#' Operating Units and countries with their ISO codes and hierarhcy levels.
+#' This is one of two components that feeds into `get_outable`.
+#'
+#' To access the UIDs, the user will need to have a DATIM account. You can
+#' take advantage of storing you credentials locally in a secure way
+#' using `set_datim`.
+#'
+#' @param username DATIM Username, defaults to using `datim_user()` if blank
+#' @param password DATIM password, defaults to using `datim_pwd()` if blank
+#' @param baseurl base url for the API, default = https://final.datim.org/
 #'
 #' @export
-#'
+#' @seealso [set_datim()] to store DATIM authentication;
+#'   [load_secrets()] to load credentials into session
 #' @examples
 #' \dontrun{
 #'  #table for all OUs
-#'   myuser <- "UserX"
-#'   identify_levels(username = myuser, password = mypwd(myuser)) }
+#'   load_secrets()
+#'   identify_levels() }
 
 identify_levels <- function(username, password, baseurl = "https://final.datim.org/"){
 
   check_internet()
+
+  if(missing(username))
+    username <- datim_user()
+
+  if(missing(password))
+    password <- datim_pwd()
 
   df_levels <- baseurl %>%
     paste0(.,"api/dataStore/dataSetAssignments/orgUnitLevels") %>%
@@ -123,13 +169,471 @@ identify_levels <- function(username, password, baseurl = "https://final.datim.o
     dplyr::rename(operatingunit = name3,
                   countryname = name4,
                   operatingunit_iso = iso3,
-                  countryname_iso = iso4) %>%
-    dplyr::rename_at(dplyr::vars(country:facility), ~ paste0(., "_lvl"))
+                  countryname_iso = iso4,
+                  psnu = prioritization) %>%
+    dplyr::rename_with(.cols= where(is.integer), ~ paste0(., "_lvl")) %>%
+    dplyr::select(dplyr::everything(), country_lvl, psnu_lvl,
+                  community_lvl, facility_lvl)
 
   return(df_levels)
 }
 
 
+#' @title Get Org UIDS
+#' @note Use with caution. Use `get_ouorguids()` for levels below 3
+#'
+#' @param level    Org level
+#' @param username DATIM Username, recommend using `datim_user()`
+#' @param password DATIM password, recommend using `datim_pwd()`
+#' @param baseurl base url for the API, default = https://final.datim.org/
+#'
+#' @return ORG UIDS as tibble
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  library(gisr)
+#'
+#'  # All orgunit level 3 uids + names
+#'  orgs <- get_orguids(level = 3)
+#' }
+#'
+get_orguids <-
+  function(level = 3,
+           username = NULL,
+           password = NULL,
+           baseurl = "https://final.datim.org/"){
+
+    # Params
+    lvl <- {{level}}
+
+    user <- base::ifelse(base::is.null({{username}}),
+                         glamr::datim_user(), {{username}})
+
+    pass <- base::ifelse(base::is.null({{password}}),
+                         glamr::datim_pwd(), {{password}})
+
+    # Query ou
+    orgs <- baseurl %>%
+      paste0("api/organisationUnits",
+             "?filter=level:eq:", lvl) %>%
+      httr::GET(httr::authenticate(user, pass)) %>%
+      httr::content("text") %>%
+      jsonlite::fromJSON(flatten = TRUE) %>%
+      purrr::pluck("organisationUnits") %>%
+      dplyr::rename(uid = id, orgunit = displayName) %>%
+      tibble::as_tibble()
+
+    return(orgs)
+  }
+
+
+#' @title Get list of OU Orgs at specific level
+#' @note  Use `get_orguids()` for levels above 4
+#'
+#' @param ouuid    OU uid
+#' @param level    org level
+#' @param username DATIM Username
+#' @param password DATIM password, recommend using `mypwd()`
+#' @param baseurl  base url for the API, default = https://final.datim.org/
+#'
+#' @return ORG UIDS as tibble
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#'  library(gisr)
+#'
+#'  cntry <- "Zambia"
+#'
+#'  uid <- get_ouuid(cntry)
+#'
+#'  lvl <- get_ouorglevel(cntry, org_type = "prioritization")
+#'
+#'  orgs <- get_ouorgs(ouuid = uid, level = lvl)
+#' }
+#'
+get_ouorgs <-
+  function(ouuid,
+           level = 4,
+           username = NULL,
+           password = NULL,
+           baseurl = "https://final.datim.org/"){
+
+    # Params
+    uid <- {{ouuid}}
+
+    lvl <- {{level}}
+
+    user <- base::ifelse(base::is.null({{username}}),
+                         glamr::datim_user(), {{username}})
+
+    pass <- base::ifelse(base::is.null({{password}}),
+                         glamr::datim_pwd(), {{password}})
+
+    # Query ou
+    orgs <- baseurl %>%
+      paste0("api/organisationUnits",
+             "?filter=level:eq:", lvl,
+             "&filter=path:like:", uid,
+             "&paging=false&format=json") %>%
+      httr::GET(httr::authenticate(user, pass)) %>%
+      httr::content("text") %>%
+      jsonlite::fromJSON(flatten = TRUE) %>%
+      purrr::pluck("organisationUnits")
+
+    # Check data
+    if (base::is.null(orgs)) {
+      base::cat(
+        crayon::red(
+          paste0("\nNo orgunits found for uid = ",
+                 uid, " & level = ", lvl, "\n")))
+
+      return(NULL)
+    }
+
+    # Clean up
+    orgs <- orgs %>%
+      dplyr::rename(uid = id, orgunit = displayName) %>%
+      tibble::as_tibble()
+
+    return(orgs)
+  }
+
+
+#' @title Get OU Org UIDS
+#'
+#' @param add_details Add countries for regional ou, default is false
+#' @param username    DATIM Username, recommend using `datim_user()`
+#' @param password    DATIM password, recommend using `datim_pwd()`
+#' @param baseurl     base url for the API, default = https://final.datim.org/
+#'
+#' @return OU UIDS as tibble
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  library(gisr)
+#'
+#'  # OU Org UIDs
+#'  ous <- get_ouuids()
+#' }
+#'
+get_ouuids <-
+  function(add_details = FALSE,
+           username = NULL,
+           password = NULL,
+           baseurl = "https://final.datim.org/"){
+
+    # Params
+    user <- base::ifelse(base::is.null({{username}}),
+                         glamr::datim_user(), {{username}})
+
+    pass <- base::ifelse(base::is.null({{password}}),
+                         glamr::datim_pwd(), {{password}})
+
+    # Query ou
+    ous <- get_orguids(level = 3,
+                       username = user,
+                       password = pass,
+                       baseurl = baseurl) %>%
+      dplyr::rename(operatingunit = orgunit)
+
+    # Add details if needed
+    if (add_details == TRUE) {
+
+      # Query R OUs / Countries
+      countries <- ous %>%
+        dplyr::filter(stringr::str_detect(operatingunit, " Region$")) %>%
+        base::split(1:base::nrow(.)) %>%
+        purrr::map_dfr(function(obj){
+
+          cntries <- get_ouorgs(obj$uid, 4) %>%
+            dplyr::rename(countryname = orgunit) %>%
+            dplyr::mutate(operatingunit = obj$operatingunit) %>%
+            dplyr::relocate(operatingunit, .after = 1)
+
+          return(cntries)
+        })
+
+      # Combine
+      ous <- ous %>%
+        dplyr::mutate(
+          countryname = dplyr::case_when(
+            stringr::str_detect(operatingunit, " Region$") == TRUE ~ NA_character_,
+            TRUE ~ operatingunit)) %>%
+        dplyr::bind_rows(countries) %>%
+        dplyr::arrange(operatingunit, countryname)
+    }
+
+    return(ous)
+  }
+
+
+#' @title Get Operatingunit / Country Org UID
+#'
+#' @param operatingunit Operatingunit name
+#' @param username      Datim Account username, recommend using `datim_user()`
+#' @param password      Datim Account Password, recommend using `datim_pwd()`
+#'
+#' @return uid
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   library(gisr)
+#'
+#'   # get orgunit for specific OU/Country: kenya
+#'   get_ouuid(operatingunit = "Kenya")
+#' }
+#'
+get_ouuid <-
+  function(operatingunit,
+           username = NULL,
+           password = NULL) {
+
+    # Params
+    ou <- stringr::str_to_upper({{operatingunit}})
+
+    user <- base::ifelse(base::is.null(username),
+                         glamr::datim_user(),
+                         {{username}})
+
+    pass <- base::ifelse(base::is.null(password),
+                         glamr::datim_pwd(),
+                         {{password}})
+
+    # Get all ou uids
+    ous <- get_ouuids(
+      add_details = TRUE,
+      username = user,
+      password = pass) %>%
+      dplyr::filter(
+        stringr::str_to_upper(operatingunit) == ou |
+          stringr::str_to_upper(countryname) == ou)
+
+
+    if (base::nrow(ous) == 0) {
+      base::cat("\nInvalid PEPFAR Operatingunit / Countryname: ",
+                crayon::red(ou, "\n"))
+
+      return(NULL)
+    }
+
+    # OU/Country uid
+    if (stringr::str_detect(ou, " region")) {
+      ous <- ous %>% dplyr::filter(is.na(countryname))
+    }
+
+    # Get uid
+    ouuid <- ous %>%
+      dplyr::pull(uid) %>%
+      dplyr::first()
+
+    return(ouuid)
+  }
+
+
+#' @title Get all orgunits levels in org hierarchy
+#' @note  Same as `glamr::identify_levels()` or `Wavelength::identify_levels()`
+#'
+#' @param username DATIM username, recommed using `datim_user()`
+#' @param password DATIM password, recommend using `datim_pwd()`
+#' @param baseurl  base API url, default = https://final.datim.org/
+#'
+#' @return df
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   library(gisr)
+#'
+#'   # Get PEPFAR Org Levels
+#'   get_levels()
+#'  }
+#'
+get_levels <-
+  function(username = NULL,
+           password = NULL,
+           baseurl = "https://final.datim.org/"){
+
+    # Params
+    user <- base::ifelse(base::is.null(username),
+                         glamr::datim_user(),
+                         {{username}})
+
+    pass <- base::ifelse(base::is.null(password),
+                         glamr::datim_pwd(),
+                         {{password}})
+
+    # Query data
+    df_levels <- baseurl %>%
+      paste0(.,"api/dataStore/dataSetAssignments/orgUnitLevels") %>%
+      httr::GET(httr::authenticate(user, pass)) %>%
+      httr::content("text") %>%
+      jsonlite::fromJSON(flatten = TRUE) %>%
+      purrr::map_dfr(dplyr::bind_rows) %>%
+      dplyr::mutate_if(is.character, ~ dplyr::na_if(., ""))
+
+    # Adjust for non-regional missions
+    df_levels <- df_levels %>%
+      dplyr::mutate(name4 = ifelse(is.na(name4), name3, name4),
+                    iso4 = ifelse(is.na(iso4), iso3, iso4))
+
+    # rename
+    df_levels <- df_levels %>%
+      dplyr::rename(operatingunit = name3,
+                    countryname = name4,
+                    operatingunit_iso = iso3,
+                    countryname_iso = iso4)
+
+    return(df_levels)
+  }
+
+
+#' Get OU Org level
+#'
+#' @param operatingunit Operatingunit name
+#' @param country       Country name (default = Operatingunit)
+#' @param org_type      Orgunit type (country_lvl, prioritization, community, facility_lvl)
+#' @param username      Datim Account username
+#' @param password      Datim Account Password
+#'
+#' @return uid
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  library(gisr)
+#'
+#'  cntry <- "Zambia"
+#'
+#'  # Get country org level
+#'  get_ouorglevel(cntry)
+#'
+#'  # Get community org level
+#'  get_ouorglevel(cntry, org_type = "community")
+#' }
+#'
+get_ouorglevel <-
+  function(operatingunit,
+           country = NULL,
+           org_type = "prioritization",
+           username = NULL,
+           password = NULL) {
+
+    # params
+    ou = {{operatingunit}}
+
+    cntry <- base::ifelse(base::is.null(country), ou, {{country}})
+
+    type <- {{org_type}}
+
+    user <- base::ifelse(base::is.null(username),
+                         glamr::datim_user(),
+                         {{username}})
+
+    pass <- base::ifelse(base::is.null(password),
+                         glamr::datim_pwd(),
+                         {{password}})
+
+    # Levels
+    df_lvls <- get_levels(user, pass)
+
+    # level name
+    if (!stringr::str_to_lower(type) %in% base::names(df_lvls)) {
+      base::cat(base::paste0("\nOrg_type is not available: ",
+                             crayon::red(type), "\n"))
+
+      return(NULL)
+    }
+
+    # filter ou/country
+    df_lvls <- df_lvls %>%
+      dplyr::filter(operatingunit == ou,
+                    countryname == cntry)
+
+    # records
+    if (nrow(df_lvls) == 0) {
+      base::cat(crayon::red("\nThere is no match for ou/country options\n"))
+
+      return(NULL)
+    }
+
+    # Level
+    lvl <- df_lvls %>% dplyr::pull(type)
+
+    return(lvl)
+  }
+
+
+#' Get Orgs uids by level
+#'
+#' @param ouuid        Operatingunit uid
+#' @param level        Orgunit level
+#' @param username     Datim Account username
+#' @param password     Datim Account Password
+#'
+#' @return             list of uids
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  library(gisr)
+#'
+#'  # Set country of interest
+#'  cntry <- "Zambia"
+#'
+#'  # Get OU/Country orgunit uid
+#'  uid <- get_ouuid(cntry)
+#'
+#'  # Get org level for psnu
+#'  lvl <- get_ouorglevel(cntry, org_type = "prioritization")
+#'
+#'  # Retreived all uids for level 4 (SNU1)
+#'  get_ouorguids(ouuid = uid, level = 4)
+#' }
+#'
+get_ouorguids <-
+  function(ouuid, level,
+           username = NULL,
+           password = NULL) {
+
+    # params
+    uid <- {{ouuid}}
+
+    lvl <- {{level}}
+
+    user <- base::ifelse(base::is.null(username),
+                         glamr::datim_user(),
+                         {{username}})
+
+    pass <- base::ifelse(base::is.null(password),
+                         glamr::datim_pwd(),
+                         {{password}})
+
+    # Query orgunits
+    orgs <- get_ouorgs(ouuid = uid,
+                       level = lvl,
+                       username = user,
+                       password = pass)
+
+    # Check data
+    if (base::is.null(orgs)) {
+      base::cat(
+        crayon::red(
+          paste0("\nNo org uids found\n")))
+
+      return(NULL)
+    }
+
+    # extract list of uids
+    lvl_uids <- orgs %>% dplyr::pull(uid)
+
+    # return
+    return(lvl_uids)
+  }
 
 
 
