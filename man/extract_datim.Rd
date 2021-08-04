@@ -9,9 +9,12 @@ extract_datim(url, username, password)
 \arguments{
 \item{url}{supply url for API call}
 
-\item{username}{DATIM username}
+\item{username}{DATIM Username, defaults to using `datim_user()` if blank}
 
-\item{password}{DATIM password, recommend using `mypwd()`}
+\item{password}{DATIM password, defaults to using `datim_pwd()` if blank}
+}
+\value{
+API pull of data from DATIM
 }
 \description{
 DATIM Analytics API
@@ -23,6 +26,5 @@ DATIM Analytics API
                  dimension=ou:LEVEL-4;HfVjCurKxh2&
                  filter=pe:2018Oct&
                  displayProperty=SHORTNAME&outputIdScheme=CODE")
- myuser <- "UserX"
- df_targets <- get_datim_targets(myurl, myuser, mypwd(myuser)) }
+ df_targets <- get_datim_targets(myurl, datim_user(), datim_pwd()) }
 }

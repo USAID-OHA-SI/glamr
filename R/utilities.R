@@ -1,7 +1,7 @@
 #' Check internet connection
 #'
 #' @return A boolean or stops
-#' @export
+#' @keywords internal
 
 check_internet <- function(){
 
@@ -15,7 +15,7 @@ check_internet <- function(){
 #' @param res response
 #'
 #' @return A boolean or stops
-#' @export
+#' @keywords internal
 
 check_status <- function(res){
 
@@ -23,16 +23,29 @@ check_status <- function(res){
     stop("The API returned an error")
 }
 
+#' Check if package exists
+#'
+#' @param pkg package name
+#'
+#' @export
+#' @keywords internal
+
+package_check <- function(pkg){
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    stop(paste("Package", pkg, "needed for this function to work. Please install it."),
+         call. = FALSE)
+  }
+}
+
 
 #' Test if service is stored in credential manager
 #'
-#' @param service account, either "datim" or "email"
+#' @param service account, either "email", "datim" or "s3"
 #'
 #' @return A boolean
-#' @export
-#'
+#' @keywords internal
 
-is_stored <- function(service = c("datim", "email")){
+is_stored <- function(service = c("datim", "email", "s3")){
 
   accounts <- keyring::key_list()$service
 
@@ -45,8 +58,7 @@ is_stored <- function(service = c("datim", "email")){
 #' @param opt_var option variable ("datim", "email", "path_msd", "path_datim", "path_vector", "path_raster")
 #'
 #' @return A boolean
-#' @export
-#'
+#' @keywords internal
 
 is_loaded <- function(opt_var){
 
@@ -60,7 +72,7 @@ is_loaded <- function(opt_var){
 #' @param package name of R package to check
 #'
 #' @return A boolean
-#' @export
+#' @keywords internal
 
 is_installed <- function(package){
   {{package}} %in% rownames(installed.packages())

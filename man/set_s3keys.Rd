@@ -2,7 +2,11 @@
 % Please edit documentation in R/load_secrets.R
 \name{set_s3keys}
 \alias{set_s3keys}
-\title{Store S3 Credentials}
+\title{Store S3 Credentials
+
+`set_s3keys` stores your s3 keys using the `keyring` package.
+This will only need to done once. After running `set_s3keys(access, secret)`,
+RStudio API which will then store the keys in your OS credential store using `keyring`.}
 \usage{
 set_s3keys(access, secret)
 }
@@ -15,6 +19,8 @@ set_s3keys(access, secret)
 stored access key
 }
 \description{
+Store S3 Credentials
+
 `set_s3keys` stores your s3 keys using the `keyring` package.
 This will only need to done once. After running `set_s3keys(access, secret)`,
 RStudio API which will then store the keys in your OS credential store using `keyring`.
@@ -24,3 +30,13 @@ RStudio API which will then store the keys in your OS credential store using `ke
 set_s3access("ABDCEDFF", "MLIZD998SD") }
 
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{load_secrets}()},
+\code{\link{set_datim}()},
+\code{\link{set_email}()}
+}
+\concept{authentication}

@@ -12,6 +12,8 @@
 
 mypwd <- function(username) {
 
+  .Deprecated("datim_pwd")
+
   package_check("keyringr")
 
   credential_label <- username

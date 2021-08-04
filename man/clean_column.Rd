@@ -16,10 +16,16 @@ Cleaned MSD DataFrame
 }
 \description{
 Clean column data
-
-Clean column data
 }
 \examples{
 \dontrun{
  df_msd \%>\% clean_column(colname = "psnu") }
 }
+\seealso{
+Other column munging: 
+\code{\link{clean_agency}()},
+\code{\link{clean_countries}()},
+\code{\link{clean_indicator}()},
+\code{\link{clean_psnu}()}
+}
+\concept{column munging}

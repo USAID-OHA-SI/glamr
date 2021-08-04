@@ -1,14 +1,20 @@
+# glamr 1.0.0
+* Used `pkgdown` to create a site
+* If no username/password are provided to `get_outable()`, `identify_ouuids()` or `identify_levels()`, defaults to using `datim_user()` and `datim_pwd()`
+* Adjust `get_outable()`/`identify_levels()` output, changing community to community_lvl and prioritization to psnu_lvl to match other indicators.
+* Include two new function to convert dates to periods and periods to dates using `convert_date_to_qtr()` and `convert_qtr_to_date()`.
+* New vigentte for project workflow added, `vignette(package = glamr)`
+* Update `set_paths()`, allowing for `path_downloads` and improve backend efficiency.
+* Store email in .Rprofile in addition to keyring using `set_email()` for use with `googledrive::drive_auth()` and `googlesheets4::gs4_auth()` without having to provide an email.
+* Add `clean_filename()` function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.
+* Adjust `load_secrets()` to allow user to specify which accounts to load in a session.
+* Depricate `mypwd()` which has been superseded by `datim_pwd()`.
+* Create `source_info` function to extract information from the file to use in the caption/source.
+* Adjust `setup_gitignore()` and `setup_readme()` to not duplicate text if its already exists
+* Add a missing append to `setup_gitignore()` to not overwrite existing file.
+* Add `pepfar_data_calendar` data frame to be used in conjunction with source info.
+* Add `pepfar_country_list` data frame to have a set of PEPFAR countries and their ISO codes. 
+* Added a `NEWS.md` file to track changes to the package.
+
 # glamr 0.1.0
-
-* Improvement to S3 utility functions: `s3_objects()`
-* Extract metadata from googledirve files, `drive_ls(fldr) %>% gdrive_metadata()`
-* Read sheets from excel files in S3, `s3_excel_sheets(bucket = "<sample-bucket>", object_key = "<sample-key>")
-* Connect text for file name or other use, `connect_text()`
-* Combined set_s3access and set_s3secret into `set_s3keys(access, secret)`
-
-
-# glamr 0.0.0.9000
-
-* Initial set of utility functions
-* Import googledrive files `import_drivefile(fldr, "TestFile.csv")`
-* List data object from S3 bucket `s3_objects("<sample-bucket>")`
+* Prior to verion 1.0.0, updates were not captured.

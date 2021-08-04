@@ -2,18 +2,35 @@
 % Please edit documentation in R/remove_sch.R
 \name{remove_sch}
 \alias{remove_sch}
-\title{A Function to Pull Out Supply Chain Data}
+\title{Remove Supply Chain Funding}
 \usage{
 remove_sch(df, poc = c("SCH", "SGAC"))
 }
 \arguments{
-\item{df}{this can be either a financial strucutured dataset or an MSD}
+\item{df}{this can be either a financial structured dataset or an MSD}
 
-\item{poc}{you can choose to filter either the SCH list, the SGAC list; default is both}
+\item{poc}{you can choose to filter either the SCH list or the SGAC list;
+default is both}
 }
 \value{
 a df without supply chain mechanisms
 }
 \description{
-A Function to Pull Out Supply Chain Data
+When working with financial data, its often useful to remove Supply Chain
+mechanism and funding from the data.
+}
+\details{
+The list of SCH mechanisms is maintained by the EA team on a Google Sheet.
+A USAID email is required to access the dataset.
+}
+\examples{
+\dontrun{
+#authenticate
+load_secrets()
+#remove SCh using SGAC list
+df <- remove_shc(df, poc = "SGAC") }
+}
+\seealso{
+[set_email()] to store USAID email;
+  [load_secrets()] to load credentials into session
 }

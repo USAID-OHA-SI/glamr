@@ -4,14 +4,17 @@
 \alias{load_secrets}
 \title{Load credentials}
 \usage{
-load_secrets()
+load_secrets(service = c("email", "datim", "s3"))
+}
+\arguments{
+\item{service}{account, either "email", "datim" or "s3"; by default, all are
+loaded if they are available}
 }
 \value{
-stores Google and DATIM credentials in session
+stores Google, DATIM, and s3 credentials in session
 }
 \description{
-#' @description
- `load_secrets` should be set at the beginning of a script to store your
+`load_secrets` should be set at the beginning of a script to store your
  email and DATIM user name under Options for the current session. This allows
  analysts to more easily share their scripts without having to manually update
  or remove use names.
@@ -29,6 +32,15 @@ To initiall store your Google email and DATIM credentials,
 \examples{
 \dontrun{
 load_secrets()
-user <- getOption("datim")
-ou_table <- datim_outable(user, datim_pwd()) }
+ou_table <- datim_outable(datim_user(), datim_pwd()) }
 }
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_s3key}()},
+\code{\link{set_datim}()},
+\code{\link{set_email}()},
+\code{\link{set_s3keys}()}
+}
+\concept{authentication}

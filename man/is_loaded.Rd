@@ -15,3 +15,4 @@ A boolean
 \description{
 Test if option variable is loaded in current session
 }
+\keyword{internal}

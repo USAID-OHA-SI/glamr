@@ -3,12 +3,25 @@
 #' @description This function handles known issues in the MSD. For
 #' example, a mechanism starting mid-year and reporting on TX_CURR
 #' will duplicate TX_CURR targets. This function resolves that by
-#' removing those known cases and
+#' removing those known cases and stores cases relevant to your data frame.
+#'
+#' The best workflow is to filter your dataset down to a country and/or
+#' technical area of interest before running `resolve_knownissues()`. When you
+#' run the function, it will print out any known issues to the console (and can)
+#' even store them to your Global Environment, so it makes sense to limit the
+#' data first to what you are using/care about.
+#'
+#' The list of known issues is maintained by USAID/SIEI division. To access the
+#' table requires having a USAID email account and can be accessed via
+#' `browse_knownissues()`.
 #'
 #' @param df standard MSD data frame, typically after its been filtered
 #' @param store_excl should the known exclusions be store in the Global Envir?
 #'
-#' @return df excluding know targets/results issues
+#' @return df excluding known targets/results issues
+#' @seealso [browse_knownissues()] to view table in Google Sheets;
+#'  [set_email()] to store USAID email;
+#'  [load_secrets()] to load credentials into session.
 #' @export
 #'
 #' @examples
@@ -66,25 +79,40 @@ resolve_knownissues <- function(df, store_excl = FALSE){
 #' Known Data Issues Tracker Google Sheet ID
 #'
 #' @return google sheet id
+#' @keywords internal
 #'
 gs_id_knownissues <- '1CMPY-GCWP3NSNWvLGLwMwBaPZsobgvjtobhjkZkDfow'
 
 #' Browse Known Issues
 #'
-#' @description Launch Known Data Issues Tracker
-#' @return
+#' @description Launches the USAID managed, Known Data Issues Tracker.
+#'
+#' The Known Data Issues Tracker is a table that summarizes different issues
+#' that are known in DATIM but cannot be resolved. For example, when a treatment
+#' partner start/ends mid-year, there will be duplicated targets that cannot be
+#' adjusted in DATIM.
+#'
+#' The list of known issues is maintained by USAID/SIEI division. To access the
+#' table requires having a USAID email account.
+#'
+#' @return Launches The Known Data Issues Tracker Google Sheet.
+#' @seealso [resolve_knownissues()] to exclude Known Issues from data set;
+#'  [set_email()] to store USAID email;
+#'  [load_secrets()] to load credentials into session.
 #' @export
 #'
 #' @examples
 #'  \dontrun{
-#'  browse_knowissues() }
-browse_knowissues <- function(){
+#'  load_secrets()
+#'  browse_knownissues() }
+browse_knownissues <- function(){
   googlesheets4::gs4_browse(googlesheets4::as_sheets_id(gs_id_knownissues))
 }
 
 #' Get Known Issues locally
 #'
 #' @description load Google Sheet
+#' @keywords internal
 #'
 get_knownissues <- function(){
 
@@ -118,6 +146,7 @@ get_knownissues <- function(){
 #' @param df data from get_knownissues()
 #'
 #' @return adjust mech_code and tidy by expanding by indicator
+#' @keywords internal
 
 clean_knownissues <- function(df){
   #convert mech_code to string to match MSD
@@ -143,6 +172,7 @@ clean_knownissues <- function(df){
 #' @param df_issues df output from clean_knownissues()
 #'
 #' @return df of MSD with extra column of period type to know what to excluded
+#' @keywords internal
 
 flag_knownissues <- function(df, df_issues){
 
@@ -166,6 +196,7 @@ flag_knownissues <- function(df, df_issues){
 #' @param type period type, either targets (default) or results
 #'
 #' @return dataframe with known issues data removed
+#' @keywords internal
 
 squish_knownissues <- function(df, type = "targets"){
 
@@ -202,6 +233,7 @@ squish_knownissues <- function(df, type = "targets"){
 #' @param df_allissues df from clean_knownissues()
 #'
 #' @return df that has a description of what was excluded in orig df
+#' @keywords internal
 
 note_knownissues <- function(df_orig, df_allissues){
 
@@ -228,6 +260,7 @@ note_knownissues <- function(df_orig, df_allissues){
 #' @param store_excl whether to store exclusions to Global Envir
 #'
 #' @return console print of known issues
+#' @keywords internal
 
 print_knownissues <- function(df, store_excl = FALSE){
 
