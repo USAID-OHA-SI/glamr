@@ -50,7 +50,15 @@
 <meta property="og:description" content="This function handles known issues in the MSD. For
 example, a mechanism starting mid-year and reporting on TX_CURR
 will duplicate TX_CURR targets. This function resolves that by
-removing those known cases and" />
+removing those known cases and stores cases relevant to your data frame.
+The best workflow is to filter your dataset down to a country and/or
+technical area of interest before running `resolve_knownissues()`. When you
+run the function, it will print out any known issues to the console (and can)
+even store them to your Global Environment, so it makes sense to limit the
+data first to what you are using/care about.
+The list of known issues is maintained by USAID/SIEI division. To access the
+table requires having a USAID email account and can be accessed via
+`browse_knownissues()`." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -146,7 +154,15 @@ removing those known cases and" />
     <p>This function handles known issues in the MSD. For
 example, a mechanism starting mid-year and reporting on TX_CURR
 will duplicate TX_CURR targets. This function resolves that by
-removing those known cases and</p>
+removing those known cases and stores cases relevant to your data frame.</p>
+<p>The best workflow is to filter your dataset down to a country and/or
+technical area of interest before running `resolve_knownissues()`. When you
+run the function, it will print out any known issues to the console (and can)
+even store them to your Global Environment, so it makes sense to limit the
+data first to what you are using/care about.</p>
+<p>The list of known issues is maintained by USAID/SIEI division. To access the
+table requires having a USAID email account and can be accessed via
+`browse_knownissues()`.</p>
     </div>
 
     <pre class="usage"><span class='fu'>resolve_knownissues</span><span class='op'>(</span><span class='va'>df</span>, store_excl <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
@@ -166,7 +182,12 @@ removing those known cases and</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>df excluding know targets/results issues</p>
+    <p>df excluding known targets/results issues</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>[browse_knownissues()] to view table in Google Sheets;
+ [set_email()] to store USAID email;
+ [load_secrets()] to load credentials into session.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

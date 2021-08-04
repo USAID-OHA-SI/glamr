@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Import file from Google Drive — import_drivefile • glamr</title>
+<title>Import file from a Google Drive folder — import_drivefile • glamr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,10 @@
 
 
 
-<meta property="og:title" content="Import file from Google Drive — import_drivefile" />
-<meta property="og:description" content="Import file from Google Drive" />
+<meta property="og:title" content="Import file from a Google Drive folder — import_drivefile" />
+<meta property="og:description" content="`import_drivefile` is a wrapper around `googledrive::drive_download`, useful
+for pulling multiple files from a given Google Drive folder (with a Google
+ID provided) to download by default to the Data folder of a project." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,13 +136,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Import file from Google Drive</h1>
+    <h1>Import file from a Google Drive folder</h1>
     <small class="dont-index">Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/R/import_drivefile.R'><code>R/import_drivefile.R</code></a></small>
     <div class="hidden name"><code>import_drivefile.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Import file from Google Drive</p>
+    <p>`import_drivefile` is a wrapper around `googledrive::drive_download`, useful
+for pulling multiple files from a given Google Drive folder (with a Google
+ID provided) to download by default to the Data folder of a project.</p>
     </div>
 
     <pre class="usage"><span class='fu'>import_drivefile</span><span class='op'>(</span><span class='va'>drive_folder</span>, <span class='va'>filename</span>, folderpath <span class='op'>=</span> <span class='st'>"Data"</span>, zip <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>

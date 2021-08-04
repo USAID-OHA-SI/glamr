@@ -167,13 +167,13 @@
         <td>
           <p><code><a href="import_drivefile.html">import_drivefile()</a></code> </p>
         </td>
-        <td><p>Import file from Google Drive</p></td>
+        <td><p>Import file from a Google Drive folder</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="return_latest.html">return_latest()</a></code> </p>
         </td>
-        <td><p>Return Latest</p></td>
+        <td><p>Return Latest File</p></td>
       </tr><tr>
         
         <td>
@@ -215,7 +215,10 @@
         <td>
           <p><code><a href="gdrive_metadata.html">gdrive_metadata()</a></code> </p>
         </td>
-        <td><p>Unpack Google Drive Metadata</p></td>
+        <td><p>Unpack Google Drive Metadata
+
+Google API provides extra metadata stored as a list in the dribble
+returned, eg modified time, permissions, owner, etc.</p></td>
       </tr><tr>
         
         <td>
@@ -256,6 +259,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="get_s3key.html">get_s3key()</a></code> </p>
+        </td>
+        <td><p>Get S3 Credentials - Access or Secret Access Key</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="load_secrets.html">load_secrets()</a></code> </p>
         </td>
         <td><p>Load credentials</p></td>
@@ -281,12 +290,6 @@
       <tr>
         
         <td>
-          <p><code><a href="get_s3key.html">get_s3key()</a></code> </p>
-        </td>
-        <td><p>Get S3 Credentials - Access or Secret Access Key</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="set_datim.html">set_datim()</a></code> </p>
         </td>
         <td><p>Store DATIM credentials</p></td>
@@ -295,25 +298,17 @@
         <td>
           <p><code><a href="set_email.html">set_email()</a></code> </p>
         </td>
-        <td><p>Set USAID email</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="set_s3access.html">set_s3access()</a></code> </p>
-        </td>
-        <td><p>Store S3 Credentials - Access Key</p></td>
+        <td><p>Store USAID email</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="set_s3keys.html">set_s3keys()</a></code> </p>
         </td>
-        <td><p>Store S3 Credentials</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="set_s3secret.html">set_s3secret()</a></code> </p>
-        </td>
-        <td><p>Store S3 Credentials - Secret Access Key</p></td>
+        <td><p>Store S3 Credentials
+
+`set_s3keys` stores your s3 keys using the `keyring` package.
+This will only need to done once. After running `set_s3keys(access, secret)`,
+RStudio API which will then store the keys in your OS credential store using `keyring`.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -332,7 +327,10 @@
         <td>
           <p><code><a href="clean_agency.html">clean_agency()</a></code> </p>
         </td>
-        <td><p>Clean data from fundingagency column</p></td>
+        <td><p>Clean data from fundingagency column
+
+`clean_agency` converts all funding agency names to upper case and removes
+the HHS prefix for those agencies.</p></td>
       </tr><tr>
         
         <td>
@@ -344,7 +342,10 @@
         <td>
           <p><code><a href="clean_countries.html">clean_countries()</a></code> </p>
         </td>
-        <td><p>Clean OU/Country names to match PEPFAR Data</p></td>
+        <td><p>Clean OU/Country names to match PEPFAR Data
+
+`clean_countries` is used to adjust Natural Earth country names to match
+PEPFAR ones.</p></td>
       </tr><tr>
         
         <td>
@@ -356,19 +357,13 @@
         <td>
           <p><code><a href="clean_indicator.html">clean_indicator()</a></code> </p>
         </td>
-        <td><p>Clean indicators</p></td>
+        <td><p>Clean indicators (apply _D suffix)</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="clean_knownissues.html">clean_knownissues()</a></code> </p>
         </td>
         <td><p>Clean Known Issues Google Sheet</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="clean_pds.html">clean_pds()</a></code> </p>
-        </td>
-        <td><p>Title</p></td>
       </tr><tr>
         
         <td>
@@ -391,7 +386,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-dates" class="hasAnchor"><a href="#section-dates" class="anchor"></a>Dates</h2>
+          <h2 id="section-date-conversion" class="hasAnchor"><a href="#section-date-conversion" class="anchor"></a>Date Conversion</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -409,15 +404,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="convert_qtr_to_date.html">convert_qtr_to_date()</a></code> </p>
+          <p><code><a href="convert_datim_pd_to_qtr.html">convert_datim_pd_to_qtr()</a></code> </p>
         </td>
-        <td><p>Convert FY Quarter/Period to Date</p></td>
+        <td><p>Convert DATIM CY Quarter/Period to FY Quarter</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="pepfar_data_calendar.html">pepfar_data_calendar</a></code> </p>
+          <p><code><a href="convert_qtr_to_date.html">convert_qtr_to_date()</a></code> </p>
         </td>
-        <td><p>Current PEPFAR Data Calendar</p></td>
+        <td><p>Convert FY Quarter/Period to Date</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -442,7 +437,7 @@
         <td>
           <p><code><a href="prinf.html">prinf()</a></code> </p>
         </td>
-        <td><p>Print All Rpws</p></td>
+        <td><p>Print All Rows</p></td>
       </tr><tr>
         
         <td>
@@ -467,7 +462,7 @@
         <td>
           <p><code><a href="get_outable.html">get_outable()</a></code> </p>
         </td>
-        <td><p>Pull OU UIDS</p></td>
+        <td><p>Pull Table of OUs/Countries, UIDs, ISO codes and levels</p></td>
       </tr><tr>
         
         <td>
@@ -502,13 +497,13 @@
       <tr>
         
         <td>
-          <p><code><a href="partner_types.html">partner_types()</a></code> </p>
+          <p><code><a href="apply_partner_type.html">apply_partner_type()</a></code> </p>
         </td>
-        <td><p>A code to add in partner types</p></td>
+        <td><p>Apply partner type (local/international)</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="browse_knowissues.html">browse_knowissues()</a></code> </p>
+          <p><code><a href="browse_knownissues.html">browse_knownissues()</a></code> </p>
         </td>
         <td><p>Browse Known Issues</p></td>
       </tr><tr>
@@ -535,13 +530,13 @@
         <td>
           <p><code><a href="remove_mo.html">remove_mo()</a></code> </p>
         </td>
-        <td><p>A Function to Remove M&amp;O from datasets</p></td>
+        <td><p>Remove M&amp;O funding</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="remove_sch.html">remove_sch()</a></code> </p>
         </td>
-        <td><p>A Function to Pull Out Supply Chain Data</p></td>
+        <td><p>Remove Supply Chain Funding</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -609,6 +604,31 @@
           <p><code><a href="s3_upload.html">s3_upload()</a></code> </p>
         </td>
         <td><p>Upload file to S3 Bucket</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-sets" class="hasAnchor"><a href="#section-data-sets" class="anchor"></a>Data Sets</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="pepfar_country_list.html">pepfar_country_list</a></code> </p>
+        </td>
+        <td><p>Current List of PEPFAR OUs/Countries and their ISO codes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pepfar_data_calendar.html">pepfar_data_calendar</a></code> </p>
+        </td>
+        <td><p>Current PEPFAR Data Calendar</p></td>
       </tr>
     </tbody>
     </table>

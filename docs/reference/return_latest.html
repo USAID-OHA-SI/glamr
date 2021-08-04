@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return Latest — return_latest • glamr</title>
+<title>Return Latest File — return_latest • glamr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Return Latest — return_latest" />
-<meta property="og:description" content="Return Latest" />
+<meta property="og:title" content="Return Latest File — return_latest" />
+<meta property="og:description" content="`return_latest` checks for a pattern in a folder and provides the most
+recent file bases on the time the file was created." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,13 +135,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return Latest</h1>
+    <h1>Return Latest File</h1>
     <small class="dont-index">Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/R/return_latest.R'><code>R/return_latest.R</code></a></small>
     <div class="hidden name"><code>return_latest.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Return Latest</p>
+    <p>`return_latest` checks for a pattern in a folder and provides the most
+recent file bases on the time the file was created.</p>
     </div>
 
     <pre class="usage"><span class='fu'>return_latest</span><span class='op'>(</span><span class='va'>folderpath</span>, <span class='va'>pattern</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -150,21 +152,22 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>folderpath</th>
-      <td><p>path to folder where file(s) are located</p></td>
+      <td><p>path to folder where file(s) are located.</p></td>
     </tr>
     <tr>
       <th>pattern</th>
-      <td><p>pattern in file name, regex expressions</p></td>
+      <td><p>pattern in file name, regex expressions. If not parttern is
+provided, the last file in the folder will be returned.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Any other valid option for `base::list.files()`</p></td>
+      <td><p>Any other valid option for `base::list.files()`.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the fill filepath for the most recent version of a file stub</p>
+    <p>a vector of the full filepath for the most recent version of a file stub</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
