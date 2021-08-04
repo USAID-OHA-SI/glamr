@@ -1,4 +1,7 @@
-#' A Function to Remove M&O from datasets
+#' Remove M&O funding
+#'
+#' When working with financial data, its often useful to remove M&O
+#' funding from the data.
 #'
 #' @param df financial or comprehensive budget dataset
 #'
@@ -6,7 +9,7 @@
 #' @export
 #'
 
-remove_mo<-function(df){
+remove_mo <- function(df){
 
   #check that mechanism exists in MSD before starting (OUxIM or PSNUxIM, not PSNU)
   if(("mech_code" %in% names(df) == FALSE)) {
