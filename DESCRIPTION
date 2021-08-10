@@ -19,34 +19,35 @@ RoxygenNote: 7.1.1
 Imports: 
     aws.s3,
     crayon,
-    curl,
     dplyr,
     glue,
     googledrive,
-    httr,
-    janitor,
-    jsonlite,
-    keyring,
     lubridate,
     magrittr,
-    plyr,
     purrr,
-    readxl,
-    rvest,
     stringr,
-    tibble,
     tools,
     tidyr,
     usethis,
-    utils,
-    vroom,
-    xml2
+    utils
 Suggests: 
-    keyringr,
-    testthat (>= 2.1.0),
+    curl,
+    fs,
+    httr,
     googlesheets4,
+    janitor,
+    jsonlite,
+    keyring,
+    keyringr,
     knitr,
-    rmarkdown
+    plyr,
+    rmarkdown,
+    readxl,
+    rvest,
+    testthat (>= 2.1.0),
+    tibble,
+    xml2,
+    vroom
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)

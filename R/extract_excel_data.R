@@ -12,6 +12,7 @@ extract_excel_data <- function(src_page, link_id, file_sheet = 2, file_ext = "xl
   check_internet()
 
   package_check('rvest')
+  package_check('xml2')
 
   src_home <- stringr::str_split(src_page, "/")[[1]]
   src_home <- paste0(src_home[1], "//", src_home[3])

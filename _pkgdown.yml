@@ -82,10 +82,18 @@ reference:
   - '`%ni%`'
   - prinf
   - package_check
+  - temp_folder
 
 - title: DATIM
   contents:
+  - get_levels
+  - get_orguids
+  - get_ouorglevel
+  - get_ouorgs
+  - get_ouorguids
   - get_outable
+  - get_ouuid
+  - get_ouuids
   - identify_levels
   - identify_ouuids
   - extract_datim

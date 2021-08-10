@@ -10,6 +10,7 @@ extract_tbl_data <- function(src_url, tbl_id) {
   check_internet()
 
   package_check('rvest')
+  package_check('xml2')
 
   tbl_data <- xml2::read_html(src_url)
 

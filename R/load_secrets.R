@@ -37,6 +37,8 @@
 
 load_secrets <- function(service = c("email", "datim", "s3")){
 
+  package_check('keyring')
+
   if(length(is_stored()) == 0){
     ui_oops("No accounts stored under {ui_code('keyring')}. Use {ui_code('set_email()')} and {ui_code('set_datim()')} to establish accounts")
   } else {
@@ -117,6 +119,9 @@ load_secrets <- function(service = c("email", "datim", "s3")){
 #' set_email("rshah@usaid.gov") }
 #'
 set_email <- function(usaid_email){
+
+  package_check('keyring')
+
   keyring::key_set_with_value(service = "email",
                               username = usaid_email,
                               password = "NULL")
@@ -158,6 +163,9 @@ set_email <- function(usaid_email){
 #' set_datim("rshah") }
 #'
 set_datim <- function(datim_username){
+
+  package_check('keyring')
+
   keyring::key_set(service = "datim",
                    username = datim_username)
 }
@@ -178,6 +186,8 @@ set_datim <- function(datim_username){
 #' ou_table <- datim_outable(datim_user(), datim_pwd()) }
 
 datim_user <- function(){
+
+  package_check('keyring')
 
   if(!is_stored("datim"))
     ui_stop("NO DATIM credentials stored. Setup using {ui_code('set_datim()')}")
@@ -207,6 +217,8 @@ datim_user <- function(){
 
 datim_pwd <- function(){
 
+  package_check('keyring')
+
   if(!is_stored("datim"))
     ui_stop("NO DATIM credentials stored. Setup using {:ui_code('set_datim()')}")
 
@@ -235,6 +247,9 @@ datim_pwd <- function(){
 #' set_s3access("ABDCEDFF", "MLIZD998SD") }
 #'
 set_s3keys <- function(access, secret){
+
+  package_check('keyring')
+
   keyring::key_set_with_value(service = "s3",
                               username = "access",
                               password = access)
@@ -262,6 +277,7 @@ set_s3keys <- function(access, secret){
 #' get_s3key(name = "access") }
 #'
 get_s3key <- function(name = "access"){
+  package_check('keyring')
   keyring::key_get(service = "s3", username = name)
 }
 

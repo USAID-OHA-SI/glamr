@@ -13,6 +13,9 @@
 s3_buckets <- function(access_key = NULL,
                        secret_key = NULL) {
 
+  package_check('janitor')
+  package_check('tibble')
+
   # Check keys
   if (is.null(access_key))
     access_key = glamr::get_s3key("access")
@@ -55,6 +58,9 @@ s3_objects <- function(bucket,
                        access_key = NULL,
                        secret_key = NULL,
                        ...) {
+
+  package_check('janitor')
+  package_check('tibble')
 
   # Check keys
   if (is.null(access_key))
@@ -232,6 +238,8 @@ s3_excel_sheets <-
            access_key = NULL,
            secret_key = NULL) {
 
+    package_check('readxl')
+
     # Notification
     base::print(base::basename(object_key))
 
@@ -287,6 +295,8 @@ s3_read_object <- function(bucket, object,
                            sheet = NULL,
                            access_key = NULL,
                            secret_key = NULL) {
+
+  package_check('readxl')
 
   # Check keys
   if (is.null(access_key))
@@ -374,6 +384,7 @@ s3_read_object <- function(bucket, object,
     usethis::ui_info("PROCESS - Reading data with {usethis::ui_code('vroom::vroom()')}")
 
     # Read other file type with vroom
+    package_check('vroom')
     df <- vroom::vroom(conn, col_types = c(.default = "c"))
   }
 
