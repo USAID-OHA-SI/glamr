@@ -19,6 +19,9 @@ API pull of data from DATIM
 \description{
 DATIM Analytics API
 }
+\note{
+Consider using `datim_process_query()` and/or `datim_execute_query()`
+}
 \examples{
 \dontrun{
  myurl <- paste0(baseurl, "api/29/analytics.json?
@@ -26,5 +29,6 @@ DATIM Analytics API
                  dimension=ou:LEVEL-4;HfVjCurKxh2&
                  filter=pe:2018Oct&
                  displayProperty=SHORTNAME&outputIdScheme=CODE")
- df_targets <- get_datim_targets(myurl, datim_user(), datim_pwd()) }
+ df_targets <- extract_datim(myurl, datim_user(), datim_pwd()) }
+
 }
