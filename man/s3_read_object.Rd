@@ -9,7 +9,8 @@ s3_read_object(
   object,
   sheet = NULL,
   access_key = NULL,
-  secret_key = NULL
+  secret_key = NULL,
+  ...
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ s3_read_object(
 \item{access_key}{S3 Access key id}
 
 \item{secret_key}{S3 Secret Access key}
+
+\item{...}{Additional arguments passed to s3HTTP}
 }
 \value{
 df

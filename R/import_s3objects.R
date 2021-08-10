@@ -2,6 +2,7 @@
 #'
 #' @param access_key S3 Access Key ID
 #' @param secret_key S3 Secret Access Key
+#' @param ...        Additional arguments passed to s3HTTP
 #'
 #' @return S3 Backets list as tibble
 #' @export
@@ -11,7 +12,8 @@
 #' s3_buckets() }
 #'
 s3_buckets <- function(access_key = NULL,
-                       secret_key = NULL) {
+                       secret_key = NULL,
+                       ...) {
 
   package_check('janitor')
   package_check('tibble')
@@ -26,7 +28,8 @@ s3_buckets <- function(access_key = NULL,
   # Get S3 Buckets as tibble
   aws.s3::bucket_list_df(
       key = access_key,
-      secret = secret_key
+      secret = secret_key,
+      ...
     ) %>%
     dplyr::as_tibble() %>%
     janitor::clean_names()
@@ -279,6 +282,7 @@ s3_excel_sheets <-
 #' @param sheet      S3 Excel object sheet name / index
 #' @param access_key S3 Access key id
 #' @param secret_key S3 Secret Access key
+#' @param ...        Additional arguments passed to s3HTTP
 #'
 #' @return df
 #' @export
@@ -294,7 +298,8 @@ s3_excel_sheets <-
 s3_read_object <- function(bucket, object,
                            sheet = NULL,
                            access_key = NULL,
-                           secret_key = NULL) {
+                           secret_key = NULL,
+                           ...) {
 
   package_check('readxl')
 
