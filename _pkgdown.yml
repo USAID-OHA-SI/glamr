@@ -80,6 +80,7 @@ reference:
 - title: Utilities
   contents:
   - '`%ni%`'
+  - '`%<>%`'
   - prinf
   - package_check
   - temp_folder

@@ -342,7 +342,7 @@ datim_execute_query <- function(url,
 
 #' @title Process Datim Query results
 #'
-#' @param url
+#' @param url       Datim API Call url
 #' @param username  Datim username, recommend using `glamr::datim_user()`
 #' @param password  Datim password, recommend using `glamr::datim_pwd()`
 #'

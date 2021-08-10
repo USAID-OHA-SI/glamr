@@ -7,6 +7,8 @@
 datim_process_query(url, username = NULL, password = NULL)
 }
 \arguments{
+\item{url}{Datim API Call url}
+
 \item{username}{Datim username, recommend using `glamr::datim_user()`}
 
 \item{password}{Datim password, recommend using `glamr::datim_pwd()`}
