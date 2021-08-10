@@ -80,7 +80,7 @@ reference:
 - title: Utilities
   contents:
   - '`%ni%`'
-  - '`%<>%`'
+  - '%<>%'
   - prinf
   - package_check
   - temp_folder
@@ -97,6 +97,7 @@ reference:
   - get_ouuids
   - identify_levels
   - identify_ouuids
+  - identify_pd
   - extract_datim
   - get_orguids
   - get_ouorgs

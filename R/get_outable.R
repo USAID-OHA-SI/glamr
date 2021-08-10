@@ -185,6 +185,62 @@ identify_levels <- function(username, password, baseurl = "https://final.datim.o
 }
 
 
+#' @title Identify Reporting Period from MSD File
+#'
+#' @param msd_file MSD File, should include publication date
+#' @param clean    Should be period be clean? default is true
+#'
+#' @return reporting period
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#'  library(glamr)
+#'
+#'  pd = return_latest(si_path(), "OU_IM") %>% identify_pd()
+#' }
+#'
+identify_pd <- function(msd_file, clean = TRUE) {
+
+  # Extract release date from msd file
+  release_date <- msd_file %>%
+    stringr::str_extract("\\d{8}") %>%
+    lubridate::ymd()
+
+  # Check validity
+  if (base::is.na(release_date) |
+      base::is.null(release_date) |
+      release_date %ni% pepfar_data_calendar$entry_close) {
+    base::print(crayon::red("Invalid and / or non-pepfar release date"))
+    return(NULL)
+  }
+
+  # Identify reporting period
+  pd <- pepfar_data_calendar %>%
+    rowwise() %>%
+    mutate(period = base::paste0("FY", fiscal_year, "Q", quarter)) %>%
+    ungroup() %>%
+    filter(entry_close == release_date) %>%
+    pull(period)
+
+  # Reformat period
+  if (clean) {
+    pd <- pd %>%
+      stringr::str_sub(start = 3, end = 4) %>%
+      stringr::str_replace(string = pd, pattern = ., replacement = "") %>%
+      stringr::str_to_upper()
+  }
+  else {
+    pd <- pd %>%
+      stringr::str_replace("Q", "qtr") %>%
+      stringr::str_to_lower()
+  }
+
+  return(pd)
+}
+
+
 #' @title Get Org UIDS
 #' @note Use with caution. Use `get_ouorguids()` for levels below 3
 #'
