@@ -206,13 +206,16 @@ identify_pd <- function(msd_file, clean = TRUE) {
   # Extract release date from msd file
   release_date <- msd_file %>%
     stringr::str_extract("\\d{8}") %>%
-    lubridate::ymd()
+    lubridate::ymd() %>%
+    base::as.character()
+
+  # Pepfar data calendar
+  release_dates <- pepfar_data_calendar %>%
+    dplyr::pull(entry_close)
 
   # Check validity
-  if (base::is.na(release_date) |
-      base::is.null(release_date) |
-      release_date %ni% pepfar_data_calendar$entry_close) {
-    base::print(crayon::red("Invalid and / or non-pepfar release date"))
+  if (!release_date %in% release_dates) {
+    base::message(crayon::red("Invalid and / or non-pepfar release date"))
     return(NULL)
   }
 
