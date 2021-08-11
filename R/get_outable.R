@@ -640,6 +640,72 @@ get_ouorglevel <-
   }
 
 
+#' @title Identify OU/Org Label
+#'
+#' @param operatingunit  Operating unit
+#' @param country        Country name
+#' @param org_level      OU Org level, default is set to 4, PSNU
+#' @param username       Datim account username
+#' @param password       Datim account password
+#'
+#' @return Org level label
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   library(glamr)
+#'
+#'   get_ouorglabel(operatingunit = "Zambia", org_level = 5)
+#' }
+#'
+get_ouorglabel <- function(operatingunit,
+                           country = NULL,
+                           org_level = 4,
+                           username = NULL,
+                           password = NULL) {
+  # Label
+  lbl <- NULL
+
+  if (org_level <= 3) {
+    lbl <- case_when(
+      org_level == 3 ~ "country",
+      org_level == 2 ~ "region",
+      org_level == 1 ~ "global",
+      TRUE ~ NA_character_
+    )
+
+    return(lbl)
+  }
+
+  # Countryname
+  if (base::is.null(country)) {
+    country <- operatingunit
+  }
+
+  # Levels
+  df_lvls <- get_levels(username, password) %>%
+    tidyr::pivot_longer(country:tidyselect::last_col(),
+                 names_to = "label",
+                 values_to = "level")
+
+  df_lvls %<>%
+    dplyr::filter(operatingunit == operatingunit,
+           countryname == country,
+           level == org_level)
+
+  if (base::is.null(df_lvls) | base::nrow(df_lvls) == 0) {
+    return(glue::glue("orglvl_{org_level}"))
+  }
+
+  lbl <- df_lvls %>%
+    dplyr::pull(label) %>%
+    base::sort() %>%
+    last()
+
+  return(lbl)
+}
+
+
 #' Get Orgs uids by level
 #'
 #' @param ouuid        Operatingunit uid

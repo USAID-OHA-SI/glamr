@@ -104,6 +104,7 @@ reference:
   - get_ouuids
   - get_ouuid
   - get_ouorglevels
+  - get_ouorglabel
   - get_ouorguids
   - get_levels
   - datim_dimensions
@@ -114,6 +115,7 @@ reference:
   - datim_execute_query
   - datim_process_query
   - datim_query
+  - datim_pops
 
 - title: Mechanism Handling
   contents:

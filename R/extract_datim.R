@@ -414,7 +414,7 @@ datim_process_query <- function(url,
     dplyr::mutate_all(~plyr::mapvalues(., metadata$from, metadata$name, warn_missing = FALSE)) %>%
     dplyr::mutate(Value = as.numeric(Value)) %>%
     dplyr::bind_cols(orgunituid = orguids) %>%
-    relocate(orgunituid, .before = 1)
+    dplyr::relocate(orgunituid, .before = 1)
 
   return(df)
 }
@@ -714,6 +714,156 @@ datim_query <-
 
     return(df)
   }
+
+
+#' @title Extract PLHIV and General POP Estimates from datim
+#'
+#' @param ou        Operatingunit
+#' @param level     Organization level
+#' @param fy        Fiscal Year
+#' @param hierarchy Should additional organizational hierarchy be added?, default is FALSE
+#' @param username       Datim account username
+#' @param password       Datim account password
+#'
+#' @return PLHIV and POP_EST Data
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   library(glamr)
+#'
+#'   datim_pops(ou = "Nigeria")
+#'
+#'   datim_pops(ou = "Nigeria", fy = 2021)
+#'
+#'   datim_pops(ou = "Nigeria", level = "psnu", fy = 2021, hierarchy = TRUE)
+#' }
+datim_pops <- function(ou,
+                       level = "country",
+                       fy = NULL,
+                       hierarchy = FALSE,
+                       username = NULL,
+                       password = NULL) {
+
+  # level
+  lvl <- level %>% stringr::str_to_lower()
+
+  if (lvl %ni% c("country", "psnu", "prioritization")) {
+    base::message(crayon::red(glue::glue("Invalid level: {level}")))
+    return(NULL)
+  }
+
+  if (lvl == "psnu") {
+    lvl <- "prioritization"
+  }
+
+  # fiscal year & Period
+  if (base::is.null(fy)) {
+    fy <- lubridate::quarter(base::Sys.Date(),
+                             with_year = TRUE,
+                             fiscal_start = 10) %>%
+      stringr::str_extract("^\\d{4}")
+  }
+
+  period <- fy %>%
+    base::as.integer() %>%
+    base::c(1, .) %>%
+    base::diff() %>%
+    base::as.character() %>%
+    base::paste0("Oct")
+
+  # PLHIV
+  df_plhiv <- ou %>%
+    datim_query(ou = .,
+                level = lvl,
+                pe = period,
+                ta = 'PLHIV',
+                value = "MER Targets",
+                disaggs = "Age/Sex/HIVStatus",
+                dimensions = c("Sex", "Age: Semi-fine age"),
+                hierarchy = hierarchy,
+                username = username,
+                password = password)
+
+  if (base::is.null(df_plhiv)) {
+    df_plhiv <- tibble::tibble()
+    base::message(crayon::red(glue::glue("Could not extract PLHIV Data for {ou}")))
+  }
+
+  # POP_EST
+  df_pop <- ou %>%
+    datim_query(ou = .,
+                level = lvl,
+                pe = period,
+                ta = 'POP_EST',
+                value = "MER Targets",
+                disaggs = "Age/Sex",
+                dimensions = c("Sex", "Age: Semi-fine age"),
+                hierarchy = hierarchy)
+
+  if (base::is.null(df_pop)) {
+    df_pop <- tibble::tibble()
+    base::message(crayon::red(glue::glue("Could not extract POP_EST Data for {ou}")))
+  }
+
+  # Merge both
+  df <- df_plhiv %>% dplyr::bind_rows(df_pop)
+
+  # Check data validity
+  if (base::nrow(df) == 0) {
+    return(tibble::tibble())
+  }
+
+  # Clean up data
+  df <- df %>%
+    janitor::clean_names() %>%
+    dplyr::select(-targets_results) %>%
+    dplyr::rename(fiscal_year = period,
+                  orgunit = organisation_unit,
+                  indicator = technical_area,
+                  standardizeddisaggregate = disaggregation_type,
+                  trendsfine = age_semi_fine_age) %>%
+    dplyr::mutate(fiscal_year = stringr::str_extract(fiscal_year, "\\d{4}$"),
+                  trendsfine = stringr::str_remove(trendsfine, "\\(Specific\\)"),
+                  trendsfine = stringr::str_remove(trendsfine, "\\(Inclusive\\)"),
+                  trendsfine = stringr::str_trim(trendsfine, side = "both"),
+                  trendsfine = stringr::str_replace(trendsfine, "<1", "<01"),
+                  trendsfine = stringr::str_replace(
+                    trendsfine, "^\\d{1}-",
+                    base::paste0("0", stringr::str_extract(trendsfine, "^\\d{1}"), "-")),
+                  trendsfine = stringr::str_replace(
+                    trendsfine,
+                    "-\\d{1}$",
+                    base::paste0("-0", stringr::str_extract(trendsfine, "\\d{1}$"))))
+
+  # Clean up hierarchy
+  if (hierarchy) {
+
+    # Remove global/regional info
+    df <- df %>%
+      #dplyr::select(-tidyselect::ends_with("2")) %>%  # Region
+      dplyr::select(-tidyselect::ends_with("1"))       # Global
+
+    # rename cols
+    cols <- df %>%
+      base::names() %>%
+      purrr::map(function(.x){
+        if (stringr::str_detect(.x, "_\\d")) {
+          lbl <- get_ouorglabel(
+            operatingunit = ou,
+            org_level = stringr::str_extract(.x, "\\d$"))
+
+          return(lbl)
+        }
+        return(.x)
+      }) %>%
+      base::unlist()
+
+    base::names(df) <- cols
+  }
+
+  return(df)
+}
 
 
 #' @title DATIM Analytics API
