@@ -24,7 +24,6 @@ Clean column data
 \seealso{
 Other column munging: 
 \code{\link{clean_agency}()},
-\code{\link{clean_countries}()},
 \code{\link{clean_indicator}()},
 \code{\link{clean_psnu}()}
 }

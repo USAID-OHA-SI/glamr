@@ -4,10 +4,12 @@
 \alias{lookup_country}
 \title{Lookup Official Country name}
 \usage{
-lookup_country(country)
+lookup_country(country, language = "en")
 }
 \arguments{
 \item{country}{country name}
+
+\item{language}{language to use for lookup}
 }
 \value{
 cleaned country name

@@ -28,7 +28,6 @@ the HHS prefix for those agencies.
 \seealso{
 Other column munging: 
 \code{\link{clean_column}()},
-\code{\link{clean_countries}()},
 \code{\link{clean_indicator}()},
 \code{\link{clean_psnu}()}
 }

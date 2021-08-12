@@ -48,3 +48,39 @@ pepfar_country_list <- df_cntry %>%
 
 
 usethis::use_data(pepfar_country_list, overwrite = TRUE)
+
+
+## PEPFAR, UN and NE countroes cross-walk
+
+  library(tidyverse)
+  library(glamr)
+  library(countrycode)
+  library(rnaturalearth)
+  library(janitor)
+
+# PEPFAR Countries
+  cntries <- glamr::pepfar_country_list
+
+# NE Countries
+  ne_cntries <- rnaturalearth::ne_countries() %>%
+    sf::st_as_sf() %>%
+    sf::st_drop_geometry() %>%
+    tibble::as_tibble() %>%
+    select(iso_a3, sovereignt, admin, name)
+
+# Countrycode
+  cntrycodes <- countrycode::codelist %>%
+    select(iso3c, continent, region, region23, un.region.name,
+           starts_with("iso.name"),
+           starts_with("country.name"),
+           starts_with("un.name"))
+
+# Combine and keep only PEPFAR Countries
+  pepfar_country_xwalk <- cntrycodes %>%
+    left_join(ne_cntries, by = c("iso3c" = "iso_a3")) %>%
+    left_join(cntries, by = c("iso3c" = "countryname_iso")) %>%
+    filter(!is.na(operatingunit_iso)) %>%
+    clean_names()
+
+# publish dataset
+  usethis::use_data(pepfar_country_xwalk, overwrite = TRUE)
