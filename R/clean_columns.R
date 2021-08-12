@@ -129,7 +129,7 @@ lookup_country <- function(country, language = "en") {
         df_cntries <- pepfar_country_xwalk %>%
           dplyr::filter(
             rowSums(across(.cols = c(tidyselect::ends_with(language),
-                                     tydyselect::all_of(c("sovereignt", "admin", "name"))),
+                                     tidyselect::all_of(c("sovereignt", "admin", "name"))),
                            .fns = ~(. == curr_name))) > 0)
       } else {
         df_cntries <- pepfar_country_xwalk %>%
