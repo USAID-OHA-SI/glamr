@@ -550,7 +550,7 @@ datim_query_old <- function(ou,
 #' @param dimensions  Additional dimensions and/or columns. This depends on values of ta and disaggs
 #' @param property    Type of name
 #' @param metadata    Should metadata be included
-#' @param hierachy    Should additional hirarchy level be included
+#' @param hierarchy    Should additional hirarchy level be included
 #' @param baseurl     DATIM API End point url
 #' @param username    Datim username
 #' @param password    Datim username
