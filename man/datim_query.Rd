@@ -42,6 +42,8 @@ default is "THIS_FINANCIAL_YEAR"}
 
 \item{metadata}{Should metadata be included}
 
+\item{hierarchy}{Should additional hirarchy level be included}
+
 \item{baseurl}{DATIM API End point url}
 
 \item{username}{Datim username}
@@ -49,8 +51,6 @@ default is "THIS_FINANCIAL_YEAR"}
 \item{password}{Datim username}
 
 \item{verbose}{Display all notifications}
-
-\item{hierachy}{Should additional hirarchy level be included}
 }
 \value{
 data as tibble

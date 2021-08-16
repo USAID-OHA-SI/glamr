@@ -121,3 +121,165 @@ gdrive_metadata <- function(df, show_details = FALSE){
 
   return(df)
 }
+
+
+#' @title Get id of googledrive folder
+#'
+#' @note This function will create a new folder if add is set to TRUE
+#'
+#' @param name Googledrive folder name
+#' @param path Googledrive parent path id
+#' @param add  Should folder be added if missing, default is true
+#' @param ...  Other arguments to passed on to `drive_mkdir`
+#'
+#' @return Googledrive folder item it or NULL for non existing folder
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  library(glamr)
+#'
+#'  gdrive_folder("Test-Folder", "ID-adfdfsdfdfdfs")
+#' }
+#'
+gdrive_folder <- function(name,
+                          path = NULL,
+                          add = FALSE,
+                          ...) {
+
+  # Identify paths
+  paths <- name %>%
+    stringr::str_replace("^\\/", "") %>%
+    stringr::str_replace("\\/$", "") %>%
+    stringr::str_split("\\/") %>%
+    base::unlist()
+
+  # Default
+  drive_id <- path
+
+  # Check every single nested path
+  for (p in paths) {
+
+    # find drive folder
+    path_id = googledrive::drive_ls(
+      path = googledrive::as_id(drive_id),
+      pattern = p)
+
+    # Get number of items
+    n <- base::nrow(path_id)
+
+    # dubplicated folder
+    if (n > 1) {
+      drive_id <- NULL
+      base::stop(glue::glue("Possible duplicated googledrive item: {p}"))
+    }
+
+    # target folder
+    if (n == 1) {
+      drive_id <- path_id$id
+    }
+
+    # create sub-folder, it not present
+    if (n == 0 & add == TRUE) {
+      # Create folder
+      path_id <- googledrive::drive_mkdir(
+        name = p,
+        path = googledrive::as_id(drive_id),
+        ...)
+
+      drive_id <- path_id$id
+
+      base::print(glue::glue("New drive folder: {p} => {drive_id}"))
+
+    } else if (n == 0 & !add) {
+      drive_id <- NULL
+      base::message(crayon::red(glue::glue("Drive folder does not exist: {p}")))
+
+      return(drive_id)
+    }
+  }
+
+  # Return final id
+  return(drive_id)
+}
+
+#' @title Update files
+#'
+#' @param filename
+#' @param to_drive
+#' @param to_folder
+#' @param add
+#' @param overwrite
+#' @param ...
+#'
+#' @return Googledrive file(s) id(s)
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  library(glamr)
+#'
+#'  list.files("./Graphics", "NIGERIA", full.names = TRUE) %>%
+#'       export_drivefile(filename = .,
+#'                        to_drive = "<path-id>",
+#'                        to_folder = "FY99Q4/VL Suppression",
+#'                        add_folder = TRUE)
+#'
+#' }
+#'
+export_drivefile <- function(filename, to_drive,
+                             to_folder = NULL,
+                             add_folder = TRUE,
+                             overwrite = TRUE,
+                             ...) {
+
+  # Track drive id
+  drive_id <- to_drive
+
+  # Identify sub-folder, if applicable
+  if (!base::is.null(to_folder)) {
+
+    # Get drive folder id
+    drive_id <- gdrive_folder(name = to_folder,
+                              path = to_drive,
+                              add = add_folder)
+
+    # Re-check id
+    if (base::is.null(drive_id)) {
+      base::stop("Could not identify drive folder")
+    }
+
+    # Folder id should be different
+    if (drive_id == to_drive) {
+      base::stop("Check drive folder name. ID is the same as parent path")
+    }
+
+    base::print(glue::glue("Exporting files to {to_folder} ..."))
+  }
+
+  # Convert id into google id
+  drive_id <- drive_id %>% googledrive::as_id()
+
+  # Upload file(s) as it is
+  files <- filename %>%
+    purrr::map_dfr(~googledrive::drive_upload(
+      media = .x,
+      path = drive_id,
+      overwrite = overwrite,
+      ...))
+
+  # Upload files
+  # if (!base::is.null(export_as)) {
+  #
+  #   files <- files %>%
+  #     dplyr::pull(id) %>%
+  #     map2_dfr(.x = .,
+  #              .y = export_as,
+  #              .f = ~googledrive::drive_rename(file = .x,
+  #                                              name = .y,
+  #                                              overwrite = overwrite))
+  #
+  # }
+
+  return(files)
+}

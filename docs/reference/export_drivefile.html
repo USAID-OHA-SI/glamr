@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Query PEPFAR/DATIM targets/results data — datim_query • glamr</title>
+<title>Update files — export_drivefile • glamr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Query PEPFAR/DATIM targets/results data — datim_query" />
-<meta property="og:description" content="Query PEPFAR/DATIM targets/results data" />
+<meta property="og:title" content="Update files — export_drivefile" />
+<meta property="og:description" content="Update files" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,112 +134,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Query PEPFAR/DATIM targets/results data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/R/extract_datim.R'><code>R/extract_datim.R</code></a></small>
-    <div class="hidden name"><code>datim_query.Rd</code></div>
+    <h1>Update files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/R/import_drivefile.R'><code>R/import_drivefile.R</code></a></small>
+    <div class="hidden name"><code>export_drivefile.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Query PEPFAR/DATIM targets/results data</p>
+    <p>Update files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>datim_query</span><span class='op'>(</span>
-  <span class='va'>ou</span>,
-  level <span class='op'>=</span> <span class='st'>"prioritization"</span>,
-  pe <span class='op'>=</span> <span class='st'>"THIS_FINANCIAL_YEAR"</span>,
-  ta <span class='op'>=</span> <span class='st'>"PLHIV"</span>,
-  value <span class='op'>=</span> <span class='cn'>NULL</span>,
-  disaggs <span class='op'>=</span> <span class='cn'>NULL</span>,
-  dimensions <span class='op'>=</span> <span class='cn'>NULL</span>,
-  property <span class='op'>=</span> <span class='st'>"SHORTNAME"</span>,
-  metadata <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  hierarchy <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  baseurl <span class='op'>=</span> <span class='st'>"https://final.datim.org/api"</span>,
-  username <span class='op'>=</span> <span class='cn'>NULL</span>,
-  password <span class='op'>=</span> <span class='cn'>NULL</span>,
-  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+    <pre class="usage"><span class='fu'>export_drivefile</span><span class='op'>(</span>
+  <span class='va'>filename</span>,
+  <span class='va'>to_drive</span>,
+  to_folder <span class='op'>=</span> <span class='cn'>NULL</span>,
+  add_folder <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ou</th>
-      <td><p>Operatingunit</p></td>
-    </tr>
-    <tr>
-      <th>level</th>
-      <td><p>Organization hierarchy level</p></td>
-    </tr>
-    <tr>
-      <th>pe</th>
-      <td><p>Reporting period. This can be expressed as relative or fixed periods
-Eg.: "THIS_FINANCIAL_YEAR", "2020Oct", "QUARTERS_THIS_YEAR", "2021Q2"
-default is "THIS_FINANCIAL_YEAR"</p></td>
-    </tr>
-    <tr>
-      <th>ta</th>
-      <td><p>Technical Area, valid option can be obtain from `datim_dim_items("Technical Area")`</p></td>
-    </tr>
-    <tr>
-      <th>value</th>
-      <td><p>Type of value to return, MER Targets or Results or both</p></td>
-    </tr>
-    <tr>
-      <th>disaggs</th>
-      <td><p>Disaggregation Types. This depends on the value of ta</p></td>
-    </tr>
-    <tr>
-      <th>dimensions</th>
-      <td><p>Additional dimensions and/or columns. This depends on values of ta and disaggs</p></td>
-    </tr>
-    <tr>
-      <th>property</th>
-      <td><p>Type of name</p></td>
-    </tr>
-    <tr>
-      <th>metadata</th>
-      <td><p>Should metadata be included</p></td>
-    </tr>
-    <tr>
-      <th>hierarchy</th>
-      <td><p>Should additional hirarchy level be included</p></td>
-    </tr>
-    <tr>
-      <th>baseurl</th>
-      <td><p>DATIM API End point url</p></td>
-    </tr>
-    <tr>
-      <th>username</th>
-      <td><p>Datim username</p></td>
-    </tr>
-    <tr>
-      <th>password</th>
-      <td><p>Datim username</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>Display all notifications</p></td>
+      <th>...</th>
+      <td></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data as tibble</p>
+    <p>Googledrive file(s) id(s)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/USAID-OHA-SI/glamr'>glamr</a></span><span class='op'>)</span>
 
- <span class='fu'>datim_query</span><span class='op'>(</span>ou <span class='op'>=</span> <span class='st'>"Nigeria"</span>, ta <span class='op'>=</span> <span class='st'>"PLHIV"</span><span class='op'>)</span>
+ <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='st'>"./Graphics"</span>, <span class='st'>"NIGERIA"</span>, full.names <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+      <span class='fu'>export_drivefile</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='va'>.</span>,
+                       to_drive <span class='op'>=</span> <span class='st'>"&lt;path-id&gt;"</span>,
+                       to_folder <span class='op'>=</span> <span class='st'>"FY99Q4/VL Suppression"</span>,
+                       add_folder <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
- <span class='fu'>datim_query</span><span class='op'>(</span>ou <span class='op'>=</span> <span class='st'>"Nigeria"</span>, ta <span class='op'>=</span> <span class='st'>"POP_EST"</span><span class='op'>)</span>
-
- <span class='fu'>datim_query</span><span class='op'>(</span>ou <span class='op'>=</span> <span class='st'>"Nigeria"</span>,
-             level <span class='op'>=</span> <span class='st'>"country"</span>,
-             ta <span class='op'>=</span> <span class='st'>"TX_CURR"</span>,
-             disaggs <span class='op'>=</span> <span class='st'>"Age/Sex/HIVStatus"</span>,
-             dimensions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Age: &lt;15/15+  (Coarse)"</span>, <span class='st'>"Sex"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>

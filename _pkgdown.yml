@@ -34,6 +34,7 @@ reference:
   contents:
   - folder_setup
   - import_drivefile
+  - export_drivefile
   - return_latest
   - set_paths
   - setup_gitignore
@@ -42,6 +43,7 @@ reference:
   - si_setup
   - source_info
   - gdrive_metadata
+  - dgrive_folder
   - extract_excel_data
   - extract_tbl_data
 
