@@ -92,10 +92,13 @@ validate_path <- function(path, type){
   if(!missing(path) && !dir.exists(path))
     ui_stop("The folder path {ui_path(path)} is not valid")
 
-  use_path <- ifelse(missing(path), getOption(type), path)
-
-  if(is.null(use_path))
+  if(missing(path) && !is.null(getOption(type))){
+    use_path <- getOption(type)
+  } else if(missing(path)){
     use_path <- 'NULL'
+  } else {
+    use_path <- path
+  }
 
   return(use_path)
 }
