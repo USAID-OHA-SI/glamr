@@ -1,4 +1,5 @@
 # glamr 1.0.0
+* Resolve bug with new code for `set_path`, causing an error if any path was missing from the .Rprofile
 * The new `temp_folder()` creates and stores a folder in your Global Envir to use, which will be automatically be deleted on the end of your RStudio session.
 * Used `pkgdown` to create a site
 * If no username/password are provided to `get_outable()`, `identify_ouuids()` or `identify_levels()`, defaults to using `datim_user()` and `datim_pwd()`

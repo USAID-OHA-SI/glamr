@@ -94,6 +94,9 @@ validate_path <- function(path, type){
 
   use_path <- ifelse(missing(path), getOption(type), path)
 
+  if(is.null(use_path))
+    use_path <- 'NULL'
+
   return(use_path)
 }
 
