@@ -7,12 +7,14 @@
 `clean_countries` is used to adjust Natural Earth country names to match
 PEPFAR ones.}
 \usage{
-clean_countries(.data, colname = "admin")
+clean_countries(.data, colname = "admin", language = "en")
 }
 \arguments{
-\item{.data}{MSD Datasets}
+\item{.data}{Reference Datasets}
 
 \item{colname}{Column name to be updated}
+
+\item{language}{language of reference, default is set to `en`. Options are: `fr`, `de`, `es`, `ar`}
 }
 \value{
 Cleaned DataFrame
@@ -25,15 +27,14 @@ PEPFAR ones.
 }
 \examples{
 \dontrun{
+ library(sf)
+ library(rnaturalearth)
+ library(glamr)
+
  spdf <- ne_countries(type = "sovereignty", scale = 110, returnclass = "sf") \%>\%
+   sf::st_drop_geometry() \%>\%
    dplyr::select(sovereignt, admin, name, adm0_a3) \%>\%
    glamr::clean_countries(colname = "admin") }
+
 }
-\seealso{
-Other column munging: 
-\code{\link{clean_agency}()},
-\code{\link{clean_column}()},
-\code{\link{clean_indicator}()},
-\code{\link{clean_psnu}()}
-}
-\concept{column munging}
+\concept{Column clean up}

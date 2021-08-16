@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -117,7 +117,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/USAID-OHA-SI/glamr/">
-    <span class="fab fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -165,6 +165,9 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>API pull of data from DATIM</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Consider using `datim_process_query()` and/or `datim_execute_query()`</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
@@ -173,7 +176,8 @@
                  dimension=ou:LEVEL-4;HfVjCurKxh2&amp;
                  filter=pe:2018Oct&amp;
                  displayProperty=SHORTNAME&amp;outputIdScheme=CODE"</span><span class='op'>)</span>
- <span class='va'>df_targets</span> <span class='op'>&lt;-</span> <span class='fu'>get_datim_targets</span><span class='op'>(</span><span class='va'>myurl</span>, <span class='fu'><a href='datim_user.html'>datim_user</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='datim_pwd.html'>datim_pwd</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>}</span>
+ <span class='va'>df_targets</span> <span class='op'>&lt;-</span> <span class='fu'>extract_datim</span><span class='op'>(</span><span class='va'>myurl</span>, <span class='fu'><a href='datim_user.html'>datim_user</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='datim_pwd.html'>datim_pwd</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

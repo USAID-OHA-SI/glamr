@@ -23,7 +23,6 @@ Clean PSNU column data
 Other column munging: 
 \code{\link{clean_agency}()},
 \code{\link{clean_column}()},
-\code{\link{clean_countries}()},
 \code{\link{clean_indicator}()}
 }
 \concept{column munging}

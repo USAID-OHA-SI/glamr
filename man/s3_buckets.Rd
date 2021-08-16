@@ -4,12 +4,14 @@
 \alias{s3_buckets}
 \title{Get S3 Buckets list}
 \usage{
-s3_buckets(access_key = NULL, secret_key = NULL)
+s3_buckets(access_key = NULL, secret_key = NULL, ...)
 }
 \arguments{
 \item{access_key}{S3 Access Key ID}
 
 \item{secret_key}{S3 Secret Access Key}
+
+\item{...}{Additional arguments passed to s3HTTP}
 }
 \value{
 S3 Backets list as tibble

@@ -16,6 +16,7 @@
 * Add a missing append to `setup_gitignore()` to not overwrite existing file.
 * Add `pepfar_data_calendar` data frame to be used in conjunction with source info.
 * Add `pepfar_country_list` data frame to have a set of PEPFAR countries and their ISO codes. 
+* Add `datim_*` functions for datim queries
 * Added a `NEWS.md` file to track changes to the package.
 
 # glamr 0.1.0

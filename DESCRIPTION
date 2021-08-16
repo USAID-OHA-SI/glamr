@@ -47,7 +47,8 @@ Suggests:
     testthat (>= 2.1.0),
     tibble,
     xml2,
-    vroom
+    vroom,
+    countrycode
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)

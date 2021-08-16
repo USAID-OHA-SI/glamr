@@ -120,6 +120,12 @@ connect_text <- function(txt,
 `%ni%` <- Negate(`%in%`)
 
 
+#' @title Assignment Pipe Operator
+#' @importFrom magrittr %<>%
+#' @export
+magrittr::`%<>%`
+
+
 #' Generate Temporary Folder
 #'
 #' `temp_folder` created a temporary folder in your AppData directory, which

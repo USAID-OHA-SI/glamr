@@ -28,7 +28,6 @@ clean_indicator() }
 Other column munging: 
 \code{\link{clean_agency}()},
 \code{\link{clean_column}()},
-\code{\link{clean_countries}()},
 \code{\link{clean_psnu}()}
 }
 \concept{column munging}

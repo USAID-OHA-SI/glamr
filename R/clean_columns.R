@@ -106,45 +106,85 @@ clean_agency <- function(.data) {
 #' @title Lookup Official Country name
 #'
 #' @param country country name
+#' @param language language to use for lookup
 #' @return cleaned country name
 #' @keywords internal
+#'
+lookup_country <- function(country, language = "en") {
 
-lookup_country <- function(country) {
+  # Symbol [Just for dplyr]
+  curr_name <- {{country}}
 
-  # Symbol [Just for dplyr to deal]
-  country <- {{country}}
+  # Vectorise the lookup process
+  curr_name %>%
+    purrr::map(function(.x) {
+
+      # Hold targeted country
+      curr_name <- .x
+      new_name <- curr_name
+
+      # lookup country
+      if (language == "en") {
+        # Include NE Columns
+        df_cntries <- pepfar_country_xwalk %>%
+          dplyr::filter(
+            rowSums(across(.cols = c(tidyselect::ends_with(language),
+                                     tidyselect::all_of(c("sovereignt", "admin", "name"))),
+                           .fns = ~(. == curr_name))) > 0)
+      } else {
+        df_cntries <- pepfar_country_xwalk %>%
+          dplyr::filter(
+            rowSums(across(.cols = tidyselect::ends_with(language),
+                           .fns = ~(. == curr_name))) > 0)
+      }
+
+      # make sure result if valid
+      if (!base::is.null(df_cntries) & base::nrow(df_cntries) == 1) {
+
+        new_name <- df_cntries %>%
+          dplyr::pull(countryname)
+
+        # notification for new match
+        if (curr_name != new_name) {
+          base::print(glue::glue("{curr_name} => {new_name}"))
+        }
+      }
+
+      # Result
+      return(new_name)
+
+    }) %>%
+    base::unlist()
 
   # Retrieve the correct name
-  country = dplyr::case_when(
-    country == "Myanmar" ~ "Burma",
-    country == "Czech Republic" ~ "Czechia",
-    country == "Ivory Coast" ~ "Cote d'Ivoire",
-    country == "Czechia" ~ "Czech Republic",
-    country == "Myanmar" ~ "Burma",
-    country == "Northern Cyprus" ~ "Cyprus",
-    country == "Republic of Serbia" ~ "Serbia",
-    country == "Taiwan*" ~ "Taiwan",
-    country == "Korea, South" ~ "South Korea",
-    country == "Guinea-Bissau" ~ "Guinea Bissau",
-    country == "Congo (Kinshasa)" ~ "Democratic Republic of the Congo",
-    country == "DRC" ~ "Democratic Republic of the Congo",
-    country == "Congo Democratic Republic" ~ "Democratic Republic of the Congo",
-    country == "Congo (Brazzaville)" ~ "Republic of the Congo",
-    country == "Republic of Congo" ~ "Republic of the Congo",
-    country == "East Timor" ~ "Timor-Leste",
-    country == "The Bahamas" ~ "Bahamas",
-    country == "United Republic of Tanzania" ~ "Tanzania",
-    country == "United States of America" ~ "United States",
-    country == "Swaziland" ~ "Eswatini",
-    country == "S. Sudan" ~ "South Sudan",
-    country == "Saint Kitts and Nevis" ~ "Saint Kitts & Nevis",
-    country == "Antigua and Barbuda" ~ "Antigua & Barbuda",
-    country == "Trinidad and Tobago" ~ "Trinidad & Tobago",
-    country == "Saint Vincent and The Grenadines" ~ "Saint Vincent & the Grenadines",
-    TRUE ~ country
-  )
-
-  return(country)
+  # country = dplyr::case_when(
+  #   country == "Myanmar" ~ "Burma",
+  #   country == "Czech Republic" ~ "Czechia",
+  #   country == "Ivory Coast" ~ "Cote d'Ivoire",
+  #   country == "Czechia" ~ "Czech Republic",
+  #   country == "Myanmar" ~ "Burma",
+  #   country == "Northern Cyprus" ~ "Cyprus",
+  #   country == "Republic of Serbia" ~ "Serbia",
+  #   country == "Taiwan*" ~ "Taiwan",
+  #   country == "Korea, South" ~ "South Korea",
+  #   country == "Guinea-Bissau" ~ "Guinea Bissau",
+  #   country == "Congo (Kinshasa)" ~ "Democratic Republic of the Congo",
+  #   country == "DRC" ~ "Democratic Republic of the Congo",
+  #   country == "Congo Democratic Republic" ~ "Democratic Republic of the Congo",
+  #   country == "Congo (Brazzaville)" ~ "Republic of the Congo",
+  #   country == "Republic of Congo" ~ "Republic of the Congo",
+  #   country == "East Timor" ~ "Timor-Leste",
+  #   country == "The Bahamas" ~ "Bahamas",
+  #   country == "United Republic of Tanzania" ~ "Tanzania",
+  #   country == "United States of America" ~ "United States",
+  #   country == "Swaziland" ~ "Eswatini",
+  #   country == "S. Sudan" ~ "South Sudan",
+  #   country == "Saint Kitts and Nevis" ~ "Saint Kitts & Nevis",
+  #   country == "Antigua and Barbuda" ~ "Antigua & Barbuda",
+  #   country == "Trinidad and Tobago" ~ "Trinidad & Tobago",
+  #   country == "Saint Vincent and The Grenadines" ~ "Saint Vincent & the Grenadines",
+  #   TRUE ~ country
+  # )
 }
 
 
@@ -153,20 +193,28 @@ lookup_country <- function(country) {
 #' `clean_countries` is used to adjust Natural Earth country names to match
 #' PEPFAR ones.
 #'
-#' @param .data MSD Datasets
-#' @param colname Column name to be updated
+#' @param .data     Reference Datasets
+#' @param colname   Column name to be updated
+#' @param language  language of reference, default is set to `en`. Options are: `fr`, `de`, `es`, `ar`
+#'
 #' @return  Cleaned DataFrame
-#' @family column munging
+#' @family    Column clean up
 #' @export
 #'
 #' @examples
 #' \dontrun{
+#'  library(sf)
+#'  library(rnaturalearth)
+#'  library(glamr)
+#'
 #'  spdf <- ne_countries(type = "sovereignty", scale = 110, returnclass = "sf") %>%
+#'    sf::st_drop_geometry() %>%
 #'    dplyr::select(sovereignt, admin, name, adm0_a3) %>%
 #'    glamr::clean_countries(colname = "admin") }
-
-clean_countries <-
-  function(.data, colname = "admin") {
+#'
+clean_countries <- function(.data,
+                            colname = "admin",
+                            language = "en") {
 
     # Check for valid column name
     if (!colname %in% names(.data)) {
@@ -186,7 +234,8 @@ clean_countries <-
     #clean column data
     .data %>%
       dplyr::mutate(dplyr::across(.cols = dplyr::all_of(name),
-                           .fns = lookup_country))
+                           .fns = lookup_country,
+                           language = language))
   }
 
 

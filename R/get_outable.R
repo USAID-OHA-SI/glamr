@@ -185,6 +185,65 @@ identify_levels <- function(username, password, baseurl = "https://final.datim.o
 }
 
 
+#' @title Identify Reporting Period from MSD File
+#'
+#' @param msd_file MSD File, should include publication date
+#' @param clean    Should be period be clean? default is true
+#'
+#' @return reporting period
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#'  library(glamr)
+#'
+#'  pd = return_latest(si_path(), "OU_IM") %>% identify_pd()
+#' }
+#'
+identify_pd <- function(msd_file, clean = TRUE) {
+
+  # Extract release date from msd file
+  release_date <- msd_file %>%
+    stringr::str_extract("\\d{8}") %>%
+    lubridate::ymd() %>%
+    base::as.character()
+
+  # Pepfar data calendar
+  release_dates <- pepfar_data_calendar %>%
+    dplyr::pull(entry_close)
+
+  # Check validity
+  if (!release_date %in% release_dates) {
+    base::message(crayon::red("Invalid and / or non-pepfar release date"))
+    return(NULL)
+  }
+
+  # Identify reporting period
+  pd <- pepfar_data_calendar %>%
+    rowwise() %>%
+    mutate(period = base::paste0("FY", fiscal_year, "Q", quarter)) %>%
+    ungroup() %>%
+    filter(entry_close == release_date) %>%
+    pull(period)
+
+  # Reformat period
+  if (clean) {
+    pd <- pd %>%
+      stringr::str_sub(start = 3, end = 4) %>%
+      stringr::str_replace(string = pd, pattern = ., replacement = "") %>%
+      stringr::str_to_upper()
+  }
+  else {
+    pd <- pd %>%
+      stringr::str_replace("Q", "qtr") %>%
+      stringr::str_to_lower()
+  }
+
+  return(pd)
+}
+
+
 #' @title Get Org UIDS
 #' @note Use with caution. Use `get_ouorguids()` for levels below 3
 #'
@@ -579,6 +638,72 @@ get_ouorglevel <-
 
     return(lvl)
   }
+
+
+#' @title Identify OU/Org Label
+#'
+#' @param operatingunit  Operating unit
+#' @param country        Country name
+#' @param org_level      OU Org level, default is set to 4, PSNU
+#' @param username       Datim account username
+#' @param password       Datim account password
+#'
+#' @return Org level label
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   library(glamr)
+#'
+#'   get_ouorglabel(operatingunit = "Zambia", org_level = 5)
+#' }
+#'
+get_ouorglabel <- function(operatingunit,
+                           country = NULL,
+                           org_level = 4,
+                           username = NULL,
+                           password = NULL) {
+  # Label
+  lbl <- NULL
+
+  if (org_level <= 3) {
+    lbl <- case_when(
+      org_level == 3 ~ "country",
+      org_level == 2 ~ "region",
+      org_level == 1 ~ "global",
+      TRUE ~ NA_character_
+    )
+
+    return(lbl)
+  }
+
+  # Countryname
+  if (base::is.null(country)) {
+    country <- operatingunit
+  }
+
+  # Levels
+  df_lvls <- get_levels(username, password) %>%
+    tidyr::pivot_longer(country:tidyselect::last_col(),
+                 names_to = "label",
+                 values_to = "level")
+
+  df_lvls %<>%
+    dplyr::filter(operatingunit == operatingunit,
+           countryname == country,
+           level == org_level)
+
+  if (base::is.null(df_lvls) | base::nrow(df_lvls) == 0) {
+    return(glue::glue("orglvl_{org_level}"))
+  }
+
+  lbl <- df_lvls %>%
+    dplyr::pull(label) %>%
+    base::sort() %>%
+    last()
+
+  return(lbl)
+}
 
 
 #' Get Orgs uids by level
