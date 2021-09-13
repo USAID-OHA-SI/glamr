@@ -9,12 +9,25 @@ export_drivefile(
   to_drive,
   to_folder = NULL,
   add_folder = TRUE,
+  file_type = "png",
   overwrite = TRUE,
   ...
 )
 }
 \arguments{
-\item{...}{}
+\item{filename}{Full name of the file to be uploaded}
+
+\item{to_drive}{Google drive id}
+
+\item{to_folder}{Google drive sub-folder}
+
+\item{add_folder}{If TRUE, add sub-folders if they are not present}
+
+\item{file_type}{File type (extension)}
+
+\item{overwrite}{If yes, existing files will be overwritten}
+
+\item{...}{Additional parameters to be passed to `googledrive::drive_upload()`}
 }
 \value{
 Googledrive file(s) id(s)

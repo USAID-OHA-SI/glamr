@@ -50,7 +50,7 @@ pepfar_country_list <- df_cntry %>%
 usethis::use_data(pepfar_country_list, overwrite = TRUE)
 
 
-## PEPFAR, UN and NE countroes cross-walk
+## PEPFAR, UN and NE countries cross-walk
 
   library(tidyverse)
   library(glamr)

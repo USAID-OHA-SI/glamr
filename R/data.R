@@ -29,3 +29,44 @@
 #' }
 #' @source \url{https://final.datim.org/}
 "pepfar_country_list"
+
+
+#' Cross-walk of Country names
+#'
+#' A dataset PEPFAR Operating Units and Countries along with their ISO codes, alternative names from other sources.
+#' This is a useful dataset designed to help with data cleaning / matching from different sources.
+#'
+#' @format A data frame with 51 rows and 23 variables:
+#' \describe{
+#'   \item{iso3c}{ISO-3 Code}
+#'   \item{contient}{Continent name}
+#'   \item{region}{World Region Name}
+#'   \item{region23}{Alternative name for World Region}
+#'   \item{un_region_name}{US Region Name}
+#'   \item{iso_name_en}{ISO Country name in English}
+#'   \item{iso_name_fr}{SO Country name in French}
+#'   \item{country_name_de}{Regular Expression of Country name in German}
+#'   \item{country_name_de_regrex}{Country name in German}
+#'   \item{country_name_en}{Country name in English}
+#'   \item{country_name_en_regrex}{Regular Expression of Country name in English}
+#'   \item{un_name_ar}{UN Name in Arabic}
+#'   \item{un_name_en}{UN Name in English}
+#'   \item{un_name_es}{UN Name in Spanish}
+#'   \item{un_name_fr}{UN Name in French}
+#'   \item{un_name_ru}{UN Name in ru}
+#'   \item{un_name_zh}{UN Name in zh}
+#'   \item{sovereignt}{rnaturalearth sovereign territory name}
+#'   \item{admin}{rnaturalearth administrative unit name}
+#'   \item{name}{rnaturalearth country name}
+#'   \item{operatingunit}{PEPFAR Operating Unit (countries + 3 regional programs)}
+#'   \item{operatingunit_iso}{PEPFAR Operating Unit ISO-3}
+#'   \item{countryname}{PEPFAR Country Name}
+#'   \item{countryname_iso}{PEPFAR Country Name ISO-3}
+#' }
+#' @source
+#' \itemize{
+#'   \url{https://final.datim.org/}
+#'   \url{https://www.naturalearthdata.com/}
+#'   \url{https://vincentarelbundock.github.io/countrycode/}
+#' }
+"pepfar_country_xwalk"

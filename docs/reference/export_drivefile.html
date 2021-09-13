@@ -148,6 +148,7 @@
   <span class='va'>to_drive</span>,
   to_folder <span class='op'>=</span> <span class='cn'>NULL</span>,
   add_folder <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  file_type <span class='op'>=</span> <span class='st'>"png"</span>,
   overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -156,8 +157,32 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>filename</th>
+      <td><p>Full name of the file to be uploaded</p></td>
+    </tr>
+    <tr>
+      <th>to_drive</th>
+      <td><p>Google drive id</p></td>
+    </tr>
+    <tr>
+      <th>to_folder</th>
+      <td><p>Google drive sub-folder</p></td>
+    </tr>
+    <tr>
+      <th>add_folder</th>
+      <td><p>If TRUE, add sub-folders if they are not present</p></td>
+    </tr>
+    <tr>
+      <th>file_type</th>
+      <td><p>File type (extension)</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>If yes, existing files will be overwritten</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td></td>
+      <td><p>Additional parameters to be passed to `googledrive::drive_upload()`</p></td>
     </tr>
     </table>
 

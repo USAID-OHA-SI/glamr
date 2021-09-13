@@ -33,6 +33,7 @@ reference:
 - title: Workflow
   contents:
   - folder_setup
+  - gdrive_folder
   - import_drivefile
   - export_drivefile
   - return_latest
@@ -105,7 +106,7 @@ reference:
   - get_ouorgs
   - get_ouuids
   - get_ouuid
-  - get_ouorglevels
+  - get_ouorglevel
   - get_ouorglabel
   - get_ouorguids
   - get_levels
@@ -145,4 +146,5 @@ reference:
 - title: Data Sets
   contents:
   - pepfar_country_list
+  - pepfar_country_xwalk
   - pepfar_data_calendar

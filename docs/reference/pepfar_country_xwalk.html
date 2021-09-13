@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • glamr</title>
+<title>Cross-walk of Country names — pepfar_country_xwalk • glamr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Cross-walk of Country names — pepfar_country_xwalk" />
+<meta property="og:description" content="A dataset PEPFAR Operating Units and Countries along with their ISO codes, alternative names from other sources.
+This is a useful dataset designed to help with data cleaning / matching from different sources." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +68,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -133,52 +135,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Cross-walk of Country names</h1>
+    <small class="dont-index">Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>pepfar_country_xwalk.Rd</code></div>
     </div>
 
-    <div id="glamr-100" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0">
-<a href="#glamr-100" class="anchor"></a>glamr 1.0.0</h1>
-<ul>
-<li>Resolve bug with new code for <code>set_path</code>, causing an error if any path was missing from the .Rprofile</li>
-<li>The new <code><a href="../reference/temp_folder.html">temp_folder()</a></code> creates and stores a folder in your Global Envir to use, which will be automatically be deleted on the end of your RStudio session.</li>
-<li>Used <code>pkgdown</code> to create a site</li>
-<li>If no username/password are provided to <code><a href="../reference/get_outable.html">get_outable()</a></code>, <code><a href="../reference/identify_ouuids.html">identify_ouuids()</a></code> or <code><a href="../reference/identify_levels.html">identify_levels()</a></code>, defaults to using <code><a href="../reference/datim_user.html">datim_user()</a></code> and <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>
-</li>
-<li>Adjust <code><a href="../reference/get_outable.html">get_outable()</a></code>/<code><a href="../reference/identify_levels.html">identify_levels()</a></code> output, changing community to community_lvl and prioritization to psnu_lvl to match other indicators.</li>
-<li>Include two new function to convert dates to periods and periods to dates using <code><a href="../reference/convert_date_to_qtr.html">convert_date_to_qtr()</a></code> and <code><a href="../reference/convert_qtr_to_date.html">convert_qtr_to_date()</a></code>.</li>
-<li>New vigentte for project workflow added, <code>vignette(package = glamr)</code>
-</li>
-<li>Update <code><a href="../reference/set_paths.html">set_paths()</a></code>, allowing for <code>path_downloads</code> and improve backend efficiency.</li>
-<li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> and <code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_auth.html">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
-<li>Add <code><a href="../reference/clean_filename.html">clean_filename()</a></code> function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.</li>
-<li>Adjust <code><a href="../reference/load_secrets.html">load_secrets()</a></code> to allow user to specify which accounts to load in a session.</li>
-<li>Depricate <code><a href="../reference/mypwd.html">mypwd()</a></code> which has been superseded by <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>.</li>
-<li>Create <code>source_info</code> function to extract information from the file to use in the caption/source.</li>
-<li>Adjust <code><a href="../reference/setup_gitignore.html">setup_gitignore()</a></code> and <code><a href="../reference/setup_readme.html">setup_readme()</a></code> to not duplicate text if its already exists</li>
-<li>Add a missing append to <code><a href="../reference/setup_gitignore.html">setup_gitignore()</a></code> to not overwrite existing file.</li>
-<li>Add <code>pepfar_data_calendar</code> data frame to be used in conjunction with source info.</li>
-<li>Add <code>pepfar_country_list</code> data frame to have a set of PEPFAR countries and their ISO codes.</li>
-<li>Add <code>datim_*</code> functions for datim queries</li>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-    <div id="glamr-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#glamr-010" class="anchor"></a>glamr 0.1.0</h1>
-<ul>
-<li>Prior to verion 1.0.0, updates were not captured.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>A dataset PEPFAR Operating Units and Countries along with their ISO codes, alternative names from other sources.
+This is a useful dataset designed to help with data cleaning / matching from different sources.</p>
+    </div>
 
+    <pre class="usage"><span class='va'>pepfar_country_xwalk</span></pre>
+
+
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A data frame with 51 rows and 23 variables:</p><dl>
+  <dt>iso3c</dt><dd><p>ISO-3 Code</p></dd>
+  <dt>contient</dt><dd><p>Continent name</p></dd>
+  <dt>region</dt><dd><p>World Region Name</p></dd>
+  <dt>region23</dt><dd><p>Alternative name for World Region</p></dd>
+  <dt>un_region_name</dt><dd><p>US Region Name</p></dd>
+  <dt>iso_name_en</dt><dd><p>ISO Country name in English</p></dd>
+  <dt>iso_name_fr</dt><dd><p>SO Country name in French</p></dd>
+  <dt>country_name_de</dt><dd><p>Regular Expression of Country name in German</p></dd>
+  <dt>country_name_de_regrex</dt><dd><p>Country name in German</p></dd>
+  <dt>country_name_en</dt><dd><p>Country name in English</p></dd>
+  <dt>country_name_en_regrex</dt><dd><p>Regular Expression of Country name in English</p></dd>
+  <dt>un_name_ar</dt><dd><p>UN Name in Arabic</p></dd>
+  <dt>un_name_en</dt><dd><p>UN Name in English</p></dd>
+  <dt>un_name_es</dt><dd><p>UN Name in Spanish</p></dd>
+  <dt>un_name_fr</dt><dd><p>UN Name in French</p></dd>
+  <dt>un_name_ru</dt><dd><p>UN Name in ru</p></dd>
+  <dt>un_name_zh</dt><dd><p>UN Name in zh</p></dd>
+  <dt>sovereignt</dt><dd><p>rnaturalearth sovereign territory name</p></dd>
+  <dt>admin</dt><dd><p>rnaturalearth administrative unit name</p></dd>
+  <dt>name</dt><dd><p>rnaturalearth country name</p></dd>
+  <dt>operatingunit</dt><dd><p>PEPFAR Operating Unit (countries + 3 regional programs)</p></dd>
+  <dt>operatingunit_iso</dt><dd><p>PEPFAR Operating Unit ISO-3</p></dd>
+  <dt>countryname</dt><dd><p>PEPFAR Country Name</p></dd>
+  <dt>countryname_iso</dt><dd><p>PEPFAR Country Name ISO-3</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    
+<dl>
+  https://final.datim.org/DATIM
+  https://www.naturalearthdata.com/Natural Earth
+  https://vincentarelbundock.github.io/countrycode/CountryCode
+
+</dl>
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

@@ -205,12 +205,13 @@ gdrive_folder <- function(name,
 
 #' @title Update files
 #'
-#' @param filename
-#' @param to_drive
-#' @param to_folder
-#' @param add
-#' @param overwrite
-#' @param ...
+#' @param filename   Full name of the file to be uploaded
+#' @param to_drive   Google drive id
+#' @param to_folder  Google drive sub-folder
+#' @param add_folder If TRUE, add sub-folders if they are not present
+#' @param file_type  File type (extension)
+#' @param overwrite  If yes, existing files will be overwritten
+#' @param ...        Additional parameters to be passed to `googledrive::drive_upload()`
 #'
 #' @return Googledrive file(s) id(s)
 #' @export
@@ -230,6 +231,7 @@ gdrive_folder <- function(name,
 export_drivefile <- function(filename, to_drive,
                              to_folder = NULL,
                              add_folder = TRUE,
+                             file_type = "png",
                              overwrite = TRUE,
                              ...) {
 
@@ -263,23 +265,11 @@ export_drivefile <- function(filename, to_drive,
   # Upload file(s) as it is
   files <- filename %>%
     purrr::map_dfr(~googledrive::drive_upload(
-      media = .x,
       path = drive_id,
+      name = base::basename(.x),
+      type = file_type,
       overwrite = overwrite,
       ...))
-
-  # Upload files
-  # if (!base::is.null(export_as)) {
-  #
-  #   files <- files %>%
-  #     dplyr::pull(id) %>%
-  #     map2_dfr(.x = .,
-  #              .y = export_as,
-  #              .f = ~googledrive::drive_rename(file = .x,
-  #                                              name = .y,
-  #                                              overwrite = overwrite))
-  #
-  # }
 
   return(files)
 }
