@@ -9,6 +9,8 @@
 #' @param df this can be either a financial structured dataset or an MSD
 #' @param poc you can choose to filter either the SCH list or the SGAC list;
 #'  default is both
+#' @param flag_only allows you keep full dataset, but identify the mechanisms
+#' that are supply chain, mech_sch as a logical; default = FALSE
 #'
 #' @return a df without supply chain mechanisms
 #' @seealso [set_email()] to store USAID email;
@@ -22,7 +24,7 @@
 #' #remove SCh using SGAC list
 #' df <- remove_shc(df, poc = "SGAC") }
 
-remove_sch <- function(df, poc= c("SCH","SGAC")){
+remove_sch <- function(df, poc= c("SCH","SGAC"), flag_only = FALSE){
 
   if ( !googlesheets4::gs4_has_token())
     stop("Function requires authentication,
@@ -41,8 +43,11 @@ remove_sch <- function(df, poc= c("SCH","SGAC")){
     dplyr::distinct(mech_id)%>%
     dplyr::pull(mech_id)
 
-  df <- df%>%
-    dplyr::filter(!mech_code %in% lst_mech)
+  if(flag_only == FALSE) {
+    df <- dplyr::filter(df, !mech_code %in% lst_mech)
+  } else {
+    df <- dplyr::mutate(df, mech_sch = mech_code %in% lst_mech)
+  }
 
   return(df)
 }
