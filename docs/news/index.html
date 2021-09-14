@@ -87,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,7 +116,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/USAID-OHA-SI/glamr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -141,6 +141,8 @@
 <h1 class="page-header" data-toc-text="1.0.0">
 <a href="#glamr-100" class="anchor"></a>glamr 1.0.0</h1>
 <ul>
+<li>Fixed <code><a href="../reference/source_info.html">source_info()</a></code> to allow it to work correctly with FSD (misspelling in the filename).</li>
+<li>Allow user to just flag, not remove SCH mechanism in <code><a href="../reference/remove_sch.html">remove_sch()</a></code>.</li>
 <li>Resolve bug with new code for <code>set_path</code>, causing an error if any path was missing from the .Rprofile</li>
 <li>The new <code><a href="../reference/temp_folder.html">temp_folder()</a></code> creates and stores a folder in your Global Envir to use, which will be automatically be deleted on the end of your RStudio session.</li>
 <li>Used <code>pkgdown</code> to create a site</li>
@@ -151,7 +153,7 @@
 <li>New vigentte for project workflow added, <code>vignette(package = glamr)</code>
 </li>
 <li>Update <code><a href="../reference/set_paths.html">set_paths()</a></code>, allowing for <code>path_downloads</code> and improve backend efficiency.</li>
-<li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> and <code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_auth.html">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
+<li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> and <code><a href="https://googlesheets4.tidyverse.org/reference/gs4_auth.html">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
 <li>Add <code><a href="../reference/clean_filename.html">clean_filename()</a></code> function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.</li>
 <li>Adjust <code><a href="../reference/load_secrets.html">load_secrets()</a></code> to allow user to specify which accounts to load in a session.</li>
 <li>Depricate <code><a href="../reference/mypwd.html">mypwd()</a></code> which has been superseded by <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>.</li>
