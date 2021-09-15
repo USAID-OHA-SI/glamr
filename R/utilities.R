@@ -85,13 +85,13 @@ is_installed <- function(package){
 }
 
 
-#' @title connect_text
+#' @title Clean and connect parts of text together
 #'
 #' @param txt          String charactors
 #' @param connections  Characters to be replaced by connector
 #' @param connector    Charactor used as connector
 #'
-#' @return
+#' @return cleaned text
 #' @export
 #'
 #' @examples

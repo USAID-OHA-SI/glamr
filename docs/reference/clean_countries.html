@@ -6,10 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clean OU/Country names to match PEPFAR Data
-
-`clean_countries` is used to adjust Natural Earth country names to match
-PEPFAR ones. — clean_countries • glamr</title>
+<title>Clean Natural Earth Country names to match PEPFAR Data — clean_countries • glamr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,13 +46,8 @@ PEPFAR ones. — clean_countries • glamr</title>
 
 
 
-<meta property="og:title" content="Clean OU/Country names to match PEPFAR Data
-
-`clean_countries` is used to adjust Natural Earth country names to match
-PEPFAR ones. — clean_countries" />
-<meta property="og:description" content="Clean OU/Country names to match PEPFAR Data
-`clean_countries` is used to adjust Natural Earth country names to match
-PEPFAR ones." />
+<meta property="og:title" content="Clean Natural Earth Country names to match PEPFAR Data — clean_countries" />
+<meta property="og:description" content="`clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / Countryname. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -96,7 +88,7 @@ PEPFAR ones." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -125,7 +117,7 @@ PEPFAR ones." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/USAID-OHA-SI/glamr/">
-    <span class="fab fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -142,21 +134,16 @@ PEPFAR ones." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clean OU/Country names to match PEPFAR Data
-
-`clean_countries` is used to adjust Natural Earth country names to match
-PEPFAR ones.</h1>
+    <h1>Clean Natural Earth Country names to match PEPFAR Data</h1>
     <small class="dont-index">Source: <a href='https://github.com/USAID-OHA-SI/glamr/blob/master/R/clean_columns.R'><code>R/clean_columns.R</code></a></small>
     <div class="hidden name"><code>clean_countries.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Clean OU/Country names to match PEPFAR Data</p>
-<p>`clean_countries` is used to adjust Natural Earth country names to match
-PEPFAR ones.</p>
+    <p>`clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / Countryname. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clean_countries</span><span class='op'>(</span><span class='va'>.data</span>, colname <span class='op'>=</span> <span class='st'>"admin"</span>, language <span class='op'>=</span> <span class='st'>"en"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>clean_countries</span><span class='op'>(</span><span class='va'>.data</span>, colname <span class='op'>=</span> <span class='st'>"admin"</span>, language <span class='op'>=</span> <span class='st'>"en"</span>, short <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +159,10 @@ PEPFAR ones.</p>
     <tr>
       <th>language</th>
       <td><p>language of reference, default is set to `en`. Options are: `fr`, `de`, `es`, `ar`</p></td>
+    </tr>
+    <tr>
+      <th>short</th>
+      <td><p>If TRUE, shorten OU/Country names instead, default is TRUE</p></td>
     </tr>
     </table>
 

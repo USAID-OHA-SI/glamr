@@ -24,6 +24,7 @@ the HHS prefix for those agencies.
 \examples{
 \dontrun{
  df_msd \%>\% clean_agency() }
+
 }
 \seealso{
 Other column munging: 

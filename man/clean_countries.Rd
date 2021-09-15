@@ -2,12 +2,9 @@
 % Please edit documentation in R/clean_columns.R
 \name{clean_countries}
 \alias{clean_countries}
-\title{Clean OU/Country names to match PEPFAR Data
-
-`clean_countries` is used to adjust Natural Earth country names to match
-PEPFAR ones.}
+\title{Clean Natural Earth Country names to match PEPFAR Data}
 \usage{
-clean_countries(.data, colname = "admin", language = "en")
+clean_countries(.data, colname = "admin", language = "en", short = TRUE)
 }
 \arguments{
 \item{.data}{Reference Datasets}
@@ -15,15 +12,14 @@ clean_countries(.data, colname = "admin", language = "en")
 \item{colname}{Column name to be updated}
 
 \item{language}{language of reference, default is set to `en`. Options are: `fr`, `de`, `es`, `ar`}
+
+\item{short}{If TRUE, shorten OU/Country names instead, default is TRUE}
 }
 \value{
 Cleaned DataFrame
 }
 \description{
-Clean OU/Country names to match PEPFAR Data
-
-`clean_countries` is used to adjust Natural Earth country names to match
-PEPFAR ones.
+`clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / Countryname. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE.
 }
 \examples{
 \dontrun{

@@ -47,7 +47,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -76,7 +76,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/USAID-OHA-SI/glamr/">
-    <span class="fab fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -90,7 +90,7 @@
 
       
 
-      </header><script src="project-workflow_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><script src="project-workflow_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Project Workflow</h1>
@@ -137,12 +137,17 @@
 <p>The primary function we’re going to run to get us going is <code>si_setup</code>. If we look under the hood at <code>si_setup</code>, we can see it actually contains three sub-function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">si_setup</span>
-<span class="co">#&gt; function(){</span>
-<span class="co">#&gt;   folder_setup()</span>
-<span class="co">#&gt;   setup_gitignore()</span>
-<span class="co">#&gt;   setup_readme()</span>
+<span class="co">#&gt; function () </span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     folder_setup()</span>
+<span class="co">#&gt;     setup_gitignore()</span>
+<span class="co">#&gt;     setup_readme()</span>
 <span class="co">#&gt; }</span>
+<<<<<<< HEAD
 <span class="co">#&gt; &lt;bytecode: 0x00000000138e1cc8&gt;</span>
+=======
+<span class="co">#&gt; &lt;bytecode: 0x00000000166bb608&gt;</span>
+>>>>>>> dbb03481bd97eb3a3106137121e250f6ded2c4ca
 <span class="co">#&gt; &lt;environment: namespace:glamr&gt;</span></code></pre></div>
 <p>The first one, <code><a href="../reference/folder_setup.html">folder_setup()</a></code> initiates the main folders we use for our work:</p>
 <ul>
@@ -158,28 +163,28 @@
 </ul>
 <p>If you clone from GitHub not all the folders may exist there, so we recommend running <code><a href="../reference/folder_setup.html">folder_setup()</a></code> on its own to establish the same organization on your local machine. The reason we have created this into a function is to ensure uniformity across our projects and know what to expect when we pick up someone else’s work (or our own work from the distant past).</p>
 <p>The next function that is run is <code><a href="../reference/setup_gitignore.html">setup_gitignore()</a></code>, which creates a <code>.gitignore</code> file in your project. The primary purpose of this file is to ensure that our data and outputs are not being published to the web. By default after running <code><a href="../reference/si_setup.html">si_setup()</a></code> most data formats/folders will be kept from being published. Below is what the <code>.gitignore</code> file will look like.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">#R basics</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  .Rproj.user</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  .Rhistory</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  .RData</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  .Ruserdata</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#no data</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.csv</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.txt</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.rds</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.xlsx</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.xls</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.zip</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.png</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.twbx</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="sc">*</span>.pptx</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#nothing from these folders</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  AI<span class="sc">/</span><span class="er">*</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  GIS<span class="sc">/</span><span class="er">*</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  Images<span class="sc">/</span><span class="er">*</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  Graphics<span class="sc">/</span><span class="er">*</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="co">#R basics</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  .Rproj.user</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  .Rhistory</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  .RData</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  .Ruserdata</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  </span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="co">#no data</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="op">*</span>.csv</span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="op">*</span>.txt</span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="op">*</span>.rds</span>
+<span id="cb6-11"><a href="#cb6-11"></a>  <span class="op">*</span>.xlsx</span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="op">*</span>.xls</span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="op">*</span>.zip</span>
+<span id="cb6-14"><a href="#cb6-14"></a>  <span class="op">*</span>.png</span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="op">*</span>.twbx</span>
+<span id="cb6-16"><a href="#cb6-16"></a>  <span class="op">*</span>.pptx</span>
+<span id="cb6-17"><a href="#cb6-17"></a>  </span>
+<span id="cb6-18"><a href="#cb6-18"></a>  <span class="co">#nothing from these folders</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>  AI<span class="op">/</span><span class="er">*</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="st">  </span>GIS<span class="op">/</span><span class="er">*</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="st">  </span>Images<span class="op">/</span><span class="er">*</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="st">  </span>Graphics<span class="op">/</span><span class="er">*</span></span></code></pre></div>
 <p>And the last component from <code><a href="../reference/si_setup.html">si_setup()</a></code> is to add a standard USAID disclaimer to your project’s <code>README.md</code> file (and creates this file if its missing).</p>
 <p>From a project standpoint, now you’re good to go.</p>
 </div>

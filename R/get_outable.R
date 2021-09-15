@@ -64,7 +64,7 @@ get_outable <- function(username, password, baseurl = "https://final.datim.org/"
 #' @param baseurl base url for the API, default = https://final.datim.org/
 #'
 #' @export
-#' @return
+#' @return Datim country names
 #' @seealso [set_datim()] to store DATIM authentication;
 #'   [load_secrets()] to load credentials into session
 #'

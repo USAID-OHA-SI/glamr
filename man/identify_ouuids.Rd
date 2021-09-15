@@ -14,7 +14,7 @@ identify_ouuids(username, password, baseurl = "https://final.datim.org/")
 \item{baseurl}{base url for the API, default = https://final.datim.org/}
 }
 \value{
-
+Datim country names
 }
 \description{
 `identify_ouuids` pulls from DATIM to return a dataframe with all PEPFAR
