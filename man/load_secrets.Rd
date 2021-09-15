@@ -4,7 +4,7 @@
 \alias{load_secrets}
 \title{Load credentials}
 \usage{
-load_secrets(service = c("email", "datim", "s3"))
+load_secrets(service = c("email", "datim", "pano", "s3"))
 }
 \arguments{
 \item{service}{account, either "email", "datim", "pano", or "s3"; by default,

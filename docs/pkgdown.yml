@@ -1,12 +1,8 @@
-pandoc: 2.7.3
+pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   credential-management: credential-management.html
   project-workflow: project-workflow.html
-<<<<<<< HEAD
-last_built: 2021-09-15T18:31Z
-=======
-last_built: 2021-09-15T15:43Z
->>>>>>> dbb03481bd97eb3a3106137121e250f6ded2c4ca
+last_built: 2021-09-15T18:45Z
 

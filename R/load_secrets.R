@@ -36,7 +36,7 @@
 #' load_secrets()
 #' ou_table <- datim_outable(datim_user(), datim_pwd()) }
 
-load_secrets <- function(service = c("email", "datim", "s3")){
+load_secrets <- function(service = c("email", "datim", "pano","s3")){
 
   package_check('keyring')
 
