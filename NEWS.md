@@ -1,3 +1,7 @@
+# glamr 1.0.1
+* Add set of functions to store, access, and load Panorama credentials - `set_pano`,
+ `pano_user()`, `pano_pwd()`, and `load_secrets()`.
+
 # glamr 1.0.0
 * Fixed `source_info()` to allow it to work correctly with FSD (misspelling in the filename).
 * Allow user to just flag, not remove SCH mechanism in `remove_sch()`.
