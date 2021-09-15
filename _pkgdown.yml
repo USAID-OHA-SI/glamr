@@ -44,7 +44,7 @@ reference:
   - si_setup
   - source_info
   - gdrive_metadata
-  - dgrive_folder
+  - gdrive_folder
   - extract_excel_data
   - extract_tbl_data
 
@@ -52,14 +52,16 @@ reference:
   contents:
   - datim_pwd
   - datim_user
+  - pano_pwd
+  - pano_user
   - get_s3key
   - load_secrets
-  - mypwd
 
 - title: Authentication Setup
   contents:
   - set_datim
   - set_email
+  - set_pano
   - set_s3keys
 
 - title: Tidying

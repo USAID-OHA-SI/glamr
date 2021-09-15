@@ -5,9 +5,10 @@
 #'  analysts to more easily share their scripts without having to manually update
 #'  or remove use names.
 #'
-#'  To initiall store your Google email and DATIM credentials,
+#'  To initially store your Google email and DATIM credentials,
 #'  you will first need to
-#'  run `set_email()`, `set_datim()`, `set_s3access()` and `set_s3secret()`
+#'  run `set_email()`, `set_datim()`, `set_pano()`,`set_s3access()` and/or
+#'  `set_s3secret()`
 #'
 #'  `load_secrets` utilizes `keyring` package to access the OS credentials store.
 #'  Storing in a centralized, secure location allows analysts to other analysts code
@@ -15,10 +16,10 @@
 #'  DATIM or Google Drive.
 #'
 #'
-#' @param service account, either "email", "datim" or "s3"; by default, all are
-#' loaded if they are available
+#' @param service account, either "email", "datim", "pano", or "s3"; by default,
+#' all are loaded if they are available
 #'
-#' @return stores Google, DATIM, and s3 credentials in session
+#' @return stores Google, DATIM, PEFPFAR Panorama, and s3 credentials in session
 #' @export
 #' @family authentication
 #'
@@ -65,6 +66,11 @@ load_secrets <- function(service = c("email", "datim", "s3")){
     options("baseurl" = "https://final.datim.org/")
     ui_done("{ui_field('datim')} username set as {ui_value(getOption('datim'))}")
     ui_done("{ui_field('baseurl')} set to {ui_value(getOption('baseurl'))}")
+  }
+
+  if(is_stored("pano") && "pano" %in% service){
+    options("pano" = keyring::key_list("pano")[1,2])
+    ui_done("{ui_field('pano')} username set as {ui_value(getOption('pano'))}")
   }
 
   if (is_stored("s3") && "s3" %in% service) {
@@ -226,6 +232,89 @@ datim_pwd <- function(){
     suppressMessages(load_secrets())
 
   keyring::key_get("datim", getOption("datim"))
+
+}
+
+
+#' Store PEPFAR Panorama credentials
+#'
+#' `set_pano` stores your PEPFAR Panoram credentials email using the `keyring` package.
+#' This will only need to done once. After running `set_pano(user)`, you will be
+#' promoted to enter your password through the RStudio API which will then store the
+#' username and password in your OS credential store using `keyring`.
+#'
+#'  The `keyring` package utilized the OS credentials store. Storing in
+#'  a centralized, secure location allows analysts to other analysts code
+#'  without having to manually change user names/email address to access
+#'  DATIM, Panorama, or Google Drive.
+#'
+#'  After `set_pano` has been run once, an analyst can set `load_secrets` at the
+#'  beginning of a script, storing their PEPFAR Panorama credentials under Options
+#'  for the current session.
+#'
+#' @param pano_username Panorama user name (email)
+#'
+#' @return stores Panorama username and password in using keyring
+#' @export
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' set_pano("rshah@usaid.gov") }
+set_pano <- function(pano_username){
+
+  package_check('keyring')
+
+  keyring::key_set(service = "pano",
+                   username = pano_username)
+}
+
+
+#' Return PEPFAR Panorama username
+#'
+#' To setup/store, run `glamr::set_pano()`.
+#'
+#' @return access Panorama username from keyring
+#' @export
+#' @family authentication
+#'
+#' @importFrom usethis ui_stop
+#' @importFrom usethis ui_code
+pano_user <- function(){
+
+  package_check('keyring')
+
+  if(!is_stored("pano"))
+    ui_stop("NO Panorama credentials stored. Setup using {ui_code('set_pano()')}")
+
+  if(!is.loaded("pano"))
+    suppressMessages(load_secrets())
+
+  keyring::key_list("pano")[1,2]
+
+}
+
+#' Return PEPFAR Panorama password
+#'
+#' To setup/store, run `glamr::set_pano()`.
+#'
+#' @return access Panorama password from keyring
+#' @export
+#' @family authentication
+#'
+#' @importFrom usethis ui_stop
+#' @importFrom usethis ui_code
+pano_pwd <- function(){
+
+  package_check('keyring')
+
+  if(!is_stored("pano"))
+    ui_stop("NO Panorama credentials stored. Setup using {:ui_code('set_pano()')}")
+
+  if(!is.loaded("pano"))
+    suppressMessages(load_secrets())
+
+  keyring::key_get("pano", getOption("pano"))
 
 }
 

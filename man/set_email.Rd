@@ -41,7 +41,10 @@ Other authentication:
 \code{\link{datim_user}()},
 \code{\link{get_s3key}()},
 \code{\link{load_secrets}()},
+\code{\link{pano_pwd}()},
+\code{\link{pano_user}()},
 \code{\link{set_datim}()},
+\code{\link{set_pano}()},
 \code{\link{set_s3keys}()}
 }
 \concept{authentication}
