@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilities.R
 \name{connect_text}
 \alias{connect_text}
-\title{connect_text}
+\title{Clean and connect parts of text together}
 \usage{
 connect_text(txt, connections = "[^a-zA-Z0-9]", connector = "_")
 }
@@ -14,10 +14,10 @@ connect_text(txt, connections = "[^a-zA-Z0-9]", connector = "_")
 \item{connector}{Charactor used as connector}
 }
 \value{
-
+cleaned text
 }
 \description{
-connect_text
+Clean and connect parts of text together
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_columns.R
 \name{lookup_country}
 \alias{lookup_country}
-\title{Lookup Official Country name}
+\title{Lookup official Country name}
 \usage{
 lookup_country(country, language = "en")
 }
@@ -15,6 +15,15 @@ lookup_country(country, language = "en")
 cleaned country name
 }
 \description{
-Lookup Official Country name
+Lookup official Country name
 }
-\keyword{internal}
+\examples{
+{
+ cntry <- "Cote d'Ivoire"
+
+ name <- lookup_country(cntry)
+
+ name
+}
+
+}

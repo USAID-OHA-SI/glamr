@@ -16,10 +16,44 @@ clean_column <- function(.data, colname = "psnu") {
 
     # Check for valid column name
     if (length(dplyr::setdiff(name,  names(.data))) > 0) {
-      cat("\nERROR - One of the column names is unknown: ",
+      cat("\nERROR - Column name is unknown: ",
           crayon::red({{colname}}), "\n")
 
       return(NULL)
+    }
+
+    # Funding Agencies
+    if(name == "fundingagency") {
+      .data <- .data %>%
+        clean_agency() %>%
+        mutate(fundingagency == case_when(
+          fundingagency == "PC" ~ "Peace Corps",
+          TRUE ~ fundingagency
+        ))
+
+      return(.data)
+    }
+
+    # Operatingunit / countryname
+    if(base::all(name %in% c("operatingunit", "countryname"))) {
+      .data <- .data %>%
+        dplyr::mutate(dplyr::across(dplyr::all_of(name),
+                      ~ case_when(
+                        . == "Democratic Republic of the Congo" ~ "DRC",
+                        . == "Papua New Guinea" ~ "PNG",
+                        . == "Dominican Republic" ~ "DR",
+                        . == "Trinidad and Tobago" ~ "T&T",
+                        . == "Antigua and Barbuda" ~ "Antigua & Barbuda",
+                        . == "Saint Kitts and Nevis" ~ "St Kitts & Nevis",
+                        . == "Saint Vincent and the Grenadines" ~ "St Vincent & Grenadines",
+                        . == "Asia Regional Program" ~ "ARP",
+                        . == "Central America Region" ~ "CAR",
+                        . == "West Africa Region" ~ "WAR",
+                        . == "Western Hemisphere Region" ~ "WHR",
+                        TRUE ~ .
+                      )))
+
+      return(.data)
     }
 
     # Remove characters
@@ -85,7 +119,7 @@ clean_psnu <- function(.data) {
 #' @examples
 #' \dontrun{
 #'  df_msd %>% clean_agency() }
-
+#'
 clean_agency <- function(.data) {
 
     # Check for valid column name
@@ -103,12 +137,21 @@ clean_agency <- function(.data) {
   }
 
 
-#' @title Lookup Official Country name
+#' @title Lookup official Country name
 #'
 #' @param country country name
 #' @param language language to use for lookup
+#'
 #' @return cleaned country name
-#' @keywords internal
+#' @export
+#'
+#' @examples{
+#'  cntry <- "Cote d'Ivoire"
+#'
+#'  name <- lookup_country(cntry)
+#'
+#'  name
+#' }
 #'
 lookup_country <- function(country, language = "en") {
 
@@ -117,7 +160,7 @@ lookup_country <- function(country, language = "en") {
 
   # Vectorise the lookup process
   curr_name %>%
-    purrr::map(function(.x) {
+    purrr::map_chr(function(.x) {
 
       # Hold targeted country
       curr_name <- .x
@@ -128,14 +171,16 @@ lookup_country <- function(country, language = "en") {
         # Include NE Columns
         df_cntries <- pepfar_country_xwalk %>%
           dplyr::filter(
-            rowSums(across(.cols = c(tidyselect::ends_with(language),
-                                     tidyselect::all_of(c("sovereignt", "admin", "name"))),
-                           .fns = ~(. == curr_name))) > 0)
+            base::rowSums(dplyr::across(
+              .cols = c(tidyselect::ends_with(language),
+                        tidyselect::all_of(c("sovereignt", "admin", "name"))),
+              .fns = ~(. == curr_name))) > 0)
       } else {
         df_cntries <- pepfar_country_xwalk %>%
           dplyr::filter(
-            rowSums(across(.cols = tidyselect::ends_with(language),
-                           .fns = ~(. == curr_name))) > 0)
+            base::rowSums(dplyr::across(
+              .cols = tidyselect::ends_with(language),
+              .fns = ~(. == curr_name))) > 0)
       }
 
       # make sure result if valid
@@ -152,9 +197,7 @@ lookup_country <- function(country, language = "en") {
 
       # Result
       return(new_name)
-
-    }) %>%
-    base::unlist()
+    })
 
   # Retrieve the correct name
   # country = dplyr::case_when(
@@ -188,17 +231,16 @@ lookup_country <- function(country, language = "en") {
 }
 
 
-#' @title Clean OU/Country names to match PEPFAR Data
+#' @title Clean Natural Earth Country names to match PEPFAR Data
 #'
-#' `clean_countries` is used to adjust Natural Earth country names to match
-#' PEPFAR ones.
+#' @description `clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / Countryname. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE.
 #'
 #' @param .data     Reference Datasets
 #' @param colname   Column name to be updated
 #' @param language  language of reference, default is set to `en`. Options are: `fr`, `de`, `es`, `ar`
-#'
+#' @param short     If TRUE, shorten OU/Country names instead, default is TRUE
 #' @return  Cleaned DataFrame
-#' @family    Column clean up
+#' @family  Column clean up
 #' @export
 #'
 #' @examples
@@ -214,19 +256,25 @@ lookup_country <- function(country, language = "en") {
 #'
 clean_countries <- function(.data,
                             colname = "admin",
-                            language = "en") {
+                            language = "en",
+                            short = TRUE) {
 
     # Check for valid column name
     if (!colname %in% names(.data)) {
       cat("\nERROR - ",
-          crayon::red(colname),
-          " is not available as a column.\n")
+          crayon::red(base::paste(colname, collapse = ", ")),
+          " not available as a column(s).\n")
 
       return(NULL)
     }
 
-    # Notification
-    cat("\nUpdating", crayon::green(colname), "column ...\n")
+    # Exception - Shorten PEPFAR OU/Country names
+    if (base::all(colname %in% c("operatingunit", "countryname")) && short == TRUE) {
+      .data <- .data %>%
+        clean_column(colname = colname)
+
+      return(.data)
+    }
 
     # Params symbols
     name <- {{colname}}
