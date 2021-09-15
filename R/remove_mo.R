@@ -12,7 +12,7 @@
 remove_mo <- function(df){
 
   #check that mechanism exists in MSD before starting (OUxIM or PSNUxIM, not PSNU)
-  if(("mech_code" %in% names(df) == FALSE)) {
+  if(any(c("mech_code", "mechanism_id") %in% names(df)) == FALSE) {
     stop('This dataset does not have mechanisms. Make sure it is OUxIM or PSNUxIM')
   }
 

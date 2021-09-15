@@ -1,4 +1,6 @@
 # glamr 1.0.0
+* Fixed `source_info()` to allow it to work correctly with FSD (misspelling in the filename).
+* Allow user to just flag, not remove SCH mechanism in `remove_sch()`.
 * Resolve bug with new code for `set_path`, causing an error if any path was missing from the .Rprofile
 * The new `temp_folder()` creates and stores a folder in your Global Envir to use, which will be automatically be deleted on the end of your RStudio session.
 * Used `pkgdown` to create a site

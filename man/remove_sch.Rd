@@ -4,13 +4,16 @@
 \alias{remove_sch}
 \title{Remove Supply Chain Funding}
 \usage{
-remove_sch(df, poc = c("SCH", "SGAC"))
+remove_sch(df, poc = c("SCH", "SGAC"), flag_only = FALSE)
 }
 \arguments{
 \item{df}{this can be either a financial structured dataset or an MSD}
 
 \item{poc}{you can choose to filter either the SCH list or the SGAC list;
 default is both}
+
+\item{flag_only}{allows you keep full dataset, but identify the mechanisms
+that are supply chain, mech_sch as a logical; default = FALSE}
 }
 \value{
 a df without supply chain mechanisms

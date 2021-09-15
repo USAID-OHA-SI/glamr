@@ -64,7 +64,7 @@ source_info <- function(path, type, return = "source"){
 
   #identify the type of file
   file_type <- dplyr::case_when(stringr::str_detect(file_name, "(Genie|NAT_SUBNAT)") ~ stringr::str_extract(path, "(Frozen|Daily|NAT_SUBNAT)"),
-                                stringr::str_detect(file_name, "Financial_Structured_Datasets") ~ "FSD",
+                                stringr::str_detect(file_name, "Fin.*_Structured_Dataset") ~ "FSD",
                                 stringr::str_detect(file_name, "MER_Structured_Datasets") ~ "MSD")
 
   #capture the dataset date for use in figuring out relvant FY period
