@@ -59,6 +59,7 @@ reference:
   - pano_session
   - get_s3key
   - load_secrets
+  - is_stored
 
 - title: Authentication Setup
   contents:

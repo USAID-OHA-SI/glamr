@@ -44,12 +44,12 @@ package_check <- function(pkg){
 
 #' Test if service is stored in credential manager
 #'
-#' @param service account, either "email", "datim" or "s3"
+#' @param service account, either "email", "datim", "pano", or "s3"
 #'
+#' @export
 #' @return A boolean
-#' @keywords internal
 
-is_stored <- function(service = c("datim", "email", "s3")){
+is_stored <- function(service = c("datim", "email", "pano", "s3")){
 
   package_check('keyring')
 
