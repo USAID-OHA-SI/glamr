@@ -28,6 +28,8 @@ navbar:
         href: articles/credential-management.html
       - text: Project Workflow
         href: articles/project-workflow.html
+      - text: Data Extraction from Panorama
+        href: articles/data-extraction-from-panorama.html
 
 reference:
 - title: Workflow
@@ -54,6 +56,7 @@ reference:
   - datim_user
   - pano_pwd
   - pano_user
+  - pano_session
   - get_s3key
   - load_secrets
 
@@ -121,6 +124,14 @@ reference:
   - datim_process_query
   - datim_query
   - datim_pops
+
+- title: Panorama
+  contents:
+  - pano_content
+  - pano_elements
+  - pano_unpack
+  - pano_extract
+  - pano_download
 
 - title: Mechanism Handling
   contents:

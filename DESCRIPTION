@@ -33,6 +33,7 @@ Imports:
 Suggests: 
     curl,
     fs,
+    zip,
     httr,
     googlesheets4,
     janitor,
