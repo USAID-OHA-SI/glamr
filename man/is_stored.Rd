@@ -4,10 +4,10 @@
 \alias{is_stored}
 \title{Test if service is stored in credential manager}
 \usage{
-is_stored(service = c("datim", "email", "s3"))
+is_stored(service = c("datim", "email", "pano", "s3"))
 }
 \arguments{
-\item{service}{account, either "email", "datim" or "s3"}
+\item{service}{account, either "email", "datim", "pano", or "s3"}
 }
 \value{
 A boolean
@@ -15,4 +15,3 @@ A boolean
 \description{
 Test if service is stored in credential manager
 }
-\keyword{internal}
