@@ -133,7 +133,7 @@ url_items <- items %>%
 `pano_extract_msd()` is designed to facilate the download of MSD files for specific operating units and at a specific org hierarchy level. Eg: download Zambia's Site x IM data sets from Panorama. 
 
 ```{r echo = T, eval = F}
-  pano_pull_msd(operatingunit = "Zambia",
+  pano_extract_msd(operatingunit = "Zambia",
                 version = "clean",
                 fiscal_year = 2021,
                 quarter = 3,
