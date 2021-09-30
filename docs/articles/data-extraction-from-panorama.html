@@ -160,10 +160,13 @@
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">item</span>, <span class="st">"^MER"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">pull</span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 
-<span class="va">mer_items</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_content.html">pano_content</a></span><span class="op">(</span>page_url <span class="op">=</span> <span class="va">dir_mer_path</span>, 
-                          session <span class="op">=</span> <span class="va">sess</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/pano_elements.html">pano_elements</a></span><span class="op">(</span>page_name <span class="op">=</span> <span class="st">"MER FY2021 Q3 Pre-Cleaning"</span>,
-                page_url <span class="op">=</span> <span class="va">dir_mer_path</span><span class="op">)</span>
+<span class="va">mer_items</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_content.html">pano_content</a></span><span class="op">(</span>page_url <span class="op">=</span> <span class="va">dir_mer_path</span>, session <span class="op">=</span> <span class="va">sess</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/pano_elements.html">pano_elements</a></span><span class="op">(</span>page_url <span class="op">=</span> <span class="va">dir_mer_path</span><span class="op">)</span>
+
+<span class="va">mer_items</span></code></pre></div>
+<p><code><a href="../reference/pano_items.html">pano_items()</a></code> combines <code><a href="../reference/pano_content.html">pano_content()</a></code> and <code><a href="../reference/pano_elements.html">pano_elements()</a></code> into 1 function for a quick access to data items list on a specific page.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mer_items</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_items.html">pano_items</a></span><span class="op">(</span>page_url <span class="op">=</span> <span class="va">dir_mer_path</span>, session <span class="op">=</span> <span class="va">sess</span><span class="op">)</span> 
 
 <span class="va">mer_items</span></code></pre></div>
 </div>
@@ -171,7 +174,7 @@
 <h3 class="hasAnchor">
 <a href="#download-specific-items-from-panorama" class="anchor"></a>Download specific items from Panorama</h3>
 <p>Most data items under the download page of Panorama are listed as zipped files. To download them to a local directory, we will need to use the <code><a href="../reference/pano_download.html">pano_download()</a></code> function. This function is a wrapper for <code><a href="https://httr.r-lib.org/reference/GET.html">httr::GET()</a></code> function write option set to a local directory.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dest_path</span> <span class="op">&lt;-</span> <span class="st">"../../../Temp/"</span>
 
 <span class="va">url</span> <span class="op">&lt;-</span> <span class="va">mer_items</span> <span class="op">%&gt;%</span> 
@@ -188,7 +191,7 @@
 <h3 class="hasAnchor">
 <a href="#download-mutiple-items-from-panorama" class="anchor"></a>Download mutiple items from Panorama</h3>
 <p><code><a href="../reference/pano_extract.html">pano_extract()</a></code> is good for batch processing. Eg: download all MER data sets from Panorama. This function combine all the above steps into one.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">items</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_extract.html">pano_extract</a></span><span class="op">(</span>item <span class="op">=</span> <span class="st">"mer"</span>, 
                       version <span class="op">=</span> <span class="st">"clean"</span>, 
                       fiscal_year <span class="op">=</span> <span class="fl">2021</span>, 
@@ -206,6 +209,18 @@
   <span class="fu">walk</span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/pano_download.html">pano_download</a></span><span class="op">(</span>item_url <span class="op">=</span> <span class="va">.x</span>, 
                       session <span class="op">=</span> <span class="va">sess</span>, 
                       dest <span class="op">=</span> <span class="va">dest_path</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="download-mer-and-ou-specific-items-from-panorama" class="section level3">
+<h3 class="hasAnchor">
+<a href="#download-mer-and-ou-specific-items-from-panorama" class="anchor"></a>Download MER and OU Specific items from Panorama</h3>
+<p><code><a href="../reference/pano_extract_msd.html">pano_extract_msd()</a></code> is designed to facilate the download of MSD files for specific operating units and at a specific org hierarchy level. Eg: download Zambia’s Site x IM data sets from Panorama.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu">pano_pull_msd</span><span class="op">(</span>operatingunit <span class="op">=</span> <span class="st">"Zambia"</span>,
+                version <span class="op">=</span> <span class="st">"clean"</span>,
+                fiscal_year <span class="op">=</span> <span class="fl">2021</span>,
+                quarter <span class="op">=</span> <span class="fl">3</span>,
+                level <span class="op">=</span> <span class="st">"site"</span>,
+                dest_path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 

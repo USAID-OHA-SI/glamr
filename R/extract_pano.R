@@ -109,12 +109,22 @@ pano_content <- function(page_url, session) {
 #' }
 #'
 pano_elements <- function(page_html,
-                          page_name = NA,
+                          #page_name = NA,
                           page_url = NULL) {
 
+  # Base ulr for download page
+  download_url <- "https://pepfar-panorama.org/forms/downloads"
+
   if (base::is.null(page_url)) {
-    page_url = "https://pepfar-panorama.org/forms/downloads"
+    page_url = download_url
   }
+
+  # Extract Parent url
+  parent_path <- page_url %>%
+    stringr::str_replace(download_url, "") %>%
+    stringr::str_replace_all("%20", " ") %>%
+    stringr::str_remove("^/") %>%
+    stringr::str_remove("^/$")
 
   page_items <- page_html %>%
     rvest::html_elements("li>a") %>%
@@ -130,13 +140,48 @@ pano_elements <- function(page_html,
     rvest::html_attr("class")
 
   df_elements <- tibble::tibble(
-      parent = page_name,
+      parent = parent_path, #page_name,
       item = page_items,
       type = page_metas,
       path = page_hrefs
     ) %>%
     dplyr::mutate(path = base::paste0(page_url, "/", page_hrefs))
 }
+
+
+#' @title Extract data items from url
+#'
+#' @param page_url  Current html page url
+#' @param session   Pano active and valid session
+#'
+#' @return data items as data frame
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   library(glamr)
+#'
+#'   s <- pano_session("<my-pano-user>", "<my-password>")
+#'   url <- "https://pepfar-panorama.org/forms/downloads"
+#'
+#'   items <- pano_items(page_url = url, session = s)
+#' }
+#'
+pano_items <- function(page_url, session = NULL) {
+
+  path <- page_url
+  sess <- session
+
+  if (base::is.null(sess)) {
+    sess <- pano_session()
+  }
+
+  items <- pano_content(page_url = path, session = sess) %>%
+    pano_elements(page_url = path)
+
+  return(items)
+}
+
 
 
 #' @title Download file from PEPFAR Panorama
@@ -226,7 +271,7 @@ pano_unpack <- function(df_pano, session) {
 
   # check for valid rows
   if (base::nrow(df_items) == 0) {
-    base::print(glue::glue("No directories"))
+    base::print(glue::glue("No directories found in the list of Pano items"))
 
     return(df_items)
   }
@@ -239,7 +284,7 @@ pano_unpack <- function(df_pano, session) {
     dplyr::select(item, path) %>%
     purrr::pmap_dfr(function(item, path){
       items <- pano_content(page_url = path, session = session) %>%
-        pano_elements(page_name = item, page_url = path)
+        pano_elements(page_url = path)
 
       return(items)
     })
@@ -296,11 +341,14 @@ pano_extract <- function(item = "mer",
   data_path <- "/forms/downloads"
   data_url <- base::paste0(base_url, data_path)
 
+  # Search Item
+  s_item <- stringr::str_to_lower(item)
+
   # archived files: update based on fy & qtr
   archive <- NULL
 
   # Search key
-  s_dir <- base::paste0(item, " FY", fiscal_year, " Q", quarter)
+  s_dir <- base::paste0(s_item, " FY", fiscal_year, " Q", quarter)
 
   # Current releases
   if (version == "initial") {
@@ -328,12 +376,13 @@ pano_extract <- function(item = "mer",
     base::stop("ERROR - No data items found on the main downlaod page")
   }
 
-  # Check reporting period # MER FY2021 Q3 Pre-Cleaning
-  mer <- dir_items %>%
-    dplyr::filter(stringr::str_detect(item, "^MER")) %>%
+  # Find Data item
+  dt_item <- dir_items %>%
+    dplyr::filter(stringr::str_detect(stringr::str_to_lower(item), base::paste0("^", s_item))) %>%
     dplyr::pull(item)
 
-  rep_pd <- mer %>%
+  # Extract Reporting Period
+  rep_pd <- dt_item %>%
     stringr::str_extract_all("\\d") %>%
     base::unlist()
 
@@ -343,13 +392,13 @@ pano_extract <- function(item = "mer",
 
   curr_rep_qtr <- rep_pd[5] %>% base::as.integer()
 
-  curr_mer <- mer %>%
+  curr_item <- dt_item %>%
     stringr::str_extract("(?<=Q)(.*)(?=-)") %>%
     stringr::str_remove("\\d\\s")
 
   if (fiscal_year < curr_rep_fy |
       quarter < curr_rep_qtr |
-      !stringr::str_detect(s_dir, curr_mer)) {
+      !stringr::str_detect(s_dir, curr_item)) {
     archive = TRUE
   } else {
     archive = FALSE
@@ -357,24 +406,38 @@ pano_extract <- function(item = "mer",
 
   # Retrieve sub-folders from previous releases
   if (archive == TRUE) {
-    s_prev_dir <- base::paste0("Previous ", item, " Releases")
+    s_prev_dir <- base::paste0("Previous ", s_item, " Releases")
 
     base::message("Looking into previous releases ...")
-    base::print(s_prev_dir)
+    base::print(stringr::str_to_lower(s_prev_dir))
 
     # Previous sub-directories
     dir_items <- dir_items %>%
       dplyr::filter(
         stringr::str_detect(
           stringr::str_to_lower(item),
-          stringr::str_to_lower(s_prev_dir))) %>%
-      dplyr::select(item, path) %>%
-      purrr::pmap_dfr(function(item, path){
-        items <- pano_content(page_url = path, session = sess) %>%
-          pano_elements(page_name = item, page_url = path)
+          stringr::str_to_lower(s_prev_dir)))
 
-        return(items)
-      })
+    if (base::is.null(dir_items) | base::nrow(dir_items) == 0) {
+      base::stop("ERROR - No items found for this release")
+    }
+
+    dir_items <- dir_items %>%
+      dplyr::pull(path) %>%
+      purrr::map_dfr(~pano_items(page_url = .x, session = sess))
+
+    # Dir structure change for previous Mer Items
+    if (s_item == "mer"){
+      s_prev_subdir <- base::paste0(s_item, " FY", fiscal_year)
+
+      dir_items <- dir_items %>%
+        dplyr::filter(
+          stringr::str_detect(
+            stringr::str_to_lower(item),
+            stringr::str_to_lower(s_prev_subdir))) %>%
+        dplyr::pull(path) %>%
+        purrr::map_dfr(~pano_items(page_url = .x, session = sess))
+    }
   }
 
   # Narrow search directories
@@ -385,17 +448,12 @@ pano_extract <- function(item = "mer",
         stringr::str_to_lower(s_dir)))
 
   base::message("Search directorie(s): ")
-  base::print(dir_items$item %>% paste(collapse = ", "))
+  base::print(base::unique(dir_items$item) %>% paste(collapse = ", "))
 
   # Extract immediate items
   df_items <- dir_items %>%
-    dplyr::select(item, path) %>%
-    purrr::pmap_dfr(function(item, path){
-      items <- pano_content(page_url = path, session = sess) %>%
-        pano_elements(page_name = item, page_url = path)
-
-      return(items)
-    })
+    dplyr::pull(path) %>%
+    purrr::map_dfr(~pano_items(page_url = .x, session = sess))
 
   # Check for valid data
   if (base::is.null(df_items) | base::nrow(df_items) == 0) {
@@ -416,7 +474,8 @@ pano_extract <- function(item = "mer",
 
     df_items <- df_items %>%
       dplyr::filter(type == "dir") %>%
-      pano_unpack(session = sess)
+      pano_unpack(session = sess) %>%
+      bind_rows(df_items)
   }
 
   #Download files
@@ -425,4 +484,88 @@ pano_extract <- function(item = "mer",
 
   # Return files
   return(df_files)
+}
+
+
+#' @title Downloads Country Specific MSDs
+#'
+#' @param operatingunit PEPFAR Operating Unit. Default is set to NULL for global datasets
+#' @param version       Data release version: initial or clean
+#' @param fiscal_year   Reporting Fiscal year: 4 digits year
+#' @param quarter       Reporting Quarter: Single digit quarters
+#' @param level         Org level, options are ou, psnu and sites
+#' @param dest_path     Directory path to download file. Default set to `si_path()`
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#'  pano_extract_msd(operatingunit = "Zambia",
+#'                   version = "clean",
+#'                   fiscal_year = 2021,
+#'                   quarter = 3,
+#'                   level = "site",
+#'                   dest_path = NULL)
+#' }
+#'
+pano_extract_msd <- function(operatingunit = NULL,
+                             version = "clean",
+                             fiscal_year = 2021,
+                             quarter = 3,
+                             level = "psnu",
+                             dest_path = NULL) {
+
+  # Session
+  sess <- pano_session()
+
+  # Destination Path
+  path_msd <- si_path("path_msd")
+
+  if (!is.null(dest_path)) {
+    path_msd <- dest_path
+  }
+
+  # Search Key
+  s_key <- level %>%
+    base::paste0("^mer_.*_", .,  "_im_.*") %>%
+    stringr::str_to_lower()
+
+  # Data items
+  df_pano <- pano_extract(item = "mer",
+                          version = version,
+                          fiscal_year = fiscal_year,
+                          quarter = quarter,
+                          unpack = T)
+
+  # Current global
+  df_pano <- df_pano %>%
+    filter(type == "file zip_file",
+           stringr::str_detect(str_to_lower(item), s_key))
+
+  # Global datasets
+  if (base::is.null(operatingunit) & level == "ou") {
+
+    df_pano %>%
+      dplyr::pull(path) %>%
+      purrr::walk(~pano_download(item_url = .x,
+                                 session = sess,
+                                 dest = path_msd))
+  } else if (!base::is.null(operatingunit) & level %in% c("psnu", "site")) {
+    # OU Specific
+    operatingunit %>%
+      purrr::walk(function(.x) {
+        s_ou <- base::paste0(".*_\\d{1}_", .x, ".zip$") %>%
+          stringr::str_to_lower()
+
+        df_pano %>%
+          filter(stringr::str_detect(stringr::str_to_lower(item), s_ou)) %>%
+          dplyr::pull(path) %>%
+          purrr::walk(~pano_download(item_url = .x,
+                                     session = sess,
+                                     dest = path_msd))
+        })
+  } else {
+    base::message("ERROR - Unkonwn options ou/level.")
+  }
 }

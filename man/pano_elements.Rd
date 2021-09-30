@@ -4,14 +4,14 @@
 \alias{pano_elements}
 \title{Extract data elements details from html content}
 \usage{
-pano_elements(page_html, page_name = NA, page_url = NULL)
+pano_elements(page_html, page_url = NULL)
 }
 \arguments{
 \item{page_html}{html content}
 
-\item{page_name}{Current html page name}
-
 \item{page_url}{Curretn html page url}
+
+\item{page_name}{Current html page name}
 }
 \value{
 html element

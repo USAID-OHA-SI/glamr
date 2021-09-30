@@ -72,10 +72,16 @@ dir_mer_path <- dirs %>%
   filter(str_detect(item, "^MER")) %>% 
   pull(path)
 
-mer_items <- pano_content(page_url = dir_mer_path, 
-                          session = sess) %>% 
-  pano_elements(page_name = "MER FY2021 Q3 Pre-Cleaning",
-                page_url = dir_mer_path)
+mer_items <- pano_content(page_url = dir_mer_path, session = sess) %>% 
+  pano_elements(page_url = dir_mer_path)
+
+mer_items
+```
+
+`pano_items()` combines `pano_content()` and `pano_elements()` into 1 function for a quick access to data items list on a specific page.
+
+```{r echo = T, eval = F}
+mer_items <- pano_items(page_url = dir_mer_path, session = sess) 
 
 mer_items
 ```
@@ -120,4 +126,17 @@ url_items <- items %>%
   walk(~pano_download(item_url = .x, 
                       session = sess, 
                       dest = dest_path))
+```
+
+### Download MER and OU Specific items from Panorama
+
+`pano_extract_msd()` is designed to facilate the download of MSD files for specific operating units and at a specific org hierarchy level. Eg: download Zambia's Site x IM data sets from Panorama. 
+
+```{r echo = T, eval = F}
+  pano_pull_msd(operatingunit = "Zambia",
+                version = "clean",
+                fiscal_year = 2021,
+                quarter = 3,
+                level = "site",
+                dest_path = NULL)
 ```

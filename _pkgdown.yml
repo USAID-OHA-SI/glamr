@@ -130,8 +130,10 @@ reference:
   contents:
   - pano_content
   - pano_elements
+  - pano_items
   - pano_unpack
   - pano_extract
+  - pano_extract_msd
   - pano_download
 
 - title: Mechanism Handling
