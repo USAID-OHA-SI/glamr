@@ -87,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -119,7 +119,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/USAID-OHA-SI/glamr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -147,6 +147,7 @@
 <li>Add set of functions to store, access, and load Panorama credentials - <code>set_pano</code>, <code><a href="../reference/pano_user.html">pano_user()</a></code>, <code><a href="../reference/pano_pwd.html">pano_pwd()</a></code>, <code><a href="../reference/pano_session.html">pano_session()</a></code>, and <code><a href="../reference/load_secrets.html">load_secrets()</a></code>.</li>
 <li>Add functions to discover and download output datasets from Panorama: <code><a href="../reference/pano_content.html">pano_content()</a></code>, <code><a href="../reference/pano_elements.html">pano_elements()</a></code>, <code><a href="../reference/pano_unpack.html">pano_unpack()</a></code>, <code><a href="../reference/pano_extract.html">pano_extract()</a></code>, <code><a href="../reference/pano_download.html">pano_download()</a></code>, <code><a href="../reference/pano_items.html">pano_items()</a></code>, <code><a href="../reference/pano_extract_msd.html">pano_extract_msd()</a></code>
 </li>
+<li>Update <code>pepfar_data_calendar</code> with FY22 dates</li>
 </ul>
 </div>
     <div id="glamr-100" class="section level1">
@@ -165,7 +166,7 @@
 <li>New vigentte for project workflow added, <code>vignette(package = glamr)</code>
 </li>
 <li>Update <code><a href="../reference/set_paths.html">set_paths()</a></code>, allowing for <code>path_downloads</code> and improve backend efficiency.</li>
-<li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> and <code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_auth.html">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
+<li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> and <code><a href="https://googlesheets4.tidyverse.org/reference/gs4_auth.html">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
 <li>Add <code><a href="../reference/clean_filename.html">clean_filename()</a></code> function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.</li>
 <li>Adjust <code><a href="../reference/load_secrets.html">load_secrets()</a></code> to allow user to specify which accounts to load in a session.</li>
 <li>Depricate <code><a href="../reference/mypwd.html">mypwd()</a></code> which has been superseded by <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>.</li>
