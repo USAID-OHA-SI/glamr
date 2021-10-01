@@ -2,6 +2,7 @@
 * Add set of functions to store, access, and load Panorama credentials - `set_pano`,
  `pano_user()`, `pano_pwd()`, `pano_session()`, and `load_secrets()`.
 * Add functions to discover and download output datasets from Panorama: `pano_content()`, `pano_elements()`, `pano_unpack()`, `pano_extract()`, `pano_download()`, `pano_items()`, `pano_extract_msd()`
+* Update `pepfar_data_calendar` with FY22 dates
 
 # glamr 1.0.0
 * Fixed `source_info()` to allow it to work correctly with FSD (misspelling in the filename).
