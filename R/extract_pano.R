@@ -209,7 +209,7 @@ pano_items <- function(page_url, session = NULL) {
 #'
 #'   f_url <- elts %>% filter(type == "file zipfile") %>% pull(path) %>% first()
 #'
-#'   pano_download(item_url = f_url, session = s, dest = "./Data/)
+#'   pano_download(item_url = f_url, session = s, dest = "./Data/")
 #' }
 #'
 pano_download <- function(item_url, session,
