@@ -180,7 +180,10 @@ flag_knownissues <- function(df, df_issues){
   df_excl <- df_issues %>%
     dplyr::filter(action == "exclude",
                   resolved == FALSE) %>%
-    dplyr::select(mech_code, fiscal_year, indicator, period_type)
+    dplyr::distinct(mech_code, fiscal_year, indicator, period_type) %>%
+    dplyr::mutate(value = TRUE) %>%
+    tidyr::pivot_wider(names_from = period_type,
+                       values_from = value)
 
   #join to main df
   df_join <- df %>%
