@@ -4,12 +4,10 @@
 \alias{squish_knownissues}
 \title{Squish Known Issues}
 \usage{
-squish_knownissues(df, type = "targets")
+squish_knownissues(df)
 }
 \arguments{
 \item{df}{df output from flag_knownissues()}
-
-\item{type}{period type, either targets (default) or results}
 }
 \value{
 dataframe with known issues data removed

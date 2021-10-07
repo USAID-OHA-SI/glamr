@@ -61,10 +61,7 @@ resolve_knownissues <- function(df, store_excl = FALSE){
   df_flag <- flag_knownissues(df, df_issues)
 
   #replace known issue data to exclude with NAs
-  df_adj <- df_flag %>%
-    squish_knownissues("targets") %>%
-    squish_knownissues("results") %>%
-    dplyr::select(-period_type)
+  df_adj <- squish_knownissues(df_flag)
 
   #print out known issues
   df %>%
@@ -180,7 +177,11 @@ flag_knownissues <- function(df, df_issues){
   df_excl <- df_issues %>%
     dplyr::filter(action == "exclude",
                   resolved == FALSE) %>%
-    dplyr::select(mech_code, fiscal_year, indicator, period_type)
+    dplyr::distinct(mech_code, fiscal_year, indicator, period_type) %>%
+    dplyr::mutate(value = TRUE) %>%
+    tidyr::pivot_wider(names_from = period_type,
+                       names_prefix = "exclude_",
+                       values_from = value)
 
   #join to main df
   df_join <- df %>%
@@ -193,35 +194,33 @@ flag_knownissues <- function(df, df_issues){
 #' Squish Known Issues
 #'
 #' @param df df output from flag_knownissues()
-#' @param type period type, either targets (default) or results
 #'
 #' @return dataframe with known issues data removed
 #' @keywords internal
 
-squish_knownissues <- function(df, type = "targets"){
+squish_knownissues <- function(df){
 
-  if(!"period_type" %in% names(df))
-    df <- dplyr::mutate(df, period_type = "none")
+  #ensure that exclude_results vars exist
+    if(!"exclude_results" %in% names(df))
+      df <- dplyr::mutate(df, exclude_results = FALSE)
 
-  #convert NAs to none for use of negative filter
-  df <- dplyr::mutate(df, period_type = ifelse(is.na(period_type), "none", period_type))
+  #ensure that exclude_targets vars exist
+    if(!"exclude_targets" %in% names(df))
+      df <- dplyr::mutate(df, exclude_targets = FALSE)
 
-  if({type} %in% unique(df$period_type)){
-    #columns to adjust
-    cols <- dplyr::case_when(type == "targets" ~ "targets",
-                             type == "results" ~ c("qtr1", "qtr2", "qtr3", "qtr4", "cumulative"))
-
-    #replace known results issues with NA
-    df_adj <- df %>%
-      dplyr::filter(period_type == {type}) %>%
-      dplyr::mutate(dplyr::across(all_of(cols), ~ NA))
-
-    #remove issue rows and bind back on the NA values
+  #fill exclude_* with FALSE for mechs not not in flagged list
     df <- df %>%
-      dplyr::filter(period_type != {type}) %>%
-      dplyr::bind_rows(df_adj) %>%
-      dplyr::mutate(period_type = dplyr::na_if(period_type, "none"))
-  }
+      dplyr::mutate(dplyr::across(dplyr::starts_with("exclude"),
+                                  ~ ifelse(is.na(.), FALSE, .)))
+
+  #remove known issues = replace with NA
+    df <- df %>%
+      dplyr::mutate(dplyr::across(c(dplyr::starts_with("qtr"), cumulative),
+                                  ~ ifelse(exclude_results == TRUE, NA_real_, .)),
+                    targets = ifelse(exclude_targets == TRUE, NA_real_, targets))
+
+  #remove exclude_*
+    df <- dplyr::select(df, -dplyr::starts_with("exclude"))
 
   return(df)
 }
