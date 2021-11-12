@@ -184,6 +184,14 @@ clean_knownissues <- function(df){
     tidyr::separate_rows(indicator, sep = ",") %>%
     dplyr::mutate(indicator = stringr::str_trim(indicator))
 
+  #adjust period_type
+  df_expnd <- df_expnd %>%
+    dplyr::mutate(period_type = period_type %>%
+                    stringr::str_remove("MER ") %>%
+                    stringr::str_replace("Amount", "amt") %>%
+                    stringr::str_replace_all(" ", "_") %>%
+                    tolower())
+
   return(df_expnd)
 }
 
