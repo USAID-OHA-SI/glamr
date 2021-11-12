@@ -8,8 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Provides a series of base functions useful to the GH OHA SI team. This
-    includes project setup, pulling from DATIM, and key functions for working with the MSD.
+Provides a series of base functions useful to the GH OHA SI team. This includes project setup, pulling from DATIM, and key functions for working with the MSD.
 }
 \seealso{
 Useful links:

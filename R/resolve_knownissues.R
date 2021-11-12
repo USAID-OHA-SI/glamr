@@ -45,12 +45,11 @@
 
 resolve_knownissues <- function(df, store_excl = FALSE){
 
-  #stop if the data aren't long
-  if(!all(c("targets", "qtr1", "qtr2", "qtr3", "qtr4", "cumulative") %in% names(df)))
-    stop("Need to provide a data frame in the normal MSD structure.")
+  #stop if the data aren't in original structure (semi-wide)
+  validate_structure(df)
 
   #stop if don't have google authentication established
-  if(!googlesheets4::gs4_has_token())
+  if(!googlesheets4::gs4_has_token() && is.null(getOption("gargle_oauth_email")))
     stop("resolve_knownissues() requires OAuth to be set prior to running. Establish authenication for the session using glamr::load_secrets() or googlesheets4::gs4_auth().")
 
   #pull down known issues from Google Sheets & tidy
@@ -72,6 +71,32 @@ resolve_knownissues <- function(df, store_excl = FALSE){
 
 }
 
+
+#' Validate supplied dataframe to ensure valid structure
+#'
+#' @param df data from get_knownissues()
+#'
+#' @return
+#' @keywords internal
+#'
+validate_structure <- function(df){
+
+  cols <- names(df)
+
+  msd_req <- c("targets", "cumulative",
+               "qtr1", "qtr2", "qtr3", "qtr4")
+
+  fsd_req <- c("cop_budget_total", "workplan_budget_amt",
+               "expenditure_amt")
+
+  is_msd <- all(msd_req %in% cols)
+
+  is_fsd <- all(fsd_req %in% cols)
+
+  if(is_msd == FALSE && is_fsd == FALSE)
+    stop("Need to provide a data frame in the normal MSD/FSD structure.")
+
+}
 
 #' Known Data Issues Tracker Google Sheet ID
 #'
