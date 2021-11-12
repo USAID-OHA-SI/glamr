@@ -205,19 +205,28 @@ clean_knownissues <- function(df){
 
 flag_knownissues <- function(df, df_issues){
 
+  #variables used in distinct, excluding indicator for FSD
+  var_distinct <- c("mech_code", "fiscal_year", "indicator", "period_type")
+  if("cop_budget_total" %in% names(df))
+    var_distinct[var_distinct != "indicator"]
+
   #create df for just exclusion and hasn't been resolved
   df_excl <- df_issues %>%
     dplyr::filter(action == "exclude",
                   resolved == FALSE) %>%
-    dplyr::distinct(mech_code, fiscal_year, indicator, period_type) %>%
+    dplyr::distinct(dplyr::across(var_distinct)) %>%
     dplyr::mutate(value = TRUE) %>%
     tidyr::pivot_wider(names_from = period_type,
                        names_prefix = "exclude_",
                        values_from = value)
 
+  #variables used in join, exclude indicator for FSD
+  var_join <- c("mech_code", "fiscal_year", "indicator")
+  if("cop_budget_total" %in% names(df))
+    var_join[var_join != "indicator"]
+
   #join to main df
-  df_join <- df %>%
-    dplyr::left_join(df_excl, by = c("mech_code", "fiscal_year", "indicator"))
+  df_join <- dplyr::left_join(df, df_excl, by = var_join)
 
   return(df_join)
 }
