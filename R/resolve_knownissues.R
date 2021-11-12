@@ -148,7 +148,7 @@ get_knownissues <- function(){
     dplyr::rename(timestamp = Timestamp,
                   countryname = `What PEPFAR country is affected?`,
                   fiscal_year = `What fiscal year has this issue?`,
-                  period_type = `Is this issue related to targets or results?`,
+                  period_type = `Where does the known issue reside?`,
                   period = `Is there a specific quarter affected?`,
                   mech_code = `What is the specific mechanism id?`,
                   mech_pname = `What is the preferred mechanism name?`,
