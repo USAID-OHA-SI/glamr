@@ -76,7 +76,6 @@ resolve_knownissues <- function(df, store_excl = FALSE){
 #'
 #' @param df data from get_knownissues()
 #'
-#' @return
 #' @keywords internal
 #'
 validate_structure <- function(df){

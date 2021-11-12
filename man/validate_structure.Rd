@@ -9,9 +9,6 @@ validate_structure(df)
 \arguments{
 \item{df}{data from get_knownissues()}
 }
-\value{
-
-}
 \description{
 Validate supplied dataframe to ensure valid structure
 }
