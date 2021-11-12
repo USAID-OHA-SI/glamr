@@ -242,23 +242,28 @@ flag_knownissues <- function(df, df_issues){
 squish_knownissues <- function(df){
 
   #ensure that exclude_results vars exist
-    if(!"exclude_results" %in% names(df))
-      df <- dplyr::mutate(df, exclude_results = FALSE)
-
-  #ensure that exclude_targets vars exist
-    if(!"exclude_targets" %in% names(df))
-      df <- dplyr::mutate(df, exclude_targets = FALSE)
+   df <- complete_exclude_vars(df)
 
   #fill exclude_* with FALSE for mechs not not in flagged list
     df <- df %>%
       dplyr::mutate(dplyr::across(dplyr::starts_with("exclude"),
                                   ~ ifelse(is.na(.), FALSE, .)))
 
-  #remove known issues = replace with NA
+  #remove known issues = replace with NA (for MER)
+  if("cumulative" %in% names(df)){
     df <- df %>%
       dplyr::mutate(dplyr::across(c(dplyr::starts_with("qtr"), cumulative),
                                   ~ ifelse(exclude_results == TRUE, NA_real_, .)),
                     targets = ifelse(exclude_targets == TRUE, NA_real_, targets))
+  }
+
+  #remove known issues = replace with NA (for MER)
+    if("cop_budget_total" %in% names(df)){
+      df <- df %>%
+        dplyr::mutate(cop_budget_total = ifelse(exclude_cop_budget_total == TRUE, NA_real_, targets),
+                      workplan_budget_amt = ifelse(exclude_cop_budget_total == TRUE, NA_real_, targets),
+                      expenditure_amt = ifelse(exclude_cop_budget_total == TRUE, NA_real_, targets))
+    }
 
   #remove exclude_*
     df <- dplyr::select(df, -dplyr::starts_with("exclude"))
@@ -266,6 +271,45 @@ squish_knownissues <- function(df){
   return(df)
 }
 
+#' Add full set of exclusion variables
+#'
+#' @param df df output from flag_knownissues()
+#'
+#' @return data frame with new variables
+#' @keywords internal
+
+complete_exclude_vars <- function(df){
+
+  lst_exclude <- c("results", "targets", "cop_budget_total",
+                   "workplan_budget_amt", "expenditure_amt") %>%
+    paste("exclude", ., sep = "_")
+
+  # purrr::map(lst_exclude, ~ add_var(df, .x))
+  df <- df %>%
+    add_var(lst_exclude[1]) %>%
+    add_var(lst_exclude[2]) %>%
+    add_var(lst_exclude[3]) %>%
+    add_var(lst_exclude[4]) %>%
+    add_var(lst_exclude[5])
+
+  return(df)
+
+}
+
+#' Add variable if it doesn't exist
+#'
+#' @param df dataframe
+#' @param x character of new variable name
+#'
+#' @return data frame with new variable
+#' @keywords internal
+
+add_var <- function(df, x){
+  if(!{{x}} %in% names(df))
+    df <- dplyr::mutate(df, {{x}} := NA)
+
+  return(df)
+}
 
 #' Note Known Issues
 #'
