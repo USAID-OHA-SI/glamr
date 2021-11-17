@@ -1,5 +1,9 @@
+# glamr 1.0.2
+* Update `resolve_knownissues` to handle working with financial data as well as MER.
+* Has `resolve_knownissues` check Rprofile to see if authentication is stored there (from `set_email`) if not loaded in session.
+
 # glamr 1.0.1
-* Resolve bug with `resolve_known_issues` that resulted from having both targets and results for the same mechanism and indicator that need to be removed.
+* Resolve bug with `resolve_knownissues` that resulted from having both targets and results for the same mechanism and indicator that need to be removed.
 * Add set of functions to store, access, and load Panorama credentials - `set_pano`,
  `pano_user()`, `pano_pwd()`, `pano_session()`, and `load_secrets()`.
 * Add functions to discover and download output datasets from Panorama: `pano_content()`, `pano_elements()`, `pano_unpack()`, `pano_extract()`, `pano_download()`, `pano_items()`, `pano_extract_msd()`
