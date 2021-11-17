@@ -331,9 +331,10 @@ note_knownissues <- function(df_orig, df_allissues){
     dplyr::distinct(action, countryname, mech_code, fiscal_year, period_type, description, indicator) %>%
     dplyr::group_by(action, countryname, mech_code, fiscal_year, period_type, description) %>%
     dplyr::summarise(indicator = paste(indicator, collapse=", "), .groups = "drop") %>%
-    dplyr::mutate(msg = ifelse(action == "exclude",
-                               glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}"),
-                               glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}; affecting {indicator}")))
+    dplyr::mutate(msg = dplyr::case_when(action == "exclude" & period_type %in% c("results", "targets") ~ glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}"),
+                                         action == "exclude" ~ glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}"),
+                                         period_type %in% c("results", "targets") ~ glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}; affecting {indicator}"),
+                                         TRUE ~ glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}")))
 
   return(df_issues_matches)
 }
