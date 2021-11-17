@@ -45,12 +45,11 @@
 
 resolve_knownissues <- function(df, store_excl = FALSE){
 
-  #stop if the data aren't long
-  if(!all(c("targets", "qtr1", "qtr2", "qtr3", "qtr4", "cumulative") %in% names(df)))
-    stop("Need to provide a data frame in the normal MSD structure.")
+  #stop if the data aren't in original structure (semi-wide)
+  validate_structure(df)
 
   #stop if don't have google authentication established
-  if(!googlesheets4::gs4_has_token())
+  if(!googlesheets4::gs4_has_token() && is.null(getOption("gargle_oauth_email")))
     stop("resolve_knownissues() requires OAuth to be set prior to running. Establish authenication for the session using glamr::load_secrets() or googlesheets4::gs4_auth().")
 
   #pull down known issues from Google Sheets & tidy
@@ -72,6 +71,31 @@ resolve_knownissues <- function(df, store_excl = FALSE){
 
 }
 
+
+#' Validate supplied dataframe to ensure valid structure
+#'
+#' @param df data from get_knownissues()
+#'
+#' @keywords internal
+#'
+validate_structure <- function(df){
+
+  cols <- names(df)
+
+  msd_req <- c("targets", "cumulative",
+               "qtr1", "qtr2", "qtr3", "qtr4")
+
+  fsd_req <- c("cop_budget_total", "workplan_budget_amt",
+               "expenditure_amt")
+
+  is_msd <- all(msd_req %in% cols)
+
+  is_fsd <- all(fsd_req %in% cols)
+
+  if(is_msd == FALSE && is_fsd == FALSE)
+    stop("Need to provide a data frame in the normal MSD/FSD structure.")
+
+}
 
 #' Known Data Issues Tracker Google Sheet ID
 #'
@@ -123,7 +147,7 @@ get_knownissues <- function(){
     dplyr::rename(timestamp = Timestamp,
                   countryname = `What PEPFAR country is affected?`,
                   fiscal_year = `What fiscal year has this issue?`,
-                  period_type = `Is this issue related to targets or results?`,
+                  period_type = `Where does the known issue reside?`,
                   period = `Is there a specific quarter affected?`,
                   mech_code = `What is the specific mechanism id?`,
                   mech_pname = `What is the preferred mechanism name?`,
@@ -159,6 +183,14 @@ clean_knownissues <- function(df){
     tidyr::separate_rows(indicator, sep = ",") %>%
     dplyr::mutate(indicator = stringr::str_trim(indicator))
 
+  #adjust period_type
+  df_expnd <- df_expnd %>%
+    dplyr::mutate(period_type = period_type %>%
+                    stringr::str_remove("MER ") %>%
+                    stringr::str_replace("Amount", "amt") %>%
+                    stringr::str_replace_all(" ", "_") %>%
+                    tolower())
+
   return(df_expnd)
 }
 
@@ -173,19 +205,28 @@ clean_knownissues <- function(df){
 
 flag_knownissues <- function(df, df_issues){
 
+  #variables used in distinct, excluding indicator for FSD
+  var_distinct <- c("mech_code", "fiscal_year", "indicator", "period_type")
+  if("cop_budget_total" %in% names(df))
+    var_distinct[var_distinct != "indicator"]
+
   #create df for just exclusion and hasn't been resolved
   df_excl <- df_issues %>%
     dplyr::filter(action == "exclude",
                   resolved == FALSE) %>%
-    dplyr::distinct(mech_code, fiscal_year, indicator, period_type) %>%
+    dplyr::distinct(dplyr::across(var_distinct)) %>%
     dplyr::mutate(value = TRUE) %>%
     tidyr::pivot_wider(names_from = period_type,
                        names_prefix = "exclude_",
                        values_from = value)
 
+  #variables used in join, exclude indicator for FSD
+  var_join <- c("mech_code", "fiscal_year", "indicator")
+  if("cop_budget_total" %in% names(df))
+    var_join[var_join != "indicator"]
+
   #join to main df
-  df_join <- df %>%
-    dplyr::left_join(df_excl, by = c("mech_code", "fiscal_year", "indicator"))
+  df_join <- dplyr::left_join(df, df_excl, by = var_join)
 
   return(df_join)
 }
@@ -201,23 +242,28 @@ flag_knownissues <- function(df, df_issues){
 squish_knownissues <- function(df){
 
   #ensure that exclude_results vars exist
-    if(!"exclude_results" %in% names(df))
-      df <- dplyr::mutate(df, exclude_results = FALSE)
-
-  #ensure that exclude_targets vars exist
-    if(!"exclude_targets" %in% names(df))
-      df <- dplyr::mutate(df, exclude_targets = FALSE)
+   df <- complete_exclude_vars(df)
 
   #fill exclude_* with FALSE for mechs not not in flagged list
     df <- df %>%
       dplyr::mutate(dplyr::across(dplyr::starts_with("exclude"),
                                   ~ ifelse(is.na(.), FALSE, .)))
 
-  #remove known issues = replace with NA
+  #remove known issues = replace with NA (for MER)
+  if("cumulative" %in% names(df)){
     df <- df %>%
       dplyr::mutate(dplyr::across(c(dplyr::starts_with("qtr"), cumulative),
                                   ~ ifelse(exclude_results == TRUE, NA_real_, .)),
                     targets = ifelse(exclude_targets == TRUE, NA_real_, targets))
+  }
+
+  #remove known issues = replace with NA (for MER)
+    if("cop_budget_total" %in% names(df)){
+      df <- df %>%
+        dplyr::mutate(cop_budget_total = ifelse(exclude_cop_budget_total == TRUE, NA_real_, targets),
+                      workplan_budget_amt = ifelse(exclude_cop_budget_total == TRUE, NA_real_, targets),
+                      expenditure_amt = ifelse(exclude_cop_budget_total == TRUE, NA_real_, targets))
+    }
 
   #remove exclude_*
     df <- dplyr::select(df, -dplyr::starts_with("exclude"))
@@ -225,6 +271,45 @@ squish_knownissues <- function(df){
   return(df)
 }
 
+#' Add full set of exclusion variables
+#'
+#' @param df df output from flag_knownissues()
+#'
+#' @return data frame with new variables
+#' @keywords internal
+
+complete_exclude_vars <- function(df){
+
+  lst_exclude <- c("results", "targets", "cop_budget_total",
+                   "workplan_budget_amt", "expenditure_amt") %>%
+    paste("exclude", ., sep = "_")
+
+  # purrr::map(lst_exclude, ~ add_var(df, .x))
+  df <- df %>%
+    add_var(lst_exclude[1]) %>%
+    add_var(lst_exclude[2]) %>%
+    add_var(lst_exclude[3]) %>%
+    add_var(lst_exclude[4]) %>%
+    add_var(lst_exclude[5])
+
+  return(df)
+
+}
+
+#' Add variable if it doesn't exist
+#'
+#' @param df dataframe
+#' @param x character of new variable name
+#'
+#' @return data frame with new variable
+#' @keywords internal
+
+add_var <- function(df, x){
+  if(!{{x}} %in% names(df))
+    df <- dplyr::mutate(df, {{x}} := NA)
+
+  return(df)
+}
 
 #' Note Known Issues
 #'
@@ -246,9 +331,10 @@ note_knownissues <- function(df_orig, df_allissues){
     dplyr::distinct(action, countryname, mech_code, fiscal_year, period_type, description, indicator) %>%
     dplyr::group_by(action, countryname, mech_code, fiscal_year, period_type, description) %>%
     dplyr::summarise(indicator = paste(indicator, collapse=", "), .groups = "drop") %>%
-    dplyr::mutate(msg = ifelse(action == "exclude",
-                               glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}"),
-                               glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}; affecting {indicator}")))
+    dplyr::mutate(msg = dplyr::case_when(action == "exclude" & period_type %in% c("results", "targets") ~ glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}"),
+                                         action == "exclude" ~ glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}"),
+                                         period_type %in% c("results", "targets") ~ glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}; affecting {indicator}"),
+                                         TRUE ~ glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}")))
 
   return(df_issues_matches)
 }
@@ -278,7 +364,7 @@ print_knownissues <- function(df, store_excl = FALSE){
 
   #if nothing is excluded, print nothing is excluded
   if(length(lst_excl_matches) == 0)
-    lst_excl_matches <- "Given your dataset, no documented issues to exlcude"
+    lst_excl_matches <- "Given your dataset, no documented issues to exclude"
 
   #print info
   purrr::walk(lst_info_matches, usethis::ui_info)
