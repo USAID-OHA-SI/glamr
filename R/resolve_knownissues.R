@@ -364,7 +364,7 @@ print_knownissues <- function(df, store_excl = FALSE){
 
   #if nothing is excluded, print nothing is excluded
   if(length(lst_excl_matches) == 0)
-    lst_excl_matches <- "Given your dataset, no documented issues to exlcude"
+    lst_excl_matches <- "Given your dataset, no documented issues to exclude"
 
   #print info
   purrr::walk(lst_info_matches, usethis::ui_info)
