@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
 
       
 
-      </header><script src="project-workflow_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><script src="project-workflow_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Project Workflow</h1>
@@ -145,7 +145,7 @@
 <span class="co">#&gt;   setup_gitignore()</span>
 <span class="co">#&gt;   setup_readme()</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x000000001565a3d0&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x00000000157a54a8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:glamr&gt;</span></code></pre></div>
 <p>The first one, <code><a href="../reference/folder_setup.html">folder_setup()</a></code> initiates the main folders we use for our work:</p>
 <ul>
@@ -199,8 +199,8 @@
 <p>Running this will open your <code>.Rprofile</code> and you’ll be prompted to paste the pre-copied code into the <code>.Rprofile</code> save and restart your session.</p>
 <p>With that stored, you can use <code><a href="../reference/si_path.html">si_path()</a></code> to return the path to your MSD folder (as the default) and then use another <code>glamr</code> function, <code><a href="../reference/return_latest.html">return_latest()</a></code>, which looks in the provide folder path for the lastest version of a file that matches the pattern you provided. In this case, we can pass in that we want the last OUxIM MSD and it will return the file path which we can pass into <code><a href="https://readr.tidyverse.org/reference/read_rds.html">readr::read_rds()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/si_path.html">si_path</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/return_latest.html">return_latest</a></span><span class="op">(</span><span class="st">"OU_IM_FY19"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/si_path.html">si_path</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/return_latest.html">return_latest</a></span><span class="op">(</span><span class="st">"OU_IM_FY19"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html">read_rds</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
   </div>

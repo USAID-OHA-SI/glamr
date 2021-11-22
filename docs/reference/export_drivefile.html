@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -194,18 +194,18 @@
     <p>Googledrive file(s) id(s)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
- <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/USAID-OHA-SI/glamr'>glamr</a></span><span class='op'>)</span>
-
- <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='st'>"./Graphics"</span>, <span class='st'>"NIGERIA"</span>, full.names <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-      <span class='fu'>export_drivefile</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='va'>.</span>,
-                       to_drive <span class='op'>=</span> <span class='st'>"&lt;path-id&gt;"</span>,
-                       to_folder <span class='op'>=</span> <span class='st'>"FY99Q4/VL Suppression"</span>,
-                       add_folder <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'> <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/USAID-OHA-SI/glamr'>glamr</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='st'>"./Graphics"</span>, <span class='st'>"NIGERIA"</span>, full.names <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>      <span class='fu'>export_drivefile</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='va'>.</span>,</span>
+<span class='r-in'>                       to_drive <span class='op'>=</span> <span class='st'>"&lt;path-id&gt;"</span>,</span>
+<span class='r-in'>                       to_folder <span class='op'>=</span> <span class='st'>"FY99Q4/VL Suppression"</span>,</span>
+<span class='r-in'>                       add_folder <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

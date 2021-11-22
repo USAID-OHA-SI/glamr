@@ -91,7 +91,7 @@ table requires having a USAID email account and can be accessed via
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@ table requires having a USAID email account and can be accessed via
 `browse_knownissues()`.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>resolve_knownissues</span><span class='op'>(</span><span class='va'>df</span>, store_excl <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>resolve_knownissues</span><span class='op'>(</span><span class='va'>df</span>, remove_cs <span class='op'>=</span> <span class='cn'>TRUE</span>, store_excl <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,6 +176,10 @@ table requires having a USAID email account and can be accessed via
     <tr>
       <th>df</th>
       <td><p>standard MSD data frame, typically after its been filtered</p></td>
+    </tr>
+    <tr>
+      <th>remove_cs</th>
+      <td><p>remove data flagged as central support (CS), default = TRUE</p></td>
     </tr>
     <tr>
       <th>store_excl</th>
@@ -193,24 +197,24 @@ table requires having a USAID email account and can be accessed via
  [load_secrets()] to load credentials into session.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/USAID-OHA-SI/glamr'>glamr</a></span><span class='op'>)</span>
-
-<span class='fu'><a href='load_secrets.html'>load_secrets</a></span><span class='op'>(</span><span class='op'>)</span> <span class='co'># or googlesheets4::gs4_auth()</span>
-
-<span class='va'>df_msd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='si_path.html'>si_path</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='return_latest.html'>return_latest</a></span><span class='op'>(</span><span class='st'>"OU_IM"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>read_rds</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='va'>df_mwi</span> <span class='op'>&lt;-</span> <span class='va'>df_msd</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>operatingunit</span> <span class='op'>==</span> <span class='st'>"Malawi"</span>,
-         <span class='va'>indicator</span> <span class='op'>==</span> <span class='st'>"TX_CURR"</span><span class='op'>)</span>
-
-<span class='va'>df_mwi_resolved</span> <span class='op'>&lt;-</span> <span class='va'>df_mwi</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>resolve_knownissues</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/USAID-OHA-SI/glamr'>glamr</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='load_secrets.html'>load_secrets</a></span><span class='op'>(</span><span class='op'>)</span> <span class='co'># or googlesheets4::gs4_auth()</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df_msd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='si_path.html'>si_path</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='return_latest.html'>return_latest</a></span><span class='op'>(</span><span class='st'>"OU_IM"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://readr.tidyverse.org/reference/read_rds.html'>read_rds</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df_mwi</span> <span class='op'>&lt;-</span> <span class='va'>df_msd</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>operatingunit</span> <span class='op'>==</span> <span class='st'>"Malawi"</span>,</span>
+<span class='r-in'>         <span class='va'>indicator</span> <span class='op'>==</span> <span class='st'>"TX_CURR"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df_mwi_resolved</span> <span class='op'>&lt;-</span> <span class='va'>df_mwi</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>resolve_knownissues</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

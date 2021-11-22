@@ -83,7 +83,7 @@ information from the filename about the fiscal year, quarter, or period." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -178,33 +178,33 @@ other options are: "period", "fiscal_year", "quarter"</p></td>
     <p>vector of information related to what is being asked in `return`</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
- <span class='fu'>source_info</span><span class='op'>(</span><span class='op'>)</span> <span class='co'>#works if you have stored path to the MSD folder via glamr::set_paths()</span>
- <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Data"</span>, type <span class='op'>=</span> <span class='st'>"PSNUxIM"</span><span class='op'>)</span>
- <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Data"</span>, type <span class='op'>=</span> <span class='st'>"PSNUxIM"</span>, return <span class='op'>=</span> <span class='st'>"period"</span><span class='op'>)</span>
- <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Downloads/Genie_PSNU_IM_Jupiter_Daily_c9f5889f-86c9-44e7-ab63-fa86c587d251.zip"</span><span class='op'>)</span>
- <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Data/MER_Structured_Datasets_NAT_SUBNAT_FY15-21_20210618_v2_1.rds"</span><span class='op'>)</span> <span class='op'>}</span>
-
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/USAID-OHA-SI/glamr'>glamr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidyverse/glue'>glue</a></span><span class='op'>)</span>
-
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='si_path.html'>si_path</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='return_latest.html'>return_latest</a></span><span class='op'>(</span><span class='st'>"OU_IM_FY19"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>read_rds</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='va'>df_viz</span> <span class='op'>&lt;-</span> <span class='va'>df</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>operatingunit</span> <span class='op'>==</span> <span class='st'>"Saturn"</span>,
-         <span class='va'>indicator</span> <span class='op'>==</span> <span class='st'>"TX_NEW"</span>,
-         <span class='va'>standardizeddisaggregate</span> <span class='op'>==</span> <span class='st'>"Total Numerator"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>count</span><span class='op'>(</span><span class='va'>fiscal_year</span>, wt <span class='op'>=</span> <span class='va'>targets</span>, name <span class='op'>=</span> <span class='st'>"targets"</span><span class='op'>)</span>
-
-<span class='va'>df_viz</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span><span class='va'>fiscal_year</span>, <span class='va'>targets</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>labs</span><span class='op'>(</span>caption <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Source: {source_info()}"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'> <span class='fu'>source_info</span><span class='op'>(</span><span class='op'>)</span> <span class='co'>#works if you have stored path to the MSD folder via glamr::set_paths()</span></span>
+<span class='r-in'> <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Data"</span>, type <span class='op'>=</span> <span class='st'>"PSNUxIM"</span><span class='op'>)</span></span>
+<span class='r-in'> <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Data"</span>, type <span class='op'>=</span> <span class='st'>"PSNUxIM"</span>, return <span class='op'>=</span> <span class='st'>"period"</span><span class='op'>)</span></span>
+<span class='r-in'> <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Downloads/Genie_PSNU_IM_Jupiter_Daily_c9f5889f-86c9-44e7-ab63-fa86c587d251.zip"</span><span class='op'>)</span></span>
+<span class='r-in'> <span class='fu'>source_info</span><span class='op'>(</span><span class='st'>"../Data/MER_Structured_Datasets_NAT_SUBNAT_FY15-21_20210618_v2_1.rds"</span><span class='op'>)</span> <span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/USAID-OHA-SI/glamr'>glamr</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidyverse/glue'>glue</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='si_path.html'>si_path</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='return_latest.html'>return_latest</a></span><span class='op'>(</span><span class='st'>"OU_IM_FY19"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://readr.tidyverse.org/reference/read_rds.html'>read_rds</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df_viz</span> <span class='op'>&lt;-</span> <span class='va'>df</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>operatingunit</span> <span class='op'>==</span> <span class='st'>"Saturn"</span>,</span>
+<span class='r-in'>         <span class='va'>indicator</span> <span class='op'>==</span> <span class='st'>"TX_NEW"</span>,</span>
+<span class='r-in'>         <span class='va'>standardizeddisaggregate</span> <span class='op'>==</span> <span class='st'>"Total Numerator"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/count.html'>count</a></span><span class='op'>(</span><span class='va'>fiscal_year</span>, wt <span class='op'>=</span> <span class='va'>targets</span>, name <span class='op'>=</span> <span class='st'>"targets"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df_viz</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>fiscal_year</span>, <span class='va'>targets</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Source: {source_info()}"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
