@@ -4,10 +4,12 @@
 \alias{resolve_knownissues}
 \title{Resolve Known Issues}
 \usage{
-resolve_knownissues(df, store_excl = FALSE)
+resolve_knownissues(df, remove_cs = TRUE, store_excl = FALSE)
 }
 \arguments{
 \item{df}{standard MSD data frame, typically after its been filtered}
+
+\item{remove_cs}{remove data flagged as central support (CS), default = TRUE}
 
 \item{store_excl}{should the known exclusions be store in the Global Envir?}
 }

@@ -16,6 +16,7 @@
 #' `browse_knownissues()`.
 #'
 #' @param df standard MSD data frame, typically after its been filtered
+#' @param remove_cs remove data flagged as central support (CS), default = TRUE
 #' @param store_excl should the known exclusions be store in the Global Envir?
 #'
 #' @return df excluding known targets/results issues
@@ -43,7 +44,7 @@
 #' df_mwi_resolved <- df_mwi %>%
 #'   resolve_knownissues() }
 
-resolve_knownissues <- function(df, store_excl = FALSE){
+resolve_knownissues <- function(df, remove_cs = TRUE, store_excl = FALSE){
 
   #stop if the data aren't in original structure (semi-wide)
   validate_structure(df)
@@ -61,6 +62,10 @@ resolve_knownissues <- function(df, store_excl = FALSE){
 
   #replace known issue data to exclude with NAs
   df_adj <- squish_knownissues(df_flag)
+
+  #remove central reporting
+  if(remove_cs == TRUE)
+    df_adj <- remove_centralsupport(df_adj)
 
   #print out known issues
   df %>%
@@ -307,6 +312,30 @@ complete_exclude_vars <- function(df){
 add_var <- function(df, x){
   if(!{{x}} %in% names(df))
     df <- dplyr::mutate(df, {{x}} := NA)
+
+  return(df)
+}
+
+
+#' Remove Central Support Reporting
+#'
+#' Central Support is often desired to be removed from MER analysis. As of
+#' FY21Q4, "CS" is a field under `indicatortype`, which can be used to
+#' identify and exclude this sort of reporting. This function is run by
+#' default in `resolve_knownissues`, but can be run separately if desired.
+#'
+#' @param df MSD dataframe (must include indicatortype)
+#'
+#' @return df with central support reporting removed
+#' @export
+#'
+remove_centralsupport <- function(df){
+
+  if("indicatortype" %in% names(df)){
+    df <- dplyr::filter(df, indicatortype != "CS")
+  } else {
+    usethis::ui_warn("Cannot remove Central Support reporting due to `indicatortype` missing from provided data frame.")
+  }
 
   return(df)
 }
