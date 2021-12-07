@@ -8,7 +8,7 @@
 #'
 #' @param path path to the folder containing MSDs or specific MSD file
 #' @param type not required unless providing a folder in `path`; default = "OU_IM_FY19"
-#' other examples include: "PSNU_IM", "NAT_SUBNAT", "PSNU"
+#' other examples include: "PSNU_IM", "NAT_SUBNAT", "PSNU", "Financial"
 #' @param return from the info, what should be returned; default = "source"
 #' other options are: "period", "fiscal_year", "quarter"
 #'
@@ -77,7 +77,7 @@ source_info <- function(path, type, return = "source"){
     #frozen
     info <- pepfar_data_calendar %>%
       dplyr::filter(as.Date(entry_close) <= file_date) %>%
-      dplyr::filter(entry_close == max(entry_close)) %>%
+      dplyr::slice_tail() %>%
       dplyr::mutate(period = glue::glue("FY{stringr::str_sub(fiscal_year, -2)}Q{quarter}"),
                     source = glue::glue("{period}{stringr::str_sub(type, end = 1)} DATIM Genie [{file_date}]"))
   } else if(file_type == "Daily") {
@@ -90,7 +90,7 @@ source_info <- function(path, type, return = "source"){
       dplyr::mutate(type = ifelse(datim_status == "open", "provisional", type),
                     date = as.Date(date)) %>%
       dplyr::filter(date <= as.Date(file_date)) %>%
-      dplyr::filter(date == max(date)) %>%
+      dplyr::slice_tail() %>%
       dplyr::mutate(type = "provisional",
                     period = glue::glue("FY{stringr::str_sub(fiscal_year, -2)}Q{quarter}"),
                     source = glue::glue("{period}{stringr::str_sub(type, end = 1)} DATIM Genie [{file_date}]"))
@@ -98,7 +98,8 @@ source_info <- function(path, type, return = "source"){
     #MSD/FSD/NAT_SUBNAT
     info <- pepfar_data_calendar %>%
       dplyr::mutate(entry_close = stringr::str_remove_all(entry_close, "-")) %>%
-      dplyr::filter(entry_close == file_date) %>%
+      dplyr::filter(entry_close <= file_date) %>%
+      dplyr::slice_tail() %>%
       dplyr::mutate(period = glue::glue("FY{stringr::str_sub(fiscal_year, -2)}Q{quarter}"),
                     source = glue::glue("{period}{stringr::str_sub(type, end = 1)} {file_type}"))
 

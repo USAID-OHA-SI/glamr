@@ -1,4 +1,5 @@
 # glamr 1.0.2
+* Adjust `source_info` to handle dates for the FSD that are out of sync with the PEPFAR calendar.
 * Included removal of central supporting from `resolve_knowissues` by default, which can also be run separately using `remove_centralsupport`.
 * Update `resolve_knownissues` to handle working with financial data as well as MER.
 * Has `resolve_knownissues` check Rprofile to see if authentication is stored there (from `set_email`) if not loaded in session.
