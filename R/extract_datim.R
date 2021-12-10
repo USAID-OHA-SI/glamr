@@ -122,7 +122,7 @@ datim_dim_items <- function(dimension,
   dim_id <- datim_dimension(dimension, username, password)
 
   # Update url
-  url_dims <- glue::glue("{url}/{dim_id}/items")
+  url_dims <- glue::glue("{url}/{dim_id}/items?paging=false")
 
   # Get items
   items <- url_dims %>%
