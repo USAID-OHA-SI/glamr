@@ -4,8 +4,9 @@
 \alias{clean_agency}
 \title{Clean data from fundingagency column
 
-`clean_agency` converts all funding agency names to upper case and removes
-the HHS prefix for those agencies.}
+`clean_agency` converts all funding agency names to upper case removes
+the HHS prefix for those agencies
+and moves State and USAID subsidiaries under their parent agencies}
 \usage{
 clean_agency(.data)
 }
@@ -18,8 +19,9 @@ Cleaned MSD DataFrame
 \description{
 Clean data from fundingagency column
 
-`clean_agency` converts all funding agency names to upper case and removes
-the HHS prefix for those agencies.
+`clean_agency` converts all funding agency names to upper case removes
+the HHS prefix for those agencies
+and moves State and USAID subsidiaries under their parent agencies
 }
 \examples{
 \dontrun{

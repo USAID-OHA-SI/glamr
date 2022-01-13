@@ -4,6 +4,7 @@
 * Included removal of central supporting from `resolve_knowissues` by default, which can also be run separately using `remove_centralsupport`.
 * Update `resolve_knownissues` to handle working with financial data as well as MER.
 * Has `resolve_knownissues` check Rprofile to see if authentication is stored there (from `set_email`) if not loaded in session.
+* Update `clean_agency` to move State (State/AF, etc.) and USAID (USAID/WCF) subsidiaries under their parent agencies
 
 # glamr 1.0.1
 * Resolve bug with `resolve_knownissues` that resulted from having both targets and results for the same mechanism and indicator that need to be removed.

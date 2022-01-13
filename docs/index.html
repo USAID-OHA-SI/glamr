@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
       </span>
     </div>
 
@@ -78,7 +80,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/USAID-OHA-SI/glamr/">
+  <a href="https://github.com/USAID-OHA-SI/glamr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -98,32 +100,32 @@
 
 
 <p><img src="reference/figures/logo.png" align="right" height="120"></p>
-<div id="glamr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#glamr" class="anchor"></a>glamr</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="glamr">glamr<a class="anchor" aria-label="anchor" href="#glamr"></a>
+</h1></div>
 <p>SI utilities package</p>
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>When using PEPFAR data, the OHA SI PEPFAR by and large uses the same MER Structured Datasets to answer the same analytical questions each period. This package is a sister package of <code>ICPIutilities</code> for working primiarly with data from DATIM and the MER Structured Datasets and plotting them using <code>glitr</code>. Focal users are analysts in USAID/GH/OHA who are using R to pull data from DATIM or perform the same repeated functions each quarter like creating TX_NET_NEW targets or assessing achievement.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p><code>glamr</code> is not on CRAN, so you will have to install it directly from GitHub using <code>remotes</code>.</p>
 <p>If you do not have <code>remotes</code> installed, you will have to run the <code>install.packages("remotes")</code> line in the code below as well.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## SETUP</span>
 
   <span class="co">#install package with vignettes</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-    <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"USAID-OHA-SI/glamr"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+    <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"USAID-OHA-SI/glamr"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
     
   <span class="co">#load the package</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/USAID-OHA-SI/glamr">glamr</a></span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/USAID-OHA-SI/glamr" class="external-link">glamr</a></span><span class="op">)</span>
 
 <span class="co">## LIST TYPES OF STYLES INCLUDED WITH PACKAGE</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="va">package</span><span class="op">:</span><span class="va">glamr</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="va">package</span><span class="op">:</span><span class="va">glamr</span><span class="op">)</span></code></pre></div>
 <hr>
 <p><em>Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.</em></p>
 </div>
@@ -133,23 +135,31 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/USAID-OHA-SI/glamr/">https://​github.com/​USAID-OHA-SI/​glamr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/USAID-OHA-SI/glamr/issues">https://​github.com/​USAID-OHA-SI/​glamr/​issues</a>
-</li>
+<li><a href="https://github.com/USAID-OHA-SI/glamr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/USAID-OHA-SI/glamr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing glamr</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Aaron Chafetz <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Tim Essam <br><small class="roles"> Author </small>  </li>
@@ -158,22 +168,25 @@
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/USAID-OHA-SI/glamr/actions"><img src="https://github.com/USAID-OHA-SI/glamr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/USAID-OHA-SI/glamr/actions" class="external-link"><img src="https://github.com/USAID-OHA-SI/glamr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Aaron Chafetz, Tim Essam, Baboyma Kagniniwa, Benjamin Kasdan.</p>
+  <p></p>
+<p>Developed by Aaron Chafetz, Tim Essam, Baboyma Kagniniwa, Benjamin Kasdan.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -181,6 +194,8 @@
 
   
 
+
+  
 
   </body>
 </html>
