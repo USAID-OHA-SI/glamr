@@ -109,8 +109,9 @@ clean_psnu <- function(.data) {
 
 #' @title Clean data from fundingagency column
 #'
-#' `clean_agency` converts all funding agency names to upper case and removes
-#' the HHS prefix for those agencies.
+#' `clean_agency` converts all funding agency names to upper case removes
+#' the HHS prefix for those agencies
+#' and moves State and USAID subsidiaries under their parent agencies
 #'
 #' @param .data MSD Datasets
 #' @return  Cleaned MSD DataFrame
@@ -130,10 +131,8 @@ clean_agency <- function(.data) {
 
     # clean column data
     .data <- .data %>%
-      dplyr::mutate(
-        fundingagency = stringr::str_to_upper(fundingagency),
-        fundingagency = stringr::str_remove(fundingagency, pattern = "^.*\\/")
-      )
+      dplyr::mutate(fundingagency = stringr::str_to_upper(fundingagency) %>% 
+                      stringr::str_remove("(^HHS\\/|\\/.*$)"))
   }
 
 
