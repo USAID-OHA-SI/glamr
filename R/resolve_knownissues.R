@@ -160,7 +160,8 @@ get_knownissues <- function(){
                   action = `How should the data issue be handled?`,
                   description = `Description of the issue`,
                   opu_status = `Is there an OPU open/pending at this time?`,
-                  email = `Email Address`)
+                  email = `Email Address`,
+                  resolved = `resolved?`)
 
   return(df_issues)
 

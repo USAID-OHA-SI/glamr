@@ -1,4 +1,5 @@
 # glamr 1.0.2
+* Fixed bug with `resolve_issues` that left of a column, breaking the function when run.
 * Removed paging from `datim_dim_items` to return full set of dimensions
 * Adjust `source_info` to handle dates for the FSD that are out of sync with the PEPFAR calendar.
 * Included removal of central supporting from `resolve_knowissues` by default, which can also be run separately using `remove_centralsupport`.
