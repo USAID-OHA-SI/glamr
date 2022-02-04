@@ -25,7 +25,7 @@
 
 get_outable <- function(username, password, baseurl = "https://final.datim.org/"){
 
-  df_uid <- identify_ouuids(username, password)
+  df_uid <- identify_ouuids(username, password, baseurl)
 
   df_levels <- identify_levels(username, password, baseurl)
 

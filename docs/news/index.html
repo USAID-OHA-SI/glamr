@@ -71,7 +71,8 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2" id="glamr-102">glamr 1.0.2<a class="anchor" aria-label="anchor" href="#glamr-102"></a></h2>
-<ul><li>Fixed bug with <code>resolve_issues</code> that left of a column, breaking the function when run.</li>
+<ul><li>Resolve bug with <code>get_outable</code> which did not use the user defined base url when running <code>identify_ouuids</code>, resulting in a user without a final.datim.org account to not access the table.</li>
+<li>Fixed bug with <code>resolve_issues</code> that left of a column, breaking the function when run.</li>
 <li>Removed paging from <code>datim_dim_items</code> to return full set of dimensions</li>
 <li>Adjust <code>source_info</code> to handle dates for the FSD that are out of sync with the PEPFAR calendar.</li>
 <li>Included removal of central supporting from <code>resolve_knowissues</code> by default, which can also be run separately using <code>remove_centralsupport</code>.</li>
@@ -133,7 +134,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

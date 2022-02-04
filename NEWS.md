@@ -1,4 +1,5 @@
 # glamr 1.0.2
+* Resolve bug with `get_outable` which did not use the user defined base url when running `identify_ouuids`, resulting in a user without a final.datim.org account to not access the table.
 * Fixed bug with `resolve_issues` that left of a column, breaking the function when run.
 * Removed paging from `datim_dim_items` to return full set of dimensions
 * Adjust `source_info` to handle dates for the FSD that are out of sync with the PEPFAR calendar.
