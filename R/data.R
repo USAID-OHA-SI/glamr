@@ -20,7 +20,7 @@
 #' This is a useful dataset for having a full set of PEPFAR countries or to
 #' align ISO codes with external datasources. Pulled from DATIM and the MSD.
 #'
-#' @format A data frame with 51 rows and 4 variables:
+#' @format A data frame with 53 rows and 4 variables:
 #' \describe{
 #'   \item{operatingunit}{PEPFAR Operating Unit (countries + 3 regional programs)}
 #'   \item{operatingunit_iso}{PEPFAR Operating Unit ISO-3}
@@ -36,7 +36,7 @@
 #' A dataset PEPFAR Operating Units and Countries along with their ISO codes, alternative names from other sources.
 #' This is a useful dataset designed to help with data cleaning / matching from different sources.
 #'
-#' @format A data frame with 51 rows and 23 variables:
+#' @format A data frame with 53 rows and 23 variables:
 #' \describe{
 #'   \item{iso3c}{ISO-3 Code}
 #'   \item{contient}{Continent name}

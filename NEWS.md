@@ -1,4 +1,5 @@
 # glamr 1.0.2
+* Update both `pepfar_country_list` and `pepfar_country_xwalk` to include Benin, now reporting into PEPFAR starting in FY22 (2022-02-22)
 * Update `source_info` to look for FY20 MSD filename as a default as opposed to FY19 (2022-02-22)
 * Resolve bug with `get_outable` which did not use the user defined base url when running `identify_ouuids`, resulting in a user without a final.datim.org account to not access the table.
 * Fixed bug with `resolve_issues` that left of a column, breaking the function when run.

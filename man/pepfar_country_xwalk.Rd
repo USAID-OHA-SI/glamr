@@ -5,7 +5,7 @@
 \alias{pepfar_country_xwalk}
 \title{Cross-walk of Country names}
 \format{
-A data frame with 51 rows and 23 variables:
+A data frame with 53 rows and 23 variables:
 \describe{
   \item{iso3c}{ISO-3 Code}
   \item{contient}{Continent name}
