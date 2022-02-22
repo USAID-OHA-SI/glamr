@@ -54,7 +54,7 @@ source_info <- function(path, type, return = "source"){
     stop("File/folder do not exist or path is not correct.")
 
   if(file.info(path)$isdir && missing(type))
-    type <- "OU_IM_FY19"
+    type <- "OU_IM_FY20"
 
   if(file.info(path)$isdir)
     path <- return_latest(path, type)
