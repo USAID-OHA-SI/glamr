@@ -202,14 +202,18 @@ gdrive_folder <- function(name, path,
   return(drive_id)
 }
 
-#' @title Update files
+#' @title Export local files for googledrive folder
 #'
-#' @param filename   Full name of the file to be uploaded
-#' @param to_drive   Google drive id
-#' @param to_folder  Google drive sub-folder
-#' @param add_folder If TRUE, add sub-folders if they are not present
-#' @param file_type  File type (extension)
-#' @param overwrite  If yes, existing files will be overwritten
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' `export_drivefile() is designed to move files googledrive`
+#'
+#' @param filename   Character, Full name of the file to be uploaded
+#' @param to_drive   Character, Google drive id
+#' @param to_folder  Character, Google drive sub-folder
+#' @param add_folder Logical. If TRUE, add sub-folders if they are not present
+#' @param overwrite  Logical. If yes, existing files will be overwritten
 #' @param ...        Additional parameters to be passed to `googledrive::drive_upload()`
 #'
 #' @return Googledrive file(s) id(s)
@@ -230,7 +234,6 @@ gdrive_folder <- function(name, path,
 export_drivefile <- function(filename, to_drive,
                              to_folder = NULL,
                              add_folder = TRUE,
-                             file_type = "png",
                              overwrite = TRUE,
                              ...) {
 
@@ -255,7 +258,7 @@ export_drivefile <- function(filename, to_drive,
       base::stop("Check drive folder name. ID is the same as parent path")
     }
 
-    base::print(glue::glue("Exporting files to {to_folder} ..."))
+    base::print(glue::glue("File(s) will be exported to: {to_folder} ..."))
   }
 
   # Convert id into google id
@@ -266,7 +269,7 @@ export_drivefile <- function(filename, to_drive,
     purrr::map_dfr(~googledrive::drive_upload(
       path = drive_id,
       name = base::basename(.x),
-      type = file_type,
+      type = NULL, # force googledrive to guess meme type
       overwrite = overwrite,
       ...))
 
