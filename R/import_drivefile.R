@@ -142,8 +142,7 @@ gdrive_metadata <- function(df, show_details = FALSE){
 #'  gdrive_folder("Test-Folder", "ID-adfdfsdfdfdfs")
 #' }
 #'
-gdrive_folder <- function(name,
-                          path = NULL,
+gdrive_folder <- function(name, path,
                           add = FALSE,
                           ...) {
 
