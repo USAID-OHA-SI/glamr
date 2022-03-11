@@ -90,7 +90,6 @@ pano_content <- function(page_url, session) {
 #' @title Extract data elements details from html content
 #'
 #' @param page_html html content
-#' @param page_name Current html page name
 #' @param page_url  Curretn html page url
 #'
 #' @return html element
@@ -109,7 +108,6 @@ pano_content <- function(page_url, session) {
 #' }
 #'
 pano_elements <- function(page_html,
-                          #page_name = NA,
                           page_url = NULL) {
 
   # Base ulr for download page
@@ -196,7 +194,6 @@ pano_items <- function(page_url, session = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#'
 #'   library(tidyverse)
 #'   library(glamr)
 #'
@@ -209,8 +206,7 @@ pano_items <- function(page_url, session = NULL) {
 #'
 #'   f_url <- elts %>% filter(type == "file zipfile") %>% pull(path) %>% first()
 #'
-#'   pano_download(item_url = f_url, session = s, dest = "./Data/")
-#' }
+#'   pano_download(item_url = f_url, session = s, dest = "./Data/")}
 #'
 pano_download <- function(item_url, session,
                           dest = NULL,

@@ -2,30 +2,27 @@
 % Please edit documentation in R/import_drivefile.R
 \name{export_drivefile}
 \alias{export_drivefile}
-\title{Update files}
+\title{Export local files for googledrive folder}
 \usage{
 export_drivefile(
   filename,
   to_drive,
   to_folder = NULL,
   add_folder = TRUE,
-  file_type = "png",
   overwrite = TRUE,
   ...
 )
 }
 \arguments{
-\item{filename}{Full name of the file to be uploaded}
+\item{filename}{Character, Full name of the file to be uploaded}
 
-\item{to_drive}{Google drive id}
+\item{to_drive}{Character, Google drive id}
 
-\item{to_folder}{Google drive sub-folder}
+\item{to_folder}{Character, Google drive sub-folder}
 
-\item{add_folder}{If TRUE, add sub-folders if they are not present}
+\item{add_folder}{Logical. If TRUE, add sub-folders if they are not present}
 
-\item{file_type}{File type (extension)}
-
-\item{overwrite}{If yes, existing files will be overwritten}
+\item{overwrite}{Logical. If yes, existing files will be overwritten}
 
 \item{...}{Additional parameters to be passed to `googledrive::drive_upload()`}
 }
@@ -33,7 +30,9 @@ export_drivefile(
 Googledrive file(s) id(s)
 }
 \description{
-Update files
+`r lifecycle::badge("experimental")`
+
+`export_drivefile() is designed to move files googledrive`
 }
 \examples{
 \dontrun{
