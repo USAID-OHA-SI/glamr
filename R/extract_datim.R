@@ -27,6 +27,10 @@ datim_dimensions <- function(url = "https://final.datim.org/api/dimensions",
   if (missing(password))
     password <- datim_pwd()
 
+  # paging
+  if (!stringr::str_detect(url, "paging"))
+    url <- base::paste0(url, "?paging=false")
+
   # Query datim
   dims <- url %>%
     datim_execute_query(username, password, flatten = TRUE) %>%
@@ -118,11 +122,15 @@ datim_dim_items <- function(dimension,
   if (missing(password))
     password <- datim_pwd()
 
+  # clean up url / paging
+  if (!stringr::str_detect(url, "?paging"))
+    url <- stringr::str_remove(url, "?paging=true|?paging=false")
+
   # Get dimension id
   dim_id <- datim_dimension(dimension, username, password)
 
-  # Update url
-  url_dims <- glue::glue("{url}/{dim_id}/items")
+  # Update url with id and paging
+  url_dims <- glue::glue("{url}/{dim_id}/items?paging=false")
 
   # Get items
   items <- url_dims %>%
