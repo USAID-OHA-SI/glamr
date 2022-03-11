@@ -89,12 +89,17 @@ gdrive_metadata <- function(df, show_details = FALSE){
     dplyr::select(drive_resource) %>%
     jsonlite::toJSON() %>%
     jsonlite::fromJSON(flatten = TRUE) %>%
-    dplyr::rename_with(~str_remove(., pattern = "drive_resource."))
+    dplyr::rename_with(~str_remove(., pattern = "drive_resource.")) %>%
+    janitor::clean_names()
+
+  # Compensate for non alter folders
+  if (!"original_filename" %in% names(df))
+    df <- dplyr::mutate(df, original_filename = name)
 
   # Unpack details?
   if (!show_details) {
+
     df <- df %>%
-      janitor::clean_names() %>%
       dplyr::select(kind, id, name, original_filename,
                     created_time, modified_time, size, trashed,
                     last_modified_by = last_modifying_user_display_name)
@@ -102,22 +107,18 @@ gdrive_metadata <- function(df, show_details = FALSE){
   }
   # Show all details (almost all)
   else {
+
     df <- df %>%
-      tidyr::unnest(cols = owners, names_sep = ".") %>%
-      tidyr::unnest(cols = permissions, names_sep = ".") %>%
+      tidyr::unnest(cols = owners, names_sep = ".") %>%      # Who owns the file
+      tidyr::unnest(cols = permissions, names_sep = ".") %>% # Who has access
       janitor::clean_names() %>%
       dplyr::select(-c(permission_ids, permissions_domain,
                        permissions_allow_file_discovery),
                     -ends_with(c("_link", "_thumbnail")),
                     -starts_with(c("thumbnail_"))) %>%
-      dplyr::filter(permissions_type != "domain")
+      dplyr::filter(permissions_type != "domain") %>%
+      tidyr::unnest(cols = permissions, names_repair = "unique") # Remove remove all list
   }
-
-  # Clean update df
-  df <- df %>%
-    dplyr::mutate(across(where(base::is.list), base::unlist)) %>%
-    dplyr::mutate(across(ends_with("_time"), lubridate::ymd_hms)) %>%
-    dplyr::mutate(across(size, base::as.integer))
 
   return(df)
 }
