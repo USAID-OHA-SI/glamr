@@ -24,11 +24,11 @@ df
 Get all orgunits levels in org hierarchy
 }
 \note{
-Same as `glamr::identify_levels()` or `Wavelength::identify_levels()`
+Same as `glamr::identify_levels()` or `glamr::identify_levels()`
 }
 \examples{
 \dontrun{
-  library(gisr)
+  library(glamr)
 
   # Get PEPFAR Org Levels
   get_levels()

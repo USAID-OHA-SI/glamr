@@ -10,8 +10,6 @@ pano_elements(page_html, page_url = NULL)
 \item{page_html}{html content}
 
 \item{page_url}{Curretn html page url}
-
-\item{page_name}{Current html page name}
 }
 \value{
 html element

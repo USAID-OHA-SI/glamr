@@ -4,7 +4,7 @@
 \alias{gdrive_folder}
 \title{Get id of googledrive folder}
 \usage{
-gdrive_folder(name, path = NULL, add = FALSE, ...)
+gdrive_folder(name, path, add = FALSE, ...)
 }
 \arguments{
 \item{name}{Googledrive folder name}

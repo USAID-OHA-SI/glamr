@@ -115,8 +115,8 @@ connect_text <- function(txt,
 
 
 #' @title Negate in
-#' @export
 #' @description negate `%in%`
+#' @export
 `%ni%` <- Negate(`%in%`)
 
 

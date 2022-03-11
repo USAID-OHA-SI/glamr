@@ -28,7 +28,7 @@ Get OU Org UIDS
 }
 \examples{
 \dontrun{
- library(gisr)
+ library(glamr)
 
  # OU Org UIDs
  ous <- get_ouuids()

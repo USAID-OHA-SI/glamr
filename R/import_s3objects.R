@@ -354,9 +354,8 @@ s3_read_object <- function(bucket, object,
     usethis::ui_info(paste0("FILE - " , s3_obj))
 
     # Read file content
-    usethis::ui_info("PROCESS - Reading data with {usethis::ui_code('Wavelength::hfr_import()')}")
+    usethis::ui_info("PROCESS - Reading data with {usethis::ui_code('readxl::read_excel()')}")
 
-    #df <- Wavelength::hfr_import(tmpfile)
     df <- NULL
 
     if (!is.null(sheet)) {

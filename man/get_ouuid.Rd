@@ -21,7 +21,7 @@ Get Operatingunit / Country Org UID
 }
 \examples{
 \dontrun{
-  library(gisr)
+  library(glamr)
 
   # get orgunit for specific OU/Country: kenya
   get_ouuid(operatingunit = "Kenya")

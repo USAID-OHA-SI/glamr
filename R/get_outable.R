@@ -257,7 +257,7 @@ identify_pd <- function(msd_file, clean = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#'  library(gisr)
+#'  library(glamr)
 #'
 #'  # All orgunit level 3 uids + names
 #'  orgs <- get_orguids(level = 3)
@@ -311,7 +311,7 @@ get_orguids <-
 #' @examples
 #' \dontrun{
 #'
-#'  library(gisr)
+#'  library(glamr)
 #'
 #'  cntry <- "Zambia"
 #'
@@ -385,7 +385,7 @@ get_ouorgs <-
 #'
 #' @examples
 #' \dontrun{
-#'  library(gisr)
+#'  library(glamr)
 #'
 #'  # OU Org UIDs
 #'  ous <- get_ouuids()
@@ -454,7 +454,7 @@ get_ouuids <-
 #'
 #' @examples
 #' \dontrun{
-#'   library(gisr)
+#'   library(glamr)
 #'
 #'   # get orgunit for specific OU/Country: kenya
 #'   get_ouuid(operatingunit = "Kenya")
@@ -508,7 +508,7 @@ get_ouuid <-
 
 
 #' @title Get all orgunits levels in org hierarchy
-#' @note  Same as `glamr::identify_levels()` or `Wavelength::identify_levels()`
+#' @note  Same as `glamr::identify_levels()` or `glamr::identify_levels()`
 #'
 #' @param username DATIM username, recommed using `datim_user()`
 #' @param password DATIM password, recommend using `datim_pwd()`
@@ -519,7 +519,7 @@ get_ouuid <-
 #'
 #' @examples
 #' \dontrun{
-#'   library(gisr)
+#'   library(glamr)
 #'
 #'   # Get PEPFAR Org Levels
 #'   get_levels()
@@ -577,7 +577,7 @@ get_levels <-
 #'
 #' @examples
 #' \dontrun{
-#'  library(gisr)
+#'  library(glamr)
 #'
 #'  cntry <- "Zambia"
 #'
@@ -718,7 +718,7 @@ get_ouorglabel <- function(operatingunit,
 #'
 #' @examples
 #' \dontrun{
-#'  library(gisr)
+#'  library(glamr)
 #'
 #'  # Set country of interest
 #'  cntry <- "Zambia"
