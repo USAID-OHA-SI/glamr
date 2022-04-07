@@ -1,4 +1,5 @@
 # glamr 1.0.3
+* Create a new period calculation, `convert_fy_qtr_to_pd`, using `fiscal_year` and quarter column to make it easier to create a period variable when not using `gophr::reshape_msd()`. (2022-04-07)
 * Update both `pepfar_country_list` and `pepfar_country_xwalk` to include Benin, now reporting into PEPFAR starting in FY22 (2022-02-22)
 * Update `source_info` to look for FY20 MSD filename as a default as opposed to FY19 (2022-02-22)
 

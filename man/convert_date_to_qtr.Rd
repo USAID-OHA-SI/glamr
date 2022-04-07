@@ -21,3 +21,10 @@ dates <- c("2021-10-01", "2021-11-15")
 convert_date_to_qtr(dates) }
 
 }
+\seealso{
+Other period: 
+\code{\link{convert_datim_pd_to_qtr}()},
+\code{\link{convert_fy_qtr_to_pd}()},
+\code{\link{convert_qtr_to_date}()}
+}
+\concept{period}
