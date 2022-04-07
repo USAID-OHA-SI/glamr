@@ -34,3 +34,10 @@ df <- df \%>\%
   mutate(date = convert_qtr_to_date(period), .after = period) }
 
 }
+\seealso{
+Other period: 
+\code{\link{convert_date_to_qtr}()},
+\code{\link{convert_datim_pd_to_qtr}()},
+\code{\link{convert_fy_qtr_to_pd}()}
+}
+\concept{period}

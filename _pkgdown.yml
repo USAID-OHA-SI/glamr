@@ -84,6 +84,7 @@ reference:
   - convert_date_to_qtr
   - convert_datim_pd_to_qtr
   - convert_qtr_to_date
+  - convert_fy_qtr_to_pd
 
 - title: Utilities
   contents:
