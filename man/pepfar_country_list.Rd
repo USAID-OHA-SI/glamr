@@ -5,12 +5,14 @@
 \alias{pepfar_country_list}
 \title{Current List of PEPFAR OUs/Countries and their ISO codes}
 \format{
-A data frame with 53 rows and 4 variables:
+A data frame with 53 rows and 6 variables:
 \describe{
   \item{operatingunit}{PEPFAR Operating Unit (countries + 3 regional programs)}
   \item{operatingunit_iso}{PEPFAR Operating Unit ISO-3}
-  \item{countryname}{PEPFAR Country Name}
-  \item{countryname_iso}{PEPFAR Country Name ISO-3}
+  \item{operatingunit_uid}{PEPFAR Operating Unit unique id from DATIM}
+  \item{country}{PEPFAR Country Name}
+  \item{country_iso}{PEPFAR Country Name ISO-3}
+  \item{country_uid}{PEPFAR Country unique id from DATIM}
 }
 }
 \source{

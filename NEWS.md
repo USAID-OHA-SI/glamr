@@ -1,5 +1,6 @@
 # glamr 1.0.4
-* Update references to old variable names in `get_outtable`, `identify_levels`, `get_ouuids`, `get_ouuid`, `get_levels`, `get_ouorglevel`, `get_ouorglabel` and `resolve_knownissues`. The new ones went into effect FY22Q2 (2022-04-08)
+* Update references to old variable names in `get_outtable`, `identify_levels`, `get_ouuids`, `get_ouuid`, `get_levels`, `get_ouorglevel`, `get_ouorglabel` and `resolve_knownissues` as well as with the raw data. The new names went into effect FY22Q2 (2022-04-08)
+* Add DATIM UIDs to `pepfar_country_list` (2022-04-08)
 
 # glamr 1.0.3
 * Create a new period calculation, `convert_fy_qtr_to_pd`, using `fiscal_year` and quarter column to make it easier to create a period variable when not using `gophr::reshape_msd()`. (2022-04-07)

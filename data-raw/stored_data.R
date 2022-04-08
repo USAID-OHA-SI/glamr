@@ -39,21 +39,22 @@ curr_fy <- source_info(return = "fiscal_year")
 
 df_msd <- si_path() %>%
   return_latest("OU_IM") %>%
-  read_rds()
+  gophr::read_msd()
 
 df_cntry <- df_msd %>%
   filter(fiscal_year == curr_fy,
-         funding_agency %ni% c("Dedup", "Default"),
+         fundingagency %ni% c("Dedup", "Default"),
          indicator != "TX_NET_NEW") %>%
-  distinct(operatingunit, countryname)
+  distinct(operatingunit, country)
 
 ou_table <- get_outable(datim_user(), datim_pwd())  %>%
-  select(operatingunit, operatingunit_iso, countryname, countryname_iso)
+  select(operatingunit, operatingunit_iso, operatingunit_uid,
+         country, country_iso, country_uid)
 
 pepfar_country_list <- df_cntry %>%
-  left_join(ou_table, by = c("operatingunit", "countryname")) %>%
+  left_join(ou_table, by = c("operatingunit", "country")) %>%
   relocate(starts_with("op")) %>%
-  arrange(operatingunit, countryname)
+  arrange(operatingunit, country)
 
 
 usethis::use_data(pepfar_country_list, overwrite = TRUE)
