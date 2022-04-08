@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_columns.R
 \name{clean_agency}
 \alias{clean_agency}
-\title{Clean data from fundingagency column
+\title{Clean data from funding_agency column
 
 `clean_agency` converts all funding agency names to upper case removes
 the HHS prefix for those agencies
@@ -17,7 +17,7 @@ clean_agency(.data)
 Cleaned MSD DataFrame
 }
 \description{
-Clean data from fundingagency column
+Clean data from funding_agency column
 
 `clean_agency` converts all funding agency names to upper case removes
 the HHS prefix for those agencies
