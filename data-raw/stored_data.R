@@ -33,7 +33,7 @@ usethis::use_data(pepfar_data_calendar, overwrite = TRUE)
 ## PEPFAR country list
 
 library(tidyverse)
-library(glamr)
+devtools::load_all()
 
 curr_fy <- source_info(return = "fiscal_year")
 
@@ -43,7 +43,7 @@ df_msd <- si_path() %>%
 
 df_cntry <- df_msd %>%
   filter(fiscal_year == curr_fy,
-         fundingagency %ni% c("Dedup", "Default"),
+         funding_agency %ni% c("Dedup", "Default"),
          indicator != "TX_NET_NEW") %>%
   distinct(operatingunit, countryname)
 

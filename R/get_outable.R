@@ -173,13 +173,13 @@ identify_levels <- function(username, password, baseurl = "https://final.datim.o
   #rename
   df_levels <- df_levels %>%
     dplyr::rename(operatingunit = name3,
-                  country = name4,
                   operatingunit_iso = iso3,
                   country_iso = iso4,
                   psnu = prioritization) %>%
     dplyr::rename_with(.cols= where(is.integer), ~ paste0(., "_lvl")) %>%
     dplyr::select(dplyr::everything(), country_lvl, psnu_lvl,
-                  community_lvl, facility_lvl)
+                  community_lvl, facility_lvl) %>%
+    dplyr::rename(country = name4)
 
   return(df_levels)
 }
