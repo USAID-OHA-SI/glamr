@@ -101,7 +101,7 @@ gdrive_metadata <- function(df, show_details = FALSE){
 
     df <- df %>%
       dplyr::select(kind, id, name, original_filename,
-                    created_time, modified_time, size, trashed,
+                    created_time, modified_time, trashed,
                     last_modified_by = last_modifying_user_display_name)
 
   }
@@ -116,8 +116,7 @@ gdrive_metadata <- function(df, show_details = FALSE){
                        permissions_allow_file_discovery),
                     -ends_with(c("_link", "_thumbnail")),
                     -starts_with(c("thumbnail_"))) %>%
-      dplyr::filter(permissions_type != "domain") %>%
-      tidyr::unnest(cols = permissions, names_repair = "unique") # Remove remove all list
+      dplyr::filter(permissions_type != "domain")
   }
 
   return(df)
