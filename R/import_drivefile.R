@@ -89,7 +89,7 @@ gdrive_metadata <- function(df, show_details = FALSE){
     dplyr::select(drive_resource) %>%
     jsonlite::toJSON() %>%
     jsonlite::fromJSON(flatten = TRUE) %>%
-    dplyr::rename_with(~str_remove(., pattern = "drive_resource.")) %>%
+    dplyr::rename_with(~stringr::str_remove(., pattern = "drive_resource.")) %>%
     janitor::clean_names()
 
   # Compensate for non alter folders
