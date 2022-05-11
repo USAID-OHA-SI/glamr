@@ -35,15 +35,15 @@ get_outable <- function(username, password, baseurl = "https://final.datim.org/"
     dplyr::left_join(df_levels, ., by = c("operatingunit" = "country"))
 
   df_outable <- df_uid %>%
-    dplyr::rename(countryname_uid = uid) %>%
+    dplyr::rename(country_uid = uid) %>%
     dplyr::select(-type) %>%
-    dplyr::left_join(df_outable, ., by = c("countryname" = "country"))
+    dplyr::left_join(df_outable, ., by = c("country"))
 
   df_outable <- df_outable %>%
     dplyr::select(operatingunit, operatingunit_uid, operatingunit_iso,
-                  countryname, countryname_uid, countryname_iso,
+                  country, country_uid, country_iso,
                   dplyr::everything()) %>%
-    dplyr::arrange(operatingunit, countryname)
+    dplyr::arrange(operatingunit, country)
 
   return(df_outable)
 
@@ -173,13 +173,13 @@ identify_levels <- function(username, password, baseurl = "https://final.datim.o
   #rename
   df_levels <- df_levels %>%
     dplyr::rename(operatingunit = name3,
-                  countryname = name4,
                   operatingunit_iso = iso3,
-                  countryname_iso = iso4,
+                  country_iso = iso4,
                   psnu = prioritization) %>%
     dplyr::rename_with(.cols= where(is.integer), ~ paste0(., "_lvl")) %>%
     dplyr::select(dplyr::everything(), country_lvl, psnu_lvl,
-                  community_lvl, facility_lvl)
+                  community_lvl, facility_lvl) %>%
+    dplyr::rename(country = name4)
 
   return(df_levels)
 }
@@ -422,7 +422,7 @@ get_ouuids <-
         purrr::map_dfr(function(obj){
 
           cntries <- get_ouorgs(obj$uid, 4) %>%
-            dplyr::rename(countryname = orgunit) %>%
+            dplyr::rename(country = orgunit) %>%
             dplyr::mutate(operatingunit = obj$operatingunit) %>%
             dplyr::relocate(operatingunit, .after = 1)
 
@@ -432,11 +432,11 @@ get_ouuids <-
       # Combine
       ous <- ous %>%
         dplyr::mutate(
-          countryname = dplyr::case_when(
+          country = dplyr::case_when(
             stringr::str_detect(operatingunit, " Region$") == TRUE ~ NA_character_,
             TRUE ~ operatingunit)) %>%
         dplyr::bind_rows(countries) %>%
-        dplyr::arrange(operatingunit, countryname)
+        dplyr::arrange(operatingunit, country)
     }
 
     return(ous)
@@ -483,11 +483,11 @@ get_ouuid <-
       password = pass) %>%
       dplyr::filter(
         stringr::str_to_upper(operatingunit) == ou |
-          stringr::str_to_upper(countryname) == ou)
+          stringr::str_to_upper(country) == ou)
 
 
     if (base::nrow(ous) == 0) {
-      base::cat("\nInvalid PEPFAR Operatingunit / Countryname: ",
+      base::cat("\nInvalid PEPFAR Operatingunit / Country: ",
                 crayon::red(ou, "\n"))
 
       return(NULL)
@@ -495,7 +495,7 @@ get_ouuid <-
 
     # OU/Country uid
     if (stringr::str_detect(ou, " region")) {
-      ous <- ous %>% dplyr::filter(is.na(countryname))
+      ous <- ous %>% dplyr::filter(is.na(country))
     }
 
     # Get uid
@@ -556,9 +556,9 @@ get_levels <-
     # rename
     df_levels <- df_levels %>%
       dplyr::rename(operatingunit = name3,
-                    countryname = name4,
+                    country = name4,
                     operatingunit_iso = iso3,
-                    countryname_iso = iso4)
+                    country_iso = iso4)
 
     return(df_levels)
   }
@@ -624,7 +624,7 @@ get_ouorglevel <-
     # filter ou/country
     df_lvls <- df_lvls %>%
       dplyr::filter(operatingunit == ou,
-                    countryname == cntry)
+                    country == cntry)
 
     # records
     if (nrow(df_lvls) == 0) {
@@ -677,7 +677,7 @@ get_ouorglabel <- function(operatingunit,
     return(lbl)
   }
 
-  # Countryname
+  # Country
   if (base::is.null(country)) {
     country <- operatingunit
   }
@@ -690,7 +690,7 @@ get_ouorglabel <- function(operatingunit,
 
   df_lvls %<>%
     dplyr::filter(operatingunit == operatingunit,
-           countryname == country,
+           country == country,
            level == org_level)
 
   if (base::is.null(df_lvls) | base::nrow(df_lvls) == 0) {

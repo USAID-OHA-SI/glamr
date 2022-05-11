@@ -150,7 +150,7 @@ get_knownissues <- function(){
   #rename columns
   df_issues <- df_issues %>%
     dplyr::rename(timestamp = Timestamp,
-                  countryname = `What PEPFAR country is affected?`,
+                  country = `What PEPFAR country is affected?`,
                   fiscal_year = `What fiscal year has this issue?`,
                   period_type = `Where does the known issue reside?`,
                   period = `Is there a specific quarter affected?`,
@@ -358,13 +358,13 @@ note_knownissues <- function(df_orig, df_allissues){
   #note all the changes being made
   df_issues_matches <- df_issues_type %>%
     dplyr::inner_join(df_orig, by = c("mech_code", "indicator", "fiscal_year")) %>%
-    dplyr::distinct(action, countryname, mech_code, fiscal_year, period_type, description, indicator) %>%
-    dplyr::group_by(action, countryname, mech_code, fiscal_year, period_type, description) %>%
+    dplyr::distinct(action, country, mech_code, fiscal_year, period_type, description, indicator) %>%
+    dplyr::group_by(action, country, mech_code, fiscal_year, period_type, description) %>%
     dplyr::summarise(indicator = paste(indicator, collapse=", "), .groups = "drop") %>%
-    dplyr::mutate(msg = dplyr::case_when(action == "exclude" & period_type %in% c("results", "targets") ~ glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}"),
-                                         action == "exclude" ~ glue::glue("Excluded {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}"),
-                                         period_type %in% c("results", "targets") ~ glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}; affecting {indicator}"),
-                                         TRUE ~ glue::glue("Extra info provided for {countryname} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}")))
+    dplyr::mutate(msg = dplyr::case_when(action == "exclude" & period_type %in% c("results", "targets") ~ glue::glue("Excluded {country} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type} for {indicator}"),
+                                         action == "exclude" ~ glue::glue("Excluded {country} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}"),
+                                         period_type %in% c("results", "targets") ~ glue::glue("Extra info provided for {country} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}; affecting {indicator}"),
+                                         TRUE ~ glue::glue("Extra info provided for {country} {mech_code} FY{stringr::str_sub(fiscal_year, -2)} {period_type}: {description}")))
 
   return(df_issues_matches)
 }

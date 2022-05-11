@@ -23,19 +23,19 @@ clean_column <- function(.data, colname = "psnu") {
     }
 
     # Funding Agencies
-    if(name == "fundingagency") {
+    if(name == "funding_agency") {
       .data <- .data %>%
         clean_agency() %>%
-        mutate(fundingagency == case_when(
-          fundingagency == "PC" ~ "Peace Corps",
-          TRUE ~ fundingagency
+        mutate(funding_agency == case_when(
+          funding_agency == "PC" ~ "Peace Corps",
+          TRUE ~ funding_agency
         ))
 
       return(.data)
     }
 
-    # Operatingunit / countryname
-    if(base::all(name %in% c("operatingunit", "countryname"))) {
+    # Operatingunit / country
+    if(base::all(name %in% c("operatingunit", "country"))) {
       .data <- .data %>%
         dplyr::mutate(dplyr::across(dplyr::all_of(name),
                       ~ case_when(
@@ -107,7 +107,7 @@ clean_psnu <- function(.data) {
   }
 
 
-#' @title Clean data from fundingagency column
+#' @title Clean data from funding_agency column
 #'
 #' `clean_agency` converts all funding agency names to upper case removes
 #' the HHS prefix for those agencies
@@ -124,14 +124,14 @@ clean_psnu <- function(.data) {
 clean_agency <- function(.data) {
 
     # Check for valid column name
-    if (!"fundingagency" %in% names(.data)) {
-      cat("\nERROR - fundingagency column is not available as a column.\n")
+    if (!"funding_agency" %in% names(.data)) {
+      cat("\nERROR - funding_agency column is not available as a column.\n")
       return(NULL)
     }
 
     # clean column data
     .data <- .data %>%
-      dplyr::mutate(fundingagency = stringr::str_to_upper(fundingagency) %>% 
+      dplyr::mutate(funding_agency = stringr::str_to_upper(funding_agency) %>%
                       stringr::str_remove("(^HHS\\/|\\/.*$)"))
   }
 
@@ -186,7 +186,7 @@ lookup_country <- function(country, language = "en") {
       if (!base::is.null(df_cntries) & base::nrow(df_cntries) == 1) {
 
         new_name <- df_cntries %>%
-          dplyr::pull(countryname)
+          dplyr::pull(country)
 
         # notification for new match
         if (curr_name != new_name) {
@@ -232,7 +232,7 @@ lookup_country <- function(country, language = "en") {
 
 #' @title Clean Natural Earth Country names to match PEPFAR Data
 #'
-#' @description `clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / Countryname. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE.
+#' @description `clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / country. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE.
 #'
 #' @param .data     Reference Datasets
 #' @param colname   Column name to be updated
@@ -268,7 +268,7 @@ clean_countries <- function(.data,
     }
 
     # Exception - Shorten PEPFAR OU/Country names
-    if (base::all(colname %in% c("operatingunit", "countryname")) && short == TRUE) {
+    if (base::all(colname %in% c("operatingunit", "country")) && short == TRUE) {
       .data <- .data %>%
         clean_column(colname = colname)
 
