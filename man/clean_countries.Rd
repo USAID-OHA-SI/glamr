@@ -19,7 +19,7 @@ clean_countries(.data, colname = "admin", language = "en", short = TRUE)
 Cleaned DataFrame
 }
 \description{
-`clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / Countryname. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE.
+`clean_countries` is used to adjust Natural Earth country names to match PEPFAR's Operatingunit / country. This function can also be used to shorten OU/Country names by setting the parameter short to TRUE.
 }
 \examples{
 \dontrun{

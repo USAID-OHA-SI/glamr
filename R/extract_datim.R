@@ -127,7 +127,7 @@ datim_dim_items <- function(dimension,
     password <- datim_pwd()
 
   # clean up url / paging
-  url <- stringr::str_remove(url, "\\?.*)")
+  url <- stringr::str_remove(url, "\\?.*\\)")
 
   # Get dimension id
   dim_id <- datim_dimension(url = url,
