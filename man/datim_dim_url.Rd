@@ -4,12 +4,20 @@
 \alias{datim_dim_url}
 \title{Build PEPFAR/DATIM Query dimension}
 \usage{
-datim_dim_url(dimension, items = NULL, username = NULL, password = NULL)
+datim_dim_url(
+  dimension,
+  items = NULL,
+  url = "https://final.datim.org/api/dimensions",
+  username = NULL,
+  password = NULL
+)
 }
 \arguments{
 \item{dimension}{Dimension name}
 
 \item{items}{Item name}
+
+\item{url}{DATIM API End point}
 
 \item{username}{DATIM Account Username}
 

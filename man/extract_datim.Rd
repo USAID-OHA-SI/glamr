@@ -29,6 +29,9 @@ Consider using `datim_process_query()` and/or `datim_execute_query()`
                  dimension=ou:LEVEL-4;HfVjCurKxh2&
                  filter=pe:2018Oct&
                  displayProperty=SHORTNAME&outputIdScheme=CODE")
- df_targets <- extract_datim(myurl, datim_user(), datim_pwd()) }
+
+ df_targets <- extract_datim(myurl, datim_user(), datim_pwd())
+
+ }
 
 }

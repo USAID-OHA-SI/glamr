@@ -98,6 +98,7 @@ datim_dimension <- function(name,
 #'
 #' @param dimension Dimension name
 #' @param var       column name to pull values from, id or item
+#' @param fields    list of column names to return, this will overight `var`
 #' @param url       DATIM API end point
 #' @param username  DATIM Account Username
 #' @param password  DATIM Account passward
@@ -115,6 +116,7 @@ datim_dimension <- function(name,
 #'
 datim_dim_items <- function(dimension,
                             var = NULL,
+                            fields = NULL,
                             url = "https://final.datim.org/api/dimensions",
                             username = NULL,
                             password = NULL){
@@ -127,7 +129,7 @@ datim_dim_items <- function(dimension,
     password <- datim_pwd()
 
   # clean up url / paging
-  url <- stringr::str_remove(url, "\\?.*\\)")
+  url <- stringr::str_remove(url, "\\?.*")
 
   # Get dimension id
   dim_id <- datim_dimension(url = url,
@@ -138,9 +140,18 @@ datim_dim_items <- function(dimension,
   # Update url with id and paging
   url_dims <- glue::glue("{url}/{dim_id}/items?paging=false")
 
+  # Request specific fields
+  if (!base::is.null(fields)) {
+    url_dims <- fields %>%
+      base::paste0(collapse = ",") %>%
+      base::paste0(url_dims, "&fields=", .)
+  }
+
   # Get items
   items <- url_dims %>%
-    datim_execute_query(username, password, flatten = TRUE) %>%
+    datim_execute_query(username, password, flatten = TRUE)
+
+  items <- items %>%
     purrr::pluck("items") %>%
     tibble::as_tibble()
 
@@ -149,11 +160,14 @@ datim_dim_items <- function(dimension,
     base::stop("Invalid dimension name")
   }
 
-  items <- items %>%
-    janitor::clean_names() %>%
-    dplyr::rename(item = display_name)
+  items <- items %>% janitor::clean_names()
 
-  if (!base::is.null(var) && var %in% c("id", "item")) {
+  if ("display_name" %in% base::names(items)) {
+    items <- items %>% dplyr::rename(item = display_name)
+  }
+
+  # Return values from variable name
+  if (!base::is.null(var) && var %in% c("id", "item") && var %in% base::names(items)) {
     items <- items %>% dplyr::pull(!!sym(var))
   }
 

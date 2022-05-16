@@ -4,12 +4,20 @@
 \alias{datim_dim_item}
 \title{Get dimension / item id}
 \usage{
-datim_dim_item(dimension, name, username = NULL, password = NULL)
+datim_dim_item(
+  dimension,
+  name,
+  url = "https://final.datim.org/api/dimensions",
+  username = NULL,
+  password = NULL
+)
 }
 \arguments{
 \item{dimension}{Dimension name}
 
 \item{name}{Item name}
+
+\item{url}{DATIM API end point}
 
 \item{username}{DATIM Account Username}
 

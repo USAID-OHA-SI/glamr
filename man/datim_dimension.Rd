@@ -4,14 +4,21 @@
 \alias{datim_dimension}
 \title{Get PEPFAR/DATIM Dimension ID}
 \usage{
-datim_dimension(name, username = NULL, password = NULL)
+datim_dimension(
+  name,
+  url = "https://final.datim.org/api/dimensions",
+  username = NULL,
+  password = NULL
+)
 }
 \arguments{
 \item{name}{Dimension name}
 
-\item{username}{DATIM Account Username}
+\item{url}{DATIM API End point, default value is `https://final.datim.org/api/dimensions`}
 
-\item{password}{DATIM Account passward}
+\item{username}{DATIM Account Username, recommended using `datim_user()`}
+
+\item{password}{DATIM Account passward, recommended using `datim_pwd()`}
 }
 \value{
 dimension uid
