@@ -71,7 +71,8 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.4" id="glamr-104">glamr 1.0.4<a class="anchor" aria-label="anchor" href="#glamr-104"></a></h2>
-<ul><li>Update references to old variable names in <code>get_outtable</code>, <code>identify_levels</code>, <code>get_ouuids</code>, <code>get_ouuid</code>, <code>get_levels</code>, <code>get_ouorglevel</code>, <code>get_ouorglabel</code> and <code>resolve_knownissues</code> as well as with the raw data. The new names went into effect FY22Q2 (2022-04-08)</li>
+<ul><li>Add <code>pluck_totals</code> function to fiter dataframe to just Total Numerator and Denominator (2022-05-27)</li>
+<li>Update references to old variable names in <code>get_outtable</code>, <code>identify_levels</code>, <code>get_ouuids</code>, <code>get_ouuid</code>, <code>get_levels</code>, <code>get_ouorglevel</code>, <code>get_ouorglabel</code> and <code>resolve_knownissues</code> as well as with the raw data. The new names went into effect FY22Q2 (2022-04-08)</li>
 <li>Add DATIM UIDs to <code>pepfar_country_list</code> (2022-04-08)</li>
 </ul></div>
     <div class="section level2">
@@ -114,7 +115,7 @@
 <li>New vigentte for project workflow added, <code>vignette(package = glamr)</code>
 </li>
 <li>Update <code><a href="../reference/set_paths.html">set_paths()</a></code>, allowing for <code>path_downloads</code> and improve backend efficiency.</li>
-<li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">googledrive::drive_auth()</a></code> and <code><a href="https://googlesheets4.tidyverse.org/reference/gs4_auth.html" class="external-link">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
+<li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://rdrr.io/pkg/googledrive/man/drive_auth.html" class="external-link">googledrive::drive_auth()</a></code> and <code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_auth.html" class="external-link">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
 <li>Add <code><a href="../reference/clean_filename.html">clean_filename()</a></code> function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.</li>
 <li>Adjust <code><a href="../reference/load_secrets.html">load_secrets()</a></code> to allow user to specify which accounts to load in a session.</li>
 <li>Depricate <code><a href="../reference/mypwd.html">mypwd()</a></code> which has been superseded by <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>.</li>
@@ -130,8 +131,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="glamr-010">glamr 0.1.0<a class="anchor" aria-label="anchor" href="#glamr-010"></a></h2>
-<ul><li>Prior to verion 1.0.0, updates were not captured.</li>
-</ul></div>
+<ul><li>Prior to verion 1.0.0, updates were not captured.</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -146,7 +146,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

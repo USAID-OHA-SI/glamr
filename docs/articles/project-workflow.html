@@ -124,14 +124,14 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org" class="external-link">usethis</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">create_project</a></span><span class="op">(</span><span class="st">"~/Documents/project-transform"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/usethis/man/create_package.html" class="external-link">create_project</a></span><span class="op">(</span><span class="st">"~/Documents/project-transform"</span><span class="op">)</span></code></pre></div>
 <p>This will get you set you up in RStudio with a self contained project. In order to collaborate we also use git and GitHub. For more on integrating git with RStudio, check out Jenny Bryan’s <a href="https://happygitwithr.com/" class="external-link">Happy Git and GitHub for the useR</a>. You an also use a UI tool like GitHub Desktop or GitKraken. If you have git installed and integreated with R, you can again use <code>usethis</code> to set everything up. And <code>usethis</code> even has some <a href="https://usethis.r-lib.org/articles/articles/usethis-setup.html#configure-user-name-and-user-email" class="external-link">help info on getting started with git</a> if this your first time.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html" class="external-link">use_git</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#this prompts a restart of your session</span>
-<span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html" class="external-link">use_github</a></span><span class="op">(</span>organisation <span class="op">=</span> <span class="st">"USAID-OHA-SI"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/usethis/man/use_git.html" class="external-link">use_git</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#this prompts a restart of your session</span>
+<span class="fu"><a href="https://rdrr.io/pkg/usethis/man/use_github.html" class="external-link">use_github</a></span><span class="op">(</span>organisation <span class="op">=</span> <span class="st">"USAID-OHA-SI"</span><span class="op">)</span></code></pre></div>
 <p>The last thing we’ll use <code>usethis</code> for is to set up a license for the project. We use the MIT license which calls for attribution for downstream uses of your work and specifies that the software is provided as is.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"Dr. Raj Shah"</span><span class="op">)</span> <span class="co">#add your name</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/usethis/man/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"Dr. Raj Shah"</span><span class="op">)</span> <span class="co">#add your name</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="si-workflow-enter-glamr">SI Workflow, Enter glamr<a class="anchor" aria-label="anchor" href="#si-workflow-enter-glamr"></a>
@@ -142,13 +142,12 @@
 <p>The primary function we’re going to run to get us going is <code>si_setup</code>. If we look under the hood at <code>si_setup</code>, we can see it actually contains three sub-function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">si_setup</span>
-<span class="co">#&gt; function () </span>
-<span class="co">#&gt; {</span>
-<span class="co">#&gt;     folder_setup()</span>
-<span class="co">#&gt;     setup_gitignore()</span>
-<span class="co">#&gt;     setup_readme()</span>
+<span class="co">#&gt; function(){</span>
+<span class="co">#&gt;   folder_setup()</span>
+<span class="co">#&gt;   setup_gitignore()</span>
+<span class="co">#&gt;   setup_readme()</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x000000002142fc60&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x0000000021c446a8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:glamr&gt;</span></code></pre></div>
 <p>The first one, <code><a href="../reference/folder_setup.html">folder_setup()</a></code> initiates the main folders we use for our work:</p>
 <ul>
@@ -200,11 +199,11 @@
   folderpath_datim <span class="op">=</span>  <span class="st">"~/Documents/DATIM"</span>,
   folderpath_downloads <span class="op">=</span>  <span class="st">"~/Downloads"</span><span class="op">)</span></code></pre></div>
 <p>Running this will open your <code>.Rprofile</code> and you’ll be prompted to paste the pre-copied code into the <code>.Rprofile</code> save and restart your session.</p>
-<p>With that stored, you can use <code><a href="../reference/si_path.html">si_path()</a></code> to return the path to your MSD folder (as the default) and then use another <code>glamr</code> function, <code><a href="../reference/return_latest.html">return_latest()</a></code>, which looks in the provide folder path for the lastest version of a file that matches the pattern you provided. In this case, we can pass in that we want the last OUxIM MSD and it will return the file path which we can pass into <code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds()</a></code></p>
+<p>With that stored, you can use <code><a href="../reference/si_path.html">si_path()</a></code> to return the path to your MSD folder (as the default) and then use another <code>glamr</code> function, <code><a href="../reference/return_latest.html">return_latest()</a></code>, which looks in the provide folder path for the lastest version of a file that matches the pattern you provided. In this case, we can pass in that we want the last OUxIM MSD and it will return the file path which we can pass into <code><a href="https://rdrr.io/pkg/readr/man/read_rds.html" class="external-link">readr::read_rds()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/si_path.html">si_path</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/return_latest.html">return_latest</a></span><span class="op">(</span><span class="st">"OU_IM_FY19"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">read_rds</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_rds.html" class="external-link">read_rds</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -223,7 +222,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
