@@ -78,6 +78,7 @@ reference:
   - clean_psnu
   - connect_text
   - extract_text
+  - pluck_totals
 
 - title: Date Conversion
   contents:
