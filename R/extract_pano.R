@@ -567,4 +567,151 @@ pano_extract_msd <- function(operatingunit = NULL,
 }
 
 
+#' @title Downloads All Global + OU Specific MSDs
+#'
+#' @param operatingunit PEPFAR Operating Unit. Default is set to NULL for global datasets
+#' @param items         Panorama data set, default option is `mer`
+#' @param archive       Logial, should the old files be archived?
+#' @param dest_path     Directory path to download file. Default set to `si_path()`
+#' @param username      Panorama username, recommend using `pano_user()`
+#' @param password      Panorama password, recommend using `pano_pwd()`
+#' @param base_url      Panorama base url
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  dir_mer <- si_path()
+#'
+#'  pano_extract_msds(operatingunit = "Zambia",
+#'                    archive = TRUE,
+#'                    dest_path = dir_mer)
+#' }
+pano_extract_msds <- function(operatingunit,
+                              items = "mer",
+                              archive = FALSE,
+                              dest_path = NULL,
+                              username = NULL,
+                              password = NULL,
+                              base_url = NULL) {
+
+  # URL
+  if (is.null(base_url))
+    base_url <- "https://pepfar-panorama.org"
+
+  url <- base::file.path(base_url, "forms/downloads")
+
+  # Pano Access
+  user <- username
+
+  if (is.null(user))
+    user <- pano_user()
+
+  pass <- password
+
+  if (is.null(pass))
+    pass <- pano_pwd()
+
+  # Destination Path
+  path_msd <- si_path("path_msd")
+
+  if (!is.null(dest_path)) {
+    path_msd <- dest_path
+  }
+
+  sess <- pano_session(username = user,
+                       password = pass,
+                       base_url = base_url)
+
+  # IDENTIFY CURRENT PERIOD
+
+  recent_fldr <- url %>%
+    pano_content(session = sess) %>%
+    pano_elements() %>%
+    dplyr::filter(stringr::str_detect(item, "^MER")) %>%
+    dplyr::pull(item)
+
+  # Release
+  curr_release <- stringr::str_extract(recent_fldr, "(?<=Q\\d{1}[:space]).*")
+  curr_status <- base::ifelse(str_detect(recent_fldr, "Post"), "clean", "initial")
+  curr_fy <- stringr::str_extract(recent_fldr, "[:digit:]{4}") %>% as.numeric()
+  curr_qtr <- stringr::str_extract(recent_fldr, "(?<=Q)[:digit:]") %>% as.numeric()
+
+  # Extract Data items
+  items <- pano_extract(item = items,
+                        version = curr_status,
+                        fiscal_year = curr_fy,
+                        quarter = curr_qtr,
+                        username = user,
+                        password = pass,
+                        unpack = TRUE)
+
+  # Archive existing files
+
+  # Identify archive folder
+  dir_archive <- dest_path %>%
+    base::dir(path = .,
+              pattern = "archive",
+              full.names = TRUE,
+              ignore.case = TRUE)
+
+  # Move files
+  if(archive) {
+
+    # Check for archive folder
+    if (base::identical(dir_archive, base::character(0))) {
+      dir_archive <- base::file.path(dest_path, "Archive")
+
+      base::message("Adding archive folder ...")
+      base::message(dir_archive)
+
+      base::dir.create(dir_archive)
+    }
+
+    # move files
+    base::message("Archiving files ....")
+
+    files_old <- dest_path %>%
+      base::list.files(path = .,
+                       pattern = "^MER_Structured_Datasets_",
+                       full.names = TRUE)
+
+    files_old %>%
+      purrr::walk(function(.x){
+        file_name <- base::basename(.x)
+        arch_name <- base::file.path(dir_archive, file_name)
+
+        base::message(base::paste0(file_name, " => ", arch_name))
+
+        fs::file_move(.x, arch_name)
+      })
+
+    base::message("Archiving files completed!")
+  }
+
+  # Global MSDs
+  base::message("Downloading global MSDs ...")
+
+  items %>%
+    dplyr::filter(
+      type == "file zip_file",
+      stringr::str_detect(parent, glue("{curr_release}$|{curr_release}/FY15-19$")),
+      stringr::str_detect(item, "OU_IM|PSNU|PSNU_IM|PSNU_IM_DREAMS|NAT_SUBNAT")) %>%
+    dplyr::pull(path) %>%
+    purrr::walk(~pano_download(item_url = .x,
+                               session = sess,
+                               dest = dest_path))
+
+  # OU MSDs
+  base::message("Downloading OU specific MSDs ...")
+
+  items %>%
+    dplyr::filter(
+      stringr::str_detect(
+        stringr::str_to_lower(item),
+        base::paste0("_", stringr::str_to_lower(operatingunit), ".zip")),
+      type == "file zip_file") %>%
+    dplyr::pull(path) %>%
+    purrr::walk(~pano_download(item_url = .x, session = sess, dest = dest_path))
+}
 
