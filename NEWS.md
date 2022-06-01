@@ -1,5 +1,8 @@
+# glamr 1.0.5
+* Add `pano_extract_msds` function to extract latest available MSDs from PEPFAR Panorama to local directory.
+
 # glamr 1.0.4
-* Add `pluck_totals` function to fiter dataframe to just Total Numerator and Denominator (2022-05-27)
+* Add `pluck_totals` function to filter dataframe to just Total Numerator and Denominator (2022-05-27)
 * Update references to old variable names in `get_outtable`, `identify_levels`, `get_ouuids`, `get_ouuid`, `get_levels`, `get_ouorglevel`, `get_ouorglabel` and `resolve_knownissues` as well as with the raw data. The new names went into effect FY22Q2 (2022-04-08)
 * Add DATIM UIDs to `pepfar_country_list` (2022-04-08)
 

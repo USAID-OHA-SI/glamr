@@ -75,17 +75,24 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">datim_dimension</span><span class="op">(</span><span class="va">name</span>, username <span class="op">=</span> <span class="cn">NULL</span>, password <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">datim_dimension</span><span class="op">(</span>
+  <span class="va">name</span>,
+  url <span class="op">=</span> <span class="st">"https://final.datim.org/api/dimensions"</span>,
+  username <span class="op">=</span> <span class="cn">NULL</span>,
+  password <span class="op">=</span> <span class="cn">NULL</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>Dimension name</p></dd>
+<dt>url</dt>
+<dd><p>DATIM API End point, default value is `https://final.datim.org/api/dimensions`</p></dd>
 <dt>username</dt>
-<dd><p>DATIM Account Username</p></dd>
+<dd><p>DATIM Account Username, recommended using `datim_user()`</p></dd>
 <dt>password</dt>
-<dd><p>DATIM Account passward</p></dd>
+<dd><p>DATIM Account passward, recommended using `datim_pwd()`</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

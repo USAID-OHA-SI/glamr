@@ -128,9 +128,9 @@ url_items <- items %>%
                       dest = dest_path))
 ```
 
-### Download MER and OU Specific items from Panorama
+### Download MSD / OU Specific items from Panorama
 
-`pano_extract_msd()` is designed to facilate the download of MSD files for specific operating units and at a specific org hierarchy level. Eg: download Zambia's Site x IM data sets from Panorama. 
+`pano_extract_msd()` is designed to facilitate the download of MSD files for specific operating units and at a specific org hierarchy level. Eg: download Zambia's Site x IM data sets from Panorama. 
 
 ```{r echo = T, eval = F}
   pano_extract_msd(operatingunit = "Zambia",
@@ -139,4 +139,14 @@ url_items <- items %>%
                 quarter = 3,
                 level = "site",
                 dest_path = NULL)
+```
+
+### Download latest MSD / OU Specific items from Panorama
+
+`pano_extract_msds()` is designed to facilitate the download and management of latest MSD files for global and/or specific operating units. The function will move existing files to an `archive` folder before downloading current files.
+
+```{r echo = T, eval = F}
+  pano_extract_msds(operatingunit = "Zambia",
+                    archive = TRUE,
+                    dest_path = si_path())
 ```

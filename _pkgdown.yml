@@ -135,6 +135,7 @@ reference:
   - pano_unpack
   - pano_extract
   - pano_extract_msd
+  - pano_extract_msds
   - pano_download
 
 - title: Mechanism Handling

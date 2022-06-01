@@ -7,6 +7,7 @@
 datim_dim_items(
   dimension,
   var = NULL,
+  fields = NULL,
   url = "https://final.datim.org/api/dimensions",
   username = NULL,
   password = NULL
@@ -16,6 +17,8 @@ datim_dim_items(
 \item{dimension}{Dimension name}
 
 \item{var}{column name to pull values from, id or item}
+
+\item{fields}{list of column names to return, this will overight `var`}
 
 \item{url}{DATIM API end point}
 
