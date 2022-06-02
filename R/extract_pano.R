@@ -632,10 +632,12 @@ pano_extract_msds <- function(operatingunit,
     dplyr::pull(item)
 
   # Release
-  curr_release <- stringr::str_extract(recent_fldr, "(?<=Q\\d{1}[:space]).*")
+  curr_release <- stringr::str_extract(recent_fldr, "(?<=Q\\d{1}[:space:]).*")
   curr_status <- base::ifelse(str_detect(recent_fldr, "Post"), "clean", "initial")
   curr_fy <- stringr::str_extract(recent_fldr, "[:digit:]{4}") %>% as.numeric()
   curr_qtr <- stringr::str_extract(recent_fldr, "(?<=Q)[:digit:]") %>% as.numeric()
+
+  base::print(glue::glue("Download parameters\nRelease: {curr_release}\nFiscal Year: {curr_fy}\nQuarter: {curr_qtr}"))
 
   # Extract Data items
   items <- pano_extract(item = items,
@@ -686,32 +688,30 @@ pano_extract_msds <- function(operatingunit,
         fs::file_move(.x, arch_name)
       })
 
-    base::message("Archiving files completed!")
+    base::message("Archiving completed!")
   }
 
-  # Global MSDs
-  base::message("Downloading global MSDs ...")
-
-  items %>%
-    dplyr::filter(
-      type == "file zip_file",
-      stringr::str_detect(parent, glue("{curr_release}$|{curr_release}/FY15-19$")),
-      stringr::str_detect(item, "OU_IM|PSNU|PSNU_IM|PSNU_IM_DREAMS|NAT_SUBNAT")) %>%
-    dplyr::pull(path) %>%
-    purrr::walk(~pano_download(item_url = .x,
-                               session = sess,
-                               dest = dest_path))
-
-  # OU MSDs
-  base::message("Downloading OU specific MSDs ...")
-
-  items %>%
+  # Global and OU MSDs
+  files_down <- items %>%
     dplyr::filter(
       stringr::str_detect(
         stringr::str_to_lower(item),
-        base::paste0("_", stringr::str_to_lower(operatingunit), ".zip")),
+        base::paste0("_", stringr::str_to_lower(operatingunit), ".zip")) |
+      (stringr::str_detect(parent, glue::glue("{curr_release}$|{curr_release}/FY15-19$")) &
+         stringr::str_detect(item, "OU_IM|PSNU|PSNU_IM|PSNU_IM_DREAMS|NAT_SUBNAT")),
       type == "file zip_file") %>%
-    dplyr::pull(path) %>%
-    purrr::walk(~pano_download(item_url = .x, session = sess, dest = dest_path))
+    dplyr::pull(path)
+
+  # Notification
+  base::message(glue::glue("Downloading MSDs files [{length(files_down)}] ..."))
+
+  # Download
+  files_down %>%
+    purrr::walk(function(.x) {
+      base::print(.x)
+      pano_download(item_url = .x, session = sess, dest = dest_path)
+    })
+
+  base::message("All done!...:)")
 }
 

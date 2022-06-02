@@ -1,5 +1,7 @@
 # glamr 1.0.5
 * Add `pano_extract_msds` function to extract latest available MSDs from PEPFAR Panorama to local directory.
+* Add `curr_date` function for on demand formatting of `Sys.Date()` values
+* Add `open_path` function to help with navigating to directories and viewing with file content
 
 # glamr 1.0.4
 * Add `pluck_totals` function to filter dataframe to just Total Numerator and Denominator (2022-05-27)

@@ -78,10 +78,12 @@ reference:
   - clean_psnu
   - connect_text
   - extract_text
+  - lookup_country
   - pluck_totals
 
 - title: Date Conversion
   contents:
+  - curr_date
   - convert_date_to_qtr
   - convert_datim_pd_to_qtr
   - convert_qtr_to_date
@@ -93,7 +95,9 @@ reference:
   - '%<>%'
   - prinf
   - package_check
+  - mypwd
   - temp_folder
+  - open_path
 
 - title: DATIM
   contents:

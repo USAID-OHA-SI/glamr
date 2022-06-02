@@ -160,3 +160,40 @@ temp_folder <- function(launch = FALSE){
 
   invisible(folderpath_tmp)
 }
+
+#' @title Get formatted current date
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  curr_date()
+#'  curr_date(fmt = "%m/%d/%Y")
+#' }
+curr_date <- function(fmt = "%Y-%m-%d") {
+  d <- base::Sys.Date()
+
+  if (!base::is.null(fmt)) {
+    d <- base::format(d, fmt)
+  }
+
+  return(d)
+}
+
+#' @title Open directory explorer or files
+#'
+#' @note This assumes default applications are set for various file type
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  dir_name <- "C:/Users/<username>/Downloads"
+#'  open_path(dir_name)
+#'
+#'  file_name <- "C:/Users/<username>/Downloads/test.csv"
+#'  open_path(file_name)
+#' }
+open_path <- function(path) {
+  utils::browseURL(path)
+}
