@@ -272,6 +272,13 @@ datim_dim_url <- function(dimension,
                           username = NULL,
                           password = NULL) {
 
+  # datim credentials
+  if (missing(username))
+    username <- datim_user()
+
+  if (missing(password))
+    password <- datim_pwd()
+
   # Query params
   dim_query <- NULL
 
@@ -520,6 +527,13 @@ datim_query <-
            password = NULL,
            verbose = FALSE){
 
+    # datim credentials
+    if (missing(username))
+      username <- datim_user()
+
+    if (missing(password))
+      password <- datim_pwd()
+
     # Notifications
     if (verbose) {
       base::print(glue::glue("Running query for:"))
@@ -555,6 +569,11 @@ datim_query <-
       paste0(baseurl, "/29/analytics?",
              "dimension=ou:", ou_uid, ";LEVEL-", org_lvl)
 
+    # Notifications
+    if (verbose) {
+      base::print(glue::glue("CORE URL = {url_core}"))
+    }
+
     # Targets/Results
     dim_tr_name <- "Targets / Results"
 
@@ -589,6 +608,11 @@ datim_query <-
              "dimension=", dim_ta, ":", dim_ta_ind, "&",     # technical area: PLHIV, POP_EST
              "dimension=", dim_tr, ":", dim_tr_value, "&")   # Targets / Results: Targets
 
+    # Notifications
+    if (verbose) {
+      base::print(glue::glue("TYPE URL = {url_type}"))
+    }
+
     # Disaggs params
     url_disaggs <- NULL
 
@@ -597,6 +621,11 @@ datim_query <-
         purrr::map(~datim_dim_url(dimension = "Disaggregation Type", items = .x)) %>%
         base::unlist() %>%
         base::paste(collapse = '&')
+    }
+
+    # Notifications
+    if (verbose) {
+      base::print(glue::glue("DISAGGS URL = {url_disaggs}"))
     }
 
     # Dimensions params
@@ -609,11 +638,21 @@ datim_query <-
         base::paste(collapse = '&')
     }
 
+    # Notifications
+    if (verbose) {
+      base::print(glue::glue("DIMS URL = {url_dims}"))
+    }
+
     # Other params
     skipmeta <- base::ifelse(!metadata, "true", "false") # Get the reverse
     orgsmeta <- base::ifelse(hierarchy, "true", "false")
 
     url_meta <- glue::glue("displayProperty={property}&skipMeta={skipmeta}&hierarchyMeta={orgsmeta}")
+
+    # Notifications
+    if (verbose) {
+      base::print(glue::glue("META URL = {url_meta}"))
+    }
 
     # Combine url parts
     url <- c(url_core, url_type)
@@ -674,6 +713,13 @@ datim_pops <- function(ou,
                        hierarchy = FALSE,
                        username = NULL,
                        password = NULL) {
+
+  # datim credentials
+  if (missing(username))
+    username <- datim_user()
+
+  if (missing(password))
+    password <- datim_pwd()
 
   # level
   lvl <- level %>% stringr::str_to_lower()
@@ -827,6 +873,7 @@ extract_datim <- function(url, username, password) {
   package_check('plyr')
   package_check('tibble')
 
+  # datim credentials
   if (missing(username))
     username <- datim_user()
 
