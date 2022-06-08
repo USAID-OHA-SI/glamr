@@ -4,7 +4,13 @@
 \alias{get_ouorguids}
 \title{Get Orgs uids by level}
 \usage{
-get_ouorguids(ouuid, level, username = NULL, password = NULL)
+get_ouorguids(
+  ouuid,
+  level,
+  username = NULL,
+  password = NULL,
+  baseurl = "https://final.datim.org/"
+)
 }
 \arguments{
 \item{ouuid}{Operatingunit uid}
@@ -14,6 +20,8 @@ get_ouorguids(ouuid, level, username = NULL, password = NULL)
 \item{username}{Datim Account username}
 
 \item{password}{Datim Account Password}
+
+\item{baseurl}{Datim base url}
 }
 \value{
 list of uids

@@ -4,7 +4,12 @@
 \alias{get_ouuid}
 \title{Get Operatingunit / Country Org UID}
 \usage{
-get_ouuid(operatingunit, username = NULL, password = NULL)
+get_ouuid(
+  operatingunit,
+  username = NULL,
+  password = NULL,
+  baseurl = "https://final.datim.org/"
+)
 }
 \arguments{
 \item{operatingunit}{Operatingunit name}

@@ -46,7 +46,6 @@ get_outable <- function(username, password, baseurl = "https://final.datim.org/"
     dplyr::arrange(operatingunit, country)
 
   return(df_outable)
-
 }
 
 #' Pull OU UIDS
@@ -73,7 +72,8 @@ get_outable <- function(username, password, baseurl = "https://final.datim.org/"
 #'  load_secrets()
 #'  ous <- identify_ouuids() }
 
-identify_ouuids <- function(username, password, baseurl = "https://final.datim.org/"){
+identify_ouuids <- function(username, password,
+                            baseurl = "https://final.datim.org/"){
 
   check_internet()
 
@@ -144,7 +144,8 @@ identify_ouuids <- function(username, password, baseurl = "https://final.datim.o
 #'   load_secrets()
 #'   identify_levels() }
 
-identify_levels <- function(username, password, baseurl = "https://final.datim.org/"){
+identify_levels <- function(username, password,
+                            baseurl = "https://final.datim.org/"){
 
   check_internet()
 
@@ -463,7 +464,8 @@ get_ouuids <-
 get_ouuid <-
   function(operatingunit,
            username = NULL,
-           password = NULL) {
+           password = NULL,
+           baseurl = "https://final.datim.org/") {
 
     # Params
     ou <- stringr::str_to_upper({{operatingunit}})
@@ -480,7 +482,8 @@ get_ouuid <-
     ous <- get_ouuids(
       add_details = TRUE,
       username = user,
-      password = pass) %>%
+      password = pass,
+      baseurl = baseurl) %>%
       dplyr::filter(
         stringr::str_to_upper(operatingunit) == ou |
           stringr::str_to_upper(country) == ou)
@@ -508,7 +511,7 @@ get_ouuid <-
 
 
 #' @title Get all orgunits levels in org hierarchy
-#' @note  Same as `glamr::identify_levels()` or `glamr::identify_levels()`
+#' @note  Similar to `glamr::identify_levels()` and `glamr::get_outable()`
 #'
 #' @param username DATIM username, recommed using `datim_user()`
 #' @param password DATIM password, recommend using `datim_pwd()`
@@ -556,7 +559,7 @@ get_levels <-
     # rename
     df_levels <- df_levels %>%
       dplyr::rename(operatingunit = name3,
-                    country = name4,
+                    countryname = name4,
                     operatingunit_iso = iso3,
                     country_iso = iso4)
 
@@ -571,6 +574,7 @@ get_levels <-
 #' @param org_type      Orgunit type (country_lvl, prioritization, community, facility_lvl)
 #' @param username      Datim Account username
 #' @param password      Datim Account Password
+#' @param base_url      Datim Base URL
 #'
 #' @return uid
 #' @export
@@ -593,7 +597,8 @@ get_ouorglevel <-
            country = NULL,
            org_type = "prioritization",
            username = NULL,
-           password = NULL) {
+           password = NULL,
+           baseurl = "https://final.datim.org/") {
 
     # params
     ou = {{operatingunit}}
@@ -611,7 +616,7 @@ get_ouorglevel <-
                          {{password}})
 
     # Levels
-    df_lvls <- get_levels(user, pass)
+    df_lvls <- get_levels(user, pass, baseurl)
 
     # level name
     if (!stringr::str_to_lower(type) %in% base::names(df_lvls)) {
@@ -624,7 +629,7 @@ get_ouorglevel <-
     # filter ou/country
     df_lvls <- df_lvls %>%
       dplyr::filter(operatingunit == ou,
-                    country == cntry)
+                    countryname == cntry)
 
     # records
     if (nrow(df_lvls) == 0) {
@@ -647,6 +652,7 @@ get_ouorglevel <-
 #' @param org_level      OU Org level, default is set to 4, PSNU
 #' @param username       Datim account username
 #' @param password       Datim account password
+#' @param baseurl        Datim base url
 #'
 #' @return Org level label
 #' @export
@@ -662,7 +668,8 @@ get_ouorglabel <- function(operatingunit,
                            country = NULL,
                            org_level = 4,
                            username = NULL,
-                           password = NULL) {
+                           password = NULL,
+                           baseurl = "https://final.datim.org/") {
   # Label
   lbl <- NULL
 
@@ -683,14 +690,14 @@ get_ouorglabel <- function(operatingunit,
   }
 
   # Levels
-  df_lvls <- get_levels(username, password) %>%
+  df_lvls <- get_levels(username, password, baseurl) %>%
     tidyr::pivot_longer(country:tidyselect::last_col(),
                  names_to = "label",
                  values_to = "level")
 
   df_lvls %<>%
     dplyr::filter(operatingunit == operatingunit,
-           country == country,
+           countryname == country,
            level == org_level)
 
   if (base::is.null(df_lvls) | base::nrow(df_lvls) == 0) {
@@ -712,6 +719,7 @@ get_ouorglabel <- function(operatingunit,
 #' @param level        Orgunit level
 #' @param username     Datim Account username
 #' @param password     Datim Account Password
+#' @param baseurl      Datim base url
 #'
 #' @return             list of uids
 #' @export
@@ -736,7 +744,8 @@ get_ouorglabel <- function(operatingunit,
 get_ouorguids <-
   function(ouuid, level,
            username = NULL,
-           password = NULL) {
+           password = NULL,
+           baseurl = "https://final.datim.org/") {
 
     # params
     uid <- {{ouuid}}
@@ -755,7 +764,8 @@ get_ouorguids <-
     orgs <- get_ouorgs(ouuid = uid,
                        level = lvl,
                        username = user,
-                       password = pass)
+                       password = pass,
+                       baseurl = baseurl)
 
     # Check data
     if (base::is.null(orgs)) {

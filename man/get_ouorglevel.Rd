@@ -9,7 +9,8 @@ get_ouorglevel(
   country = NULL,
   org_type = "prioritization",
   username = NULL,
-  password = NULL
+  password = NULL,
+  baseurl = "https://final.datim.org/"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ get_ouorglevel(
 \item{username}{Datim Account username}
 
 \item{password}{Datim Account Password}
+
+\item{base_url}{Datim Base URL}
 }
 \value{
 uid

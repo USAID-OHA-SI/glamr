@@ -24,7 +24,7 @@ df
 Get all orgunits levels in org hierarchy
 }
 \note{
-Same as `glamr::identify_levels()` or `glamr::identify_levels()`
+Similar to `glamr::identify_levels()` and `glamr::get_outable()`
 }
 \examples{
 \dontrun{

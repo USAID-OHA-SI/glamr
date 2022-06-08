@@ -9,7 +9,8 @@ get_ouorglabel(
   country = NULL,
   org_level = 4,
   username = NULL,
-  password = NULL
+  password = NULL,
+  baseurl = "https://final.datim.org/"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ get_ouorglabel(
 \item{username}{Datim account username}
 
 \item{password}{Datim account password}
+
+\item{baseurl}{Datim base url}
 }
 \value{
 Org level label
