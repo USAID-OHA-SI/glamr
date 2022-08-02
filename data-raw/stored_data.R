@@ -37,15 +37,27 @@ devtools::load_all()
 
 curr_fy <- source_info(return = "fiscal_year")
 
-df_msd <- si_path() %>%
-  return_latest("OU_IM") %>%
+# df_msd <- si_path() %>%
+#   return_latest("OU_IM") %>%
+#   gophr::read_msd()
+
+# df_cntry <- df_msd %>%
+#   filter(fiscal_year == curr_fy,
+#          funding_agency %ni% c("Dedup", "Default"),
+#          indicator != "TX_NET_NEW") %>%
+#   distinct(operatingunit, country)
+
+df_fsd <- si_path() %>%
+  return_latest("Financial") %>%
   gophr::read_msd()
 
-df_cntry <- df_msd %>%
+df_cntry <- df_fsd %>%
   filter(fiscal_year == curr_fy,
-         fundingagency %ni% c("Dedup", "Default"),
-         indicator != "TX_NET_NEW") %>%
+         str_detect(country, "Region", negate = TRUE),
+         cop_budget_total > 0,
+         funding_agency %ni% c("Dedup", "Default")) %>%
   distinct(operatingunit, country)
+
 
 ou_table <- get_outable(datim_user(), datim_pwd())  %>%
   select(operatingunit, operatingunit_iso, operatingunit_uid,
@@ -88,7 +100,7 @@ usethis::use_data(pepfar_country_list, overwrite = TRUE)
 # Combine and keep only PEPFAR Countries
   pepfar_country_xwalk <- cntrycodes %>%
     left_join(ne_cntries, by = c("iso3c" = "iso_a3")) %>%
-    left_join(cntries, by = c("iso3c" = "countryname_iso")) %>%
+    left_join(cntries, by = c("iso3c" = "country_iso")) %>%
     filter(!is.na(operatingunit_iso)) %>%
     clean_names()
 

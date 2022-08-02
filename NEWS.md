@@ -1,4 +1,5 @@
 # glamr 1.0.5
+* Update `pepfar_country_list` and `pepfar_country_xwalk` to reflect countries that receive any PEPFAR funding (budgets for the current FY) instead of just those that report MER indicators (2022-08-02)
 * Add `pano_extract_msds` function to extract latest available MSDs from PEPFAR Panorama to local directory.
 * Add `curr_date` function for on demand formatting of `Sys.Date()` values
 * Add `open_path` function to help with navigating to directories and viewing with file content
