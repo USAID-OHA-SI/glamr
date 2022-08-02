@@ -94,11 +94,12 @@
 
       
 
-      </header><script src="data-extraction-from-panorama_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Data Extraction from Panorama</h1>
-                        <h4 data-toc-skip class="author">Baboyma Kagniniwa</h4>
+                        <h4 data-toc-skip class="author">Baboyma
+Kagniniwa</h4>
             
             <h4 data-toc-skip class="date">2021-09-23</h4>
       
@@ -112,12 +113,15 @@
 <div class="section level3">
 <h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
-<p>This vignette provides guidance on how to identify and extract data sets output files stored in an S/FTP site.</p>
+<p>This vignette provides guidance on how to identify and extract data
+sets output files stored in an S/FTP site.</p>
 </div>
 <div class="section level3">
 <h3 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a>
 </h3>
-<p>PEPFAR/Panorama releases, on the quarterly basis, global programs’ Monitoring, Evaluation and Reporting (MER), Financial, SIMS, and Narratives.</p>
+<p>PEPFAR/Panorama releases, on the quarterly basis, global programs’
+Monitoring, Evaluation and Reporting (MER), Financial, SIMS, and
+Narratives.</p>
 </div>
 <div class="section level3">
 <h3 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
@@ -131,7 +135,10 @@
 <div class="section level3">
 <h3 id="create-an-active-session">Create an active session<a class="anchor" aria-label="anchor" href="#create-an-active-session"></a>
 </h3>
-<p>Panorama is a protected site and all user will need to authenticate in order to order to explore the dashboards. Same is true for data extraction. To create an active and valid session for all the http requests, we will use <code><a href="../reference/pano_session.html">pano_session()</a></code></p>
+<p>Panorama is a protected site and all user will need to authenticate
+in order to order to explore the dashboards. Same is true for data
+extraction. To create an active and valid session for all the http
+requests, we will use <code><a href="../reference/pano_session.html">pano_session()</a></code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">user</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_user.html">pano_user</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">pass</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_pwd.html">pano_pwd</a></span><span class="op">(</span><span class="op">)</span>
@@ -141,7 +148,8 @@
 <div class="section level3">
 <h3 id="extract-content-from-download-page">Extract content from download page<a class="anchor" aria-label="anchor" href="#extract-content-from-download-page"></a>
 </h3>
-<p>In order to extract the list of data items on the download page, we will need to get the html content of the page first.</p>
+<p>In order to extract the list of data items on the download page, we
+will need to get the html content of the page first.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://pepfar-panorama.org/forms/downloads/"</span>
 
@@ -152,7 +160,10 @@
 <div class="section level3">
 <h3 id="extract-data-items-details">Extract data items details<a class="anchor" aria-label="anchor" href="#extract-data-items-details"></a>
 </h3>
-<p>The details of the data items are embeded into the html content. Most of them are listed as a hyperlink within a <code>&lt;li&gt;</code> element. The function <code><a href="../reference/pano_elements.html">pano_elements()</a></code> allows us to extract all those items as a tibble.</p>
+<p>The details of the data items are embeded into the html content. Most
+of them are listed as a hyperlink within a <code>&lt;li&gt;</code>
+element. The function <code><a href="../reference/pano_elements.html">pano_elements()</a></code> allows us to extract
+all those items as a tibble.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dirs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_elements.html">pano_elements</a></span><span class="op">(</span>page_html <span class="op">=</span> <span class="va">cont</span><span class="op">)</span>
 
@@ -166,7 +177,9 @@
   <span class="fu"><a href="../reference/pano_elements.html">pano_elements</a></span><span class="op">(</span>page_url <span class="op">=</span> <span class="va">dir_mer_path</span><span class="op">)</span>
 
 <span class="va">mer_items</span></code></pre></div>
-<p><code><a href="../reference/pano_items.html">pano_items()</a></code> combines <code><a href="../reference/pano_content.html">pano_content()</a></code> and <code><a href="../reference/pano_elements.html">pano_elements()</a></code> into 1 function for a quick access to data items list on a specific page.</p>
+<p><code><a href="../reference/pano_items.html">pano_items()</a></code> combines <code><a href="../reference/pano_content.html">pano_content()</a></code> and
+<code><a href="../reference/pano_elements.html">pano_elements()</a></code> into 1 function for a quick access to data
+items list on a specific page.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mer_items</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_items.html">pano_items</a></span><span class="op">(</span>page_url <span class="op">=</span> <span class="va">dir_mer_path</span>, session <span class="op">=</span> <span class="va">sess</span><span class="op">)</span> 
 
@@ -175,7 +188,11 @@
 <div class="section level3">
 <h3 id="download-specific-items-from-panorama">Download specific items from Panorama<a class="anchor" aria-label="anchor" href="#download-specific-items-from-panorama"></a>
 </h3>
-<p>Most data items under the download page of Panorama are listed as zipped files. To download them to a local directory, we will need to use the <code><a href="../reference/pano_download.html">pano_download()</a></code> function. This function is a wrapper for <code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">httr::GET()</a></code> function write option set to a local directory.</p>
+<p>Most data items under the download page of Panorama are listed as
+zipped files. To download them to a local directory, we will need to use
+the <code><a href="../reference/pano_download.html">pano_download()</a></code> function. This function is a wrapper
+for <code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">httr::GET()</a></code> function write option set to a local
+directory.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dest_path</span> <span class="op">&lt;-</span> <span class="st">"../../../Temp/"</span>
 
@@ -192,7 +209,9 @@
 <div class="section level3">
 <h3 id="download-mutiple-items-from-panorama">Download mutiple items from Panorama<a class="anchor" aria-label="anchor" href="#download-mutiple-items-from-panorama"></a>
 </h3>
-<p><code><a href="../reference/pano_extract.html">pano_extract()</a></code> is good for batch processing. Eg: download all MER data sets from Panorama. This function combine all the above steps into one.</p>
+<p><code><a href="../reference/pano_extract.html">pano_extract()</a></code> is good for batch processing. Eg:
+download all MER data sets from Panorama. This function combine all the
+above steps into one.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">items</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pano_extract.html">pano_extract</a></span><span class="op">(</span>item <span class="op">=</span> <span class="st">"mer"</span>, 
                       version <span class="op">=</span> <span class="st">"clean"</span>, 
@@ -215,7 +234,10 @@
 <div class="section level3">
 <h3 id="download-msd-ou-specific-items-from-panorama">Download MSD / OU Specific items from Panorama<a class="anchor" aria-label="anchor" href="#download-msd-ou-specific-items-from-panorama"></a>
 </h3>
-<p><code><a href="../reference/pano_extract_msd.html">pano_extract_msd()</a></code> is designed to facilitate the download of MSD files for specific operating units and at a specific org hierarchy level. Eg: download Zambia’s Site x IM data sets from Panorama.</p>
+<p><code><a href="../reference/pano_extract_msd.html">pano_extract_msd()</a></code> is designed to facilitate the
+download of MSD files for specific operating units and at a specific org
+hierarchy level. Eg: download Zambia’s Site x IM data sets from
+Panorama.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="../reference/pano_extract_msd.html">pano_extract_msd</a></span><span class="op">(</span>operatingunit <span class="op">=</span> <span class="st">"Zambia"</span>,
                 version <span class="op">=</span> <span class="st">"clean"</span>,
@@ -227,7 +249,10 @@
 <div class="section level3">
 <h3 id="download-latest-msd-ou-specific-items-from-panorama">Download latest MSD / OU Specific items from Panorama<a class="anchor" aria-label="anchor" href="#download-latest-msd-ou-specific-items-from-panorama"></a>
 </h3>
-<p><code><a href="../reference/pano_extract_msds.html">pano_extract_msds()</a></code> is designed to facilitate the download and management of latest MSD files for global and/or specific operating units. The function will move existing files to an <code>archive</code> folder before downloading current files.</p>
+<p><code><a href="../reference/pano_extract_msds.html">pano_extract_msds()</a></code> is designed to facilitate the
+download and management of latest MSD files for global and/or specific
+operating units. The function will move existing files to an
+<code>archive</code> folder before downloading current files.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="../reference/pano_extract_msds.html">pano_extract_msds</a></span><span class="op">(</span>operatingunit <span class="op">=</span> <span class="st">"Zambia"</span>,
                     archive <span class="op">=</span> <span class="cn">TRUE</span>,
