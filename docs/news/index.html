@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -32,7 +32,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -42,9 +42,6 @@
     </li>
     <li>
       <a href="../articles/project-workflow.html">Project Workflow</a>
-    </li>
-    <li>
-      <a href="../articles/data-extraction-from-panorama.html">Data Extraction from Panorama</a>
     </li>
   </ul></li>
 <li>
@@ -69,6 +66,11 @@
       <small>Source: <a href="https://github.com/USAID-OHA-SI/glamr/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.0" id="glamr-110">glamr 1.1.0<a class="anchor" aria-label="anchor" href="#glamr-110"></a></h2>
+<ul><li>Fully depricate <code>my_pwd()</code> [2022-08-05]</li>
+<li>Migrate API related function (DATIM, Pano, s3) and vignette to <code>grabr</code>: <code>datim_dim_item</code>, <code>datim_dim_items</code>, <code>datim_dim_url</code>, <code>datim_dimension</code>, <code>datim_dimensions</code>, <code>datim_execute_query</code>, <code>datim_pops</code>, <code>datim_process_query</code>, <code>datim_query</code>, <code>get_levels</code>, <code>get_orguids</code>, <code>get_ouorglabel</code>, <code>get_ouorglevel</code>, <code>get_ouorgs</code>, <code>get_ouorguids</code>, <code>get_outable</code>, <code>get_ouuid</code>, <code>get_ouuids</code>, <code>identify_levels</code>, <code>identify_ouuids</code>, <code>lazy_secrets</code>, <code>package_check</code>, <code>pano_content</code>, <code>pano_download</code>, <code>pano_elements</code>, <code>pano_extract</code>, <code>pano_extract_msd</code>, <code>pano_extract_msds</code>, <code>pano_items</code>, <code>pano_session</code>, <code>s3_buckets</code>, <code>s3_download</code>, <code>s3_excel_sheets</code>, <code>s3_object_type</code>, <code>s3_objects</code>, <code>s3_read_object</code>, <code>s3_remove</code>, <code>s3_unpack_keys</code>, <code>s3_upload</code> [2022-08-05]</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.5" id="glamr-105">glamr 1.0.5<a class="anchor" aria-label="anchor" href="#glamr-105"></a></h2>
 <ul><li>Update <code>pepfar_country_list</code> and <code>pepfar_country_xwalk</code> to reflect countries that receive any PEPFAR funding (budgets for the current FY) instead of just those that report MER indicators (2022-08-02)</li>
@@ -103,8 +105,8 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.1" id="glamr-101">glamr 1.0.1<a class="anchor" aria-label="anchor" href="#glamr-101"></a></h2>
 <ul><li>Resolve bug with <code>resolve_knownissues</code> that resulted from having both targets and results for the same mechanism and indicator that need to be removed.</li>
-<li>Add set of functions to store, access, and load Panorama credentials - <code>set_pano</code>, <code><a href="../reference/pano_user.html">pano_user()</a></code>, <code><a href="../reference/pano_pwd.html">pano_pwd()</a></code>, <code><a href="../reference/pano_session.html">pano_session()</a></code>, and <code><a href="../reference/load_secrets.html">load_secrets()</a></code>.</li>
-<li>Add functions to discover and download output datasets from Panorama: <code><a href="../reference/pano_content.html">pano_content()</a></code>, <code><a href="../reference/pano_elements.html">pano_elements()</a></code>, <code><a href="../reference/pano_unpack.html">pano_unpack()</a></code>, <code><a href="../reference/pano_extract.html">pano_extract()</a></code>, <code><a href="../reference/pano_download.html">pano_download()</a></code>, <code><a href="../reference/pano_items.html">pano_items()</a></code>, <code><a href="../reference/pano_extract_msd.html">pano_extract_msd()</a></code>
+<li>Add set of functions to store, access, and load Panorama credentials - <code>set_pano</code>, <code><a href="../reference/pano_user.html">pano_user()</a></code>, <code><a href="../reference/pano_pwd.html">pano_pwd()</a></code>, <code>pano_session()</code>, and <code><a href="../reference/load_secrets.html">load_secrets()</a></code>.</li>
+<li>Add functions to discover and download output datasets from Panorama: <code>pano_content()</code>, <code>pano_elements()</code>, <code>pano_unpack()</code>, <code>pano_extract()</code>, <code>pano_download()</code>, <code>pano_items()</code>, <code>pano_extract_msd()</code>
 </li>
 <li>Update <code>pepfar_data_calendar</code> with FY22 dates</li>
 </ul></div>
@@ -115,9 +117,9 @@
 <li>Resolve bug with new code for <code>set_path</code>, causing an error if any path was missing from the .Rprofile</li>
 <li>The new <code><a href="../reference/temp_folder.html">temp_folder()</a></code> creates and stores a folder in your Global Envir to use, which will be automatically be deleted on the end of your RStudio session.</li>
 <li>Used <code>pkgdown</code> to create a site</li>
-<li>If no username/password are provided to <code><a href="../reference/get_outable.html">get_outable()</a></code>, <code><a href="../reference/identify_ouuids.html">identify_ouuids()</a></code> or <code><a href="../reference/identify_levels.html">identify_levels()</a></code>, defaults to using <code><a href="../reference/datim_user.html">datim_user()</a></code> and <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>
+<li>If no username/password are provided to <code>get_outable()</code>, <code>identify_ouuids()</code> or <code>identify_levels()</code>, defaults to using <code><a href="../reference/datim_user.html">datim_user()</a></code> and <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>
 </li>
-<li>Adjust <code><a href="../reference/get_outable.html">get_outable()</a></code>/<code><a href="../reference/identify_levels.html">identify_levels()</a></code> output, changing community to community_lvl and prioritization to psnu_lvl to match other indicators.</li>
+<li>Adjust <code>get_outable()</code>/<code>identify_levels()</code> output, changing community to community_lvl and prioritization to psnu_lvl to match other indicators.</li>
 <li>Include two new function to convert dates to periods and periods to dates using <code><a href="../reference/convert_date_to_qtr.html">convert_date_to_qtr()</a></code> and <code><a href="../reference/convert_qtr_to_date.html">convert_qtr_to_date()</a></code>.</li>
 <li>New vigentte for project workflow added, <code>vignette(package = glamr)</code>
 </li>
@@ -125,7 +127,7 @@
 <li>Store email in .Rprofile in addition to keyring using <code><a href="../reference/set_email.html">set_email()</a></code> for use with <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">googledrive::drive_auth()</a></code> and <code><a href="https://googlesheets4.tidyverse.org/reference/gs4_auth.html" class="external-link">googlesheets4::gs4_auth()</a></code> without having to provide an email.</li>
 <li>Add <code><a href="../reference/clean_filename.html">clean_filename()</a></code> function to remove apostrophe and other pesky characters from a filename, especially for use when uploading to Google Drive.</li>
 <li>Adjust <code><a href="../reference/load_secrets.html">load_secrets()</a></code> to allow user to specify which accounts to load in a session.</li>
-<li>Depricate <code><a href="../reference/mypwd.html">mypwd()</a></code> which has been superseded by <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>.</li>
+<li>Depricate <code>mypwd()</code> which has been superseded by <code><a href="../reference/datim_pwd.html">datim_pwd()</a></code>.</li>
 <li>Create <code>source_info</code> function to extract information from the file to use in the caption/source.</li>
 <li>Adjust <code><a href="../reference/setup_gitignore.html">setup_gitignore()</a></code> and <code><a href="../reference/setup_readme.html">setup_readme()</a></code> to not duplicate text if its already exists</li>
 <li>Add a missing append to <code><a href="../reference/setup_gitignore.html">setup_gitignore()</a></code> to not overwrite existing file.</li>
