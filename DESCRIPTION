@@ -39,7 +39,6 @@ Suggests:
     janitor,
     jsonlite,
     keyring,
-    keyringr,
     knitr,
     plyr,
     rmarkdown,

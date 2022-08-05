@@ -114,8 +114,8 @@ gdrive_metadata <- function(df, show_details = FALSE){
       janitor::clean_names() %>%
       dplyr::select(-c(permission_ids, permissions_domain,
                        permissions_allow_file_discovery),
-                    -ends_with(c("_link", "_thumbnail")),
-                    -starts_with(c("thumbnail_"))) %>%
+                    -dplyr::ends_with(c("_link", "_thumbnail")),
+                    -dplyr::starts_with(c("thumbnail_"))) %>%
       dplyr::filter(permissions_type != "domain")
   }
 

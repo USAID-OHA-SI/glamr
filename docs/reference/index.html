@@ -74,18 +74,6 @@
         </td>
         <td><p>Setup Folder Structure in Project</p></td>
       </tr><tr><td>
-          <p><code><a href="gdrive_folder.html">gdrive_folder()</a></code> </p>
-        </td>
-        <td><p>Get id of googledrive folder</p></td>
-      </tr><tr><td>
-          <p><code><a href="import_drivefile.html">import_drivefile()</a></code> </p>
-        </td>
-        <td><p>Import file from a Google Drive folder</p></td>
-      </tr><tr><td>
-          <p><code><a href="export_drivefile.html">export_drivefile()</a></code> </p>
-        </td>
-        <td><p>Export local files for googledrive folder</p></td>
-      </tr><tr><td>
           <p><code><a href="return_latest.html">return_latest()</a></code> </p>
         </td>
         <td><p>Return Latest File</p></td>
@@ -109,17 +97,6 @@
           <p><code><a href="si_setup.html">si_setup()</a></code> </p>
         </td>
         <td><p>Default SI Project Setup</p></td>
-      </tr><tr><td>
-          <p><code><a href="source_info.html">source_info()</a></code> </p>
-        </td>
-        <td><p>Extract MSD Source Information</p></td>
-      </tr><tr><td>
-          <p><code><a href="gdrive_metadata.html">gdrive_metadata()</a></code> </p>
-        </td>
-        <td><p>Unpack Google Drive Metadata
-
-Google API provides extra metadata stored as a list in the dribble
-returned, eg modified time, permissions, owner, etc.</p></td>
       </tr><tr><td>
           <p><code><a href="extract_excel_data.html">extract_excel_data()</a></code> </p>
         </td>
@@ -185,22 +162,33 @@ returned, eg modified time, permissions, owner, etc.</p></td>
 This will only need to done once. After running `set_s3keys(access, secret)`,
 RStudio API which will then store the keys in your OS credential store using `keyring`.</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="google-drive">Google Drive <a href="#google-drive" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="gdrive_folder.html">gdrive_folder()</a></code> </p>
+        </td>
+        <td><p>Get id of googledrive folder</p></td>
+      </tr><tr><td>
+          <p><code><a href="import_drivefile.html">import_drivefile()</a></code> </p>
+        </td>
+        <td><p>Import file from a Google Drive folder</p></td>
+      </tr><tr><td>
+          <p><code><a href="export_drivefile.html">export_drivefile()</a></code> </p>
+        </td>
+        <td><p>Export local files for googledrive folder</p></td>
+      </tr><tr><td>
+          <p><code><a href="gdrive_metadata.html">gdrive_metadata()</a></code> </p>
+        </td>
+        <td><p>Unpack Google Drive Metadata
+
+Google API provides extra metadata stored as a list in the dribble
+returned, eg modified time, permissions, owner, etc.</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="tidying">Tidying <a href="#tidying" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="clean_agency.html">clean_agency()</a></code> </p>
-        </td>
-        <td><p>Clean data from funding_agency column
-
-`clean_agency` converts all funding agency names to upper case removes
-the HHS prefix for those agencies
-and moves State and USAID subsidiaries under their parent agencies</p></td>
-      </tr><tr><td>
-          <p><code><a href="clean_column.html">clean_column()</a></code> </p>
-        </td>
-        <td><p>Clean column data</p></td>
-      </tr><tr><td>
           <p><code><a href="clean_countries.html">clean_countries()</a></code> </p>
         </td>
         <td><p>Clean Natural Earth Country names to match PEPFAR Data</p></td>
@@ -208,14 +196,6 @@ and moves State and USAID subsidiaries under their parent agencies</p></td>
           <p><code><a href="clean_filename.html">clean_filename()</a></code> </p>
         </td>
         <td><p>Clean Filename</p></td>
-      </tr><tr><td>
-          <p><code><a href="clean_indicator.html">clean_indicator()</a></code> </p>
-        </td>
-        <td><p>Clean indicators (apply _D suffix)</p></td>
-      </tr><tr><td>
-          <p><code><a href="clean_psnu.html">clean_psnu()</a></code> </p>
-        </td>
-        <td><p>Clean PSNU column data</p></td>
       </tr><tr><td>
           <p><code><a href="connect_text.html">connect_text()</a></code> </p>
         </td>
@@ -228,10 +208,6 @@ and moves State and USAID subsidiaries under their parent agencies</p></td>
           <p><code><a href="lookup_country.html">lookup_country()</a></code> </p>
         </td>
         <td><p>Lookup official Country name</p></td>
-      </tr><tr><td>
-          <p><code><a href="pluck_totals.html">pluck_totals()</a></code> </p>
-        </td>
-        <td><p>Filter for Only Totals in MSD</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="date-conversion">Date Conversion <a href="#date-conversion" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -284,38 +260,6 @@ and moves State and USAID subsidiaries under their parent agencies</p></td>
           <p><code><a href="open_path.html">open_path()</a></code> </p>
         </td>
         <td><p>Open directory explorer or files</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="mechanism-handling">Mechanism Handling <a href="#mechanism-handling" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="apply_partner_type.html">apply_partner_type()</a></code> </p>
-        </td>
-        <td><p>Apply partner type (local/international)</p></td>
-      </tr><tr><td>
-          <p><code><a href="browse_knownissues.html">browse_knownissues()</a></code> </p>
-        </td>
-        <td><p>Browse Known Issues</p></td>
-      </tr><tr><td>
-          <p><code><a href="resolve_knownissues.html">resolve_knownissues()</a></code> </p>
-        </td>
-        <td><p>Resolve Known Issues</p></td>
-      </tr><tr><td>
-          <p><code><a href="remove_centralsupport.html">remove_centralsupport()</a></code> </p>
-        </td>
-        <td><p>Remove Central Support Reporting</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="financial">Financial <a href="#financial" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="remove_mo.html">remove_mo()</a></code> </p>
-        </td>
-        <td><p>Remove M&amp;O funding</p></td>
-      </tr><tr><td>
-          <p><code><a href="remove_sch.html">remove_sch()</a></code> </p>
-        </td>
-        <td><p>Remove Supply Chain Funding</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="data-sets">Data Sets <a href="#data-sets" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>

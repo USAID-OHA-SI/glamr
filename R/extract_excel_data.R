@@ -32,8 +32,8 @@ extract_excel_data <- function(src_page, link_id, file_sheet = 2, file_ext = "xl
   raw_dta <- readxl::read_excel(tmp_file, sheet = file_sheet)
 
   raw_dta <- raw_dta %>%
-    dplyr::rename_at(dplyr::vars(contains(" ")), dplyr::funs(stringr::str_replace_all(., " ", "_"))) %>%
-    dplyr::rename_at(dplyr::vars(everything()), tolower)
+    dplyr::rename_at(dplyr::vars(dplyr::contains(" ")), dplyr::funs(stringr::str_replace_all(., " ", "_"))) %>%
+    dplyr::rename_at(dplyr::vars(dplyr::everything()), tolower)
 
   return(raw_dta)
 }

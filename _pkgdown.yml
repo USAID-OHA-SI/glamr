@@ -33,18 +33,12 @@ reference:
 - title: Workflow
   contents:
   - folder_setup
-  - gdrive_folder
-  - import_drivefile
-  - export_drivefile
   - return_latest
   - set_paths
   - setup_gitignore
   - setup_readme
   - si_path
   - si_setup
-  - source_info
-  - gdrive_metadata
-  - gdrive_folder
   - extract_excel_data
   - extract_tbl_data
 
@@ -65,18 +59,21 @@ reference:
   - set_pano
   - set_s3keys
 
+- title: Google Drive
+  contents:
+  - gdrive_folder
+  - import_drivefile
+  - export_drivefile
+  - gdrive_metadata
+  - gdrive_folder
+
 - title: Tidying
   contents:
-  - clean_agency
-  - clean_column
   - clean_countries
   - clean_filename
-  - clean_indicator
-  - clean_psnu
   - connect_text
   - extract_text
   - lookup_country
-  - pluck_totals
 
 - title: Date Conversion
   contents:
@@ -94,18 +91,6 @@ reference:
   - package_check
   - temp_folder
   - open_path
-
-- title: Mechanism Handling
-  contents:
-  - apply_partner_type
-  - browse_knownissues
-  - resolve_knownissues
-  - remove_centralsupport
-
-- title: Financial
-  contents:
-  - remove_mo
-  - remove_sch
 
 - title: Data Sets
   contents:

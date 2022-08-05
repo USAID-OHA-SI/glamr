@@ -149,7 +149,7 @@ setup_readme <- function(add_disclaimer = TRUE){
 
 missing_section <- function(file){
 
-  suppressWarnings(text <- read.delim(file, col.names = "x"))
+  suppressWarnings(text <- utils::read.delim(file, col.names = "x"))
 
   text <- text %>%
     dplyr::filter(stringr::str_detect(x,
