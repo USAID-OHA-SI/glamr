@@ -28,25 +28,17 @@ navbar:
         href: articles/credential-management.html
       - text: Project Workflow
         href: articles/project-workflow.html
-      - text: Data Extraction from Panorama
-        href: articles/data-extraction-from-panorama.html
 
 reference:
 - title: Workflow
   contents:
   - folder_setup
-  - gdrive_folder
-  - import_drivefile
-  - export_drivefile
   - return_latest
   - set_paths
   - setup_gitignore
   - setup_readme
   - si_path
   - si_setup
-  - source_info
-  - gdrive_metadata
-  - gdrive_folder
   - extract_excel_data
   - extract_tbl_data
 
@@ -56,7 +48,6 @@ reference:
   - datim_user
   - pano_pwd
   - pano_user
-  - pano_session
   - get_s3key
   - load_secrets
   - is_stored
@@ -68,18 +59,21 @@ reference:
   - set_pano
   - set_s3keys
 
+- title: Google Drive
+  contents:
+  - gdrive_folder
+  - import_drivefile
+  - export_drivefile
+  - gdrive_metadata
+  - gdrive_folder
+
 - title: Tidying
   contents:
-  - clean_agency
-  - clean_column
   - clean_countries
   - clean_filename
-  - clean_indicator
-  - clean_psnu
   - connect_text
   - extract_text
   - lookup_country
-  - pluck_totals
 
 - title: Date Conversion
   contents:
@@ -95,76 +89,8 @@ reference:
   - '%<>%'
   - prinf
   - package_check
-  - mypwd
   - temp_folder
   - open_path
-
-- title: DATIM
-  contents:
-  - get_levels
-  - get_orguids
-  - get_ouorglevel
-  - get_ouorgs
-  - get_ouorguids
-  - get_outable
-  - get_ouuid
-  - get_ouuids
-  - identify_levels
-  - identify_ouuids
-  - identify_pd
-  - extract_datim
-  - get_orguids
-  - get_ouorgs
-  - get_ouuids
-  - get_ouuid
-  - get_ouorglevel
-  - get_ouorglabel
-  - get_ouorguids
-  - get_levels
-  - datim_dimensions
-  - datim_dimension
-  - datim_dim_items
-  - datim_dim_item
-  - datim_dim_url
-  - datim_execute_query
-  - datim_process_query
-  - datim_query
-  - datim_pops
-
-- title: Panorama
-  contents:
-  - pano_content
-  - pano_elements
-  - pano_items
-  - pano_unpack
-  - pano_extract
-  - pano_extract_msd
-  - pano_extract_msds
-  - pano_download
-
-- title: Mechanism Handling
-  contents:
-  - apply_partner_type
-  - browse_knownissues
-  - resolve_knownissues
-  - remove_centralsupport
-
-- title: Financial
-  contents:
-  - remove_mo
-  - remove_sch
-
-- title: s3 Utilities
-  contents:
-  - s3_buckets
-  - s3_download
-  - s3_excel_sheets
-  - s3_objects
-  - s3_object_type
-  - s3_read_object
-  - s3_remove
-  - s3_unpack_keys
-  - s3_upload
 
 - title: Data Sets
   contents:
