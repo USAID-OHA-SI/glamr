@@ -49,6 +49,8 @@ Suggests:
     xml2,
     vroom,
     countrycode
+Remotes: 
+  USAID-OHA-SI/gagglr
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
