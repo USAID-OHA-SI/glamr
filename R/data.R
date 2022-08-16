@@ -9,6 +9,7 @@
 #'   \item{type}{data release type, initial or clean}
 #'   \item{entry_open}{date entry begins into DATIM}
 #'   \item{entry_close}{date DATIM is closed and data are frozen}
+#'   \item{msd_release}{date the MSD is released on PEPFAR Panorma}
 #' }
 #' @source \url{https://datim.zendesk.com/hc/en-us/articles/115001940503-PEPFAR-Data-Calendar}
 "pepfar_data_calendar"

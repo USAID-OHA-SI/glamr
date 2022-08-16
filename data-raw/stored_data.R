@@ -21,11 +21,11 @@ pepfar_data_calendar <-
            2022L,       3L,   "clean", "2022-09-01", "2022-09-16",
            2022L,       4L, "initial", "2022-10-03", "2022-11-10",
            2022L,       4L,   "clean", "2022-12-01", "2022-12-16"
-    )
-
-
-
-
+    ) %>%
+  dplyr::mutate(release_lag = ifelse(quarter == 4 & type == "clean", 3, 1),
+                msd_release = as.Date(entry_close) + lubridate::weeks(release_lag),
+                dplyr::across(c(entry_open, entry_close, msd_release), as.Date)) %>%
+  dplyr::select(-release_lag)
 
 usethis::use_data(pepfar_data_calendar, overwrite = TRUE)
 

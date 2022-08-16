@@ -1,4 +1,5 @@
 # glamr 1.1.0
+* Add `msd_release` to `pepfar_data_calendar` [2022-08-16]
 * Fully depricate `my_pwd()` [2022-08-05]
 * Migrate MSD/FSD related functions to `gophr`: `apply_partner_type`, `browse_knownissues`, `clean_agency`, `clean_column`, `clean_indicator`, `clean_psnu`, `pluck_totals`, `remove_centralsupport`, `remove_mo`, `remove_sch`, `resolve_knownissues`, `source_info` [2022-08-05]
 * Migrate API related function (DATIM, Pano, s3) and vignette to `grabr`: `datim_dim_item`, `datim_dim_items`, `datim_dim_url`, `datim_dimension`, `datim_dimensions`, `datim_execute_query`, `datim_pops`, `datim_process_query`, `datim_query`, `get_levels`, `get_orguids`, `get_ouorglabel`, `get_ouorglevel`, `get_ouorgs`, `get_ouorguids`, `get_outable`, `get_ouuid`, `get_ouuids`, `identify_levels`, `identify_ouuids`, `lazy_secrets`, `package_check`, `pano_content`, `pano_download`, `pano_elements`, `pano_extract`, `pano_extract_msd`, `pano_extract_msds`, `pano_items`, `pano_session`, `s3_buckets`, `s3_download`, `s3_excel_sheets`, `s3_object_type`, `s3_objects`, `s3_read_object`, `s3_remove`, `s3_unpack_keys`, `s3_upload`
