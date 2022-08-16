@@ -133,9 +133,9 @@ history, and source documents.</p>
 <code>File &gt; New Project</code> or establish through
 <code>usethis</code></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org" class="external-link">usethis</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">create_project</a></span><span class="op">(</span><span class="st">"~/Documents/project-transform"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org" class="external-link">usethis</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">create_project</a></span><span class="op">(</span><span class="st">"~/Documents/project-transform"</span><span class="op">)</span></span></code></pre></div>
 <p>This will get you set you up in RStudio with a self contained
 project. In order to collaborate we also use git and GitHub. For more on
 integrating git with RStudio, check out Jenny Bryan’s <a href="https://happygitwithr.com/" class="external-link">Happy Git and GitHub for the useR</a>.
@@ -145,14 +145,14 @@ git installed and integreated with R, you can again use
 has some <a href="https://usethis.r-lib.org/articles/articles/usethis-setup.html#configure-user-name-and-user-email" class="external-link">help
 info on getting started with git</a> if this your first time.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html" class="external-link">use_git</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#this prompts a restart of your session</span>
-<span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html" class="external-link">use_github</a></span><span class="op">(</span>organisation <span class="op">=</span> <span class="st">"USAID-OHA-SI"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html" class="external-link">use_git</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#this prompts a restart of your session</span></span>
+<span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html" class="external-link">use_github</a></span><span class="op">(</span>organisation <span class="op">=</span> <span class="st">"USAID-OHA-SI"</span><span class="op">)</span></span></code></pre></div>
 <p>The last thing we’ll use <code>usethis</code> for is to set up a
 license for the project. We use the MIT license which calls for
 attribution for downstream uses of your work and specifies that the
 software is provided as is.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"Dr. Raj Shah"</span><span class="op">)</span> <span class="co">#add your name</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"Dr. Raj Shah"</span><span class="op">)</span> <span class="co">#add your name</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="si-workflow-enter-glamr">SI Workflow, Enter glamr<a class="anchor" aria-label="anchor" href="#si-workflow-enter-glamr"></a>
@@ -161,20 +161,20 @@ software is provided as is.</p>
 turn to some workflow specifics that <code>glamr</code> is going to help
 us with.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/USAID-OHA-SI/glamr" class="external-link">glamr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/USAID-OHA-SI/glamr" class="external-link">glamr</a></span><span class="op">)</span></span></code></pre></div>
 <p>The primary function we’re going to run to get us going is
 <code>si_setup</code>. If we look under the hood at
 <code>si_setup</code>, we can see it actually contains three
 sub-function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">si_setup</span>
-<span class="co">#&gt; function(){</span>
-<span class="co">#&gt;   folder_setup()</span>
-<span class="co">#&gt;   setup_gitignore()</span>
-<span class="co">#&gt;   setup_readme()</span>
-<span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000021bd7bf0&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:glamr&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">si_setup</span></span>
+<span><span class="co">#&gt; function(){</span></span>
+<span><span class="co">#&gt;   folder_setup()</span></span>
+<span><span class="co">#&gt;   setup_gitignore()</span></span>
+<span><span class="co">#&gt;   setup_readme()</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x000002167f5a5580&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: namespace:glamr&gt;</span></span></code></pre></div>
 <p>The first one, <code><a href="../reference/folder_setup.html">folder_setup()</a></code> initiates the main folders
 we use for our work:</p>
 <ul>
@@ -260,9 +260,9 @@ the file paths, it just works.</p>
 store all the relevant paths (you can ignore any that aren’t relevant to
 you).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/set_paths.html">set_paths</a></span><span class="op">(</span>folderpath_msd <span class="op">=</span> <span class="st">"~/Documents/Data"</span>,
-  folderpath_datim <span class="op">=</span>  <span class="st">"~/Documents/DATIM"</span>,
-  folderpath_downloads <span class="op">=</span>  <span class="st">"~/Downloads"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_paths.html">set_paths</a></span><span class="op">(</span>folderpath_msd <span class="op">=</span> <span class="st">"~/Documents/Data"</span>,</span>
+<span>  folderpath_datim <span class="op">=</span>  <span class="st">"~/Documents/DATIM"</span>,</span>
+<span>  folderpath_downloads <span class="op">=</span>  <span class="st">"~/Downloads"</span><span class="op">)</span></span></code></pre></div>
 <p>Running this will open your <code>.Rprofile</code> and you’ll be
 prompted to paste the pre-copied code into the <code>.Rprofile</code>
 save and restart your session.</p>
@@ -274,9 +274,9 @@ matches the pattern you provided. In this case, we can pass in that we
 want the last OUxIM MSD and it will return the file path which we can
 pass into <code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/si_path.html">si_path</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/return_latest.html">return_latest</a></span><span class="op">(</span><span class="st">"OU_IM_FY19"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">read_rds</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/si_path.html">si_path</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/return_latest.html">return_latest</a></span><span class="op">(</span><span class="st">"OU_IM_FY19"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">read_rds</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
   </div>
 
@@ -295,7 +295,7 @@ pass into <code><a href="https://readr.tidyverse.org/reference/read_rds.html" cl
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

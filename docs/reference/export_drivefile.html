@@ -74,49 +74,62 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">export_drivefile</span><span class="op">(</span>
-  <span class="va">filename</span>,
-  <span class="va">to_drive</span>,
-  to_folder <span class="op">=</span> <span class="cn">NULL</span>,
-  add_folder <span class="op">=</span> <span class="cn">TRUE</span>,
-  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">export_drivefile</span><span class="op">(</span></span>
+<span>  <span class="va">filename</span>,</span>
+<span>  <span class="va">to_drive</span>,</span>
+<span>  to_folder <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_folder <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>filename</dt>
 <dd><p>Character, Full name of the file to be uploaded</p></dd>
+
+
 <dt>to_drive</dt>
 <dd><p>Character, Google drive id</p></dd>
+
+
 <dt>to_folder</dt>
 <dd><p>Character, Google drive sub-folder</p></dd>
+
+
 <dt>add_folder</dt>
 <dd><p>Logical. If TRUE, add sub-folders if they are not present</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p>Logical. If yes, existing files will be overwritten</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional parameters to be passed to `googledrive::drive_upload()`</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Googledrive file(s) id(s)</p>
+    
+
+<p>Googledrive file(s) id(s)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/USAID-OHA-SI/glamr" class="external-link">glamr</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="st">"./Graphics"</span>, <span class="st">"NIGERIA"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">      <span class="fu">export_drivefile</span><span class="op">(</span>filename <span class="op">=</span> <span class="va">.</span>,</span>
-<span class="r-in">                       to_drive <span class="op">=</span> <span class="st">"&lt;path-id&gt;"</span>,</span>
-<span class="r-in">                       to_folder <span class="op">=</span> <span class="st">"FY99Q4/VL Suppression"</span>,</span>
-<span class="r-in">                       add_folder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/USAID-OHA-SI/glamr" class="external-link">glamr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="st">"./Graphics"</span>, <span class="st">"NIGERIA"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>      <span class="fu">export_drivefile</span><span class="op">(</span>filename <span class="op">=</span> <span class="va">.</span>,</span></span>
+<span class="r-in"><span>                       to_drive <span class="op">=</span> <span class="st">"&lt;path-id&gt;"</span>,</span></span>
+<span class="r-in"><span>                       to_folder <span class="op">=</span> <span class="st">"FY99Q4/VL Suppression"</span>,</span></span>
+<span class="r-in"><span>                       add_folder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -131,7 +144,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
