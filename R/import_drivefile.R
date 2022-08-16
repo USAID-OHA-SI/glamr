@@ -51,7 +51,7 @@ import_drivefile <- function(drive_folder, filename, folderpath = "Data", zip = 
 }
 
 
-#' @title Unpack Google Drive Metadata
+#' Unpack Google Drive Metadata
 #'
 #' Google API provides extra metadata stored as a list in the dribble
 #' returned, eg modified time, permissions, owner, etc.

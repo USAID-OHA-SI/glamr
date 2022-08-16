@@ -2,10 +2,7 @@
 % Please edit documentation in R/import_drivefile.R
 \name{gdrive_metadata}
 \alias{gdrive_metadata}
-\title{Unpack Google Drive Metadata
-
-Google API provides extra metadata stored as a list in the dribble
-returned, eg modified time, permissions, owner, etc.}
+\title{Unpack Google Drive Metadata}
 \usage{
 gdrive_metadata(df, show_details = FALSE)
 }
@@ -18,8 +15,6 @@ gdrive_metadata(df, show_details = FALSE)
 adds extra meta data to data frame
 }
 \description{
-Unpack Google Drive Metadata
-
 Google API provides extra metadata stored as a list in the dribble
 returned, eg modified time, permissions, owner, etc.
 }

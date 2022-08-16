@@ -318,7 +318,7 @@ pano_pwd <- function(){
 
 }
 
-#' @title Store S3 Credentials
+#' Store S3 Credentials
 #'
 #' `set_s3keys` stores your s3 keys using the `keyring` package.
 #' This will only need to done once. After running `set_s3keys(access, secret)`,

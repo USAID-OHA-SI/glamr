@@ -4,28 +4,26 @@
 
 pepfar_data_calendar <-
   tibble::tribble(
-    ~fiscal_year, ~quarter,     ~type,  ~entry_open, ~entry_close,
-           2021L,       1L, "initial", "2021-01-06", "2021-02-12",
-           2021L,       1L,   "clean", "2021-03-01", "2021-03-19",
-           2021L,       2L, "initial", "2021-04-01", "2021-05-14",
-           2021L,       2L,   "clean", "2021-06-01", "2021-06-18",
-           2021L,       3L, "initial", "2021-07-01", "2021-08-13",
-           2021L,       3L,   "clean", "2021-09-01", "2021-09-17",
-           2021L,       4L, "initial", "2021-10-01", "2021-11-12",
-           2021L,       4L,   "clean", "2021-12-01", "2021-12-17",
-           2022L,       1L, "initial", "2022-01-05", "2022-02-11",
-           2022L,       1L,   "clean", "2022-03-01", "2022-03-18",
-           2022L,       2L, "initial", "2022-04-01", "2022-05-13",
-           2022L,       2L,   "clean", "2022-06-01", "2022-06-17",
-           2022L,       3L, "initial", "2022-07-01", "2022-08-12",
-           2022L,       3L,   "clean", "2022-09-01", "2022-09-16",
-           2022L,       4L, "initial", "2022-10-03", "2022-11-10",
-           2022L,       4L,   "clean", "2022-12-01", "2022-12-16"
+    ~fiscal_year, ~quarter,     ~type,  ~entry_open, ~entry_close, ~msd_release,
+           2021L,       1L, "initial", "2021-01-06", "2021-02-12", "2021-02-19",
+           2021L,       1L,   "clean", "2021-03-01", "2021-03-19", "2021-03-26",
+           2021L,       2L, "initial", "2021-04-01", "2021-05-14", "2021-05-21",
+           2021L,       2L,   "clean", "2021-06-01", "2021-06-18", "2021-06-25",
+           2021L,       3L, "initial", "2021-07-01", "2021-08-13", "2021-08-20",
+           2021L,       3L,   "clean", "2021-09-01", "2021-09-17", "2021-09-24",
+           2021L,       4L, "initial", "2021-10-01", "2021-11-12", "2021-11-19",
+           2021L,       4L,   "clean", "2021-12-01", "2021-12-17", "2022-01-07",
+           2022L,       1L, "initial", "2022-01-05", "2022-02-11", "2022-02-18",
+           2022L,       1L,   "clean", "2022-03-01", "2022-03-18", "2022-03-25",
+           2022L,       2L, "initial", "2022-04-01", "2022-05-13", "2022-05-20",
+           2022L,       2L,   "clean", "2022-06-01", "2022-06-17", "2022-06-24",
+           2022L,       3L, "initial", "2022-07-01", "2022-08-12", "2022-08-19",
+           2022L,       3L,   "clean", "2022-09-01", "2022-09-16", "2022-09-23",
+           2022L,       4L, "initial", "2022-10-03", "2022-11-14", "2022-11-22",
+           2022L,       4L,   "clean", "2022-12-01", "2022-12-16", "2023-01-06"
     ) %>%
-  dplyr::mutate(release_lag = ifelse(quarter == 4 & type == "clean", 3, 1),
-                msd_release = as.Date(entry_close) + lubridate::weeks(release_lag),
-                dplyr::across(c(entry_open, entry_close, msd_release), as.Date)) %>%
-  dplyr::select(-release_lag)
+  dplyr::filter(fiscal_year >= max(fiscal_year) - 1) %>%
+  dplyr::mutate(dplyr::across(c(entry_open, entry_close, msd_release), as.Date))
 
 usethis::use_data(pepfar_data_calendar, overwrite = TRUE)
 
