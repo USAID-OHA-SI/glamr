@@ -1,4 +1,5 @@
 # glamr 1.1.0
+* Updates `pepfar_data_calendar` to reflect new FY23 PEPFAR calendar (removes FY21) [2022-11-28]
 * Add `msd_release` to `pepfar_data_calendar` and updated Q4 clean release date to match new calendar [2022-08-16]
 * Fully depricate `my_pwd()` [2022-08-05]
 * Migrate MSD/FSD related functions to `gophr`: `apply_partner_type`, `browse_knownissues`, `clean_agency`, `clean_column`, `clean_indicator`, `clean_psnu`, `pluck_totals`, `remove_centralsupport`, `remove_mo`, `remove_sch`, `resolve_knownissues`, `source_info` [2022-08-05]
