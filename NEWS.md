@@ -1,4 +1,6 @@
 # glamr 1.1.0
+* Update `pepfar_country_list` and `pepfar_country_xwalk` to reflect FY23 PEPFAR funding countries [2023-02-23]
+* Print out the file name when using `return_latest` [2023-02-23]
 * Updates `pepfar_data_calendar` to reflect (1) Q4i close on 10 Nov [MER late close on 14 Nov] and (2) new FY23 PEPFAR calendar (removes FY21) [2022-11-28]
 * Add `msd_release` to `pepfar_data_calendar` and updated Q4 clean release date to match new calendar [2022-08-16]
 * Fully depricate `my_pwd()` [2022-08-05]
