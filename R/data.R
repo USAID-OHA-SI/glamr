@@ -21,7 +21,7 @@
 #' This is a useful dataset for having a full set of PEPFAR countries or to
 #' align ISO codes with external datasources. Pulled from DATIM and the FSD.
 #'
-#' @format A data frame with 56 rows and 6 variables:
+#' @format A data frame with 55 rows and 6 variables:
 #' \describe{
 #'   \item{operatingunit}{PEPFAR Operating Unit (countries + 3 regional programs)}
 #'   \item{operatingunit_iso}{PEPFAR Operating Unit ISO-3}
@@ -39,7 +39,7 @@
 #' A dataset PEPFAR Operating Units and Countries along with their ISO codes, alternative names from other sources.
 #' This is a useful dataset designed to help with data cleaning / matching from different sources.
 #'
-#' @format A data frame with 53 rows and 23 variables:
+#' @format A data frame with 55 rows and 29 variables:
 #' \describe{
 #'   \item{iso3c}{ISO-3 Code}
 #'   \item{contient}{Continent name}
@@ -63,8 +63,9 @@
 #'   \item{name}{rnaturalearth country name}
 #'   \item{operatingunit}{PEPFAR Operating Unit (countries + 3 regional programs)}
 #'   \item{operatingunit_iso}{PEPFAR Operating Unit ISO-3}
-#'   \item{countryname}{PEPFAR Country Name}
-#'   \item{countryname_iso}{PEPFAR Country Name ISO-3}
+#'   \item{operatingunit_uid}{PEPFAR Operating Unit unique id from DATIM}
+#'   \item{country}{PEPFAR Country Name}
+#'   \item{country_uid}{PEPFAR Country unique id from DATIM}
 #' }
 #' @source
 #' \itemize{

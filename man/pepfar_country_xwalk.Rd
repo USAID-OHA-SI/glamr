@@ -5,7 +5,7 @@
 \alias{pepfar_country_xwalk}
 \title{Cross-walk of Country names}
 \format{
-A data frame with 53 rows and 23 variables:
+A data frame with 55 rows and 29 variables:
 \describe{
   \item{iso3c}{ISO-3 Code}
   \item{contient}{Continent name}
@@ -29,8 +29,9 @@ A data frame with 53 rows and 23 variables:
   \item{name}{rnaturalearth country name}
   \item{operatingunit}{PEPFAR Operating Unit (countries + 3 regional programs)}
   \item{operatingunit_iso}{PEPFAR Operating Unit ISO-3}
-  \item{countryname}{PEPFAR Country Name}
-  \item{countryname_iso}{PEPFAR Country Name ISO-3}
+  \item{operatingunit_uid}{PEPFAR Operating Unit unique id from DATIM}
+  \item{country}{PEPFAR Country Name}
+  \item{country_uid}{PEPFAR Country unique id from DATIM}
 }
 }
 \source{

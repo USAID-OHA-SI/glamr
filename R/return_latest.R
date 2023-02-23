@@ -36,5 +36,8 @@ return_latest <- function(folderpath, pattern, ...){
       dplyr::pull(filepath)
   }
 
+  pattern_info <- ifelse(pattern == ".*", "", glue::glue(" matching {usethis::ui_path(pattern)}"))
+  usethis::ui_info("Latest file in {usethis::ui_path(basename(dirname(f)))}{pattern_info}: {usethis::ui_path(basename(f))}")
+
   return(f)
 }
