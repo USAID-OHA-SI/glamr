@@ -446,7 +446,7 @@ set_key <- function(service, name) {
 #'
 get_key <- function(service, name) {
 
-  if (!service %in% get_services() | !name %in% get_keys(services)) {
+  if (!service %in% get_services() | !name %in% get_keys(service)) {
     usethis::ui_warn("WARNINGS - Invalid service and/or key name")
     return(NULL)
   }

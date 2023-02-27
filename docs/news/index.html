@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -67,8 +67,17 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.1" id="glamr-111">glamr 1.1.1<a class="anchor" aria-label="anchor" href="#glamr-111"></a></h2>
+<ul><li>Add <code>set_key</code>, <code>get_key</code> and <code>get_keys</code> for generic account credentials management</li>
+<li>Add <code>get_services</code> as a lookup function for existing keyring services</li>
+<li>Add <code>get_account</code> and <code>set_account</code> to group <code>get_*</code> and <code>set_*</code> into 1 function</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.0" id="glamr-110">glamr 1.1.0<a class="anchor" aria-label="anchor" href="#glamr-110"></a></h2>
-<ul><li>Add <code>msd_release</code> to <code>pepfar_data_calendar</code> and updated Q4 clean release date to match new calendar [2022-08-16]</li>
+<ul><li>Update <code>pepfar_country_list</code> and <code>pepfar_country_xwalk</code> to reflect FY23 PEPFAR funding countries [2023-02-23]</li>
+<li>Print out the file name when using <code>return_latest</code> [2023-02-23]</li>
+<li>Updates <code>pepfar_data_calendar</code> to reflect (1) Q4i close on 10 Nov [MER late close on 14 Nov] and (2) new FY23 PEPFAR calendar (removes FY21) [2022-11-28]</li>
+<li>Add <code>msd_release</code> to <code>pepfar_data_calendar</code> and updated Q4 clean release date to match new calendar [2022-08-16]</li>
 <li>Fully depricate <code>my_pwd()</code> [2022-08-05]</li>
 <li>Migrate MSD/FSD related functions to <code>gophr</code>: <code>apply_partner_type</code>, <code>browse_knownissues</code>, <code>clean_agency</code>, <code>clean_column</code>, <code>clean_indicator</code>, <code>clean_psnu</code>, <code>pluck_totals</code>, <code>remove_centralsupport</code>, <code>remove_mo</code>, <code>remove_sch</code>, <code>resolve_knownissues</code>, <code>source_info</code> [2022-08-05]</li>
 <li>Migrate API related function (DATIM, Pano, s3) and vignette to <code>grabr</code>: <code>datim_dim_item</code>, <code>datim_dim_items</code>, <code>datim_dim_url</code>, <code>datim_dimension</code>, <code>datim_dimensions</code>, <code>datim_execute_query</code>, <code>datim_pops</code>, <code>datim_process_query</code>, <code>datim_query</code>, <code>get_levels</code>, <code>get_orguids</code>, <code>get_ouorglabel</code>, <code>get_ouorglevel</code>, <code>get_ouorgs</code>, <code>get_ouorguids</code>, <code>get_outable</code>, <code>get_ouuid</code>, <code>get_ouuids</code>, <code>identify_levels</code>, <code>identify_ouuids</code>, <code>lazy_secrets</code>, <code>package_check</code>, <code>pano_content</code>, <code>pano_download</code>, <code>pano_elements</code>, <code>pano_extract</code>, <code>pano_extract_msd</code>, <code>pano_extract_msds</code>, <code>pano_items</code>, <code>pano_session</code>, <code>s3_buckets</code>, <code>s3_download</code>, <code>s3_excel_sheets</code>, <code>s3_object_type</code>, <code>s3_objects</code>, <code>s3_read_object</code>, <code>s3_remove</code>, <code>s3_unpack_keys</code>, <code>s3_upload</code> [2022-08-05]</li>
@@ -142,8 +151,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="glamr-010">glamr 0.1.0<a class="anchor" aria-label="anchor" href="#glamr-010"></a></h2>
-<ul><li>Prior to verion 1.0.0, updates were not captured.</li>
-</ul></div>
+<ul><li>Prior to verion 1.0.0, updates were not captured.</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -158,7 +166,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

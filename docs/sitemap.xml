@@ -160,6 +160,15 @@
     <loc>/reference/gdrive_metadata.html</loc>
   </url>
   <url>
+    <loc>/reference/get_account.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_key.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_keys.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_knownissues.html</loc>
   </url>
   <url>
@@ -191,6 +200,9 @@
   </url>
   <url>
     <loc>/reference/get_s3key.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_services.html</loc>
   </url>
   <url>
     <loc>/reference/glamr-package.html</loc>
@@ -355,10 +367,16 @@
     <loc>/reference/setup_readme.html</loc>
   </url>
   <url>
+    <loc>/reference/set_account.html</loc>
+  </url>
+  <url>
     <loc>/reference/set_datim.html</loc>
   </url>
   <url>
     <loc>/reference/set_email.html</loc>
+  </url>
+  <url>
+    <loc>/reference/set_key.html</loc>
   </url>
   <url>
     <loc>/reference/set_pano.html</loc>
