@@ -1,3 +1,8 @@
+# glamr 1.1.1
+* Add `set_key`, `get_key` and `get_keys` for generic account credentials management
+* Add `get_services` as a lookup function for existing keyring services
+* Add `get_account` and `set_account` to group `get_*` and `set_*` into 1 function
+
 # glamr 1.1.0
 * Update `pepfar_country_list` and `pepfar_country_xwalk` to reflect FY23 PEPFAR funding countries [2023-02-23]
 * Print out the file name when using `return_latest` [2023-02-23]

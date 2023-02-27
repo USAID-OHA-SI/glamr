@@ -370,4 +370,159 @@ get_s3key <- function(name = "access"){
   keyring::key_get(service = "s3", username = name)
 }
 
+#' @title Get Services
+#'
+#' @return list of active services
+#' @export
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' get_services()}
+#'
+get_services <- function() {
+  keys <- keyring::key_list()
+  unique(keys$service)
+}
+
+#' @title Get Service Keys
+#'
+#' @param service Account Service name
+#'
+#' @return list of key names for active services
+#' @export
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' get_keys('<service-name>')}
+#'
+get_keys <- function(service) {
+  keys <- keyring::key_list()
+  keys[keys$service == service,]$username
+}
+
+
+#' @title Set value for service name
+#'
+#' @param service Name of the service
+#' @param name    Name of the key
+#'
+#' @export
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' set_key(service = '<service-name>', name = '<key-name>')}
+#'
+set_key <- function(service, name) {
+
+  msg <- glue::glue("Please enter value for {service}/{name} key:")
+
+  value <- rstudioapi::askForPassword(prompt = msg)
+  value <- stringr::str_trim(value, side = "both")
+
+  if (base::nchar(value) == 0)
+    base::stop("ERROR - Invalid value entered")
+
+  keyring::key_set_with_value(service = service,
+                              username = name,
+                              password = value)
+}
+
+
+#' @title Get value of service key name
+#'
+#' @param service Name of the service
+#' @param name    Name of the key
+#'
+#' @return key value
+#' @export
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' get_key(service = '<service-name>', name = '<key-name>')}
+#'
+get_key <- function(service, name) {
+
+  if (!service %in% get_services() | !name %in% get_keys(services)) {
+    usethis::ui_warn("WARNINGS - Invalid service and/or key name")
+    return(NULL)
+  }
+
+  keyring::key_get(service, name)
+}
+
+#' @title Get account details
+#'
+#' @note Inspired by `grabr::lazy_secrets()`
+#'
+#' @param name Service name of the account
+#'
+#' @return key / value pair as list containing details of the account (invisible)
+#' @export
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' get_account(name = 's3')}
+#'
+get_account <- function(name) {
+
+  package_check('keyring')
+
+  if(!glamr::is_stored(name)) {
+
+    if(!interactive())
+      usethis::ui_stop("No {name} record found. Create a new account using {ui_code('set_key()')}")
+  }
+
+  accnt <- keyring::key_list(name)
+
+  accnt %>%
+    dplyr::pull(username) %>%
+    purrr::map(function(username) {
+      get_key(service = name, name = username)
+    }) %>%
+    purrr::set_names(accnt$username) %>%
+    base::invisible()
+}
+
+
+#' @title Create / Update account
+#'
+#' @param name    Service name of the account
+#' @param keys    List of account key names
+#' @param update  Should an existing account be overwriten
+#'
+#' @export
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' set_account(name = 's3', keys = c("access", "secret"))}
+#'
+set_account <- function(name,
+                        keys = c("username", "password"),
+                        update = FALSE) {
+
+  package_check('keyring')
+
+  # Keyring Service
+  srv <- name
+
+  if(glamr::is_stored(srv) & !update) {
+    usethis::ui_stop("{srv} exists already. Set update to TRUE to overwrite")
+  }
+
+  # Prompt user to set value for account keys
+  keys %>%
+    purrr::walk(function(key){
+      set_key(service = srv, name = key)
+    })
+}
+
+
+
 
