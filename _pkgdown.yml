@@ -51,6 +51,10 @@ reference:
   - get_s3key
   - load_secrets
   - is_stored
+  - get_key
+  - get_keys
+  - get_services
+  - get_account
 
 - title: Authentication Setup
   contents:
@@ -58,6 +62,8 @@ reference:
   - set_email
   - set_pano
   - set_s3keys
+  - set_key
+  - set_account
 
 - title: Google Drive
   contents:

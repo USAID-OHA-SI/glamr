@@ -6,6 +6,9 @@
 \usage{
 open_path(path)
 }
+\arguments{
+\item{path}{Full path of the file to be opened}
+}
 \description{
 Open directory explorer or files
 }

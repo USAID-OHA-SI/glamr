@@ -6,6 +6,9 @@
 \usage{
 curr_date(fmt = "\%Y-\%m-\%d")
 }
+\arguments{
+\item{fmt}{Date format}
+}
 \description{
 Get formatted current date
 }

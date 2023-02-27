@@ -163,6 +163,8 @@ temp_folder <- function(launch = FALSE){
 
 #' @title Get formatted current date
 #'
+#' @param fmt Date format
+#'
 #' @export
 #'
 #' @examples
@@ -181,6 +183,8 @@ curr_date <- function(fmt = "%Y-%m-%d") {
 }
 
 #' @title Open directory explorer or files
+#'
+#' @param path Full path of the file to be opened
 #'
 #' @note This assumes default applications are set for various file type
 #'
