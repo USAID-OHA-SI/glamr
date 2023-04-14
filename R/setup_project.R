@@ -90,17 +90,31 @@ file = ".gitignore", append = TRUE)
 
   cat("\n#no data
 *.csv
+*.gz
 *.txt
 *.rds
 *.xlsx
 *.xls
 *.zip
 *.png
-*.twbx
 *.pptx
-*.twb
 *.tfl
-*.gz
+*.twb
+*.twbx
+*.tbs
+*.tbm
+*.hyper
+*.sql
+*.parquet
+*.svg
+*.dfx
+*.json
+*.dta
+*.shp
+*.dbf
+
+
+
 
 #nothing from these folders
 AI/*
