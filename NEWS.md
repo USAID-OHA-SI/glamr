@@ -1,3 +1,7 @@
+# glamr 1.2.0
+* Add `Data_public` folder to be generated when running `si_setup`
+* Modified file extensions to be ignored in `setup_gitignore`
+
 # glamr 1.1.1
 * Add `set_key`, `get_key` and `get_keys` for generic account credentials management
 * Add `get_services` as a lookup function for existing keyring services
