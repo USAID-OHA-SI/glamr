@@ -22,7 +22,7 @@ period variable."><meta property="og:image" content="/logo.png"><!-- mathjax -->
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -82,21 +82,28 @@ period variable.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">convert_fy_qtr_to_pd</span><span class="op">(</span><span class="va">df</span>, fy_ind <span class="op">=</span> <span class="st">"fiscal_year"</span>, qtr_ind <span class="op">=</span> <span class="st">"qtr"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">convert_fy_qtr_to_pd</span><span class="op">(</span><span class="va">df</span>, fy_ind <span class="op">=</span> <span class="st">"fiscal_year"</span>, qtr_ind <span class="op">=</span> <span class="st">"qtr"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>MSD data frame reshaped long, eg `pivot_longer`</p></dd>
+
+
 <dt>fy_ind</dt>
 <dd><p>indicator name in df for the fiscal year, default = "fiscal_year"</p></dd>
+
+
 <dt>qtr_ind</dt>
 <dd><p>indicator name in the df for quarters, default = "qtrs"</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>united period column combining and cleaning fiscal year and quarter</p>
+    
+
+<p>united period column combining and cleaning fiscal year and quarter</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -108,21 +115,21 @@ period variable.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_summary</span> <span class="op">&lt;-</span> <span class="va">df_msd</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">       <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">indicator</span> <span class="op">==</span> <span class="st">"TX_CURR"</span>,</span>
-<span class="r-in">              <span class="va">standardizeddisaggregate</span> <span class="op">==</span> <span class="st">"Total Numerator"</span>,</span>
-<span class="r-in">              <span class="va">operatingunit</span> <span class="op">==</span> <span class="st">"Jupiter"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">       <span class="fu">group_by</span><span class="op">(</span><span class="va">mech_code</span>, <span class="va">fiscal_year</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">       <span class="fu"><a href="https://r-spatial.github.io/sf/reference/tidyverse.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"qtr"</span><span class="op">)</span>, <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">                 .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_summary</span> <span class="op">&lt;-</span> <span class="va">df_summary</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">       <span class="fu">pivot_longer</span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">mech_code</span>, <span class="va">fiscal_year</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"qtrs"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_summary</span> <span class="op">&lt;-</span> <span class="fu">convert_fy_qtr_to_pd</span><span class="op">(</span><span class="va">df_summary</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_summary</span> <span class="op">&lt;-</span> <span class="va">df_msd</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>       <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">indicator</span> <span class="op">==</span> <span class="st">"TX_CURR"</span>,</span></span>
+<span class="r-in"><span>              <span class="va">standardizeddisaggregate</span> <span class="op">==</span> <span class="st">"Total Numerator"</span>,</span></span>
+<span class="r-in"><span>              <span class="va">operatingunit</span> <span class="op">==</span> <span class="st">"Jupiter"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>       <span class="fu">group_by</span><span class="op">(</span><span class="va">mech_code</span>, <span class="va">fiscal_year</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>       <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">starts_with</span><span class="op">(</span><span class="st">"qtr"</span><span class="op">)</span>, <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_summary</span> <span class="op">&lt;-</span> <span class="va">df_summary</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>       <span class="fu">pivot_longer</span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">mech_code</span>, <span class="va">fiscal_year</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"qtrs"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_summary</span> <span class="op">&lt;-</span> <span class="fu">convert_fy_qtr_to_pd</span><span class="op">(</span><span class="va">df_summary</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -137,7 +144,7 @@ period variable.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
