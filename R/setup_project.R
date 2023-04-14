@@ -26,6 +26,7 @@ si_setup <- function(){
 #' The standard setup provides the following folders for these uses:
 #'   * Data - where any raw/input data (**xlsx/csv/rds**) specific to the project are stored
 #'   * Dataout - where any intermediary or final data (**xlsx/csv/rds**) are output as a product of your code
+#'   * Data_public - where all public data lives *
 #'   * Scripts - where all the code (**R/py**) are stored (if there is a local order, make sure to add prefixes to each script, e.g. 00_init.R, 01_data-access.R, 02_data-munging.R, ...)
 #'   * Images - any **png/jpeg** visual outputs from your code
 #'   * Graphics - any **svg/pdf** visual outputs that will be edited in vector graphics editor, eg Adobe Illustrator or Inkscape
@@ -48,7 +49,7 @@ si_setup <- function(){
 #'   folder_setup(fldrs)
 #' }
 folder_setup <- function(folder_list = list("Data", "Images", "Scripts", "AI",
-                                            "Dataout", "GIS", "Documents", "Graphics", "markdown")) {
+                                            "Dataout", "Data_public", "GIS", "Documents", "Graphics", "markdown")) {
   if(!is.list(folder_list))
     stop("Please provide a list of directories to create for the project.")
   print("The following directories will be created:")
@@ -89,20 +90,39 @@ file = ".gitignore", append = TRUE)
 
   cat("\n#no data
 *.csv
+*.gz
 *.txt
 *.rds
 *.xlsx
 *.xls
 *.zip
 *.png
-*.twbx
 *.pptx
+*.tfl
+*.twb
+*.twbx
+*.tbs
+*.tbm
+*.hyper
+*.sql
+*.parquet
+*.svg
+*.dfx
+*.json
+*.dta
+*.shp
+*.dbf
+
+
+
 
 #nothing from these folders
 AI/*
 GIS/*
 Images/*
-Graphics/*",
+Graphics/*
+Data/*
+Dataout/*",
 file = ".gitignore", append = TRUE
 
   )

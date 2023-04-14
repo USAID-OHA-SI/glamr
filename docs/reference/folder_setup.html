@@ -20,7 +20,7 @@ as a stand alone function but primarily serves `si_setup()`"><meta property="og:
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -78,22 +78,24 @@ as a stand alone function but primarily serves `si_setup()`</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">folder_setup</span><span class="op">(</span>
-  folder_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Data"</span>, <span class="st">"Images"</span>, <span class="st">"Scripts"</span>, <span class="st">"AI"</span>, <span class="st">"Dataout"</span>, <span class="st">"GIS"</span>, <span class="st">"Documents"</span>,
-    <span class="st">"Graphics"</span>, <span class="st">"markdown"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">folder_setup</span><span class="op">(</span></span>
+<span>  folder_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Data"</span>, <span class="st">"Images"</span>, <span class="st">"Scripts"</span>, <span class="st">"AI"</span>, <span class="st">"Dataout"</span>, <span class="st">"Data_public"</span>, <span class="st">"GIS"</span>,</span>
+<span>    <span class="st">"Documents"</span>, <span class="st">"Graphics"</span>, <span class="st">"markdown"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>folder_list</dt>
 <dd><p>list of folders to install</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
     <p>The standard setup provides the following folders for these uses:
   * Data - where any raw/input data (**xlsx/csv/rds**) specific to the project are stored
   * Dataout - where any intermediary or final data (**xlsx/csv/rds**) are output as a product of your code
+  * Data_public - where all public data lives *
   * Scripts - where all the code (**R/py**) are stored (if there is a local order, make sure to add prefixes to each script, e.g. 00_init.R, 01_data-access.R, 02_data-munging.R, ...)
   * Images - any **png/jpeg** visual outputs from your code
   * Graphics - any **svg/pdf** visual outputs that will be edited in vector graphics editor, eg Adobe Illustrator or Inkscape
@@ -112,13 +114,13 @@ as a stand alone function but primarily serves `si_setup()`</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">#standard</span></span>
-<span class="r-in">  <span class="fu">folder_setup</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">#specific</span></span>
-<span class="r-in">  <span class="va">fldrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Data"</span>, <span class="st">"Tableau"</span>, <span class="st">"AI"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">folder_setup</span><span class="op">(</span><span class="va">fldrs</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">#standard</span></span></span>
+<span class="r-in"><span>  <span class="fu">folder_setup</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#specific</span></span></span>
+<span class="r-in"><span>  <span class="va">fldrs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Data"</span>, <span class="st">"Tableau"</span>, <span class="st">"AI"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">folder_setup</span><span class="op">(</span><span class="va">fldrs</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -133,7 +135,7 @@ as a stand alone function but primarily serves `si_setup()`</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ returned, eg modified time, permissions, owner, etc."><meta property="og:image" 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -74,29 +74,34 @@ returned, eg modified time, permissions, owner, etc.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gdrive_metadata</span><span class="op">(</span><span class="va">df</span>, show_details <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gdrive_metadata</span><span class="op">(</span><span class="va">df</span>, show_details <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>Results from Google Drive drive_ls</p></dd>
+
+
 <dt>show_details</dt>
 <dd><p>Show all metadata fields, default is FALSE</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>adds extra meta data to data frame</p>
+    
+
+<p>adds extra meta data to data frame</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org" class="external-link">googledrive</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">drive_auth</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">fldr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/as_id.html" class="external-link">as_id</a></span><span class="op">(</span><span class="st">"&lt;google-folder-id&gt;"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_ls.html" class="external-link">drive_ls</a></span><span class="op">(</span><span class="va">fldr</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">gdrive_metadata</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org" class="external-link">googledrive</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">drive_auth</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fldr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_id.html" class="external-link">as_id</a></span><span class="op">(</span><span class="st">"&lt;google-folder-id&gt;"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_ls.html" class="external-link">drive_ls</a></span><span class="op">(</span><span class="va">fldr</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">gdrive_metadata</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -111,7 +116,7 @@ returned, eg modified time, permissions, owner, etc.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

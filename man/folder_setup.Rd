@@ -5,8 +5,8 @@
 \title{Setup Folder Structure in Project}
 \usage{
 folder_setup(
-  folder_list = list("Data", "Images", "Scripts", "AI", "Dataout", "GIS", "Documents",
-    "Graphics", "markdown")
+  folder_list = list("Data", "Images", "Scripts", "AI", "Dataout", "Data_public", "GIS",
+    "Documents", "Graphics", "markdown")
 )
 }
 \arguments{
@@ -22,6 +22,7 @@ as a stand alone function but primarily serves `si_setup()`
 The standard setup provides the following folders for these uses:
   * Data - where any raw/input data (**xlsx/csv/rds**) specific to the project are stored
   * Dataout - where any intermediary or final data (**xlsx/csv/rds**) are output as a product of your code
+  * Data_public - where all public data lives *
   * Scripts - where all the code (**R/py**) are stored (if there is a local order, make sure to add prefixes to each script, e.g. 00_init.R, 01_data-access.R, 02_data-munging.R, ...)
   * Images - any **png/jpeg** visual outputs from your code
   * Graphics - any **svg/pdf** visual outputs that will be edited in vector graphics editor, eg Adobe Illustrator or Inkscape
