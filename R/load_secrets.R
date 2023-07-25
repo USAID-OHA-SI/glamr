@@ -195,8 +195,20 @@ datim_user <- function(){
 
   package_check('keyring')
 
-  if(!is_stored("datim"))
-    ui_stop("NO DATIM credentials stored. Setup using {ui_code('set_datim()')}")
+  # Attempt to get user to add account
+  if(!is_stored("datim") & is_installed("keyring")) {
+
+    user <- rstudioapi::askForPassword(prompt = "Enter your DATIM Username to setup your account (Close or Excape to abort):")
+    user <- stringr::str_trim(value, side = "both")
+
+    if (base::nchar(user) == 0)
+      ui_stop("ERROR - Invalid username entered")
+
+    set_datim(datim_username = user)
+  }
+
+  if(!is_stored("datim") & !is_installed("keyring"))
+    ui_stop("NO DATIM credentials stored. Install `keyring` package and use {ui_code('set_datim()')} to setup datim account")
 
   if(!is.loaded("datim"))
     suppressMessages(load_secrets())
