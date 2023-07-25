@@ -28,7 +28,8 @@ Imports:
     tools,
     tidyr,
     usethis,
-    utils
+    utils,
+    keyring
 Suggests: 
     curl,
     fs,
@@ -37,7 +38,6 @@ Suggests:
     googlesheets4,
     janitor,
     jsonlite,
-    keyring,
     knitr,
     plyr,
     rmarkdown,
