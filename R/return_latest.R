@@ -32,7 +32,7 @@ return_latest <- function(folderpath, pattern, ...){
     f <- f %>%
       file.info() %>%
       tibble::rownames_to_column(var = "filepath") %>%
-      dplyr::filter(ctime == max(ctime)) %>%
+      dplyr::filter(ctime == max(mtime)) %>%
       dplyr::pull(filepath)
   }
 
