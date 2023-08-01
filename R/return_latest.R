@@ -1,7 +1,7 @@
 #' Return Latest File
 #'
 #' `return_latest` checks for a pattern in a folder and provides the most
-#' recent file bases on the time the file was created.
+#' recent file bases on the time the file was modified
 #'
 #' @param folderpath path to folder where file(s) are located.
 #' @param pattern    pattern in file name, regex expressions. If not parttern is
@@ -32,7 +32,7 @@ return_latest <- function(folderpath, pattern, ...){
     f <- f %>%
       file.info() %>%
       tibble::rownames_to_column(var = "filepath") %>%
-      dplyr::filter(ctime == max(mtime)) %>%
+      dplyr::filter(mtime == max(mtime)) %>%
       dplyr::pull(filepath)
   }
 

@@ -1,6 +1,7 @@
 # glamr 1.2.0
-* Add `Data_public` folder to be generated when running `si_setup`
-* Modified file extensions to be ignored in `setup_gitignore`
+* Update `return_latest` to filter on the date modifed (`mdate`) rather than the date created (`cdate`) [2023-08-01] 
+* Add `Data_public` folder to be generated when running `si_setup` [2023-04-13]
+* Modified file extensions to be ignored in `setup_gitignore` [2023-04-13]
 
 # glamr 1.1.1
 * Add `set_key`, `get_key` and `get_keys` for generic account credentials management

@@ -19,7 +19,7 @@ a vector of the full filepath for the most recent version of a file stub
 }
 \description{
 `return_latest` checks for a pattern in a folder and provides the most
-recent file bases on the time the file was created.
+recent file bases on the time the file was modified
 }
 \examples{
 \dontrun{
