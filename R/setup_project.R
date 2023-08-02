@@ -52,7 +52,7 @@ folder_setup <- function(folder_list = list("Data", "Images", "Scripts", "AI",
                                             "Dataout", "Data_public", "GIS", "Documents", "Graphics", "markdown")) {
   if(!is.list(folder_list))
     stop("Please provide a list of directories to create for the project.")
-  print("The following directories will be created:")
+  usethis::ui_info("The following directories will be created (if they do no already):")
   print(glue::glue(crayon::green('{folder_list}')))
   suppressWarnings(
   purrr::walk(folder_list, ~dir.create(.))
@@ -79,16 +79,25 @@ folder_setup <- function(folder_list = list("Data", "Images", "Scripts", "AI",
 
 setup_gitignore <- function(){
 
+  if(!file.exists(".gitignore")){
+    usethis::ui_info("Adding a {usethis::ui_code('.gitignore')} file")
+    file.create(".gitignore")
+  }
+
+  if(missing_section(".gitignore"))
+    usethis::ui_info("Adding standard files types and folders to {usethis::ui_code('.gitignore')}")
+
   if(!file.exists(".gitignore") || missing_section(".gitignore")){
     cat("#R basics
 .Rproj.user
 .Rhistory
 .RData
-.Ruserdata",
-file = ".gitignore", append = TRUE)
-  }
+.Ruserdata
+.httr-oauth
+.DS_Store
+.quarto
 
-  cat("\n#no data
+#no data
 *.csv
 *.gz
 *.txt
@@ -113,9 +122,6 @@ file = ".gitignore", append = TRUE)
 *.shp
 *.dbf
 
-
-
-
 #nothing from these folders
 AI/*
 GIS/*
@@ -123,9 +129,9 @@ Images/*
 Graphics/*
 Data/*
 Dataout/*",
-file = ".gitignore", append = TRUE
+        file = ".gitignore", append = TRUE)
+  }
 
-  )
 
 }
 
@@ -150,10 +156,13 @@ file = ".gitignore", append = TRUE
 
 setup_readme <- function(add_disclaimer = TRUE){
 
-  if(!file.exists("README.md"))
+  if(!file.exists("README.md")){
+    usethis::ui_info("Adding a {usethis::ui_code('README.md')} file")
     usethis::use_readme_md()
+  }
 
   if(add_disclaimer == TRUE && missing_section("README.md")){
+    usethis::ui_info("Adding standard disclaimer to {usethis::ui_code('README.md')}")
     cat(
       "\n---\n\n*Disclaimer: The findings, interpretation, and conclusions expressed herein are those of the authors and do not necessarily reflect the views of United States Agency for International Development. All errors remain our own.*",
       file = "README.md", append = TRUE)
