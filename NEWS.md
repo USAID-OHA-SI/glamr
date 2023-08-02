@@ -1,4 +1,6 @@
 # glamr 1.2.0
+* Resolve duplication occuring when running `si_setup` in `.gitignore` [2023-08-02]
+* Add additional file types specificed in `usethis::git_vaccinate` to ignore [2023-08-02]
 * Update `return_latest` to filter on the date modifed (`mdate`) rather than the date created (`cdate`) [2023-08-01] 
 * Add `Data_public` folder to be generated when running `si_setup` [2023-04-13]
 * Modified file extensions to be ignored in `setup_gitignore` [2023-04-13]
