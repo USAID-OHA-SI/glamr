@@ -74,6 +74,14 @@ pepfar_country_list <- df_cntry %>%
   relocate(starts_with("op")) %>%
   arrange(operatingunit, country)
 
+#Amb Nkengasong's 8 + 1 + 1 countries (2023-06-09 re:Moving countries to green!)
+pepfar_focus <- c("Cameroon", "Cote d'Ivoire", "Ethiopia", "Kenya",
+                  "Mozambique", "Nigeria", "Tanzania", "Zambia",
+                  "South Africa", "Philippines")
+
+pepfar_country_list <- pepfar_country_list %>%
+  mutate(pepfar_accel = country %in% pepfar_focus) %>%
+  filter(pepfar_accel)
 
 usethis::use_data(pepfar_country_list, overwrite = TRUE)
 
