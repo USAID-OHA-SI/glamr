@@ -21,7 +21,13 @@
 #' This is a useful dataset for having a full set of PEPFAR countries or to
 #' align ISO codes with external datasources. Pulled from DATIM and the FSD.
 #'
-#' @format A data frame with 55 rows and 6 variables:
+#' The list of PEPFAR acceleration countries was defined by Amb. Nkengasong
+#' during a DP's retreat for the [Zaidi 2023-06-08 re: Moving
+#' countries to green!]. These are countries "where enhanced attention and
+#' focus might help 'move the dial' on achieving and sustaining the
+#' UNAIDS 95-95-95 targets by 2025"
+#'
+#' @format A data frame with 55 rows and 7 variables:
 #' \describe{
 #'   \item{operatingunit}{PEPFAR Operating Unit (countries + 3 regional programs)}
 #'   \item{operatingunit_iso}{PEPFAR Operating Unit ISO-3}
@@ -29,6 +35,7 @@
 #'   \item{country}{PEPFAR Country Name}
 #'   \item{country_iso}{PEPFAR Country Name ISO-3}
 #'   \item{country_uid}{PEPFAR Country unique id from DATIM}
+#'   \item{pepfar_accel}{Is the country prioritized in the 8+1+1 group defined by SGAC?}
 #' }
 #' @source \url{https://final.datim.org/}
 "pepfar_country_list"
