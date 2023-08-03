@@ -1,4 +1,5 @@
 # glamr 1.2.0
+* Include the list of 8 + 1 + 1 countries prioritized by PEPFAR in `pepfar_country_list` under the variable `pepfar_accel` [2023-08-03]
 * Resolve duplication occuring when running `si_setup` in `.gitignore` [2023-08-02]
 * Add additional file types specificed in `usethis::git_vaccinate` to ignore [2023-08-02]
 * Update `return_latest` to filter on the date modifed (`mdate`) rather than the date created (`cdate`) [2023-08-01] 
