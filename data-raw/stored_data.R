@@ -80,8 +80,7 @@ pepfar_focus <- c("Cameroon", "Cote d'Ivoire", "Ethiopia", "Kenya",
                   "South Africa", "Philippines")
 
 pepfar_country_list <- pepfar_country_list %>%
-  mutate(pepfar_accel = country %in% pepfar_focus) %>%
-  filter(pepfar_accel)
+  mutate(pepfar_accel = country %in% pepfar_focus)
 
 usethis::use_data(pepfar_country_list, overwrite = TRUE)
 
