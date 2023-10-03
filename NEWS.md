@@ -1,4 +1,5 @@
 # glamr 1.2.0
+* Add in `gen_ref_id` to be used as a one off outside of a snippet [2023-10-03]
 * Include the list of 8 + 1 + 1 countries prioritized by PEPFAR in `pepfar_country_list` under the variable `pepfar_accel` [2023-08-03]
 * Resolve duplication occuring when running `si_setup` in `.gitignore` [2023-08-02]
 * Add additional file types specificed in `usethis::git_vaccinate` to ignore [2023-08-02]

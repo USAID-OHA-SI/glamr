@@ -29,7 +29,8 @@ Imports:
     tidyr,
     usethis,
     utils,
-    keyring
+    keyring,
+    digest
 Suggests: 
     curl,
     fs,
