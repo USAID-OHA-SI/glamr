@@ -1,3 +1,7 @@
+# glamr 1.3
+* Added an option to silence the output of `temp_folder` for use within functions [2023-10-11]
+* New version documtnation style. Patches/very minor changes will be updated as a patch (X.X.X) and updates on this NEWS page will fall under the minor (X.X) version [2023-10-11]
+
 # glamr 1.2.0
 * Add in `gen_ref_id` to be used as a one off outside of a snippet [2023-10-03]
 * Include the list of 8 + 1 + 1 countries prioritized by PEPFAR in `pepfar_country_list` under the variable `pepfar_accel` [2023-08-03]
