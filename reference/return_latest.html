@@ -74,7 +74,7 @@ recent file bases on the time the file was modified</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">return_latest</span><span class="op">(</span><span class="va">folderpath</span>, <span class="va">pattern</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">return_latest</span><span class="op">(</span><span class="va">folderpath</span>, <span class="va">pattern</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,6 +86,11 @@ recent file bases on the time the file was modified</p>
 <dt>pattern</dt>
 <dd><p>pattern in file name, regex expressions. If not parttern is
 provided, the last file in the folder will be returned.</p></dd>
+
+
+<dt>quiet</dt>
+<dd><p>suppresses the output message related to the file name creation,
+for use in sub functions, default = FALSE</p></dd>
 
 
 <dt>...</dt>

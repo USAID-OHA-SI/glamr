@@ -74,7 +74,7 @@ will be automatically removed after you close your RStudio session.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">temp_folder</span><span class="op">(</span>launch <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">temp_folder</span><span class="op">(</span>launch <span class="op">=</span> <span class="cn">FALSE</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,6 +82,11 @@ will be automatically removed after you close your RStudio session.</p>
     <dl><dt>launch</dt>
 <dd><p>do you want to launch the temp folder in the Windows Explorer?
 default = FALSE</p></dd>
+
+
+<dt>quiet</dt>
+<dd><p>suppresses the output message related to the folder creation
+and location, for use in sub functions, default = FALSE</p></dd>
 
 </dl></div>
     <div id="value">
