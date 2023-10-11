@@ -133,6 +133,8 @@ magrittr::`%<>%`
 #'
 #' @param launch do you want to launch the temp folder in the Windows Explorer?
 #'  default = FALSE
+#' @param quiet suppresses the output message related to the folder creation
+#' and location, for use in sub functions, default = FALSE)
 #'
 #' @return creates a temp directory and stores it as `folderpath_tmp`
 #' @export
@@ -145,15 +147,16 @@ magrittr::`%<>%`
 #'              .y = df_googlefiles$filename,
 #'              .f = ~googledrive::drive_download(googledrive::as_id(.x),
 #'                                                file.path(folderpath_tmp, .y))) }
-temp_folder <- function(launch = FALSE){
+temp_folder <- function(launch = FALSE, quiet = FALSE){
 
   package_check('fs')
 
   folderpath_tmp <<- fs::dir_create(fs::file_temp())
 
-  usethis::ui_info("A temporary folder is now available here: {usethis::ui_path(folderpath_tmp)}")
-  usethis::ui_info("The folder path is stored as the object {usethis::ui_code('folderpath_tmp')}")
-
+  if(quiet == FALSE){
+    usethis::ui_info("A temporary folder is now available here: {usethis::ui_path(folderpath_tmp)}")
+    usethis::ui_info("The folder path is stored as the object {usethis::ui_code('folderpath_tmp')}")
+  }
 
   if(launch == TRUE)
     shell.exec(folderpath_tmp)
