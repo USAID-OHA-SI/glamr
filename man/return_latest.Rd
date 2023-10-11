@@ -4,13 +4,16 @@
 \alias{return_latest}
 \title{Return Latest File}
 \usage{
-return_latest(folderpath, pattern, ...)
+return_latest(folderpath, pattern, quiet = FALSE, ...)
 }
 \arguments{
 \item{folderpath}{path to folder where file(s) are located.}
 
 \item{pattern}{pattern in file name, regex expressions. If not parttern is
 provided, the last file in the folder will be returned.}
+
+\item{quiet}{suppresses the output message related to the file name creation,
+for use in sub functions, default = FALSE}
 
 \item{...}{Any other valid option for `base::list.files()`.}
 }

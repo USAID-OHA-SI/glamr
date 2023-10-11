@@ -134,7 +134,7 @@ magrittr::`%<>%`
 #' @param launch do you want to launch the temp folder in the Windows Explorer?
 #'  default = FALSE
 #' @param quiet suppresses the output message related to the folder creation
-#' and location, for use in sub functions, default = FALSE)
+#' and location, for use in sub functions, default = FALSE
 #'
 #' @return creates a temp directory and stores it as `folderpath_tmp`
 #' @export

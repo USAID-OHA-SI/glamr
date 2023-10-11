@@ -6,6 +6,8 @@
 #' @param folderpath path to folder where file(s) are located.
 #' @param pattern    pattern in file name, regex expressions. If not parttern is
 #'  provided, the last file in the folder will be returned.
+#' @param quiet suppresses the output message related to the file name creation,
+#'   for use in sub functions, default = FALSE
 #' @param ...        Any other valid option for `base::list.files()`.
 #'
 #' @return a vector of the full filepath for the most recent version of a file stub
@@ -17,7 +19,7 @@
 #' filepath <- return_latest("Data", file_stub)
 #' df <- read_rds(filepath) }
 
-return_latest <- function(folderpath, pattern, ...){
+return_latest <- function(folderpath, pattern, quiet = FALSE, ...){
 
   if(missing(pattern))
     pattern <- ".*"
@@ -36,8 +38,10 @@ return_latest <- function(folderpath, pattern, ...){
       dplyr::pull(filepath)
   }
 
-  pattern_info <- ifelse(pattern == ".*", "", glue::glue(" matching {usethis::ui_path(pattern)}"))
-  usethis::ui_info("Latest file in {usethis::ui_path(basename(dirname(f)))}{pattern_info}: {usethis::ui_path(basename(f))}")
+  if(quiet == FALSE){
+    pattern_info <- ifelse(pattern == ".*", "", glue::glue(" matching {usethis::ui_path(pattern)}"))
+    usethis::ui_info("Latest file in {usethis::ui_path(basename(dirname(f)))}{pattern_info}: {usethis::ui_path(basename(f))}")
+  }
 
   return(f)
 }
