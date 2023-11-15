@@ -5,3 +5,7 @@
 ^doc$
 ^\.github$
 ^data-raw$
+'NEWS.html'
+pkgdown/
+^docs$
+_pkgdown.yml
