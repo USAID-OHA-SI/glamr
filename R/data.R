@@ -49,16 +49,20 @@
 #' @format A data frame with 55 rows and 29 variables:
 #' \describe{
 #'   \item{iso3c}{ISO-3 Code}
-#'   \item{contient}{Continent name}
+#'   \item{continent}{Continent name}
 #'   \item{region}{World Region Name}
 #'   \item{region23}{Alternative name for World Region}
 #'   \item{un_region_name}{US Region Name}
 #'   \item{iso_name_en}{ISO Country name in English}
 #'   \item{iso_name_fr}{SO Country name in French}
 #'   \item{country_name_de}{Regular Expression of Country name in German}
-#'   \item{country_name_de_regrex}{Country name in German}
+#'   \item{country_name_de_regex}{Country name in German}
 #'   \item{country_name_en}{Country name in English}
-#'   \item{country_name_en_regrex}{Regular Expression of Country name in English}
+#'   \item{country_name_en_regex}{Regular Expression of Country name in English}
+#'   \item{country_name_fr}{Regular Expression of Country name in French}
+#'   \item{country_name_fr_regex}{Country name in French}
+#'   \item{country_name_it}{Regular Expression of Country name in Italian}
+#'   \item{country_name_it_regex}{Country name in Italian}
 #'   \item{un_name_ar}{UN Name in Arabic}
 #'   \item{un_name_en}{UN Name in English}
 #'   \item{un_name_es}{UN Name in Spanish}
