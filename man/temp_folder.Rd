@@ -4,11 +4,14 @@
 \alias{temp_folder}
 \title{Generate Temporary Folder}
 \usage{
-temp_folder(launch = FALSE)
+temp_folder(launch = FALSE, quiet = FALSE)
 }
 \arguments{
 \item{launch}{do you want to launch the temp folder in the Windows Explorer?
 default = FALSE}
+
+\item{quiet}{suppresses the output message related to the folder creation
+and location, for use in sub functions, default = FALSE)}
 }
 \value{
 creates a temp directory and stores it as `folderpath_tmp`

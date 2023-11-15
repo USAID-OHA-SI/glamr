@@ -3,7 +3,7 @@
 #source: https://datim.zendesk.com/hc/en-us/articles/115001940503-PEPFAR-Data-Calendar
 
 pepfar_data_calendar <-
- tibble::tribble(
+  tibble::tribble(
     ~fiscal_year, ~quarter,     ~type,  ~entry_open, ~entry_close, ~msd_release,
            2021L,       1L, "initial", "2021-01-06", "2021-02-12", "2021-02-19",
            2021L,       1L,   "clean", "2021-03-01", "2021-03-19", "2021-03-26",
@@ -28,7 +28,15 @@ pepfar_data_calendar <-
            2023L,       3L, "initial", "2023-06-30", "2023-08-11", "2023-08-18",
            2023L,       3L,   "clean", "2023-08-31", "2023-09-15", "2023-09-22",
            2023L,       4L, "initial", "2023-10-02", "2023-11-14", "2023-11-21",
-           2023L,       4L,   "clean", "2023-11-30", "2023-11-15", "2024-01-05"
+           2023L,       4L,   "clean", "2023-11-30", "2023-11-15", "2024-01-05",
+           2024L,       1L, "initial", "2024-01-03", "2024-02-15", "2024-02-23",
+           2024L,       1L,   "clean", "2024-03-01", "2024-03-15", "2024-03-22",
+           2024L,       2L, "initial", "2024-04-01", "2024-05-17", "2024-05-24",
+           2024L,       2L,   "clean", "2024-05-31", "2024-06-14", "2024-06-25",
+           2024L,       3L, "initial", "2024-07-01", "2024-08-16", "2024-08-23",
+           2024L,       3L,   "clean", "2024-08-30", "2024-09-13", "2024-09-20",
+           2024L,       4L, "initial", "2024-10-01", "2024-11-15", "2024-11-22",
+           2024L,       4L,   "clean", "2024-12-02", "2024-12-13", "2024-12-20"
     ) %>%
   dplyr::filter(fiscal_year >= max(fiscal_year) - 1) %>%
   dplyr::mutate(dplyr::across(c(entry_open, entry_close, msd_release), as.Date))
