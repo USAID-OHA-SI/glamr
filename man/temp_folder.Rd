@@ -11,8 +11,8 @@ temp_folder(launch = FALSE, quiet = FALSE)
 default = FALSE}
 
 \item{quiet}{suppresses the output message related to the folder creation
-and location, for use in sub functions, default = FALSE)}
-}
+and location, for use in sub functions, default = FALSE}
+
 \value{
 creates a temp directory and stores it as `folderpath_tmp`
 }
