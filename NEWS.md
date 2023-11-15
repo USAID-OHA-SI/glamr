@@ -1,4 +1,5 @@
 # glamr 1.3
+* Update `pepfar_data_calendar` with FY24 dates [2023-11-15]
 * Added an option to silence the output of `temp_folder` and `return_latest` for use within functions [2023-10-11]
 * New version documtnation style. Patches/very minor changes will be updated as a patch (X.X.X) and updates on this NEWS page will fall under the minor (X.X) version [2023-10-11]
 

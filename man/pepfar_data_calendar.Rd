@@ -5,7 +5,7 @@
 \alias{pepfar_data_calendar}
 \title{Current PEPFAR Data Calendar}
 \format{
-A data frame with 8 rows and 5 variables:
+A data frame with 16 rows and 6 variables:
 \describe{
   \item{fiscal_year}{fiscal year, start = October}
   \item{quarter}{fiscal quarter, integer 1-4}

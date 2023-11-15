@@ -33,14 +33,14 @@ lookup_country <- function(country, language = "en") {
         df_cntries <- pepfar_country_xwalk %>%
           dplyr::filter(
             base::rowSums(dplyr::across(
-              .cols = c(tidyselect::ends_with(language),
-                        tidyselect::all_of(c("sovereignt", "admin", "name"))),
+              .cols = c(dplyr::ends_with(language),
+                        dplyr::all_of(c("sovereignt", "admin", "name"))),
               .fns = ~(. == curr_name))) > 0)
       } else {
         df_cntries <- pepfar_country_xwalk %>%
           dplyr::filter(
             base::rowSums(dplyr::across(
-              .cols = tidyselect::ends_with(language),
+              .cols = dplyr::ends_with(language),
               .fns = ~(. == curr_name))) > 0)
       }
 

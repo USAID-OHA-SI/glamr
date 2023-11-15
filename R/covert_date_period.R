@@ -162,7 +162,7 @@ convert_datim_pd_to_qtr <- function(df){
 convert_fy_qtr_to_pd <- function(df, fy_ind = "fiscal_year", qtr_ind = "qtr"){
 
   if(!fy_ind %in% names(df))
-    sethis::ui_stop("Cannot find '{fy_ind}' in data frame provided.")
+    usethis::ui_stop("Cannot find '{fy_ind}' in data frame provided.")
 
   if(!qtr_ind %in% names(df))
     usethis::ui_stop("Cannot find '{qtr_ind}' in data frame provided.")
