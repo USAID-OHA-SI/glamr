@@ -102,6 +102,8 @@ connect_text <- function(txt,
                          connections = "[^a-zA-Z0-9]",
                          connector = "_") {
 
+  package_check("stringi")
+
   text <- base::sapply(txt, function(x) {
     x %>%
       stringr::str_split(connections) %>%
