@@ -18,10 +18,10 @@ extract_tbl_data <- function(src_url, tbl_id) {
     rvest::html_nodes(tbl_id) %>%
     rvest::html_table() %>%
     as.data.frame() %>%
-    dplyr::rename_at(dplyr::vars(dplyr:everything()), dplyr::funs(stringr::str_replace_all(., "[\\W+]", "_"))) %>%
-    dplyr::rename_at(dplyr::vars(dplyr:starts_with("_")), dplyr::funs(substr(., 2, nchar(.)))) %>%
-    dplyr::rename_at(dplyr::vars(ends_with("_")), dplyr::funs(substr(., 1, nchar(.)-1))) %>%
-    dplyr::rename_at(dplyr::vars(dplyr:everything()), tolower)
+    dplyr::rename_at(dplyr::vars(dplyr::everything()), dplyr::funs(stringr::str_replace_all(., "[\\W+]", "_"))) %>%
+    dplyr::rename_at(dplyr::vars(dplyr::starts_with("_")), dplyr::funs(substr(., 2, nchar(.)))) %>%
+    dplyr::rename_at(dplyr::vars(dplyr::ends_with("_")), dplyr::funs(substr(., 1, nchar(.)-1))) %>%
+    dplyr::rename_at(dplyr::vars(dplyr::everything()), tolower)
 
   return(tbl_data)
 }
