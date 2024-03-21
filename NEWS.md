@@ -1,4 +1,5 @@
 # glamr 1.3
+* Update `convert_datim_pd` to reflect new date structure output from DATIM [2024-03-21]
 * Change instructions to install from rOpenSci [2024-01-04]
 * Update `pepfar_data_calendar` with FY24 dates [2023-11-15]
 * Added an option to silence the output of `temp_folder` and `return_latest` for use within functions [2023-10-11]
