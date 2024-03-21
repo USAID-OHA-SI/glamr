@@ -8,7 +8,8 @@ if (getRversion() >= "2.15.1")
       "last_modifying_user_display_name", "modified_time", "mtime", "name",
       "original_filename", "owners", "pepfar_country_xwalk", "period",
       "permission_ids", "permissions", "permissions_allow_file_discovery",
-      "permissions_domain", "permissions_type", "trashed", "username", "x")
+      "permissions_domain", "permissions_type", "trashed", "username", "x",
+      "<<-")
   )
 
 # The following block is used by usethis to automatically manage
