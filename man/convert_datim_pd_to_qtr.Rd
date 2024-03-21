@@ -4,10 +4,12 @@
 \alias{convert_datim_pd_to_qtr}
 \title{Convert DATIM CY Quarter/Period to FY Quarter}
 \usage{
-convert_datim_pd_to_qtr(df)
+convert_datim_pd_to_qtr(df, pd_col = "Period")
 }
 \arguments{
-\item{df}{dataframe from \code{extract_datim()}}
+\item{df}{dataframe from DATIM API, \code{grabr::extract_datim()}}
+
+\item{pd_col}{name of the period column, default = "Period"}
 }
 \value{
 Convert periods from long CY dates to PEPFAR standard FY
@@ -18,13 +20,14 @@ targets/cumulative). This function is built into `extract_datim`.
 }
 \examples{
 \dontrun{
-df <- tibble::tibble(Periods = c("Jan to Mar 2019", "Oct 2018 to Sep 2019"))
+df <- tibble::tibble(Periods = c("October - December 2023",
+                                 "January - March 2024",
+                                 "October 2023 to September 2024"))
 df <- convert_datim_pd_to_qtr(df) }
 }
 \seealso{
 [set_datim()] to store DATIM authentication;
-[load_secrets()] to store DATIM authentication;
-[extract_datim()] to run API (which incorporates convert_datim_pd_to_qtr)
+[load_secrets()] to store DATIM authentication
 
 Other period: 
 \code{\link{convert_date_to_qtr}()},
