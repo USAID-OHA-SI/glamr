@@ -1,4 +1,5 @@
 # glamr 1.3
+* Update the ability to launch the folder path on any OS (previously just Windows) with `temp_folder` [2024-03-28]
 * Update `convert_datim_pd` to reflect new date structure output from DATIM [2024-03-21]
 * Change instructions to install from rOpenSci [2024-01-04]
 * Update `pepfar_data_calendar` with FY24 dates [2023-11-15]
