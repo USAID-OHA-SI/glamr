@@ -161,7 +161,7 @@ temp_folder <- function(launch = FALSE, quiet = FALSE){
   }
 
   if(launch == TRUE)
-    shell.exec(folderpath_tmp)
+    utils::browseURL(folderpath_tmp)
 
   invisible(folderpath_tmp)
 }
