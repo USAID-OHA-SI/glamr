@@ -16,7 +16,8 @@ folderpath stored in global options
 `si_path` accesses folder paths stored in global options to make it easier
 work across analysts/machines. Analysts will first setup the paths using
 `set_paths()` which then store local folder paths where larger data are stored
-centrally and outside of projects.
+centrally and outside of projects. This will also work on PEPFAR Workbench to
+return the location of the MSD, `Sys.getenv("S3_READ")`.
 }
 \examples{
 \dontrun{

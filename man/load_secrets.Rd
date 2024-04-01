@@ -7,11 +7,12 @@
 load_secrets(service = c("email", "datim", "pano", "s3", "pdap"))
 }
 \arguments{
-\item{service}{account, either "email", "datim", "pano", or "s3"; by default,
-all are loaded if they are available}
+\item{service}{account, either "email", "datim", "pano", "s3", or "pdap"; by
+default, all are loaded if they are available}
 }
 \value{
-stores Google, DATIM, PEFPFAR Panorama, and s3 credentials in session
+stores Google, DATIM, PEFPFAR Panorama, s3, and PDAP credentials in
+  session
 }
 \description{
 `load_secrets` should be set at the beginning of a script to store your
@@ -20,10 +21,8 @@ stores Google, DATIM, PEFPFAR Panorama, and s3 credentials in session
  or remove use names.
 }
 \details{
-To initially store your Google email and DATIM credentials,
- you will first need to
- run `set_email()`, `set_datim()`, `set_pano()`,`set_s3access()` and/or
- `set_s3secret()`
+To initially store your credentials, you will first need to
+ run `set_email()`, `set_datim()`, `set_pano()`, and/or `set_key` (for s3)
 
  `load_secrets` utilizes `keyring` package to access the OS credentials store.
  Storing in a centralized, secure location allows analysts to other analysts code
