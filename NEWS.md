@@ -1,4 +1,6 @@
 # glamr 2.0
+* Setup `return_latest` to provide key to latest file that exists in the MSD folder in PDAP when working from Posit Workbench [2024-04-01]  
+* Have `si_path()` return the path to the MSD folder (`Sys.getenv("S3_READ")`) when working from Posit Workbench [2024-04-01] 
 * Upload `load_secrets` and `is_stored` to work with PDAP, both locally and in Posit Workbench [2024-04-01]
 * Add PDAP function, `pdap_access`, `pdap_secrets`, and `pdap_bucket`, to work out of the PEPFAR Workbench environment with s3 [2024-04-01]
 
