@@ -21,6 +21,22 @@
 
 return_latest <- function(folderpath, pattern, quiet = FALSE, ...){
 
+  r_env <- ifelse(is_pdap(), "pdap", "local")
+
+  switch (r_env,
+          local = return_latest_local(folderpath, pattern, quiet, ...),
+          pdap = return_latest_pdap(folderpath, pattern, quiet, ...)
+  )
+
+}
+
+#' Local Return Latest File
+#'
+#' @inheritParams return_latest
+#' @keywords internal
+#'
+return_latest_local <- function(folderpath, pattern, quiet = FALSE, ...){
+
   if(missing(pattern))
     pattern <- ".*"
 
@@ -41,6 +57,47 @@ return_latest <- function(folderpath, pattern, quiet = FALSE, ...){
   if(quiet == FALSE){
     pattern_info <- ifelse(pattern == ".*", "", glue::glue(" matching {usethis::ui_path(pattern)}"))
     usethis::ui_info("Latest file in {usethis::ui_path(basename(dirname(f)))}{pattern_info}: {usethis::ui_path(basename(f))}")
+  }
+
+  return(f)
+}
+
+
+#' PDAP Return Latest File
+#'
+#' @inheritParams return_latest
+#' @keywords internal
+#'
+return_latest_pdap <- function(folderpath, pattern, quiet = FALSE, ...){
+
+  if(!requireNamespace("grabr", quietly = TRUE))
+    usethis::ui_stop("Package {usethis::ui_field('grabr')} is required, see - https://usaid-oha-si.github.io/grabr/")
+
+  suppressWarnings(
+    f <- grabr::s3_objects(bucket = folderpath,
+                           prefix = NULL,
+                           access_key = Sys.getenv("AWS_ACCESS_KEY_ID"),
+                           secret_key = Sys.getenv("AWS_SECRET_ACCESS_KEY"))
+  )
+
+
+  if(!missing(pattern))
+    f <- dplyr::filter(f, stringr::str_detect(key, {pattern}))
+
+
+  if(nrow(f) == 0)
+    stop("no files found")
+
+
+  if(length(f) > 1){
+    f <- f %>%
+      dplyr::filter(last_modified == max(last_modified)) %>%
+      dplyr::pull(key)
+  }
+
+  if(quiet == FALSE){
+    pattern_info <- ifelse(missing(pattern), "", glue::glue(" matching {usethis::ui_path(pattern)}"))
+    usethis::ui_info("Latest file in {usethis::ui_path(folderpath)}{pattern_info}: {usethis::ui_path(basename(f))}")
   }
 
   return(f)
