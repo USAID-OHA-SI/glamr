@@ -88,7 +88,7 @@ load_secrets <- function(service = c("email", "datim", "pano","s3", "pdap")){
     ui_done("{ui_field('S3')} keys set in {ui_value('access_key')} and {ui_value('secret_key')}")
   }
 
-  if ((is_pdap() || is_stored("pdap")) && "pdap" %in% service) {
+  if (is_stored("pdap") && "pdap" %in% service) {
     options("pdap_access" = pdap_access())
     options("pdap_secret" = pdap_secret())
     options("pdap_read" = pdap_bucket("read"))
@@ -98,7 +98,6 @@ load_secrets <- function(service = c("email", "datim", "pano","s3", "pdap")){
       ui_line("Also accessible through {ui_code('Sys.getenv(\\'AWS_ACCESS_KEY_ID\\')')} and {ui_code('Sys.getenv(\\'AWS_SECRET_ACCESS_KEY\\')')}")
       ui_done("{ui_field('PDAP S3')} READ/WRITE buckets available through {ui_value('pdap_read()')} and {ui_value('pdap_write()')}")
       ui_line("Also accessible through {ui_code('Sys.getenv(\\'S3_READ\\')')} and {ui_code('Sys.getenv(\\'S3_WRITE\\')')}")
-
     } else {
       ui_done("{ui_field('PDAP S3')} WRITE bucket available through {ui_value('pdap_write()')}")
     }
