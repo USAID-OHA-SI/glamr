@@ -121,6 +121,9 @@
     <loc>/reference/is_loaded.html</loc>
   </url>
   <url>
+    <loc>/reference/is_pdap.html</loc>
+  </url>
+  <url>
     <loc>/reference/is_stored.html</loc>
   </url>
   <url>
@@ -145,6 +148,15 @@
     <loc>/reference/pano_user.html</loc>
   </url>
   <url>
+    <loc>/reference/pdap_access.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pdap_bucket.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pdap_secret.html</loc>
+  </url>
+  <url>
     <loc>/reference/pepfar_country_list.html</loc>
   </url>
   <url>
@@ -164,6 +176,12 @@
   </url>
   <url>
     <loc>/reference/return_latest.html</loc>
+  </url>
+  <url>
+    <loc>/reference/return_latest_local.html</loc>
+  </url>
+  <url>
+    <loc>/reference/return_latest_pdap.html</loc>
   </url>
   <url>
     <loc>/reference/set_account.html</loc>
