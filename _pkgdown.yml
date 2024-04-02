@@ -48,6 +48,9 @@ reference:
   - datim_user
   - pano_pwd
   - pano_user
+  - pdap_access
+  - pdap_secret
+  - pdap_bucket
   - get_s3key
   - load_secrets
   - is_stored

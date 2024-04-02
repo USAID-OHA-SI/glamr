@@ -5,10 +5,8 @@
 #'  analysts to more easily share their scripts without having to manually update
 #'  or remove use names.
 #'
-#'  To initially store your Google email and DATIM credentials,
-#'  you will first need to
-#'  run `set_email()`, `set_datim()`, `set_pano()`,`set_s3access()` and/or
-#'  `set_s3secret()`
+#'  To initially store your credentials, you will first need to
+#'  run `set_email()`, `set_datim()`, `set_pano()`, and/or `set_key` (for s3)
 #'
 #'  `load_secrets` utilizes `keyring` package to access the OS credentials store.
 #'  Storing in a centralized, secure location allows analysts to other analysts code
@@ -16,10 +14,11 @@
 #'  DATIM or Google Drive.
 #'
 #'
-#' @param service account, either "email", "datim", "pano", or "s3"; by default,
-#' all are loaded if they are available
+#' @param service account, either "email", "datim", "pano", "s3", or "pdap"; by
+#' default, all are loaded if they are available
 #'
-#' @return stores Google, DATIM, PEFPFAR Panorama, and s3 credentials in session
+#' @return stores Google, DATIM, PEFPFAR Panorama, s3, and PDAP credentials in
+#'   session
 #' @export
 #' @family authentication
 #'
@@ -30,18 +29,19 @@
 #' @importFrom usethis ui_field
 #' @importFrom usethis ui_value
 #' @importFrom usethis ui_code
+#' @importFrom usethis ui_line
 #'
 #' @examples
 #' \dontrun{
 #' load_secrets()
 #' ou_table <- datim_outable(datim_user(), datim_pwd()) }
 
-load_secrets <- function(service = c("email", "datim", "pano","s3")){
+load_secrets <- function(service = c("email", "datim", "pano","s3", "pdap")){
 
   package_check('keyring')
 
   if(length(is_stored()) == 0){
-    ui_oops("No accounts stored under {ui_code('keyring')}. Use {ui_code('set_email()')} and {ui_code('set_datim()')} to establish accounts")
+    ui_oops("No accounts stored under {ui_code('keyring')}. Use {ui_code('set_email()')}, {ui_code('set_datim()')}, or {ui_code('set_keys()')} to establish accounts")
   } else {
     ui_info("The following items have been stored for use in this session:")
   }
@@ -86,6 +86,21 @@ load_secrets <- function(service = c("email", "datim", "pano","s3")){
     # )
 
     ui_done("{ui_field('S3')} keys set in {ui_value('access_key')} and {ui_value('secret_key')}")
+  }
+
+  if (is_stored("pdap") && "pdap" %in% service) {
+    options("pdap_access" = pdap_access())
+    options("pdap_secret" = pdap_secret())
+    options("pdap_read" = pdap_bucket("read"))
+    options("pdap_write" = pdap_bucket("write"))
+    ui_done("{ui_field('PDAP S3')} keys set in {ui_value('pdap_access()')} and {ui_value('pdap_key()')}")
+    if(is_pdap()){
+      ui_line("Also accessible through {ui_code('Sys.getenv(\\'AWS_ACCESS_KEY_ID\\')')} and {ui_code('Sys.getenv(\\'AWS_SECRET_ACCESS_KEY\\')')}")
+      ui_done("{ui_field('PDAP S3')} READ/WRITE buckets available through {ui_value('pdap_read()')} and {ui_value('pdap_write()')}")
+      ui_line("Also accessible through {ui_code('Sys.getenv(\\'S3_READ\\')')} and {ui_code('Sys.getenv(\\'S3_WRITE\\')')}")
+    } else {
+      ui_done("{ui_field('PDAP S3')} WRITE bucket available through {ui_value('pdap_write()')}")
+    }
   }
 
 }
@@ -537,4 +552,175 @@ set_account <- function(name,
 
 
 
+#' Store PDAP Access Key credentials
+#'
+#' When working with PDAP, you will need to access data from either the read or
+#' write buckets and need the credentials to do so. This function stores the
+#' Access Key associated with your account,
+#' `Sys.getenv("AWS_ACCESS_KEY_ID")`. To use locally, the user will need to
+#' store `set_key('pdap', 'access')`, which securely stores this information with
+#' `keyring` (we can only write, not read from a local machine).
+#'
+#' @export
+#' @family authentication
+#'
+#' \dontrun{
+#' library(grabr)
+#' s3_upload(upload_file_path,
+#'           bucket = pdap_bucket("write"),
+#'           prefix = "usaid/",
+#'           access_key = pdap_access(),
+#'           secret_key = pdap_secret())
+#'
+#' #identify path to dataset uploaded
+#'   path_wrkbnch <- s3_objects(bucket = pdap_bucket("write"),
+#'                              prefix = "usaid/",
+#'                              access_key = pdap_access(),
+#'                              secret_key = pdap_secret()) %>%
+#'     filter(str_detect(key, "Moz")) %>%
+#'     pull(key)
+#'
+#' #read
+#' df_msd <- s3read_using(read_psd,
+#'                        bucket = pdap_bucket("write"),
+#'                        object = path_wrkbnch) }
+#'
+pdap_access <- function(){
+
+
+  if(!is_pdap() && !is_stored("pdap"))
+    ui_stop("NO PDAP access credentials stored. Setup using {ui_code('set_key(\\'pdap\\', \\'access\\')')}")
+
+  if(!is_pdap() && !is.loaded("pdap_secret"))
+    suppressMessages(load_secrets())
+
+  if(is_pdap()){
+    Sys.getenv("AWS_ACCESS_KEY_ID")
+  } else {
+    keyring::key_get("pdap", "access")
+  }
+
+
+}
+
+
+#' Store PDAP Secret Access Key credentials
+#'
+#' When working with PDAP, you will need to access data from either the read or
+#' write buckets and need the credentials to do so. This function stores the
+#' Secret Access Key associated with your account,
+#' `Sys.getenv("AWS_SECRET_ACCESS_KEY")`. To use locally, the user will need to
+#' store `set_key('pdap', 'secret')`, which securely stores this information with
+#' `keyring` (we can only write, not read from a local machine).
+#'
+#' @export
+#' @family authentication
+#'
+#' \dontrun{
+#' library(grabr)
+#' s3_upload(upload_file_path,
+#'           bucket = pdap_bucket("write"),
+#'           prefix = "usaid/",
+#'           access_key = pdap_access(),
+#'           secret_key = pdap_secret())
+#'
+#' #identify path to dataset uploaded
+#'   path_wrkbnch <- s3_objects(bucket = pdap_bucket("write"),
+#'                              prefix = "usaid/",
+#'                              access_key = pdap_access(),
+#'                              secret_key = pdap_secret()) %>%
+#'     filter(str_detect(key, "Moz")) %>%
+#'     pull(key)
+#'
+#' #read
+#' df_msd <- s3read_using(read_psd,
+#'                        bucket = pdap_bucket("write"),
+#'                        object = path_wrkbnch) }
+#'
+pdap_secret <- function(){
+
+  if(!is_pdap() && !is_stored("pdap"))
+    ui_stop("NO PDAP secrets key credentials stored. Setup access key using {ui_code('set_key(\\'pdap\\', \\'secret\\')')}")
+
+  if(!is_pdap() && !is.loaded("pdap_secret"))
+    suppressMessages(load_secrets())
+
+  if(is_pdap()){
+    Sys.getenv("AWS_SECRET_ACCESS_KEY")
+  } else {
+    keyring::key_get("pdap", "secret")
+  }
+
+
+}
+
+
+#' Access PDAP read/write bucket
+#'
+#' When working with PDAP, you will need to access data from either the read or
+#' write buckets. The read bucket ("S3_READ") is where PEPFAR Systems stores the
+#' MSDs and the write bucket ("S3_WRITE") is where users can upload files (USAID
+#' users will have access and write to the "usaid/" sub bucket).
+#'
+#' When access from PDAP Posit Workbench, the function will access the system
+#' environment variables `Sys.getenv("S3_READ")` or `Sys.getenv("S3_WRITE")`
+#' where as it accessing locally, the user will need to store the read bucket
+#' location with `set_key()`, which securely stores this information with
+#' `keyring` (we can only write, not read from a local machine).
+#'
+#' @param type is the bucket read (default) or write?
+#'
+#' @return character string of AWS bucket location
+#' @export
+#'
+#' @family authentication
+#'
+#' @examples
+#' \dontrun{
+#' library(grabr)
+#' s3_upload(upload_file_path,
+#'           bucket = pdap_bucket("write"),
+#'           prefix = "usaid/",
+#'           access_key = pdap_access(),
+#'           secret_key = pdap_secret())
+#'
+#' #identify path to dataset uploaded
+#'   path_wrkbnch <- s3_objects(bucket = pdap_bucket("write"),
+#'                              prefix = "usaid/",
+#'                              access_key = pdap_access(),
+#'                              secret_key = pdap_secret()) %>%
+#'     filter(str_detect(key, "Moz")) %>%
+#'     pull(key)
+#'
+#' #read
+#' df_msd <- s3read_using(read_psd,
+#'                        bucket = pdap_bucket("write"),
+#'                        object = path_wrkbnch) }
+#'
+pdap_bucket <- function(type = c("read", "write")){
+
+  type <- type[1]
+
+  if(is_pdap()){
+    b <- switch (type,
+            "read" = Sys.getenv("S3_READ"),
+            "write" = Sys.getenv("S3_WRITE")
+    )
+
+    return(b)
+  }
+
+  if(!is_pdap && type == "read"){
+    ui_oops("Reading PDAP data locally not accessible")
+  }
+
+  if(!is_pdap() && !is_stored("pdap"))
+    ui_stop("NO PDAP write bucket location found Setup using {ui_code('set_key(\\'pdap\\', \\'write\\')')}")
+
+  if(!is_pdap() && !is.loaded("pdap_write"))
+    suppressMessages(load_secrets())
+
+  keyring::key_get("pdap", "write")
+
+}
 

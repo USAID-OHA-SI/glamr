@@ -44,12 +44,21 @@ package_check <- function(pkg){
 
 #' Test if service is stored in credential manager
 #'
-#' @param service account, either "email", "datim", "pano", or "s3"
+#' @param service account, either "email", "datim", "pano", "s3", "pdap"
 #'
 #' @export
 #' @return A boolean
 
-is_stored <- function(service = c("datim", "email", "pano", "s3")){
+is_stored <- function(service = c("datim", "email", "pano", "s3", "pdap")){
+
+  if(length(service) > 1){
+    service <- base::match.arg(service)
+    usethis::ui_info("Multiple serices selected; returning value for the only the first: {usethis::ui_field(service)}")
+  }
+
+  if(service == "pdap" && is_pdap()){
+    return(TRUE)
+  }
 
   package_check('keyring')
 
@@ -72,6 +81,16 @@ is_loaded <- function(opt_var){
 
 }
 
+#' Test if the user is working on the PDAP environment in Posit Workbench
+#'
+#' @return a boolean
+#'
+#' @keywords internal
+#'
+is_pdap <- function(){
+  grepl("rstudio-server.*datim.org",
+        as.list(Sys.info())$nodename)
+}
 
 #' Test if package is installed locally
 #'

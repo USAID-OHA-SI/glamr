@@ -33,6 +33,7 @@ Other authentication:
 \code{\link{load_secrets}()},
 \code{\link{pano_pwd}()},
 \code{\link{pano_user}()},
+\code{\link{pdap_bucket}()},
 \code{\link{set_account}()},
 \code{\link{set_datim}()},
 \code{\link{set_email}()},

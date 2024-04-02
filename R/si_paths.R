@@ -3,7 +3,8 @@
 #' `si_path` accesses folder paths stored in global options to make it easier
 #' work across analysts/machines. Analysts will first setup the paths using
 #' `set_paths()` which then store local folder paths where larger data are stored
-#' centrally and outside of projects.
+#' centrally and outside of projects. This will also work on PEPFAR Workbench to
+#' return the location of the MSD, `Sys.getenv("S3_READ")`.
 #'
 #' @param type folderpath, eg "path_msd" (default), "path_datim", "path_raster", "path_vector", "path_downloads"
 #'
@@ -25,10 +26,17 @@
 
 si_path <- function(type = "path_msd"){
 
-  if(!is_loaded(type) || getOption(type) == "NULL")
+  if((!is_loaded(type) || getOption(type) == "NULL") && !is_pdap())
     ui_oops("No folder path stored in your {ui_path('.Rprofile')} matches {ui_path(type)}. Use {ui_code('glamr::set_paths()')} to store one.")
 
-  getOption(type)
+  if(!is_pdap()){
+    getOption(type)
+  } else {
+    pdap_bucket('read')
+  }
+
+
+
 }
 
 
