@@ -566,7 +566,6 @@ set_account <- function(name,
 #' @family authentication
 #'
 #' \dontrun{
-#'
 #' library(grabr)
 #' s3_upload(upload_file_path,
 #'           bucket = pdap_bucket("write"),
@@ -585,9 +584,7 @@ set_account <- function(name,
 #' #read
 #' df_msd <- s3read_using(read_psd,
 #'                        bucket = pdap_bucket("write"),
-#'                        object = path_wrkbnch)
-#'
-#' }
+#'                        object = path_wrkbnch) }
 #'
 pdap_access <- function(){
 
@@ -621,7 +618,6 @@ pdap_access <- function(){
 #' @family authentication
 #'
 #' \dontrun{
-#'
 #' library(grabr)
 #' s3_upload(upload_file_path,
 #'           bucket = pdap_bucket("write"),
@@ -640,9 +636,7 @@ pdap_access <- function(){
 #' #read
 #' df_msd <- s3read_using(read_psd,
 #'                        bucket = pdap_bucket("write"),
-#'                        object = path_wrkbnch)
-#'
-#' }
+#'                        object = path_wrkbnch) }
 #'
 pdap_secret <- function(){
 
@@ -684,7 +678,6 @@ pdap_secret <- function(){
 #'
 #' @examples
 #' \dontrun{
-#'
 #' library(grabr)
 #' s3_upload(upload_file_path,
 #'           bucket = pdap_bucket("write"),
@@ -703,9 +696,7 @@ pdap_secret <- function(){
 #' #read
 #' df_msd <- s3read_using(read_psd,
 #'                        bucket = pdap_bucket("write"),
-#'                        object = path_wrkbnch)
-#'
-#' }
+#'                        object = path_wrkbnch) }
 #'
 pdap_bucket <- function(type = c("read", "write")){
 

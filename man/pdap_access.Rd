@@ -18,7 +18,6 @@ store `set_key('pdap', 'access')`, which securely stores this information with
 Other authentication
 
 \dontrun{
-
 library(grabr)
 s3_upload(upload_file_path,
           bucket = pdap_bucket("write"),
@@ -37,15 +36,12 @@ s3_upload(upload_file_path,
 #read
 df_msd <- s3read_using(read_psd,
                        bucket = pdap_bucket("write"),
-                       object = path_wrkbnch)
-
-}: 
+                       object = path_wrkbnch) }: 
 \code{\link{pdap_secret}()}
 }
 \concept{authentication
 
 \dontrun{
-
 library(grabr)
 s3_upload(upload_file_path,
           bucket = pdap_bucket("write"),
@@ -64,6 +60,4 @@ s3_upload(upload_file_path,
 #read
 df_msd <- s3read_using(read_psd,
                        bucket = pdap_bucket("write"),
-                       object = path_wrkbnch)
-
-}}
+                       object = path_wrkbnch) }}
