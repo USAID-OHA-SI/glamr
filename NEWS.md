@@ -1,4 +1,5 @@
 # glamr 2.0
+* Resolve issue with `datim_user` when no user was stored, which resulting from the wrong object used [2024-05-23]
 * Update `is_stored` to return TRUE for "pdap" when working from Posit Workbench [2024-04-02]
 * Setup `return_latest` to provide key to latest file that exists in the MSD folder in PDAP when working from Posit Workbench [2024-04-01]  
 * Have `si_path()` return the path to the MSD folder (`Sys.getenv("S3_READ")`) when working from Posit Workbench [2024-04-01] 
