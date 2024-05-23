@@ -214,7 +214,7 @@ datim_user <- function(){
   if(!is_stored("datim") & is_installed("keyring")) {
 
     user <- rstudioapi::askForPassword(prompt = "Enter your DATIM Username to setup your account (Close or Excape to abort):")
-    user <- stringr::str_trim(value, side = "both")
+    user <- stringr::str_trim(user, side = "both")
 
     if (base::nchar(user) == 0)
       ui_stop("ERROR - Invalid username entered")
