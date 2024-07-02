@@ -53,7 +53,7 @@ is_stored <- function(service = c("datim", "email", "pano", "s3", "pdap")){
 
   if(length(service) > 1){
     service <- base::match.arg(service)
-    usethis::ui_info("Multiple serices selected; returning value for the only the first: {usethis::ui_field(service)}")
+    usethis::ui_info("Multiple services selected; returning value for the only the first: {usethis::ui_field(service)}")
   }
 
   if(service == "pdap" && is_pdap()){
