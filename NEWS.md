@@ -1,4 +1,5 @@
 # glamr 2.0
+* Fix bug within `pdap_bucket` resulting from a missing parentheses [2024-07-02]
 * Resolve issue with `datim_user` when no user was stored, which resulting from the wrong object used [2024-05-23]
 * Update `is_stored` to return TRUE for "pdap" when working from Posit Workbench [2024-04-02]
 * Setup `return_latest` to provide key to latest file that exists in the MSD folder in PDAP when working from Posit Workbench [2024-04-01]  
