@@ -710,7 +710,7 @@ pdap_bucket <- function(type = c("read", "write")){
     return(b)
   }
 
-  if(!is_pdap && type == "read"){
+  if(!is_pdap() && type == "read"){
     ui_oops("Reading PDAP data locally not accessible")
   }
 
