@@ -14,9 +14,7 @@ Secret Access Key associated with your account,
 store `set_key('pdap', 'secret')`, which securely stores this information with
 `keyring` (we can only write, not read from a local machine).
 }
-\seealso{
-Other authentication
-
+\examples{
 \dontrun{
 library(grabr)
 s3_upload(upload_file_path,
@@ -29,35 +27,35 @@ s3_upload(upload_file_path,
   path_wrkbnch <- s3_objects(bucket = pdap_bucket("write"),
                              prefix = "usaid/",
                              access_key = pdap_access(),
-                             secret_key = pdap_secret()) %>%
-    filter(str_detect(key, "Moz")) %>%
+                             secret_key = pdap_secret()) \%>\%
+    filter(str_detect(key, "Moz")) \%>\%
     pull(key)
 
 #read
 df_msd <- s3read_using(read_psd,
                        bucket = pdap_bucket("write"),
-                       object = path_wrkbnch) }: 
-\code{\link{pdap_access}()}
+                       object = path_wrkbnch) }
+
 }
-\concept{authentication
-
-\dontrun{
-library(grabr)
-s3_upload(upload_file_path,
-          bucket = pdap_bucket("write"),
-          prefix = "usaid/",
-          access_key = pdap_access(),
-          secret_key = pdap_secret())
-
-#identify path to dataset uploaded
-  path_wrkbnch <- s3_objects(bucket = pdap_bucket("write"),
-                             prefix = "usaid/",
-                             access_key = pdap_access(),
-                             secret_key = pdap_secret()) %>%
-    filter(str_detect(key, "Moz")) %>%
-    pull(key)
-
-#read
-df_msd <- s3read_using(read_psd,
-                       bucket = pdap_bucket("write"),
-                       object = path_wrkbnch) }}
+\seealso{
+Other authentication: 
+\code{\link{datim_pwd}()},
+\code{\link{datim_user}()},
+\code{\link{get_account}()},
+\code{\link{get_key}()},
+\code{\link{get_keys}()},
+\code{\link{get_s3key}()},
+\code{\link{get_services}()},
+\code{\link{load_secrets}()},
+\code{\link{pano_pwd}()},
+\code{\link{pano_user}()},
+\code{\link{pdap_access}()},
+\code{\link{pdap_bucket}()},
+\code{\link{set_account}()},
+\code{\link{set_datim}()},
+\code{\link{set_email}()},
+\code{\link{set_key}()},
+\code{\link{set_pano}()},
+\code{\link{set_s3keys}()}
+}
+\concept{authentication}

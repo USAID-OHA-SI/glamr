@@ -563,7 +563,7 @@ set_account <- function(name,
 #'
 #' @export
 #' @family authentication
-#'
+#' @examples
 #' \dontrun{
 #' library(grabr)
 #' s3_upload(upload_file_path,
@@ -615,7 +615,7 @@ pdap_access <- function(){
 #'
 #' @export
 #' @family authentication
-#'
+#' @examples
 #' \dontrun{
 #' library(grabr)
 #' s3_upload(upload_file_path,
