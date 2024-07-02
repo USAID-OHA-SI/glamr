@@ -89,17 +89,18 @@ load_secrets <- function(service = c("email", "datim", "pano","s3", "pdap")){
   }
 
   if (is_stored("pdap") && "pdap" %in% service) {
-    options("pdap_access" = pdap_access())
-    options("pdap_secret" = pdap_secret())
-    options("pdap_read" = pdap_bucket("read"))
-    options("pdap_write" = pdap_bucket("write"))
+    options("pdap_access" = keyring::key_get("pdap", "access"))
+    options("pdap_secret" = keyring::key_get("pdap", "secret"))
+    options("pdap_write" = keyring::key_get("pdap", "write"))
     ui_done("{ui_field('PDAP S3')} keys set in {ui_value('pdap_access()')} and {ui_value('pdap_key()')}")
     if(is_pdap()){
+      options("pdap_read" = Sys.getenv('S3_READ'))
       ui_line("Also accessible through {ui_code('Sys.getenv(\\'AWS_ACCESS_KEY_ID\\')')} and {ui_code('Sys.getenv(\\'AWS_SECRET_ACCESS_KEY\\')')}")
       ui_done("{ui_field('PDAP S3')} READ/WRITE buckets available through {ui_value('pdap_read()')} and {ui_value('pdap_write()')}")
       ui_line("Also accessible through {ui_code('Sys.getenv(\\'S3_READ\\')')} and {ui_code('Sys.getenv(\\'S3_WRITE\\')')}")
     } else {
       ui_done("{ui_field('PDAP S3')} WRITE bucket available through {ui_value('pdap_write()')}")
+      ui_oops("{ui_field('PDAP S3')} READ bucket not locally not accessible")
     }
   }
 
