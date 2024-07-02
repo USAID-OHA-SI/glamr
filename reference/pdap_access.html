@@ -22,7 +22,7 @@ store `set_key('pdap', 'access')`, which securely stores this information with
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">glamr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.2</span>
       </span>
     </div>
 
@@ -87,11 +87,52 @@ store `set_key('pdap', 'access')`, which securely stores this information with
 
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other authentication</p>
-<p>: 
-<code><a href="pdap_secret.html">pdap_secret</a>()</code></p></div>
+    <div class="dont-index"><p>Other authentication: 
+<code><a href="datim_pwd.html">datim_pwd</a>()</code>,
+<code><a href="datim_user.html">datim_user</a>()</code>,
+<code><a href="get_account.html">get_account</a>()</code>,
+<code><a href="get_key.html">get_key</a>()</code>,
+<code><a href="get_keys.html">get_keys</a>()</code>,
+<code><a href="get_s3key.html">get_s3key</a>()</code>,
+<code><a href="get_services.html">get_services</a>()</code>,
+<code><a href="load_secrets.html">load_secrets</a>()</code>,
+<code><a href="pano_pwd.html">pano_pwd</a>()</code>,
+<code><a href="pano_user.html">pano_user</a>()</code>,
+<code><a href="pdap_bucket.html">pdap_bucket</a>()</code>,
+<code><a href="pdap_secret.html">pdap_secret</a>()</code>,
+<code><a href="set_account.html">set_account</a>()</code>,
+<code><a href="set_datim.html">set_datim</a>()</code>,
+<code><a href="set_email.html">set_email</a>()</code>,
+<code><a href="set_key.html">set_key</a>()</code>,
+<code><a href="set_pano.html">set_pano</a>()</code>,
+<code><a href="set_s3keys.html">set_s3keys</a>()</code></p></div>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grabr</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">s3_upload</span><span class="op">(</span><span class="va">upload_file_path</span>,</span></span>
+<span class="r-in"><span>          bucket <span class="op">=</span> <span class="fu"><a href="pdap_bucket.html">pdap_bucket</a></span><span class="op">(</span><span class="st">"write"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          prefix <span class="op">=</span> <span class="st">"usaid/"</span>,</span></span>
+<span class="r-in"><span>          access_key <span class="op">=</span> <span class="fu">pdap_access</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>          secret_key <span class="op">=</span> <span class="fu"><a href="pdap_secret.html">pdap_secret</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#identify path to dataset uploaded</span></span></span>
+<span class="r-in"><span>  <span class="va">path_wrkbnch</span> <span class="op">&lt;-</span> <span class="fu">s3_objects</span><span class="op">(</span>bucket <span class="op">=</span> <span class="fu"><a href="pdap_bucket.html">pdap_bucket</a></span><span class="op">(</span><span class="st">"write"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                             prefix <span class="op">=</span> <span class="st">"usaid/"</span>,</span></span>
+<span class="r-in"><span>                             access_key <span class="op">=</span> <span class="fu">pdap_access</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                             secret_key <span class="op">=</span> <span class="fu"><a href="pdap_secret.html">pdap_secret</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">key</span>, <span class="st">"Moz"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>    <span class="fu">pull</span><span class="op">(</span><span class="va">key</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#read</span></span></span>
+<span class="r-in"><span><span class="va">df_msd</span> <span class="op">&lt;-</span> <span class="fu">s3read_using</span><span class="op">(</span><span class="va">read_psd</span>,</span></span>
+<span class="r-in"><span>                       bucket <span class="op">=</span> <span class="fu"><a href="pdap_bucket.html">pdap_bucket</a></span><span class="op">(</span><span class="st">"write"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                       object <span class="op">=</span> <span class="va">path_wrkbnch</span><span class="op">)</span> <span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
