@@ -40,7 +40,7 @@ load_secrets <- function(service = c("email", "datim", "pano","s3", "pdap")){
 
   package_check('keyring')
 
-  if(length(is_stored()) == 0){
+  if(suppressMessages(is_stored()) == FALSE){
     ui_oops("No accounts stored under {ui_code('keyring')}. Use {ui_code('set_email()')}, {ui_code('set_datim()')}, or {ui_code('set_keys()')} to establish accounts")
   } else {
     ui_info("The following items have been stored for use in this session:")
