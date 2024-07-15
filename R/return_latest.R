@@ -7,6 +7,7 @@
 #' @param pattern    pattern in file name, regex expressions. If not parttern is
 #'  provided, the last file in the folder will be returned.
 #' @param quiet suppresses the output message related to the file name creation,
+#' @param n number of files (starting with the latest) to return, default = 1
 #'   for use in sub functions, default = FALSE
 #' @param ...        Any other valid option for `base::list.files()`.
 #'
@@ -19,13 +20,13 @@
 #' filepath <- return_latest("Data", file_stub)
 #' df <- read_rds(filepath) }
 
-return_latest <- function(folderpath, pattern, quiet = FALSE, ...){
+return_latest <- function(folderpath, pattern, n = 1, quiet = FALSE, ...){
 
   r_env <- ifelse(is_pdap(), "pdap", "local")
 
   switch (r_env,
-          local = return_latest_local(folderpath, pattern, quiet, ...),
-          pdap = return_latest_pdap(folderpath, pattern, quiet, ...)
+          local = return_latest_local(folderpath, pattern, n, quiet, ...),
+          pdap = return_latest_pdap(folderpath, pattern, n, quiet, ...)
   )
 
 }
@@ -35,7 +36,7 @@ return_latest <- function(folderpath, pattern, quiet = FALSE, ...){
 #' @inheritParams return_latest
 #' @keywords internal
 #'
-return_latest_local <- function(folderpath, pattern, quiet = FALSE, ...){
+return_latest_local <- function(folderpath, pattern, n = 1, quiet = FALSE, ...){
 
   if(missing(pattern))
     pattern <- ".*"
@@ -50,7 +51,7 @@ return_latest_local <- function(folderpath, pattern, quiet = FALSE, ...){
     f <- f %>%
       file.info() %>%
       tibble::rownames_to_column(var = "filepath") %>%
-      dplyr::filter(mtime == max(mtime)) %>%
+      dplyr::slice_max(order_by = mtime,  n = {n}) %>%
       dplyr::pull(filepath)
   }
 
@@ -68,7 +69,7 @@ return_latest_local <- function(folderpath, pattern, quiet = FALSE, ...){
 #' @inheritParams return_latest
 #' @keywords internal
 #'
-return_latest_pdap <- function(folderpath, pattern, quiet = FALSE, ...){
+return_latest_pdap <- function(folderpath, pattern, n = 1, quiet = FALSE, ...){
 
   if(!requireNamespace("grabr", quietly = TRUE))
     usethis::ui_stop("Package {usethis::ui_field('grabr')} is required, see - https://usaid-oha-si.github.io/grabr/")
@@ -91,7 +92,7 @@ return_latest_pdap <- function(folderpath, pattern, quiet = FALSE, ...){
 
   if(length(f) > 1){
     f <- f %>%
-      dplyr::filter(last_modified == max(last_modified)) %>%
+      dplyr::slice_max(order_by = last_modified,  n = {n}) %>%
       dplyr::pull(key)
   }
 
