@@ -1,4 +1,6 @@
 # glamr 2.0
+* Improve `return_latest` to handle Google Drive paths/ids [2024-07-15]
+* Allow `return_latest` to identify multiple files from the latest [2024-07-15]
 * Reconfigure `load_secrets` for local handing of PDAP [2024-07-02]
 * Improve messages issued with `load_secrets` [2024-07-02]
 * Fix bug within `pdap_bucket` resulting from a missing parentheses [2024-07-02]

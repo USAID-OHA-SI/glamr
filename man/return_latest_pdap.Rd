@@ -4,16 +4,19 @@
 \alias{return_latest_pdap}
 \title{PDAP Return Latest File}
 \usage{
-return_latest_pdap(folderpath, pattern, quiet = FALSE, ...)
+return_latest_pdap(folderpath, pattern, n = 1, quiet = FALSE, ...)
 }
 \arguments{
-\item{folderpath}{path to folder where file(s) are located.}
+\item{folderpath}{path to folder where file(s) are located. This path can
+also be in the form of a Google ID}
 
 \item{pattern}{pattern in file name, regex expressions. If not parttern is
 provided, the last file in the folder will be returned.}
 
-\item{quiet}{suppresses the output message related to the file name creation,
+\item{n}{number of files (starting with the latest) to return, default = 1
 for use in sub functions, default = FALSE}
+
+\item{quiet}{suppresses the output message related to the file name creation,}
 
 \item{...}{Any other valid option for `base::list.files()`.}
 }
