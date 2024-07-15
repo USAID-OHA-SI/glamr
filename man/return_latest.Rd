@@ -7,7 +7,8 @@
 return_latest(folderpath, pattern, n = 1, quiet = FALSE, ...)
 }
 \arguments{
-\item{folderpath}{path to folder where file(s) are located.}
+\item{folderpath}{path to folder where file(s) are located. This path can
+also be in the form of a Google ID}
 
 \item{pattern}{pattern in file name, regex expressions. If not parttern is
 provided, the last file in the folder will be returned.}
@@ -30,5 +31,14 @@ recent file bases on the time the file was modified
 \dontrun{
 file_stub <- "MER_Structured_Datasets_OU_IM_FY18-20"
 filepath <- return_latest("Data", file_stub)
-df <- read_rds(filepath) }
+df <- read_psd(filepath) }
+
+\dontrun{
+load_secrets("email")
+gdrive_folder_id <- "1alhiHrDBJzRftcyJRW-THohz9LbJezzJ"
+gdrive_path <- return_latest(gdrive_folder_id, "SI")
+#download
+drive_download(gdrive_path)
+#or read directly from the Google Sheet
+df <- read_sheet(filepath) }
 }

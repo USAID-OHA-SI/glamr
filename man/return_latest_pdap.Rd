@@ -7,7 +7,8 @@
 return_latest_pdap(folderpath, pattern, n = 1, quiet = FALSE, ...)
 }
 \arguments{
-\item{folderpath}{path to folder where file(s) are located.}
+\item{folderpath}{path to folder where file(s) are located. This path can
+also be in the form of a Google ID}
 
 \item{pattern}{pattern in file name, regex expressions. If not parttern is
 provided, the last file in the folder will be returned.}
