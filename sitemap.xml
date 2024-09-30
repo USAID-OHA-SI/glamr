@@ -1,225 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/credential-management.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/project-workflow.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_internet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_status.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clean_countries.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clean_filename.html</loc>
-  </url>
-  <url>
-    <loc>/reference/connect_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_date_to_qtr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_datim_pd_to_qtr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_fy_qtr_to_pd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_qtr_to_date.html</loc>
-  </url>
-  <url>
-    <loc>/reference/curr_date.html</loc>
-  </url>
-  <url>
-    <loc>/reference/datim_pwd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/datim_user.html</loc>
-  </url>
-  <url>
-    <loc>/reference/export_drivefile.html</loc>
-  </url>
-  <url>
-    <loc>/reference/extract_excel_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/extract_tbl_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/extract_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/folder_setup.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gdrive_folder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gdrive_metadata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gen_ref_id.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_account.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_key.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_keys.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_s3key.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_services.html</loc>
-  </url>
-  <url>
-    <loc>/reference/glamr-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/grapes-ni-grapes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/import_drivefile.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is_installed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is_loaded.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is_pdap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is_stored.html</loc>
-  </url>
-  <url>
-    <loc>/reference/load_secrets.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lookup_country.html</loc>
-  </url>
-  <url>
-    <loc>/reference/missing_section.html</loc>
-  </url>
-  <url>
-    <loc>/reference/open_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/package_check.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pano_pwd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pano_user.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pdap_access.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pdap_bucket.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pdap_secret.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pepfar_country_list.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pepfar_country_xwalk.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pepfar_data_calendar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/prinf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/return_latest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/return_latest_local.html</loc>
-  </url>
-  <url>
-    <loc>/reference/return_latest_pdap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_account.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_datim.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_email.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_key.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_pano.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_paths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_s3keys.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setup_gitignore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setup_readme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/si_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/si_setup.html</loc>
-  </url>
-  <url>
-    <loc>/reference/temp_folder.html</loc>
-  </url>
-  <url>
-    <loc>/reference/validate_path.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/credential-management.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/project-workflow.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/check_internet.html</loc></url>
+<url><loc>/reference/check_status.html</loc></url>
+<url><loc>/reference/clean_countries.html</loc></url>
+<url><loc>/reference/clean_filename.html</loc></url>
+<url><loc>/reference/connect_text.html</loc></url>
+<url><loc>/reference/convert_date_to_qtr.html</loc></url>
+<url><loc>/reference/convert_datim_pd_to_qtr.html</loc></url>
+<url><loc>/reference/convert_fy_qtr_to_pd.html</loc></url>
+<url><loc>/reference/convert_qtr_to_date.html</loc></url>
+<url><loc>/reference/curr_date.html</loc></url>
+<url><loc>/reference/datim_pwd.html</loc></url>
+<url><loc>/reference/datim_user.html</loc></url>
+<url><loc>/reference/export_drivefile.html</loc></url>
+<url><loc>/reference/extract_excel_data.html</loc></url>
+<url><loc>/reference/extract_tbl_data.html</loc></url>
+<url><loc>/reference/extract_text.html</loc></url>
+<url><loc>/reference/folder_setup.html</loc></url>
+<url><loc>/reference/gdrive_folder.html</loc></url>
+<url><loc>/reference/gdrive_metadata.html</loc></url>
+<url><loc>/reference/gen_ref_id.html</loc></url>
+<url><loc>/reference/get_account.html</loc></url>
+<url><loc>/reference/get_key.html</loc></url>
+<url><loc>/reference/get_keys.html</loc></url>
+<url><loc>/reference/get_s3key.html</loc></url>
+<url><loc>/reference/get_services.html</loc></url>
+<url><loc>/reference/glamr-package.html</loc></url>
+<url><loc>/reference/grapes-ni-grapes.html</loc></url>
+<url><loc>/reference/import_drivefile.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/is_installed.html</loc></url>
+<url><loc>/reference/is_loaded.html</loc></url>
+<url><loc>/reference/is_pdap.html</loc></url>
+<url><loc>/reference/is_stored.html</loc></url>
+<url><loc>/reference/load_secrets.html</loc></url>
+<url><loc>/reference/lookup_country.html</loc></url>
+<url><loc>/reference/missing_section.html</loc></url>
+<url><loc>/reference/open_path.html</loc></url>
+<url><loc>/reference/package_check.html</loc></url>
+<url><loc>/reference/pano_pwd.html</loc></url>
+<url><loc>/reference/pano_user.html</loc></url>
+<url><loc>/reference/pdap_access.html</loc></url>
+<url><loc>/reference/pdap_bucket.html</loc></url>
+<url><loc>/reference/pdap_secret.html</loc></url>
+<url><loc>/reference/pepfar_country_list.html</loc></url>
+<url><loc>/reference/pepfar_country_xwalk.html</loc></url>
+<url><loc>/reference/pepfar_data_calendar.html</loc></url>
+<url><loc>/reference/pipe.html</loc></url>
+<url><loc>/reference/prinf.html</loc></url>
+<url><loc>/reference/reexports.html</loc></url>
+<url><loc>/reference/return_latest.html</loc></url>
+<url><loc>/reference/return_latest_local.html</loc></url>
+<url><loc>/reference/return_latest_pdap.html</loc></url>
+<url><loc>/reference/set_account.html</loc></url>
+<url><loc>/reference/set_datim.html</loc></url>
+<url><loc>/reference/set_email.html</loc></url>
+<url><loc>/reference/set_key.html</loc></url>
+<url><loc>/reference/set_pano.html</loc></url>
+<url><loc>/reference/set_paths.html</loc></url>
+<url><loc>/reference/set_s3keys.html</loc></url>
+<url><loc>/reference/setup_gitignore.html</loc></url>
+<url><loc>/reference/setup_readme.html</loc></url>
+<url><loc>/reference/si_path.html</loc></url>
+<url><loc>/reference/si_setup.html</loc></url>
+<url><loc>/reference/temp_folder.html</loc></url>
+<url><loc>/reference/validate_path.html</loc></url>
 </urlset>
+
